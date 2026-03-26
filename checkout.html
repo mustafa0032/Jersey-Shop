@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout – JerseyBase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="checkout.css" />
+  </head>
+  <body>
+
+    <!-- ── HEADER (same flyout nav as index.html) ───────────────────── -->
+    <header class="header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo">⚽ JerseyBase</a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">☰</button>
+
+        <nav class="nav" id="nav-menu">
+          <ul class="nav-list">
+
+            <!-- Fan Edition -->
+            <li class="has-flyout">
+              <a href="index.html#fan-edition" class="nav-link">Fan Edition</a>
+              <ul class="flyout-l1">
+                <li>
+                  <a href="index.html#fan-edition" class="season-row">
+                    Season 25/26 <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2">
+                    <li><a href="index.html#fan-edition">AC Milan</a></li>
+                    <li><a href="index.html#fan-edition">Ajax</a></li>
+                    <li><a href="index.html#fan-edition">Arsenal</a></li>
+                    <li><a href="index.html#fan-edition">Barcelona</a></li>
+                    <li><a href="index.html#fan-edition">Bayern München</a></li>
+                    <li><a href="index.html#fan-edition">Benfica</a></li>
+                    <li><a href="index.html#fan-edition">Betis</a></li>
+                    <li><a href="index.html#fan-edition">Bilbao</a></li>
+                    <li><a href="index.html#fan-edition">Celtic</a></li>
+                    <li><a href="index.html#fan-edition">Chelsea</a></li>
+                    <li><a href="index.html#fan-edition">Flamengo</a></li>
+                    <li><a href="index.html#fan-edition">Inter Miami</a></li>
+                    <li><a href="index.html#fan-edition">Inter Milan</a></li>
+                    <li><a href="index.html#fan-edition">Juventus</a></li>
+                    <li><a href="index.html#fan-edition">Liverpool</a></li>
+                    <li><a href="index.html#fan-edition">Manchester City</a></li>
+                    <li><a href="index.html#fan-edition">Man. United</a></li>
+                    <li><a href="index.html#fan-edition">Marseille</a></li>
+                    <li><a href="index.html#fan-edition">Mineiro</a></li>
+                    <li><a href="index.html#fan-edition">Minens</a></li>
+                    <li><a href="index.html#fan-edition">Napoli</a></li>
+                    <li><a href="index.html#fan-edition">Newcastle</a></li>
+                    <li><a href="index.html#fan-edition">Palmeiras</a></li>
+                    <li><a href="index.html#fan-edition">Paris (PSG)</a></li>
+                    <li><a href="index.html#fan-edition">Porto</a></li>
+                    <li><a href="index.html#fan-edition">Real Madrid</a></li>
+                    <li><a href="index.html#fan-edition">Roma</a></li>
+                    <li><a href="index.html#fan-edition">Santos</a></li>
+                    <li><a href="index.html#fan-edition">Sao Paulo</a></li>
+                    <li><a href="index.html#fan-edition">Sporting CP</a></li>
+                    <li><a href="index.html#fan-edition">Tottenham</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <!-- National Teams -->
+            <li class="has-flyout">
+              <a href="index.html#national-teams" class="nav-link">National Teams</a>
+              <ul class="flyout-l1">
+                <li>
+                  <a href="index.html#national-teams" class="season-row">
+                    World Cup 2026 <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2">
+                    <li><a href="index.html#national-teams">Argentina</a></li>
+                    <li><a href="index.html#national-teams">Belgium</a></li>
+                    <li><a href="index.html#national-teams">Canada</a></li>
+                    <li><a href="index.html#national-teams">Colombia</a></li>
+                    <li><a href="index.html#national-teams">England</a></li>
+                    <li><a href="index.html#national-teams">France</a></li>
+                    <li><a href="index.html#national-teams">Germany</a></li>
+                    <li><a href="index.html#national-teams">Japan</a></li>
+                    <li><a href="index.html#national-teams">Mexico</a></li>
+                    <li><a href="index.html#national-teams">Portugal</a></li>
+                    <li><a href="index.html#national-teams">Spain</a></li>
+                    <li><a href="index.html#national-teams">Uruguay</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Retros -->
+            <li class="has-flyout">
+              <a href="index.html#retros-clubs" class="nav-link">Retros</a>
+              <ul class="flyout-l1">
+                <li>
+                  <a href="index.html#retros-clubs" class="season-row">
+                    Club Classics <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2 flyout-left">
+                    <li><a href="index.html#retros-clubs">AC Milan</a></li>
+                    <li><a href="index.html#retros-clubs">Arsenal</a></li>
+                    <li><a href="index.html#retros-clubs">Barcelona</a></li>
+                    <li><a href="index.html#retros-clubs">Bayern München</a></li>
+                    <li><a href="index.html#retros-clubs">Chelsea</a></li>
+                    <li><a href="index.html#retros-clubs">Inter Mailand</a></li>
+                    <li><a href="index.html#retros-clubs">Juventus</a></li>
+                    <li><a href="index.html#retros-clubs">Liverpool</a></li>
+                    <li><a href="index.html#retros-clubs">Manchester City</a></li>
+                    <li><a href="index.html#retros-clubs">Man. United</a></li>
+                    <li><a href="index.html#retros-clubs">Marseille</a></li>
+                    <li><a href="index.html#retros-clubs">PSG</a></li>
+                    <li><a href="index.html#retros-clubs">Real Madrid</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="index.html#retros-nations" class="season-row">
+                    Nation Classics <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2 flyout-left">
+                    <li><a href="index.html#retros-nations">Argentina</a></li>
+                    <li><a href="index.html#retros-nations">Brazil</a></li>
+                    <li><a href="index.html#retros-nations">Croatia</a></li>
+                    <li><a href="index.html#retros-nations">England</a></li>
+                    <li><a href="index.html#retros-nations">France</a></li>
+                    <li><a href="index.html#retros-nations">Germany</a></li>
+                    <li><a href="index.html#retros-nations">Italy</a></li>
+                    <li><a href="index.html#retros-nations">Japan</a></li>
+                    <li><a href="index.html#retros-nations">Marocco</a></li>
+                    <li><a href="index.html#retros-nations">Mexico</a></li>
+                    <li><a href="index.html#retros-nations">Netherlands</a></li>
+                    <li><a href="index.html#retros-nations">Nigeria</a></li>
+                    <li><a href="index.html#retros-nations">Portugal</a></li>
+                    <li><a href="index.html#retros-nations">Senegal</a></li>
+                    <li><a href="index.html#retros-nations">Spain</a></li>
+                    <li><a href="index.html#retros-nations">Türkiye</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Cart -->
+            <li>
+              <a href="checkout.html" class="nav-link cart-link">
+                <span class="cart-icon">🛒</span> Cart
+                <span id="cart-count" class="cart-badge">0</span>
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ── CHECKOUT MAIN ─────────────────────────────────────────────── -->
+    <main class="checkout-page">
+      <div class="container checkout-grid">
+
+        <!-- LEFT: Cart Summary -->
+        <section class="checkout-panel cart-panel">
+          <div class="panel-header">
+            <span class="panel-icon">🛒</span>
+            <h2>Your Cart</h2>
+          </div>
+          <div id="cart-empty" class="cart-empty">
+            <span class="cart-empty-icon">👕</span>
+            <p>Your cart is empty.</p>
+            <a href="index.html" class="btn-outline-sm">Browse jerseys</a>
+          </div>
+          <div id="cart-items" class="cart-items"></div>
+          <div class="cart-total-row" id="cart-total-row">
+            <span>Total</span>
+            <strong>CHF <span id="cart-total">0.00</span></strong>
+          </div>
+        </section>
+
+        <!-- RIGHT: Order Form -->
+        <section class="checkout-panel form-panel">
+          <div class="panel-header">
+            <span class="panel-icon">📦</span>
+            <h2>Shipping Details</h2>
+          </div>
+          <p class="panel-sub">No login required — we'll contact you to confirm your order.</p>
+
+          <form id="checkout-form" class="checkout-form" action="https://formspree.io/jerseyphase@gmail.com" method="POST" novalidate>
+
+            <div class="form-row">
+              <label for="fullName">Full name *</label>
+              <input type="text" id="fullName" name="fullName" required placeholder="Your full name" />
+            </div>
+
+            <div class="form-row">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required placeholder="you@example.com" />
+            </div>
+
+            <div class="form-row">
+              <label for="phone">Phone number *</label>
+              <input type="tel" id="phone" name="phone" required placeholder="+41 79 123 45 67" pattern="[0-9+\-()\s]{7,}" />
+            </div>
+
+            <div class="form-row">
+              <label for="address">Shipping address *</label>
+              <input type="text" id="address" name="address" required placeholder="Musterstrasse 12" />
+            </div>
+
+            <div class="row-2">
+              <div class="form-row">
+                <label for="city">City *</label>
+                <input type="text" id="city" name="city" required placeholder="Zürich" />
+              </div>
+              <div class="form-row">
+                <label for="postalCode">Postal code *</label>
+                <input type="text" id="postalCode" name="postalCode" required placeholder="8000" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="country">Country *</label>
+              <input type="text" id="country" name="country" required placeholder="Switzerland" />
+            </div>
+
+            <div class="form-row">
+              <label for="size">Size *</label>
+              <select id="size" name="size" required>
+                <option value="">Choose size</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="notes">Notes (optional)</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Any special requests..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              Place Order →
+            </button>
+
+            <div id="checkout-success" class="success-alert" role="status" aria-live="polite" hidden>
+              ✅ Your email client has opened with all order details pre-filled — just hit <strong>Send</strong>! We'll confirm your order shortly.
+            </div>
+            <div id="checkout-error" class="error-alert" role="alert" hidden></div>
+
+            <input type="hidden" name="_subject" value="🛒 New JerseyBase Order" />
+            <input type="hidden" name="_replyto" id="form-replyto" value="" />
+            <input type="hidden" name="cart_contents" id="form-cart" value="" />
+            <input type="hidden" name="order_total" id="form-total" value="" />
+            <input type="hidden" name="_next" value="checkout.html" />
+          </form>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 JerseyBase. All rights reserved.</p>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
