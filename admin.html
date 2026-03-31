@@ -544,7 +544,8 @@ function displayOrders() {
         <span class="order-item-qty">×${i.quantity}</span>
         <span class="order-item-price">CHF ${(+(i.subtotal || i.price * i.quantity)).toFixed(2)}</span>
       </div>`).join("");
-    const actionsHtml = isAdmin ? `
+    const canEdit = currentUser.role === "admin" || currentUser.role === "supplier";
+    const actionsHtml = canEdit ? `
       <div class="order-actions">
         <label>Status:</label>
         <select class="status-select" id="sel-${o.id}">
@@ -554,7 +555,7 @@ function displayOrders() {
           <option value="delivered"  ${o.status==="delivered"  ?"selected":""}>🟢 Geliefert</option>
         </select>
         <button class="update-btn" onclick="updateOrderStatus(${o.id})">Speichern</button>
-        <button class="order-del-btn" onclick="deleteOrder(${o.id})">✕ Löschen</button>
+        ${isAdmin ? `<button class="order-del-btn" onclick="deleteOrder(${o.id})">✕ Löschen</button>` : ""}
       </div>` : `<div style="margin-top:0.75rem;font-size:0.78rem;color:rgba(255,255,255,0.25);">Status: <strong style="color:rgba(255,255,255,0.5)">${statusLabel}</strong></div>`;
     return `
     <div class="order-card status-${o.status}" id="order-card-${o.id}">
