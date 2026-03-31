@@ -2681,8 +2681,8 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
 
     countEl.textContent = `${matches.length} jersey${matches.length === 1 ? "" : "s"} found`;
 
+    let searchSliderCounter = 0;
     matches.forEach(({ card, label }) => {
-      const wrapper = document.createElement("div");
       // Prepend a small badge indicating the section
       const { text, cls } = labelMap[label] || labelMap.fan;
       const badge = document.createElement("div");
@@ -2690,6 +2690,18 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
       badge.textContent = text;
       // Insert badge before card content
       const inner = card.cloneNode(true);
+      // Fix hidden cards (e.g. those behind "View More")
+      inner.style.display = "";
+      // Fix duplicate slider IDs so prev/next buttons work on the cloned card
+      const sliderEl = inner.querySelector(".product-image-slider");
+      if (sliderEl && sliderEl.id) {
+        const newSliderId = "search-slider-" + (searchSliderCounter++);
+        sliderEl.id = newSliderId;
+        const prevBtn = inner.querySelector(".slider-btn.slider-prev");
+        const nextBtn = inner.querySelector(".slider-btn.slider-next");
+        if (prevBtn) prevBtn.setAttribute("onclick", `slideImage('${newSliderId}', -1)`);
+        if (nextBtn) nextBtn.setAttribute("onclick", `slideImage('${newSliderId}', 1)`);
+      }
       const infoDiv = inner.querySelector(".product-info");
       if (infoDiv) infoDiv.insertBefore(badge, infoDiv.firstChild);
       resultsGrid.appendChild(inner);
