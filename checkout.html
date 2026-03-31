@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Checkout – JerseyBase</title>
+    <title>Checkout – JerseyPhase</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
     <!-- ── HEADER (same flyout nav as index.html) ───────────────────── -->
     <header class="header">
       <div class="container header-inner">
-        <a href="index.html" class="logo">⚽ JerseyBase</a>
+        <a href="index.html" class="logo"><span class="logo-jers">Jersey</span><span class="logo-hub">Phase</span></a>
         <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">☰</button>
 
         <nav class="nav" id="nav-menu">
@@ -75,18 +75,50 @@
                     World Cup 2026 <span class="arrow">▶</span>
                   </a>
                   <ul class="flyout-l2">
+                    <li><a href="index.html#national-teams">Algeria</a></li>
                     <li><a href="index.html#national-teams">Argentina</a></li>
+                    <li><a href="index.html#national-teams">Austria</a></li>
                     <li><a href="index.html#national-teams">Belgium</a></li>
+                    <li><a href="index.html#national-teams">Brazil</a></li>
                     <li><a href="index.html#national-teams">Canada</a></li>
+                    <li><a href="index.html#national-teams">Chile</a></li>
                     <li><a href="index.html#national-teams">Colombia</a></li>
+                    <li><a href="index.html#national-teams">Costa Rica</a></li>
+                    <li><a href="index.html#national-teams">Croatia</a></li>
+                    <li><a href="index.html#national-teams">Czech Republic</a></li>
+                    <li><a href="index.html#national-teams">Ecuador</a></li>
                     <li><a href="index.html#national-teams">England</a></li>
                     <li><a href="index.html#national-teams">France</a></li>
                     <li><a href="index.html#national-teams">Germany</a></li>
+                    <li><a href="index.html#national-teams">Ghana</a></li>
+                    <li><a href="index.html#national-teams">Hungary</a></li>
+                    <li><a href="index.html#national-teams">Iceland</a></li>
+                    <li><a href="index.html#national-teams">Italy</a></li>
+                    <li><a href="index.html#national-teams">Ivory Coast</a></li>
+                    <li><a href="index.html#national-teams">Jamaica</a></li>
                     <li><a href="index.html#national-teams">Japan</a></li>
                     <li><a href="index.html#national-teams">Mexico</a></li>
+                    <li><a href="index.html#national-teams">Morocco</a></li>
+                    <li><a href="index.html#national-teams">Netherlands</a></li>
+                    <li><a href="index.html#national-teams">New Zealand</a></li>
+                    <li><a href="index.html#national-teams">Nigeria</a></li>
+                    <li><a href="index.html#national-teams">Norway</a></li>
+                    <li><a href="index.html#national-teams">Paraguay</a></li>
+                    <li><a href="index.html#national-teams">Peru</a></li>
+                    <li><a href="index.html#national-teams">Poland</a></li>
                     <li><a href="index.html#national-teams">Portugal</a></li>
+                    <li><a href="index.html#national-teams">Saudi Arabia</a></li>
+                    <li><a href="index.html#national-teams">Scotland</a></li>
+                    <li><a href="index.html#national-teams">Senegal</a></li>
+                    <li><a href="index.html#national-teams">South Africa</a></li>
+                    <li><a href="index.html#national-teams">South Korea</a></li>
                     <li><a href="index.html#national-teams">Spain</a></li>
-                    <li><a href="index.html#national-teams">Uruguay</a></li>
+                    <li><a href="index.html#national-teams">Sweden</a></li>
+                    <li><a href="index.html#national-teams">Switzerland</a></li>
+                    <li><a href="index.html#national-teams">Ukraine</a></li>
+                    <li><a href="index.html#national-teams">USA</a></li>
+                    <li><a href="index.html#national-teams">Venezuela</a></li>
+                    <li><a href="index.html#national-teams">Wales</a></li>
                   </ul>
                 </li>
               </ul>
@@ -185,7 +217,7 @@
           </div>
           <p class="panel-sub">No login required — we'll contact you to confirm your order.</p>
 
-          <form id="checkout-form" class="checkout-form" action="https://formspree.io/jerseyphase@gmail.com" method="POST" novalidate>
+          <form id="checkout-form" class="checkout-form" action="https://formspree.io/f/mreokeok" method="POST" novalidate>
 
             <div class="form-row">
               <label for="fullName">Full name *</label>
@@ -224,18 +256,6 @@
             </div>
 
             <div class="form-row">
-              <label for="size">Size *</label>
-              <select id="size" name="size" required>
-                <option value="">Choose size</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option>
-              </select>
-            </div>
-
-            <div class="form-row">
               <label for="notes">Notes (optional)</label>
               <textarea id="notes" name="notes" rows="3" placeholder="Any special requests..."></textarea>
             </div>
@@ -245,15 +265,9 @@
             </button>
 
             <div id="checkout-success" class="success-alert" role="status" aria-live="polite" hidden>
-              ✅ Your email client has opened with all order details pre-filled — just hit <strong>Send</strong>! We'll confirm your order shortly.
+              ✅ Order sent! We'll contact you shortly to confirm.
             </div>
             <div id="checkout-error" class="error-alert" role="alert" hidden></div>
-
-            <input type="hidden" name="_subject" value="🛒 New JerseyBase Order" />
-            <input type="hidden" name="_replyto" id="form-replyto" value="" />
-            <input type="hidden" name="cart_contents" id="form-cart" value="" />
-            <input type="hidden" name="order_total" id="form-total" value="" />
-            <input type="hidden" name="_next" value="checkout.html" />
           </form>
         </section>
 
@@ -261,9 +275,11 @@
     </main>
 
     <footer class="footer">
-      <p>© 2026 JerseyBase. All rights reserved.</p>
+      <p>© 2026 JerseyPhase. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>emailjs.init("kktW89XjiOjRLC2MD");</script>
     <script src="cart.js"></script>
     <script src="script.js"></script>
   </body>

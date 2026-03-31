@@ -43,6 +43,23 @@ function isSameEntry(a, b) {
          (a.backprint || "") === (b.backprint || "");
 }
 
+function showCartToast(name) {
+  let toast = document.getElementById("cart-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "cart-toast";
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `<span class="cart-toast-icon">✅</span><span class="cart-toast-text"><strong>${name}</strong> wurde zum Warenkorb hinzugefügt!</span>`;
+  toast.classList.remove("cart-toast--hide");
+  toast.classList.add("cart-toast--show");
+  clearTimeout(toast._hideTimer);
+  toast._hideTimer = setTimeout(() => {
+    toast.classList.remove("cart-toast--show");
+    toast.classList.add("cart-toast--hide");
+  }, 3000);
+}
+
 function addToCart(newItem) {
   const cart = getCart();
   const existing = cart.find((item) => isSameEntry(item, newItem));
@@ -56,6 +73,7 @@ function addToCart(newItem) {
 
   saveCart(cart);
   renderCart();
+  showCartToast(newItem.name);
 }
 
 function updateQuantity(uid, quantity) {
@@ -113,6 +131,9 @@ function renderCart() {
     const itemEl = document.createElement("div");
     itemEl.className = "cart-item";
 
+    const sizeHtml      = item.size
+      ? `<span class="cart-size-badge">Size: ${item.size}</span>`
+      : "";
     const backprintHtml = item.backprint
       ? `<div class="cart-addons-info">✏️ Backprint: ${item.backprint}</div>`
       : "";
@@ -120,7 +141,7 @@ function renderCart() {
     itemEl.innerHTML = `
       <div class="cart-item-image"><img src="${item.image || 'https://via.placeholder.com/60x60?text=Jersey'}" alt="${item.name}" width="60" height="60" /></div>
       <div class="cart-item-details">
-        <h3>${item.name}</h3>
+        <h3>${item.name} ${sizeHtml}</h3>
         ${backprintHtml}
         <div class="cart-item-meta">
           <span class="cart-price">CHF ${item.price.toFixed(2)}</span>

@@ -1,0 +1,893 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JerseyPhase – Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #login-screen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 1rem;
+    }
+    .login-box {
+      background: #13131c; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px; padding: 2.5rem 2rem; width: 100%; max-width: 400px;
+      text-align: center;
+    }
+    .login-logo { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .login-logo span { background: #fff; color: #000; padding: 0.05em 0.35em; border-radius: 5px; margin-left: 2px; }
+    .login-sub { font-size: 0.82rem; color: rgba(255,255,255,0.4); margin-bottom: 2rem; }
+    .login-field { text-align: left; margin-bottom: 0.85rem; }
+    .login-field label { display: block; font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.45); margin-bottom: 0.35rem; }
+    .login-box input {
+      width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; padding: 0.8rem 1rem; color: #fff; font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem; outline: none; letter-spacing: 0.02em;
+    }
+    .login-box input:focus { border-color: #4ade80; }
+    .login-btn {
+      width: 100%; background: #4ade80; color: #0a0a0f; border: none; border-radius: 10px;
+      padding: 0.85rem; font-weight: 700; font-size: 0.95rem; font-family: 'Poppins', sans-serif;
+      cursor: pointer; transition: all 0.2s; margin-top: 0.5rem;
+    }
+    .login-btn:hover { background: #22c55e; }
+    .login-error { color: #f87171; font-size: 0.82rem; margin-top: 0.75rem; min-height: 1.2em; }
+
+    /* ── DASHBOARD ── */
+    #dashboard { display: none; }
+    .admin-header {
+      background: #13131c; border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .admin-logo { font-size: 1.1rem; font-weight: 800; }
+    .admin-logo span { background: #fff; color: #000; padding: 0.05em 0.3em; border-radius: 4px; margin-left: 2px; }
+    .admin-user-info { display: flex; align-items: center; gap: 0.6rem; }
+    .admin-badge { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 20px; border: 1px solid; }
+    .badge-admin    { background: rgba(74,222,128,0.15); color: #4ade80; border-color: rgba(74,222,128,0.25); }
+    .badge-supplier { background: rgba(251,191,36,0.12); color: #fbbf24; border-color: rgba(251,191,36,0.25); }
+    .admin-username { font-size: 0.82rem; color: rgba(255,255,255,0.5); font-weight: 500; }
+    .logout-btn { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); border-radius: 8px; padding: 0.4rem 1rem; font-size: 0.82rem; cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.2s; }
+    .logout-btn:hover { border-color: #f87171; color: #f87171; }
+
+    .admin-main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* ── TABS ── */
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0; flex-wrap: wrap; }
+    .tab-btn {
+      background: transparent; border: none; color: rgba(255,255,255,0.45); font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem; font-weight: 600; padding: 0.7rem 1.25rem; cursor: pointer; border-bottom: 2px solid transparent;
+      transition: all 0.2s; margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: rgba(255,255,255,0.8); }
+    .tab-btn.active { color: #4ade80; border-bottom-color: #4ade80; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── SECTION TITLES ── */
+    .section-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.25rem; color: rgba(255,255,255,0.9); }
+    .pending-empty { text-align: center; padding: 3rem 1rem; color: rgba(255,255,255,0.3); font-size: 0.9rem; }
+    .pending-empty span { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
+
+    /* ── REVIEW ITEMS ── */
+    .review-item {
+      background: #13131c; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px;
+      padding: 1.25rem; margin-bottom: 1rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start;
+    }
+    .review-item.approved { border-color: rgba(74,222,128,0.3); background: rgba(74,222,128,0.04); }
+    .ri-stars { color: #fbbf24; font-size: 1rem; margin-bottom: 0.4rem; }
+    .ri-text { font-size: 0.88rem; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 0.6rem; font-style: italic; }
+    .ri-meta { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+    .ri-meta strong { color: rgba(255,255,255,0.6); }
+    .ri-photo { max-width: 80px; max-height: 80px; border-radius: 8px; object-fit: cover; margin-top: 0.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .ri-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
+    .approve-btn {
+      background: #4ade80; color: #0a0a0f; border: none; border-radius: 8px;
+      padding: 0.5rem 1rem; font-size: 0.82rem; font-weight: 700; font-family: 'Poppins', sans-serif;
+      cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .approve-btn:hover { background: #22c55e; }
+    .approve-btn:disabled { background: rgba(74,222,128,0.3); color: rgba(0,0,0,0.5); cursor: default; }
+    .delete-btn {
+      background: transparent; border: 1px solid rgba(248,113,113,0.3); color: #f87171;
+      border-radius: 8px; padding: 0.4rem 0.8rem; font-size: 0.78rem; font-weight: 600;
+      font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .delete-btn:hover { background: rgba(248,113,113,0.1); }
+    .approved-tag { font-size: 0.75rem; color: #4ade80; font-weight: 600; padding: 0.3rem 0.6rem; background: rgba(74,222,128,0.1); border-radius: 6px; border: 1px solid rgba(74,222,128,0.2); }
+
+    /* ── APPROVED GRID ── */
+    .approved-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+    .appr-card {
+      background: #13131c; border: 1px solid rgba(74,222,128,0.2); border-radius: 14px;
+      padding: 1.25rem; position: relative;
+    }
+    .appr-stars { color: #fbbf24; font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .appr-text { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.55; margin-bottom: 0.6rem; font-style: italic; }
+    .appr-name { font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+    .appr-jersey { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+    .appr-del {
+      position: absolute; top: 0.75rem; right: 0.75rem;
+      background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.2); color: #f87171;
+      border-radius: 6px; padding: 0.25rem 0.5rem; font-size: 0.72rem; cursor: pointer; font-family: 'Poppins', sans-serif;
+    }
+    .appr-del:hover { background: rgba(248,113,113,0.2); }
+    .appr-photo { width: 100%; max-height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem; }
+
+    /* ── ADD REVIEW FORM ── */
+    .add-form { background: #13131c; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.75rem; max-width: 620px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.9rem; }
+    .form-field.full { grid-column: span 2; }
+    .form-field label { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.5); }
+    .form-field input, .form-field textarea, .form-field select {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #fff;
+      border-radius: 10px; padding: 0.7rem 0.9rem; font-size: 0.9rem; font-family: 'Poppins', sans-serif;
+      outline: none; transition: border-color 0.2s; width: 100%;
+    }
+    .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: #4ade80; }
+    .form-field textarea { resize: vertical; min-height: 90px; }
+    .form-field select option { background: #1e1e2d; }
+    .star-pick { display: flex; gap: 0.3rem; }
+    .star-pick .sp-star { font-size: 1.8rem; color: rgba(255,255,255,0.15); cursor: pointer; transition: color 0.1s, transform 0.1s; line-height: 1; user-select: none; }
+    .star-pick .sp-star:hover, .star-pick .sp-star.on { color: #fbbf24; }
+    .star-pick .sp-star:hover { transform: scale(1.12); }
+    .save-btn {
+      background: #4ade80; color: #0a0a0f; border: none; border-radius: 10px;
+      padding: 0.8rem 2rem; font-weight: 700; font-size: 0.92rem; font-family: 'Poppins', sans-serif;
+      cursor: pointer; transition: all 0.2s; margin-top: 0.5rem;
+    }
+    .save-btn:hover { background: #22c55e; transform: translateY(-1px); }
+
+    /* ── ORDERS ── */
+    .orders-toolbar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .orders-filter-label { font-size: 0.8rem; color: rgba(255,255,255,0.4); font-weight: 600; }
+    .filter-btn {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5);
+      border-radius: 20px; padding: 0.35rem 0.9rem; font-size: 0.78rem; font-weight: 600;
+      font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active { background: rgba(74,222,128,0.12); border-color: rgba(74,222,128,0.3); color: #4ade80; }
+    .order-card {
+      background: #13131c; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px;
+      padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .order-card.status-new       { border-left: 4px solid #60a5fa; }
+    .order-card.status-processing{ border-left: 4px solid #fbbf24; }
+    .order-card.status-shipped   { border-left: 4px solid #a78bfa; }
+    .order-card.status-delivered { border-left: 4px solid #4ade80; }
+    .order-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .order-id { font-size: 0.78rem; color: rgba(255,255,255,0.3); font-weight: 600; font-family: monospace; }
+    .order-date { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+    .order-status-badge {
+      font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 20px; border: 1px solid; white-space: nowrap;
+    }
+    .s-new        { background: rgba(96,165,250,0.12); color: #60a5fa; border-color: rgba(96,165,250,0.3); }
+    .s-processing { background: rgba(251,191,36,0.12); color: #fbbf24; border-color: rgba(251,191,36,0.3); }
+    .s-shipped    { background: rgba(167,139,250,0.12); color: #a78bfa; border-color: rgba(167,139,250,0.3); }
+    .s-delivered  { background: rgba(74,222,128,0.12); color: #4ade80; border-color: rgba(74,222,128,0.2); }
+    .order-body { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .order-section-label { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .order-customer-info p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.7; }
+    .order-customer-info strong { color: rgba(255,255,255,0.95); }
+    .order-item-row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.83rem; color: rgba(255,255,255,0.65); padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .order-item-row:last-child { border-bottom: none; }
+    .order-item-name { flex: 1; }
+    .order-item-qty  { color: rgba(255,255,255,0.35); }
+    .order-item-price { font-weight: 600; color: rgba(255,255,255,0.75); white-space: nowrap; }
+    .order-total-row { margin-top: 0.75rem; display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; color: #fff; }
+    .order-notes { font-size: 0.82rem; color: rgba(255,255,255,0.4); font-style: italic; margin-top: 0.5rem; }
+    .order-actions { margin-top: 1.25rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1rem; }
+    .order-actions label { font-size: 0.78rem; color: rgba(255,255,255,0.4); font-weight: 600; }
+    .status-select {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #fff;
+      border-radius: 8px; padding: 0.4rem 0.7rem; font-size: 0.82rem; font-family: 'Poppins', sans-serif; outline: none; cursor: pointer;
+    }
+    .status-select option { background: #1e1e2d; }
+    .update-btn {
+      background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3); color: #4ade80;
+      border-radius: 8px; padding: 0.4rem 0.9rem; font-size: 0.78rem; font-weight: 700;
+      font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s;
+    }
+    .update-btn:hover { background: rgba(74,222,128,0.25); }
+    .order-del-btn {
+      margin-left: auto; background: transparent; border: 1px solid rgba(248,113,113,0.25); color: rgba(248,113,113,0.7);
+      border-radius: 8px; padding: 0.4rem 0.8rem; font-size: 0.75rem; cursor: pointer;
+      font-family: 'Poppins', sans-serif; transition: all 0.2s;
+    }
+    .order-del-btn:hover { background: rgba(248,113,113,0.1); color: #f87171; }
+
+    /* ── NOTICE ── */
+    .notice { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); border-radius: 12px; padding: 1rem 1.25rem; font-size: 0.83rem; color: rgba(251,191,36,0.85); line-height: 1.6; margin-bottom: 1.5rem; }
+    .notice strong { color: #fbbf24; }
+    .supplier-notice { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.2); border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.8rem; color: rgba(251,191,36,0.75); margin-bottom: 1.5rem; }
+
+    /* ── ADD ORDER FORM ── */
+    .add-order-form { background: #13131c; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.75rem; max-width: 760px; }
+    .add-order-form h3 { font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin: 1.5rem 0 1rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.25rem; }
+    .add-order-form h3:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+    .item-row { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 0.6rem; align-items: end; margin-bottom: 0.6rem; }
+    .item-row input { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #fff; border-radius: 8px; padding: 0.55rem 0.75rem; font-size: 0.85rem; font-family: 'Poppins', sans-serif; outline: none; width: 100%; }
+    .item-row input:focus { border-color: #4ade80; }
+    .remove-item-btn { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.2); color: #f87171; border-radius: 8px; padding: 0.55rem 0.7rem; cursor: pointer; font-size: 0.9rem; }
+    .add-item-btn { background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.82rem; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s; margin-top: 0.25rem; width: 100%; }
+    .add-item-btn:hover { border-color: rgba(74,222,128,0.4); color: #4ade80; }
+    .order-total-display { display: flex; justify-content: flex-end; align-items: center; gap: 0.75rem; margin-top: 0.75rem; font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.8); }
+
+    /* ── TOAST ── */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: #0a0a0f; border: 1px solid #4ade80; color: #4ade80; padding: 0.75rem 1.25rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; z-index: 9999; opacity: 0; transform: translateY(10px); transition: all 0.25s; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: span 1; }
+      .review-item { grid-template-columns: 1fr; }
+      .ri-actions { flex-direction: row; flex-wrap: wrap; }
+      .order-body { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ─────────────────────────────────────────────────────── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Jersey<span>Phase</span></div>
+    <p class="login-sub">Admin Panel — Bitte einloggen</p>
+    <div class="login-field">
+      <label>Benutzername</label>
+      <input type="text" id="username-input" placeholder="Benutzername" autocomplete="username" />
+    </div>
+    <div class="login-field">
+      <label>Passwort</label>
+      <input type="password" id="pw-input" placeholder="Passwort" autocomplete="current-password" />
+    </div>
+    <button class="login-btn" onclick="doLogin()">Einloggen →</button>
+    <p class="login-error" id="login-error"></p>
+  </div>
+</div>
+
+<!-- ── DASHBOARD ─────────────────────────────────────────────────── -->
+<div id="dashboard">
+  <header class="admin-header">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <div class="admin-logo">Jersey<span>Phase</span></div>
+      <span class="admin-badge" id="role-badge">Admin</span>
+    </div>
+    <div class="admin-user-info">
+      <span class="admin-username" id="display-username"></span>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="admin-main">
+
+    <!-- Tabs -->
+    <div class="tabs" id="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('orders', this)">📦 Bestellungen <span id="orders-count-badge"></span></button>
+      <button class="tab-btn" id="tab-addorder-btn" onclick="switchTab('addorder', this)">➕ Bestellung eintragen</button>
+      <button class="tab-btn" onclick="switchTab('pending', this)">⏳ Pending <span id="pending-count-badge"></span></button>
+      <button class="tab-btn" onclick="switchTab('approved', this)">✅ Bestätigt <span id="approved-count-badge"></span></button>
+      <button class="tab-btn" id="tab-add-btn" onclick="switchTab('add', this)">✍️ Review hinzufügen</button>
+    </div>
+
+    <!-- Tab: Orders -->
+    <div class="tab-panel active" id="tab-orders">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:1rem;">
+        <p class="section-title" style="margin:0;">Alle Bestellungen</p>
+        <div class="orders-toolbar" style="margin:0;">
+          <span class="orders-filter-label">Filter:</span>
+          <button class="filter-btn active" onclick="filterOrders('all', this)">Alle</button>
+          <button class="filter-btn" onclick="filterOrders('new', this)">🔵 Neu</button>
+          <button class="filter-btn" onclick="filterOrders('processing', this)">🟡 In Bearbeitung</button>
+          <button class="filter-btn" onclick="filterOrders('shipped', this)">🟣 Versendet</button>
+          <button class="filter-btn" onclick="filterOrders('delivered', this)">🟢 Geliefert</button>
+        </div>
+      </div>
+      <div id="orders-list"></div>
+    </div>
+
+    <!-- Tab: Add Order -->
+    <div class="tab-panel" id="tab-addorder">
+      <p class="section-title">Bestellung manuell eintragen</p>
+      <div class="notice">
+        <strong>Für bestehende Bestellungen:</strong> Trage hier Bestellungen ein, die du per Email erhalten hast. Neue Bestellungen über die Website werden ab jetzt automatisch gespeichert.
+      </div>
+      <div class="add-order-form">
+
+        <h3>👤 Kundendaten</h3>
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Name *</label>
+            <input type="text" id="ao-name" placeholder="Vor- und Nachname" />
+          </div>
+          <div class="form-field">
+            <label>Email *</label>
+            <input type="email" id="ao-email" placeholder="kunde@example.com" />
+          </div>
+          <div class="form-field">
+            <label>Telefon</label>
+            <input type="text" id="ao-phone" placeholder="+41 79 123 45 67" />
+          </div>
+          <div class="form-field">
+            <label>Land</label>
+            <input type="text" id="ao-country" placeholder="Switzerland" />
+          </div>
+          <div class="form-field">
+            <label>Strasse &amp; Hausnummer</label>
+            <input type="text" id="ao-address" placeholder="Musterstrasse 12" />
+          </div>
+          <div class="form-field">
+            <label>PLZ &amp; Stadt</label>
+            <input type="text" id="ao-city" placeholder="8000 Zürich" />
+          </div>
+        </div>
+
+        <h3>🛒 Bestellte Artikel</h3>
+        <div id="ao-items-list">
+          <div class="item-row">
+            <input type="text" placeholder="Trikot (z.B. Barcelona Home 25/26, Grösse L)" />
+            <input type="number" placeholder="Menge" min="1" value="1" />
+            <input type="number" placeholder="Preis CHF" min="0" step="0.01" />
+            <button class="remove-item-btn" onclick="removeOrderItem(this)" title="Entfernen">✕</button>
+          </div>
+        </div>
+        <button class="add-item-btn" onclick="addOrderItem()">+ Artikel hinzufügen</button>
+        <div class="order-total-display">
+          Total: CHF <span id="ao-total-display">0.00</span>
+        </div>
+
+        <h3>📝 Sonstiges</h3>
+        <div class="form-field">
+          <label>Status</label>
+          <select id="ao-status" class="status-select" style="max-width:220px;">
+            <option value="new">🔵 Neu</option>
+            <option value="processing">🟡 In Bearbeitung</option>
+            <option value="shipped">🟣 Versendet</option>
+            <option value="delivered">🟢 Geliefert</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Notizen / Anmerkungen</label>
+          <textarea id="ao-notes" placeholder="z.B. Backprint: Messi 10 ..." style="min-height:70px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;border-radius:10px;padding:0.7rem 0.9rem;font-size:0.9rem;font-family:'Poppins',sans-serif;outline:none;width:100%;resize:vertical;"></textarea>
+        </div>
+
+        <button class="save-btn" onclick="saveManualOrder()" style="margin-top:0.25rem;">Bestellung speichern ✓</button>
+      </div>
+    </div>
+
+    <!-- Tab: Pending -->
+    <div class="tab-panel" id="tab-pending">
+      <p class="section-title">Pending Reviews — warte auf Bestätigung</p>
+      <div class="notice">
+        <strong>So funktioniert es:</strong> Wenn ein Kunde eine Rezension schreibt, erscheint sie hier.
+        Prüfe ob die Bestellungs-E-Mail zu einer echten Bestellung gehört (schau in deinem Gmail nach) —
+        dann klick <strong>Bestätigen ✓</strong>. Die Review erscheint sofort öffentlich auf der Website mit "Verified Purchase".
+      </div>
+      <div id="pending-list"></div>
+    </div>
+
+    <!-- Tab: Approved -->
+    <div class="tab-panel" id="tab-approved">
+      <p class="section-title">Bestätigte Reviews — öffentlich sichtbar</p>
+      <div id="approved-list"></div>
+    </div>
+
+    <!-- Tab: Add Review -->
+    <div class="tab-panel" id="tab-add">
+      <p class="section-title">Neue Review manuell hinzufügen</p>
+      <div class="add-form">
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Name *</label>
+            <input type="text" id="add-name" placeholder="z.B. Marco T." />
+          </div>
+          <div class="form-field">
+            <label>Trikot *</label>
+            <input type="text" id="add-jersey" placeholder="z.B. Barcelona Home 25/26" />
+          </div>
+          <div class="form-field">
+            <label>Datum</label>
+            <input type="text" id="add-date" placeholder="z.B. April 2026" />
+          </div>
+          <div class="form-field">
+            <label>Bewertung *</label>
+            <div class="star-pick" id="add-stars">
+              <span class="sp-star" data-v="1">★</span>
+              <span class="sp-star" data-v="2">★</span>
+              <span class="sp-star" data-v="3">★</span>
+              <span class="sp-star" data-v="4">★</span>
+              <span class="sp-star" data-v="5">★</span>
+            </div>
+          </div>
+          <div class="form-field full">
+            <label>Rezensionstext *</label>
+            <textarea id="add-text" placeholder="Text der Rezension..."></textarea>
+          </div>
+          <div class="form-field full">
+            <label>Foto (optional) — Bild-URL oder von Gerät hochladen</label>
+            <input type="url" id="add-photo-url" placeholder="https://... (oder Datei unten hochladen)" />
+            <input type="file" id="add-photo-file" accept="image/*" style="margin-top:0.5rem;background:transparent;border:none;color:rgba(255,255,255,0.5);font-size:0.82rem;" />
+            <div id="add-photo-preview" style="margin-top:0.5rem;display:none;"><img id="add-preview-img" style="max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:1px solid rgba(255,255,255,0.1);" /></div>
+          </div>
+        </div>
+        <button class="save-btn" onclick="addReviewManually()">Review hinzufügen ✓</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── USERS ────────────────────────────────────────────────────────────
+const USERS = {
+  "mostafa.rasouli01": { password: "Mr05439275602$",   role: "admin"    },
+  "Liu.zhanyang":      { password: "LiuJersey2026_$",  role: "supplier" },
+};
+
+// ── AUTH ─────────────────────────────────────────────────────────────
+let currentUser = null;
+
+function doLogin() {
+  const username = document.getElementById("username-input").value.trim();
+  const pw       = document.getElementById("pw-input").value;
+  const user     = USERS[username];
+  if (user && user.password === pw) {
+    sessionStorage.setItem("jp_admin_user", username);
+    startDashboard(username);
+  } else {
+    document.getElementById("login-error").textContent = "Falscher Benutzername oder Passwort.";
+    document.getElementById("pw-input").value = "";
+  }
+}
+document.getElementById("pw-input").addEventListener("keydown", e => { if (e.key === "Enter") doLogin(); });
+document.getElementById("username-input").addEventListener("keydown", e => { if (e.key === "Enter") document.getElementById("pw-input").focus(); });
+
+function doLogout() {
+  sessionStorage.removeItem("jp_admin_user");
+  location.reload();
+}
+
+function startDashboard(username) {
+  currentUser = { username, ...USERS[username] };
+  document.getElementById("login-screen").style.display = "none";
+  document.getElementById("dashboard").style.display = "block";
+
+  // Role badge
+  const badge = document.getElementById("role-badge");
+  if (currentUser.role === "admin") {
+    badge.textContent = "Admin"; badge.className = "admin-badge badge-admin";
+  } else {
+    badge.textContent = "Supplier"; badge.className = "admin-badge badge-supplier";
+  }
+  document.getElementById("display-username").textContent = username;
+
+  // Hide "Add Review" and "Add Order" tabs for supplier
+  if (currentUser.role === "supplier") {
+    document.getElementById("tab-add-btn").style.display = "none";
+    document.getElementById("tab-addorder-btn").style.display = "none";
+  }
+
+  loadDashboard();
+}
+
+// Auto-login if session exists
+const savedUser = sessionStorage.getItem("jp_admin_user");
+if (savedUser && USERS[savedUser]) {
+  setTimeout(() => startDashboard(savedUser), 0);
+}
+
+// ── API HELPERS ───────────────────────────────────────────────────────
+async function api(endpoint, body) {
+  const res = await fetch(endpoint, {
+    method:  body !== undefined ? "POST" : "GET",
+    headers: body !== undefined ? { "Content-Type": "application/json" } : {},
+    body:    body !== undefined ? JSON.stringify(body) : undefined,
+  });
+  return res.json();
+}
+
+// ── TABS ──────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("tab-" + name).classList.add("active");
+}
+
+// ── LOAD DASHBOARD ────────────────────────────────────────────────────
+function loadDashboard() {
+  renderOrders();
+  renderPending();
+  renderApproved();
+  if (currentUser.role === "admin") {
+    initAddStars();
+    initPhotoUpload();
+    const today = new Date().toLocaleDateString("de-CH", { month: "long", year: "numeric" });
+    document.getElementById("add-date").value = today;
+  }
+}
+
+// ── ORDERS ────────────────────────────────────────────────────────────
+let allOrders = [];
+let currentFilter = "all";
+
+async function renderOrders() {
+  const list = document.getElementById("orders-list");
+  list.innerHTML = `<div class="pending-empty"><span>⏳</span>Lädt...</div>`;
+  try { allOrders = await api("/api/orders"); } catch(e) { allOrders = []; }
+  document.getElementById("orders-count-badge").textContent = allOrders.length ? `(${allOrders.length})` : "";
+  displayOrders();
+}
+
+function displayOrders() {
+  const list = document.getElementById("orders-list");
+  const filtered = currentFilter === "all" ? allOrders : allOrders.filter(o => o.status === currentFilter);
+  if (!filtered.length) {
+    list.innerHTML = `<div class="pending-empty"><span>📭</span>Keine Bestellungen${currentFilter !== "all" ? " in dieser Kategorie" : ""}.</div>`;
+    return;
+  }
+  const isAdmin = currentUser.role === "admin";
+  list.innerHTML = filtered.map(o => {
+    const statusLabel = { new: "Neu", processing: "In Bearbeitung", shipped: "Versendet", delivered: "Geliefert" }[o.status] || o.status;
+    const c = o.customer || {};
+    const items = (o.items || []);
+    const itemsHtml = items.map(i => `
+      <div class="order-item-row">
+        <span class="order-item-name">${escHtml(i.name)}${i.size ? ` <span style="color:rgba(255,255,255,0.3)">· ${escHtml(i.size)}</span>` : ""}${i.backprint ? ` <span style="color:rgba(255,255,255,0.25);font-size:0.78rem">✏️ ${escHtml(i.backprint)}</span>` : ""}</span>
+        <span class="order-item-qty">×${i.quantity}</span>
+        <span class="order-item-price">CHF ${(+(i.subtotal || i.price * i.quantity)).toFixed(2)}</span>
+      </div>`).join("");
+    const actionsHtml = isAdmin ? `
+      <div class="order-actions">
+        <label>Status:</label>
+        <select class="status-select" id="sel-${o.id}">
+          <option value="new"        ${o.status==="new"        ?"selected":""}>🔵 Neu</option>
+          <option value="processing" ${o.status==="processing" ?"selected":""}>🟡 In Bearbeitung</option>
+          <option value="shipped"    ${o.status==="shipped"    ?"selected":""}>🟣 Versendet</option>
+          <option value="delivered"  ${o.status==="delivered"  ?"selected":""}>🟢 Geliefert</option>
+        </select>
+        <button class="update-btn" onclick="updateOrderStatus(${o.id})">Speichern</button>
+        <button class="order-del-btn" onclick="deleteOrder(${o.id})">✕ Löschen</button>
+      </div>` : `<div style="margin-top:0.75rem;font-size:0.78rem;color:rgba(255,255,255,0.25);">Status: <strong style="color:rgba(255,255,255,0.5)">${statusLabel}</strong></div>`;
+    return `
+    <div class="order-card status-${o.status}" id="order-card-${o.id}">
+      <div class="order-head">
+        <div>
+          <div class="order-id">${o.order_id || ("#" + o.id)}</div>
+          <div class="order-date">📅 ${escHtml(o.date || "")}</div>
+        </div>
+        <span class="order-status-badge s-${o.status}">${statusLabel}</span>
+      </div>
+      <div class="order-body">
+        <div class="order-customer-info">
+          <div class="order-section-label">Kunde</div>
+          <p><strong>${escHtml(c.name || "—")}</strong></p>
+          <p>📧 ${escHtml(c.email || "—")}</p>
+          <p>📞 ${escHtml(c.phone || "—")}</p>
+          <p>📍 ${escHtml(c.address || "")}, ${escHtml(c.postalCode || "")} ${escHtml(c.city || "")}, ${escHtml(c.country || "")}</p>
+          ${o.notes ? `<p class="order-notes">💬 ${escHtml(o.notes)}</p>` : ""}
+        </div>
+        <div>
+          <div class="order-section-label">Bestellte Artikel</div>
+          ${itemsHtml || `<div style="color:rgba(255,255,255,0.25);font-size:0.85rem;">Keine Artikel</div>`}
+          <div class="order-total-row"><span>Total</span><span>CHF ${(+(o.total||0)).toFixed(2)}</span></div>
+        </div>
+      </div>
+      ${actionsHtml}
+    </div>`;
+  }).join("");
+}
+
+function filterOrders(status, btn) {
+  currentFilter = status;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  displayOrders();
+}
+
+async function updateOrderStatus(id) {
+  const sel = document.getElementById("sel-" + id);
+  if (!sel) return;
+  try {
+    await api("/api/order/update-status", { id, status: sel.value });
+    const order = allOrders.find(o => o.id === id);
+    if (order) order.status = sel.value;
+    displayOrders();
+    toast("✅ Status aktualisiert!");
+  } catch(e) { toast("❌ Fehler beim Speichern.", true); }
+}
+
+async function deleteOrder(id) {
+  if (!confirm("Bestellung wirklich löschen?")) return;
+  try {
+    await api("/api/order/delete", { id });
+    allOrders = allOrders.filter(o => o.id !== id);
+    document.getElementById("orders-count-badge").textContent = allOrders.length ? `(${allOrders.length})` : "";
+    displayOrders();
+    toast("🗑️ Bestellung gelöscht.");
+  } catch(e) { toast("❌ Fehler beim Löschen.", true); }
+}
+
+// ── PENDING REVIEWS ───────────────────────────────────────────────────
+async function renderPending() {
+  const list = document.getElementById("pending-list");
+  list.innerHTML = `<div class="pending-empty"><span>⏳</span>Lädt...</div>`;
+  let pending = [];
+  try { pending = await api("/api/reviews/pending"); } catch(e) {}
+  document.getElementById("pending-count-badge").textContent = pending.length ? `(${pending.length})` : "";
+  if (!pending.length) {
+    list.innerHTML = `<div class="pending-empty"><span>📭</span>Keine ausstehenden Rezensionen.</div>`;
+    return;
+  }
+  const isAdmin = currentUser.role === "admin";
+  list.innerHTML = pending.map(r => `
+    <div class="review-item" id="pending-item-${r.id}">
+      <div>
+        <div class="ri-stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
+        ${r.photo ? `<img class="ri-photo" src="${r.photo}" />` : ""}
+        <p class="ri-text">"${escHtml(r.text)}"</p>
+        <p class="ri-meta">
+          <strong>${escHtml(r.name)}</strong> · ${escHtml(r.jersey)} · ${escHtml(r.date || "")}
+          ${r.email ? `<br>📧 Bestellungs-Email: <strong>${escHtml(r.email)}</strong>` : ""}
+        </p>
+      </div>
+      <div class="ri-actions">
+        ${isAdmin ? `<button class="approve-btn" onclick="approveReview(${r.id})">Bestätigen ✓</button>
+        <button class="delete-btn" onclick="deletePending(${r.id})">Ablehnen ✗</button>` :
+        `<span class="approved-tag">Nur ansehen</span>`}
+      </div>
+    </div>
+  `).join("");
+}
+
+// ── APPROVED REVIEWS ──────────────────────────────────────────────────
+async function renderApproved() {
+  const list = document.getElementById("approved-list");
+  list.innerHTML = `<div class="pending-empty"><span>⏳</span>Lädt...</div>`;
+  let approved = [];
+  try { approved = await api("/api/reviews/approved"); } catch(e) {}
+  document.getElementById("approved-count-badge").textContent = approved.length ? `(${approved.length})` : "";
+  if (!approved.length) {
+    list.innerHTML = `<div class="pending-empty"><span>⭐</span>Noch keine bestätigten Rezensionen.</div>`;
+    return;
+  }
+  const isAdmin = currentUser.role === "admin";
+  list.innerHTML = `<div class="approved-grid">${approved.map(r => `
+    <div class="appr-card" id="approved-item-${r.id}">
+      ${isAdmin ? `<button class="appr-del" onclick="deleteApproved(${r.id})">✕</button>` : ""}
+      ${r.photo ? `<img class="appr-photo" src="${r.photo}" />` : ""}
+      <div class="appr-stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
+      <p class="appr-text">"${escHtml(r.text)}"</p>
+      <div class="appr-name">${escHtml(r.name)}</div>
+      <div class="appr-jersey">${escHtml(r.jersey)} · ${escHtml(r.date || "")}</div>
+    </div>
+  `).join("")}</div>`;
+}
+
+// ── APPROVE / DELETE ──────────────────────────────────────────────────
+async function approveReview(id) {
+  const btn = document.querySelector(`#pending-item-${id} .approve-btn`);
+  if (btn) { btn.disabled = true; btn.textContent = "…"; }
+  try {
+    await api("/api/review/approve", { id });
+    toast("✅ Review bestätigt und veröffentlicht!");
+  } catch(e) { toast("❌ Fehler beim Bestätigen.", true); }
+  renderPending();
+  renderApproved();
+}
+
+async function deletePending(id) {
+  try {
+    await api("/api/review/delete-pending", { id });
+    toast("🗑️ Review abgelehnt.");
+  } catch(e) { toast("❌ Fehler.", true); }
+  renderPending();
+}
+
+async function deleteApproved(id) {
+  try {
+    await api("/api/review/delete-approved", { id });
+    toast("🗑️ Review entfernt.");
+  } catch(e) { toast("❌ Fehler.", true); }
+  renderApproved();
+}
+
+// ── ADD MANUALLY ──────────────────────────────────────────────────────
+let addRating = 0;
+function initAddStars() {
+  const stars = document.querySelectorAll("#add-stars .sp-star");
+  stars.forEach(s => {
+    s.addEventListener("mouseenter", () => {
+      const v = Number(s.dataset.v);
+      stars.forEach(x => x.classList.toggle("on", Number(x.dataset.v) <= v));
+    });
+    s.addEventListener("mouseleave", () => {
+      stars.forEach(x => x.classList.toggle("on", Number(x.dataset.v) <= addRating));
+    });
+    s.addEventListener("click", () => {
+      addRating = Number(s.dataset.v);
+      stars.forEach(x => x.classList.toggle("on", Number(x.dataset.v) <= addRating));
+    });
+  });
+}
+
+function initPhotoUpload() {
+  const fileInput = document.getElementById("add-photo-file");
+  const preview   = document.getElementById("add-photo-preview");
+  const img       = document.getElementById("add-preview-img");
+  const urlInput  = document.getElementById("add-photo-url");
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => { img.src = e.target.result; preview.style.display = "block"; urlInput.value = ""; };
+    reader.readAsDataURL(file);
+  });
+  urlInput.addEventListener("input", () => {
+    if (urlInput.value.trim()) { img.src = urlInput.value.trim(); preview.style.display = "block"; fileInput.value = ""; }
+  });
+}
+
+async function addReviewManually() {
+  const name   = document.getElementById("add-name").value.trim();
+  const jersey = document.getElementById("add-jersey").value.trim();
+  const date   = document.getElementById("add-date").value.trim();
+  const text   = document.getElementById("add-text").value.trim();
+  const imgEl  = document.getElementById("add-preview-img");
+  const photo  = document.getElementById("add-photo-preview").style.display !== "none" ? imgEl.src : null;
+  if (!name || !jersey || !text || !addRating) {
+    toast("⚠️ Bitte alle Pflichtfelder ausfüllen und Sterne wählen.", true); return;
+  }
+  const saveBtn = document.querySelector(".save-btn");
+  saveBtn.disabled = true; saveBtn.textContent = "Speichern…";
+  try {
+    await api("/api/review/add", {
+      name, jersey, rating: addRating, text, photo,
+      date: date || new Date().toLocaleDateString("de-CH", { month: "long", year: "numeric" }),
+      verified: true
+    });
+    document.getElementById("add-name").value = "";
+    document.getElementById("add-jersey").value = "";
+    document.getElementById("add-text").value = "";
+    document.getElementById("add-photo-url").value = "";
+    document.getElementById("add-photo-file").value = "";
+    document.getElementById("add-photo-preview").style.display = "none";
+    addRating = 0;
+    document.querySelectorAll("#add-stars .sp-star").forEach(s => s.classList.remove("on"));
+    toast("✅ Review manuell hinzugefügt!");
+    switchTab("approved", document.querySelectorAll(".tab-btn")[2]);
+    renderApproved();
+  } catch(e) { toast("❌ Fehler beim Speichern.", true); }
+  saveBtn.disabled = false; saveBtn.textContent = "Review hinzufügen ✓";
+}
+
+// ── MANUAL ORDER ENTRY ────────────────────────────────────────────────
+function addOrderItem() {
+  const list = document.getElementById("ao-items-list");
+  const row = document.createElement("div");
+  row.className = "item-row";
+  row.innerHTML = `
+    <input type="text" placeholder="Trikot (z.B. Real Madrid Away 25/26, Grösse M)" oninput="recalcTotal()" />
+    <input type="number" placeholder="Menge" min="1" value="1" oninput="recalcTotal()" />
+    <input type="number" placeholder="Preis CHF" min="0" step="0.01" oninput="recalcTotal()" />
+    <button class="remove-item-btn" onclick="removeOrderItem(this)" title="Entfernen">✕</button>`;
+  list.appendChild(row);
+  row.querySelector("input").focus();
+}
+
+function removeOrderItem(btn) {
+  const rows = document.querySelectorAll("#ao-items-list .item-row");
+  if (rows.length === 1) { toast("⚠️ Mindestens ein Artikel muss vorhanden sein.", true); return; }
+  btn.closest(".item-row").remove();
+  recalcTotal();
+}
+
+function recalcTotal() {
+  let total = 0;
+  document.querySelectorAll("#ao-items-list .item-row").forEach(row => {
+    const inputs = row.querySelectorAll("input");
+    const qty   = parseFloat(inputs[1]?.value) || 0;
+    const price = parseFloat(inputs[2]?.value) || 0;
+    total += qty * price;
+  });
+  document.getElementById("ao-total-display").textContent = total.toFixed(2);
+}
+
+// Add oninput to first row on load
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("#ao-items-list .item-row input").forEach(i => i.setAttribute("oninput", "recalcTotal()"));
+});
+
+async function saveManualOrder() {
+  const name    = document.getElementById("ao-name").value.trim();
+  const email   = document.getElementById("ao-email").value.trim();
+  const phone   = document.getElementById("ao-phone").value.trim();
+  const country = document.getElementById("ao-country").value.trim();
+  const address = document.getElementById("ao-address").value.trim();
+  const city    = document.getElementById("ao-city").value.trim();
+  const notes   = document.getElementById("ao-notes").value.trim();
+  const status  = document.getElementById("ao-status").value;
+
+  if (!name || !email) { toast("⚠️ Name und Email sind Pflichtfelder.", true); return; }
+
+  const items = [];
+  let total = 0;
+  let valid = true;
+  document.querySelectorAll("#ao-items-list .item-row").forEach(row => {
+    const inputs = row.querySelectorAll("input");
+    const itemName = inputs[0]?.value.trim();
+    const qty      = parseInt(inputs[1]?.value) || 1;
+    const price    = parseFloat(inputs[2]?.value) || 0;
+    if (!itemName) { valid = false; return; }
+    const subtotal = +(qty * price).toFixed(2);
+    items.push({ name: itemName, size: "", backprint: "", quantity: qty, price, subtotal });
+    total += subtotal;
+  });
+
+  if (!valid || items.length === 0) { toast("⚠️ Bitte mindestens einen Artikel mit Name eintragen.", true); return; }
+
+  const btn = document.querySelector(".save-btn");
+  btn.disabled = true; btn.textContent = "Speichern…";
+
+  try {
+    await api("/api/order/submit", {
+      customer: { name, email, phone, address, city: city.replace(/^\d+\s*/,""), postalCode: city.match(/^\d+/)?.[0]||"", country },
+      items,
+      total: +total.toFixed(2),
+      notes,
+      status,
+    });
+
+    // Reset form
+    document.getElementById("ao-name").value    = "";
+    document.getElementById("ao-email").value   = "";
+    document.getElementById("ao-phone").value   = "";
+    document.getElementById("ao-country").value = "";
+    document.getElementById("ao-address").value = "";
+    document.getElementById("ao-city").value    = "";
+    document.getElementById("ao-notes").value   = "";
+    document.getElementById("ao-status").value  = "new";
+    document.getElementById("ao-items-list").innerHTML = `
+      <div class="item-row">
+        <input type="text" placeholder="Trikot (z.B. Barcelona Home 25/26, Grösse L)" oninput="recalcTotal()" />
+        <input type="number" placeholder="Menge" min="1" value="1" oninput="recalcTotal()" />
+        <input type="number" placeholder="Preis CHF" min="0" step="0.01" oninput="recalcTotal()" />
+        <button class="remove-item-btn" onclick="removeOrderItem(this)" title="Entfernen">✕</button>
+      </div>`;
+    document.getElementById("ao-total-display").textContent = "0.00";
+
+    toast("✅ Bestellung gespeichert!");
+    await renderOrders();
+    switchTab("orders", document.querySelector(".tab-btn"));
+  } catch(e) {
+    toast("❌ Fehler beim Speichern — läuft der Server?", true);
+  }
+  btn.disabled = false; btn.textContent = "Bestellung speichern ✓";
+}
+
+// Also support setting status on manual submit via API
+const _origOrderSubmit = null;
+
+// ── TOAST ─────────────────────────────────────────────────────────────
+function toast(msg, isError) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.style.borderColor = isError ? "#f87171" : "#4ade80";
+  el.style.color = isError ? "#f87171" : "#4ade80";
+  el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 3000);
+}
+
+// ── UTILS ─────────────────────────────────────────────────────────────
+function escHtml(str) {
+  return String(str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+</script>
+</body>
+</html>
