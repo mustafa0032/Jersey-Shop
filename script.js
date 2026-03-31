@@ -2976,3 +2976,47 @@ Once we receive your payment, we will contact you to confirm your order. Thank y
     }
   });
 })();
+
+// ── Review Photo Lightbox ─────────────────────────────────────────────────
+(function () {
+  const lightbox  = document.getElementById("review-photo-lightbox");
+  const closeBtn  = document.getElementById("review-photo-lightbox-close");
+  const lightboxImg = lightbox ? lightbox.querySelector("img") : null;
+
+  if (!lightbox || !lightboxImg) return;
+
+  function openReviewLightbox(src) {
+    lightboxImg.src = src;
+    lightbox.classList.add("rpl-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeReviewLightbox() {
+    lightbox.classList.remove("rpl-open");
+    lightboxImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  // Click on review photo
+  document.addEventListener("click", (e) => {
+    if (e.target.matches(".review-card-photo")) {
+      const src = e.target.dataset.lightboxSrc || e.target.src;
+      if (src) openReviewLightbox(src);
+    }
+  });
+
+  // Close button
+  closeBtn.addEventListener("click", closeReviewLightbox);
+
+  // Click outside image closes lightbox
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeReviewLightbox();
+  });
+
+  // ESC key closes lightbox
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox.classList.contains("rpl-open")) {
+      closeReviewLightbox();
+    }
+  });
+})();
