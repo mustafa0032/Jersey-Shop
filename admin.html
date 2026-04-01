@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JerseyPhase – Admin</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -869,26 +870,4 @@ async function saveManualOrder() {
   } catch(e) {
     toast("❌ Fehler beim Speichern — läuft der Server?", true);
   }
-  btn.disabled = false; btn.textContent = "Bestellung speichern ✓";
-}
-
-// Also support setting status on manual submit via API
-const _origOrderSubmit = null;
-
-// ── TOAST ─────────────────────────────────────────────────────────────
-function toast(msg, isError) {
-  const el = document.getElementById("toast");
-  el.textContent = msg;
-  el.style.borderColor = isError ? "#f87171" : "#4ade80";
-  el.style.color = isError ? "#f87171" : "#4ade80";
-  el.classList.add("show");
-  setTimeout(() => el.classList.remove("show"), 3000);
-}
-
-// ── UTILS ─────────────────────────────────────────────────────────────
-function escHtml(str) {
-  return String(str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-}
-</script>
-</body>
-</html>
+  btn.disabled = false; btn.textContent = "Bestell
