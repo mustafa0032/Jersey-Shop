@@ -265,6 +265,11 @@
   font-size: 0.92rem;
   border: 1px solid transparent;
   line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  width: 100%;
+  box-sizing: border-box;
 }
 .success-alert { color: #bbf7d0; background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.25); }
 .error-alert   { color: #fecaca; background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.25); }
@@ -304,4 +309,37 @@
   .btn-submit { font-size: 0.95rem; padding: 0.9rem; }
   .cart-total-row { font-size: 0.9rem; }
   .cart-total-row strong { font-size: 1.15rem; }
+}
+
+/* ── Cart Info Box ───────────────────────────────────────────────── */
+.cart-info-box {
+  margin-top: 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.cart-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.4;
+}
+.cart-info-divider {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin: 0.25rem 0;
+}
+.price-new {
+  color: #4ade80;
+  font-weight: 700;
+}
+.price-old {
+  color: rgba(255,255,255,0.35);
+  text-decoration: line-through;
+  font-size: 0.82rem;
 }

@@ -486,12 +486,21 @@ if (savedUser && USERS[savedUser]) {
 
 // ── API HELPERS ───────────────────────────────────────────────────────
 async function api(endpoint, body) {
-  const res = await fetch(endpoint, {
-    method:  body !== undefined ? "POST" : "GET",
-    headers: body !== undefined ? { "Content-Type": "application/json" } : {},
-    body:    body !== undefined ? JSON.stringify(body) : undefined,
-  });
-  return res.json();
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5000);
+  try {
+    const res = await fetch(endpoint, {
+      method:  body !== undefined ? "POST" : "GET",
+      headers: body !== undefined ? { "Content-Type": "application/json" } : {},
+      body:    body !== undefined ? JSON.stringify(body) : undefined,
+      signal:  controller.signal,
+    });
+    clearTimeout(timer);
+    return res.json();
+  } catch(e) {
+    clearTimeout(timer);
+    throw e;
+  }
 }
 
 // ── TABS ──────────────────────────────────────────────────────────────
@@ -515,6 +524,11 @@ function loadDashboard() {
   }
 }
 
+// ── HELPERS ───────────────────────────────────────────────────────────
+function escHtml(str) {
+  return String(str ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
 // ── ORDERS ────────────────────────────────────────────────────────────
 let allOrders = [];
 let currentFilter = "all";
@@ -522,7 +536,12 @@ let currentFilter = "all";
 async function renderOrders() {
   const list = document.getElementById("orders-list");
   list.innerHTML = `<div class="pending-empty"><span>⏳</span>Lädt...</div>`;
-  try { allOrders = await api("/api/orders"); } catch(e) { allOrders = []; }
+  try {
+    allOrders = await api("/api/orders");
+  } catch(e) {
+    list.innerHTML = `<div class="pending-empty"><span>❌</span>Server nicht erreichbar — bitte stelle sicher dass <strong>START TUNNEL.bat</strong> läuft und lade die Seite neu.</div>`;
+    return;
+  }
   document.getElementById("orders-count-badge").textContent = allOrders.length ? `(${allOrders.length})` : "";
   displayOrders();
 }
@@ -870,4 +889,8 @@ async function saveManualOrder() {
   } catch(e) {
     toast("❌ Fehler beim Speichern — läuft der Server?", true);
   }
-  btn.disabled = false; btn.textContent = "Bestell
+  btn.disabled = false; btn.textContent = "Bestellung speichern";
+}
+</script>
+</body>
+</html>

@@ -106,6 +106,8 @@ function updateCartCount() {
   const count = getCartCount();
   const badge = document.getElementById("cart-count");
   if (badge) badge.textContent = count;
+  const mobileBadge = document.getElementById("cart-count-mobile");
+  if (mobileBadge) mobileBadge.textContent = count;
 }
 
 function renderCart() {

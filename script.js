@@ -3,7 +3,7 @@ const products = [
     "id": 1,
     "name": "AC Milan Home Front",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for AC Milan",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Front.jpeg"
@@ -12,7 +12,7 @@ const products = [
     "id": 2,
     "name": "AC Milan Home Back",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for AC Milan",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Back.jpeg"
@@ -21,7 +21,7 @@ const products = [
     "id": 3,
     "name": "Ajax Away Front",
     "league": "Eredivisie",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Ajax",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Ajax/Ajax 25-26 away front.jpeg"
@@ -30,7 +30,7 @@ const products = [
     "id": 4,
     "name": "Ajax Away Back",
     "league": "Eredivisie",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Ajax",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Ajax/Ajax 25-26 away back.jpeg"
@@ -39,7 +39,7 @@ const products = [
     "id": 5,
     "name": "Arsenal Away Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Arsenal",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Front.jpeg"
@@ -48,7 +48,7 @@ const products = [
     "id": 6,
     "name": "Arsenal Away Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Arsenal",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Back.jpeg"
@@ -57,7 +57,7 @@ const products = [
     "id": 7,
     "name": "Arsenal Home Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Arsenal",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Front.jpeg"
@@ -66,7 +66,7 @@ const products = [
     "id": 8,
     "name": "Arsenal Home Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Arsenal",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Back.jpeg"
@@ -75,7 +75,7 @@ const products = [
     "id": 9,
     "name": "Barcelona Away Front",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Barcelona",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 Front.jpeg"
@@ -84,7 +84,7 @@ const products = [
     "id": 10,
     "name": "Barcelona Away Back",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Barcelona",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 back.jpeg"
@@ -93,7 +93,7 @@ const products = [
     "id": 11,
     "name": "Barcelona Home Front",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Barcelona",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 Front.jpeg"
@@ -102,7 +102,7 @@ const products = [
     "id": 12,
     "name": "Barcelona Home Back",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Barcelona",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 back.jpeg"
@@ -111,7 +111,7 @@ const products = [
     "id": 13,
     "name": "Bayern München Away Front",
     "league": "Bundesliga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Bayern München",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Front.jpeg"
@@ -120,7 +120,7 @@ const products = [
     "id": 14,
     "name": "Bayern München Away Back",
     "league": "Bundesliga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Bayern München",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Back.jpeg"
@@ -129,7 +129,7 @@ const products = [
     "id": 15,
     "name": "Bayern München Home Front",
     "league": "Bundesliga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Bayern München",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Front.jpeg"
@@ -138,7 +138,7 @@ const products = [
     "id": 16,
     "name": "Bayern München Home Back",
     "league": "Bundesliga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Bayern München",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Back.jpeg"
@@ -147,7 +147,7 @@ const products = [
     "id": 17,
     "name": "Benfica Away Front",
     "league": "Primeira Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Benfica",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica away 25-26 Front.jpeg"
@@ -156,7 +156,7 @@ const products = [
     "id": 18,
     "name": "Benfica Away Back",
     "league": "Primeira Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Benfica",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica away 25-26 Back.jpeg"
@@ -165,7 +165,7 @@ const products = [
     "id": 19,
     "name": "Benfica Home Front",
     "league": "Primeira Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Benfica",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica Home 25-26 Front.jpeg"
@@ -174,7 +174,7 @@ const products = [
     "id": 20,
     "name": "Benfica Home Back",
     "league": "Primeira Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Benfica",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica home 25-26 Back.jpeg"
@@ -183,7 +183,7 @@ const products = [
     "id": 21,
     "name": "Betis Home Front",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Betis",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Betis/Betis home 25-26 Front.jpeg"
@@ -192,7 +192,7 @@ const products = [
     "id": 22,
     "name": "Betis Home Back",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Betis",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Betis/Betis home 25-26 back.jpeg"
@@ -201,7 +201,7 @@ const products = [
     "id": 23,
     "name": "Bilbao Home Front",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Bilbao",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Front.jpeg"
@@ -210,7 +210,7 @@ const products = [
     "id": 24,
     "name": "Bilbao Home Back",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Bilbao",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Back.jpeg"
@@ -219,7 +219,7 @@ const products = [
     "id": 25,
     "name": "Celtic Home Front",
     "league": "Scottish Premiership",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Celtic",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Celtic/Celtic home 25-26 Front.jpeg"
@@ -228,7 +228,7 @@ const products = [
     "id": 26,
     "name": "Celtic Home Back",
     "league": "Scottish Premiership",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Celtic",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Celtic/Celtic Home 25-26 Back.jpeg"
@@ -237,7 +237,7 @@ const products = [
     "id": 27,
     "name": "Chelsea Away Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Chelsea",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 front.jpeg"
@@ -246,7 +246,7 @@ const products = [
     "id": 28,
     "name": "Chelsea Away Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Chelsea",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 back.jpeg"
@@ -255,7 +255,7 @@ const products = [
     "id": 29,
     "name": "Chelsea Home Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Chelsea",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Home 25-26 Front.jpeg"
@@ -264,7 +264,7 @@ const products = [
     "id": 30,
     "name": "Chelsea Home Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Chelsea",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea 25-26 back.jpeg"
@@ -273,7 +273,7 @@ const products = [
     "id": 31,
     "name": "Flamengo Home Front",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Flamengo",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Front.jpeg"
@@ -282,7 +282,7 @@ const products = [
     "id": 32,
     "name": "Flamengo Home Back",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Flamengo",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Back.jpeg"
@@ -291,7 +291,7 @@ const products = [
     "id": 33,
     "name": "Inter Miami Away Front",
     "league": "MLS",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Inter Miami",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Front.jpeg"
@@ -300,7 +300,7 @@ const products = [
     "id": 34,
     "name": "Inter Miami Away Back",
     "league": "MLS",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Inter Miami",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Back.jpeg"
@@ -309,7 +309,7 @@ const products = [
     "id": 35,
     "name": "Inter Miami Home Front",
     "league": "MLS",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Inter Miami",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Front.jpeg"
@@ -318,7 +318,7 @@ const products = [
     "id": 36,
     "name": "Inter Miami Home Back",
     "league": "MLS",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Inter Miami",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Back.jpeg"
@@ -327,7 +327,7 @@ const products = [
     "id": 37,
     "name": "Inter Milan Home Front",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Inter Milan",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Front.jpeg"
@@ -336,7 +336,7 @@ const products = [
     "id": 38,
     "name": "Inter Milan Home Back",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Inter Milan",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Back.jpeg"
@@ -345,7 +345,7 @@ const products = [
     "id": 39,
     "name": "Juventus Away Front",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Juventus",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus away 25-26 Front.jpeg"
@@ -354,7 +354,7 @@ const products = [
     "id": 40,
     "name": "Juventus Away Back",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Juventus",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus away 25-26 Back.jpeg"
@@ -363,7 +363,7 @@ const products = [
     "id": 41,
     "name": "Juventus Home Front",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Juventus",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus 25-26 home Front.jpeg"
@@ -372,7 +372,7 @@ const products = [
     "id": 42,
     "name": "Juventus Home Back",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Juventus",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus 25-26 home back.jpeg"
@@ -381,7 +381,7 @@ const products = [
     "id": 43,
     "name": "Liverpool Away Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Liverpool",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away front.jpeg"
@@ -390,7 +390,7 @@ const products = [
     "id": 44,
     "name": "Liverpool Away Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Liverpool",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away back.jpeg"
@@ -399,7 +399,7 @@ const products = [
     "id": 45,
     "name": "Liverpool Home Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Liverpool",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Front.jpeg"
@@ -408,7 +408,7 @@ const products = [
     "id": 46,
     "name": "Liverpool Home Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Liverpool",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Back.jpeg"
@@ -417,7 +417,7 @@ const products = [
     "id": 47,
     "name": "Manchester City Away Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Manchester City",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Front.jpeg"
@@ -426,7 +426,7 @@ const products = [
     "id": 48,
     "name": "Manchester City Away Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Manchester City",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Back.jpeg"
@@ -435,7 +435,7 @@ const products = [
     "id": 49,
     "name": "Manchester City Away Black Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Black Front jersey for Manchester City",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black.jpeg"
@@ -444,7 +444,7 @@ const products = [
     "id": 50,
     "name": "Manchester City Away Black Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Black Back jersey for Manchester City",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black back.jpeg"
@@ -453,7 +453,7 @@ const products = [
     "id": 51,
     "name": "Manchester City Home Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Manchester City",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Front.jpeg"
@@ -462,7 +462,7 @@ const products = [
     "id": 52,
     "name": "Manchester City Home Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Manchester City",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Back.jpeg"
@@ -471,7 +471,7 @@ const products = [
     "id": 53,
     "name": "Manchester United Away Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Manchester United",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Front.jpeg"
@@ -480,7 +480,7 @@ const products = [
     "id": 54,
     "name": "Manchester United Away Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Manchester United",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Back.jpeg"
@@ -489,7 +489,7 @@ const products = [
     "id": 55,
     "name": "Manchester United Home Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Manchester United",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Front.jpeg"
@@ -498,7 +498,7 @@ const products = [
     "id": 56,
     "name": "Manchester United Home Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Manchester United",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Back.jpeg"
@@ -507,7 +507,7 @@ const products = [
     "id": 57,
     "name": "Marseille Away Front",
     "league": "Ligue 1",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Marseille",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille away 25-26 Front.jpeg"
@@ -516,7 +516,7 @@ const products = [
     "id": 58,
     "name": "Marseille Away Back",
     "league": "Ligue 1",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Marseille",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille away 25-26 back.jpeg"
@@ -525,7 +525,7 @@ const products = [
     "id": 59,
     "name": "Marseille Home Front",
     "league": "Ligue 1",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Marseille",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille home 25-26 front.jpeg"
@@ -534,7 +534,7 @@ const products = [
     "id": 60,
     "name": "Marseille Home Back",
     "league": "Ligue 1",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Marseille",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille home 25-26 back.jpeg"
@@ -543,7 +543,7 @@ const products = [
     "id": 61,
     "name": "Mineiro Home Front",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Mineiro",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Front.jpeg"
@@ -552,7 +552,7 @@ const products = [
     "id": 62,
     "name": "Mineiro Home Back",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Mineiro",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Back.jpeg"
@@ -561,7 +561,7 @@ const products = [
     "id": 63,
     "name": "Minens Home Front",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Minens",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Minens/Minens 25-26 front.jpeg"
@@ -570,7 +570,7 @@ const products = [
     "id": 64,
     "name": "Minens Home Back",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Minens",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Minens/Minens 25-26 back.jpeg"
@@ -579,7 +579,7 @@ const products = [
     "id": 65,
     "name": "Napoli Away Front",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Napoli",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 away front.jpeg"
@@ -588,7 +588,7 @@ const products = [
     "id": 66,
     "name": "Napoli Away Back",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Napoli",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 away back.jpeg"
@@ -597,7 +597,7 @@ const products = [
     "id": 67,
     "name": "Napoli Home Front",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Napoli",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 home front.jpeg"
@@ -606,7 +606,7 @@ const products = [
     "id": 68,
     "name": "Napoli Home Back",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Napoli",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 home back.jpeg"
@@ -615,7 +615,7 @@ const products = [
     "id": 69,
     "name": "New Castle Home Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for New Castle",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/New Castle/New Castle home 25-26 Front.jpeg"
@@ -624,7 +624,7 @@ const products = [
     "id": 70,
     "name": "New Castle Home Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for New Castle",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/New Castle/New Castle home 25-26 back.jpeg"
@@ -633,7 +633,7 @@ const products = [
     "id": 71,
     "name": "Palmeiras Away Front",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Palmeiras",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Front.jpeg"
@@ -642,7 +642,7 @@ const products = [
     "id": 72,
     "name": "Palmeiras Away Back",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Palmeiras",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Back.jpeg"
@@ -651,7 +651,7 @@ const products = [
     "id": 73,
     "name": "Palmeiras Home Front",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Palmeiras",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Front.jpeg"
@@ -660,7 +660,7 @@ const products = [
     "id": 74,
     "name": "Palmeiras Home Back",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Palmeiras",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Back.jpeg"
@@ -669,7 +669,7 @@ const products = [
     "id": 75,
     "name": "Paris Home Front",
     "league": "Ligue 1",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Paris",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Paris/Paris Home 25-26 Front.jpeg"
@@ -678,7 +678,7 @@ const products = [
     "id": 76,
     "name": "Paris Home Back",
     "league": "Ligue 1",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Paris",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Paris/Paris Home 25-26 Back.jpeg"
@@ -687,7 +687,7 @@ const products = [
     "id": 77,
     "name": "Porto Away Front",
     "league": "Primeira Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Porto",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto away 25-26 Front.jpeg"
@@ -696,7 +696,7 @@ const products = [
     "id": 78,
     "name": "Porto Away Back",
     "league": "Primeira Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Porto",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto away 25-26 back.jpeg"
@@ -705,7 +705,7 @@ const products = [
     "id": 79,
     "name": "Porto Home Front",
     "league": "Primeira Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Porto",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto home 25-26 Front.jpeg"
@@ -714,7 +714,7 @@ const products = [
     "id": 80,
     "name": "Porto Home Back",
     "league": "Primeira Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Porto",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto Home 25-26 back.jpeg"
@@ -723,7 +723,7 @@ const products = [
     "id": 81,
     "name": "Real Madrid Away Front",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Real Madrid",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Front.jpeg"
@@ -732,7 +732,7 @@ const products = [
     "id": 82,
     "name": "Real Madrid Away Back",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Real Madrid",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Back.jpeg"
@@ -741,7 +741,7 @@ const products = [
     "id": 83,
     "name": "Real Madrid Home Front",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Real Madrid",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Front.jpeg"
@@ -750,7 +750,7 @@ const products = [
     "id": 84,
     "name": "Real Madrid Home Back",
     "league": "La Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Real Madrid",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Back.jpeg"
@@ -759,7 +759,7 @@ const products = [
     "id": 85,
     "name": "Rome Home Front",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Rome",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Rome/Rome home 25-26 Front.jpeg"
@@ -768,7 +768,7 @@ const products = [
     "id": 86,
     "name": "Rome Home Back",
     "league": "Serie A",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Rome",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Rome/Rome home 25-26 Back.jpeg"
@@ -777,7 +777,7 @@ const products = [
     "id": 87,
     "name": "Santos Home Back",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Santos",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Santos/Santos back.jpeg"
@@ -786,7 +786,7 @@ const products = [
     "id": 88,
     "name": "Sao Paulo Away Front",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Front jersey for Sao Paulo",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Front.jpeg"
@@ -795,7 +795,7 @@ const products = [
     "id": 89,
     "name": "Sao Paulo Away Back",
     "league": "Brasileirão",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Away Back jersey for Sao Paulo",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Back.jpeg"
@@ -804,7 +804,7 @@ const products = [
     "id": 90,
     "name": "Sporting Lissabon Home Front",
     "league": "Primeira Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Sporting Lissabon",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Front.jpeg"
@@ -813,7 +813,7 @@ const products = [
     "id": 91,
     "name": "Sporting Lissabon Home Back",
     "league": "Primeira Liga",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Sporting Lissabon",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Back.jpeg"
@@ -822,7 +822,7 @@ const products = [
     "id": 92,
     "name": "Totenham Home Front",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Front jersey for Totenham",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Totenham/Totenham home 25-26 Front.jpeg"
@@ -831,7 +831,7 @@ const products = [
     "id": 93,
     "name": "Totenham Home Back",
     "league": "Premier League",
-    "price": 79.99,
+    "price": 35,
     "description": "Fan Edition Home Back jersey for Totenham",
     "color": "team-colors",
     "image": "Jerseys/Jerseys/Fan Edition/Totenham/Totenham home 25-26 back.jpeg"
@@ -843,7 +843,7 @@ const nationalTeamsProducts = [
     "id": 1000,
     "name": "Algeria Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Algeria",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Algeria f.webp"
   },
@@ -851,7 +851,7 @@ const nationalTeamsProducts = [
     "id": 1001,
     "name": "Algeria Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Algeria",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Algeria b.webp"
   },
@@ -859,7 +859,7 @@ const nationalTeamsProducts = [
     "id": 1002,
     "name": "Argentina Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Argentina",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Argentina f.webp"
   },
@@ -867,7 +867,7 @@ const nationalTeamsProducts = [
     "id": 1003,
     "name": "Argentina Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Argentina",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Argentina b.webp"
   },
@@ -875,7 +875,7 @@ const nationalTeamsProducts = [
     "id": 1004,
     "name": "Austria Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Austria",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Austria f.webp"
   },
@@ -883,7 +883,7 @@ const nationalTeamsProducts = [
     "id": 1005,
     "name": "Austria Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Austria",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Austria b.webp"
   },
@@ -891,7 +891,7 @@ const nationalTeamsProducts = [
     "id": 1006,
     "name": "Belgium Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Belgium",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Belgium f.webp"
   },
@@ -899,7 +899,7 @@ const nationalTeamsProducts = [
     "id": 1007,
     "name": "Belgium Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Belgium",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Belgium b.webp"
   },
@@ -907,7 +907,7 @@ const nationalTeamsProducts = [
     "id": 1008,
     "name": "Brazil Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Brazil",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Brazil f.jpg"
   },
@@ -915,7 +915,7 @@ const nationalTeamsProducts = [
     "id": 1009,
     "name": "Brazil Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Brazil",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Brazil b.jpg"
   },
@@ -923,7 +923,7 @@ const nationalTeamsProducts = [
     "id": 1010,
     "name": "Canada Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Canada",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Canada f.webp"
   },
@@ -931,7 +931,7 @@ const nationalTeamsProducts = [
     "id": 1011,
     "name": "Canada Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Canada",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Canada b.webp"
   },
@@ -939,7 +939,7 @@ const nationalTeamsProducts = [
     "id": 1012,
     "name": "Chile Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Chile",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Chile f.webp"
   },
@@ -947,7 +947,7 @@ const nationalTeamsProducts = [
     "id": 1013,
     "name": "Chile Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Chile",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Chile b.webp"
   },
@@ -955,7 +955,7 @@ const nationalTeamsProducts = [
     "id": 1014,
     "name": "Colombia Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Colombia",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Colombia f.webp"
   },
@@ -963,7 +963,7 @@ const nationalTeamsProducts = [
     "id": 1015,
     "name": "Colombia Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Colombia",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Colombia b.webp"
   },
@@ -971,7 +971,7 @@ const nationalTeamsProducts = [
     "id": 1016,
     "name": "Costa Rica Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Costa Rica",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Costa rica f.webp"
   },
@@ -979,7 +979,7 @@ const nationalTeamsProducts = [
     "id": 1017,
     "name": "Costa Rica Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Costa Rica",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Costa rica b.webp"
   },
@@ -987,7 +987,7 @@ const nationalTeamsProducts = [
     "id": 1018,
     "name": "Croatia Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Croatia",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Croatia f.jpg"
   },
@@ -995,7 +995,7 @@ const nationalTeamsProducts = [
     "id": 1019,
     "name": "Croatia Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Croatia",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Croatia b.jpg"
   },
@@ -1003,7 +1003,7 @@ const nationalTeamsProducts = [
     "id": 1020,
     "name": "Czech Republic Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Czech Republic",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Czech republic f.webp"
   },
@@ -1011,7 +1011,7 @@ const nationalTeamsProducts = [
     "id": 1021,
     "name": "Czech Republic Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Czech Republic",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Czesh republic b.webp"
   },
@@ -1019,7 +1019,7 @@ const nationalTeamsProducts = [
     "id": 1022,
     "name": "Ecuador Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Ecuador",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ecuador f.jpg"
   },
@@ -1027,7 +1027,7 @@ const nationalTeamsProducts = [
     "id": 1023,
     "name": "Ecuador Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Ecuador",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ecuador b.jpg"
   },
@@ -1035,7 +1035,7 @@ const nationalTeamsProducts = [
     "id": 1024,
     "name": "England Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for England",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/England f.webp"
   },
@@ -1043,7 +1043,7 @@ const nationalTeamsProducts = [
     "id": 1025,
     "name": "England Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for England",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Englanx b.webp"
   },
@@ -1051,7 +1051,7 @@ const nationalTeamsProducts = [
     "id": 1026,
     "name": "France Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for France",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/France f.webp"
   },
@@ -1059,7 +1059,7 @@ const nationalTeamsProducts = [
     "id": 1027,
     "name": "France Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for France",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Frances b.webp"
   },
@@ -1067,7 +1067,7 @@ const nationalTeamsProducts = [
     "id": 1028,
     "name": "Germany Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Germany",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Germany f.webp"
   },
@@ -1075,7 +1075,7 @@ const nationalTeamsProducts = [
     "id": 1029,
     "name": "Germany Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Germany",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Germany b.webp"
   },
@@ -1083,7 +1083,7 @@ const nationalTeamsProducts = [
     "id": 1030,
     "name": "Ghana Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Ghana",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ghana f.jpg"
   },
@@ -1091,7 +1091,7 @@ const nationalTeamsProducts = [
     "id": 1031,
     "name": "Ghana Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Ghana",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ghana b.jpg"
   },
@@ -1099,7 +1099,7 @@ const nationalTeamsProducts = [
     "id": 1032,
     "name": "Hungary Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Hungary",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Hungary f.webp"
   },
@@ -1107,7 +1107,7 @@ const nationalTeamsProducts = [
     "id": 1033,
     "name": "Hungary Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Hungary",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Hungary b.webp"
   },
@@ -1115,7 +1115,7 @@ const nationalTeamsProducts = [
     "id": 1034,
     "name": "Iceland Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Iceland",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Iceland f.webp"
   },
@@ -1123,7 +1123,7 @@ const nationalTeamsProducts = [
     "id": 1035,
     "name": "Iceland Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Iceland",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Icelanx b.webp"
   },
@@ -1131,7 +1131,7 @@ const nationalTeamsProducts = [
     "id": 1036,
     "name": "Italy Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Italy",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Italia f.webp"
   },
@@ -1139,7 +1139,7 @@ const nationalTeamsProducts = [
     "id": 1037,
     "name": "Italy Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Italy",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Italia b.webp"
   },
@@ -1147,7 +1147,7 @@ const nationalTeamsProducts = [
     "id": 1038,
     "name": "Ivory Coast Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Ivory Coast",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ivory Coast f.jpg"
   },
@@ -1155,7 +1155,7 @@ const nationalTeamsProducts = [
     "id": 1039,
     "name": "Ivory Coast Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Ivory Coast",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ivory Coast b.jpg"
   },
@@ -1163,7 +1163,7 @@ const nationalTeamsProducts = [
     "id": 1040,
     "name": "Jamaica Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Jamaica",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Jamaica f.webp"
   },
@@ -1171,7 +1171,7 @@ const nationalTeamsProducts = [
     "id": 1041,
     "name": "Jamaica Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Jamaica",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Jamaica b.webp"
   },
@@ -1179,7 +1179,7 @@ const nationalTeamsProducts = [
     "id": 1042,
     "name": "Japan Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Japan",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Japan f.png"
   },
@@ -1187,7 +1187,7 @@ const nationalTeamsProducts = [
     "id": 1043,
     "name": "Japan Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Japan",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Japan b.webp"
   },
@@ -1195,7 +1195,7 @@ const nationalTeamsProducts = [
     "id": 1044,
     "name": "Mexico Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Mexico",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Mexico f.webp"
   },
@@ -1203,7 +1203,7 @@ const nationalTeamsProducts = [
     "id": 1045,
     "name": "Mexico Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Mexico",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Mexico b.webp"
   },
@@ -1211,7 +1211,7 @@ const nationalTeamsProducts = [
     "id": 1046,
     "name": "Morocco Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Morocco",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Morocco f.jpg"
   },
@@ -1219,7 +1219,7 @@ const nationalTeamsProducts = [
     "id": 1047,
     "name": "Morocco Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Morocco",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Morocco b.jpg"
   },
@@ -1227,7 +1227,7 @@ const nationalTeamsProducts = [
     "id": 1048,
     "name": "Netherlands Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Netherlands",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Netherland f.webp"
   },
@@ -1235,7 +1235,7 @@ const nationalTeamsProducts = [
     "id": 1049,
     "name": "Netherlands Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Netherlands",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Netherlanx b.webp"
   },
@@ -1243,7 +1243,7 @@ const nationalTeamsProducts = [
     "id": 1050,
     "name": "New Zealand Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for New Zealand",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/New Zealand f.jpg"
   },
@@ -1251,7 +1251,7 @@ const nationalTeamsProducts = [
     "id": 1051,
     "name": "New Zealand Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for New Zealand",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/New Zealand b.jpg"
   },
@@ -1259,7 +1259,7 @@ const nationalTeamsProducts = [
     "id": 1052,
     "name": "Nigeria Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Nigeria",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Nigeria f.webp"
   },
@@ -1267,7 +1267,7 @@ const nationalTeamsProducts = [
     "id": 1053,
     "name": "Nigeria Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Nigeria",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Nigeria b.webp"
   },
@@ -1275,7 +1275,7 @@ const nationalTeamsProducts = [
     "id": 1054,
     "name": "Norway Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Norway",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Norway f.jpg"
   },
@@ -1283,7 +1283,7 @@ const nationalTeamsProducts = [
     "id": 1055,
     "name": "Norway Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Norway",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Norway b.jpg"
   },
@@ -1291,7 +1291,7 @@ const nationalTeamsProducts = [
     "id": 1056,
     "name": "Paraguay Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Paraguay",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Paraguay f.jpg"
   },
@@ -1299,7 +1299,7 @@ const nationalTeamsProducts = [
     "id": 1057,
     "name": "Paraguay Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Paraguay",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Paraguay b.jpg"
   },
@@ -1307,7 +1307,7 @@ const nationalTeamsProducts = [
     "id": 1058,
     "name": "Peru Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Peru",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Peru f.webp"
   },
@@ -1315,7 +1315,7 @@ const nationalTeamsProducts = [
     "id": 1059,
     "name": "Peru Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Peru",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Peru b.webp"
   },
@@ -1323,7 +1323,7 @@ const nationalTeamsProducts = [
     "id": 1060,
     "name": "Poland Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Poland",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Poland f.jpg"
   },
@@ -1331,7 +1331,7 @@ const nationalTeamsProducts = [
     "id": 1061,
     "name": "Poland Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Poland",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Poland b.jpg"
   },
@@ -1339,7 +1339,7 @@ const nationalTeamsProducts = [
     "id": 1062,
     "name": "Portugal Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Portugal",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Portugal f.jpg"
   },
@@ -1347,7 +1347,7 @@ const nationalTeamsProducts = [
     "id": 1063,
     "name": "Portugal Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Portugal",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Portugal b.jpg"
   },
@@ -1355,7 +1355,7 @@ const nationalTeamsProducts = [
     "id": 1064,
     "name": "Saudi Arabia Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Saudi Arabia",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Saudia f.webp"
   },
@@ -1363,7 +1363,7 @@ const nationalTeamsProducts = [
     "id": 1065,
     "name": "Saudi Arabia Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Saudi Arabia",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Saudia b.webp"
   },
@@ -1371,7 +1371,7 @@ const nationalTeamsProducts = [
     "id": 1066,
     "name": "Scotland Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Scotland",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Scotland f.webp"
   },
@@ -1379,7 +1379,7 @@ const nationalTeamsProducts = [
     "id": 1067,
     "name": "Scotland Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Scotland",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Scotland b.webp"
   },
@@ -1387,7 +1387,7 @@ const nationalTeamsProducts = [
     "id": 1068,
     "name": "Senegal Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Senegal",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Senegal f.jpg"
   },
@@ -1395,7 +1395,7 @@ const nationalTeamsProducts = [
     "id": 1069,
     "name": "Senegal Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Senegal",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Senegal b.jpg"
   },
@@ -1403,7 +1403,7 @@ const nationalTeamsProducts = [
     "id": 1070,
     "name": "South Africa Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for South Africa",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/South Africa f.jpg"
   },
@@ -1411,7 +1411,7 @@ const nationalTeamsProducts = [
     "id": 1071,
     "name": "South Africa Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for South Africa",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/South Africa b.jpg"
   },
@@ -1419,7 +1419,7 @@ const nationalTeamsProducts = [
     "id": 1072,
     "name": "South Korea Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for South Korea",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/south korea f.webp"
   },
@@ -1427,7 +1427,7 @@ const nationalTeamsProducts = [
     "id": 1073,
     "name": "South Korea Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for South Korea",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/South Korea b.webp"
   },
@@ -1435,7 +1435,7 @@ const nationalTeamsProducts = [
     "id": 1074,
     "name": "Spain Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Spain",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Spain f.webp"
   },
@@ -1443,7 +1443,7 @@ const nationalTeamsProducts = [
     "id": 1075,
     "name": "Spain Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Spain",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Spain b.webp"
   },
@@ -1451,7 +1451,7 @@ const nationalTeamsProducts = [
     "id": 1076,
     "name": "Sweden Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Sweden",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Sweden f.webp"
   },
@@ -1459,7 +1459,7 @@ const nationalTeamsProducts = [
     "id": 1077,
     "name": "Sweden Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Sweden",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Sweden b.webp"
   },
@@ -1467,7 +1467,7 @@ const nationalTeamsProducts = [
     "id": 1078,
     "name": "Switzerland Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Switzerland",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Switzerland f.jpg"
   },
@@ -1475,7 +1475,7 @@ const nationalTeamsProducts = [
     "id": 1079,
     "name": "Switzerland Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Switzerland",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Switzerland b.jpg"
   },
@@ -1483,7 +1483,7 @@ const nationalTeamsProducts = [
     "id": 1080,
     "name": "Ukraine Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Ukraine",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ukraine f.webp"
   },
@@ -1491,7 +1491,7 @@ const nationalTeamsProducts = [
     "id": 1081,
     "name": "Ukraine Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Ukraine",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ukraine b.webp"
   },
@@ -1499,7 +1499,7 @@ const nationalTeamsProducts = [
     "id": 1082,
     "name": "USA Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for USA",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Usa f.webp"
   },
@@ -1507,7 +1507,7 @@ const nationalTeamsProducts = [
     "id": 1083,
     "name": "USA Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for USA",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Usa b.webp"
   },
@@ -1515,7 +1515,7 @@ const nationalTeamsProducts = [
     "id": 1084,
     "name": "Venezuela Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Venezuela",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Venezuela f.webp"
   },
@@ -1523,7 +1523,7 @@ const nationalTeamsProducts = [
     "id": 1085,
     "name": "Venezuela Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Venezuela",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/venezula b.webp"
   },
@@ -1531,7 +1531,7 @@ const nationalTeamsProducts = [
     "id": 1086,
     "name": "Wales Home Front",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Wales",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Wales f.webp"
   },
@@ -1539,7 +1539,7 @@ const nationalTeamsProducts = [
     "id": 1087,
     "name": "Wales Home Back",
     "category": "national",
-    "price": 79.99,
+    "price": 35,
     "description": "National Team 2026 jersey for Wales",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Wales b.webp"
   }
@@ -1550,7 +1550,7 @@ const retrosProducts = [
     "id": 2000,
     "name": "AC Milan Home 2006-2007 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2006-2007 for AC Milan",
     "image": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Back.jpg",
@@ -1560,7 +1560,7 @@ const retrosProducts = [
     "id": 2001,
     "name": "AC Milan Home 2010-2011 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2010-2011 for AC Milan",
     "image": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan Home 2010-2011 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan Home 2010-2011 Back.jpg",
@@ -1570,7 +1570,7 @@ const retrosProducts = [
     "id": 2002,
     "name": "Arsenal Home 2002-2004 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2002-2004 for Arsenal",
     "image": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Back.jpg",
@@ -1580,7 +1580,7 @@ const retrosProducts = [
     "id": 2003,
     "name": "Arsenal Home 2019-2020 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2019-2020 for Arsenal",
     "image": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Back.jpg",
@@ -1590,7 +1590,7 @@ const retrosProducts = [
     "id": 2004,
     "name": "Barcelona Home 2013-2014 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2013-2014 for Barcelona",
     "image": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Back.jpg",
@@ -1600,7 +1600,7 @@ const retrosProducts = [
     "id": 2005,
     "name": "Barcelona Home 2015-2016 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2015-2016 for Barcelona",
     "image": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Back.jpg",
@@ -1610,7 +1610,7 @@ const retrosProducts = [
     "id": 2006,
     "name": "Barcelona Home 2019-2020 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2019-2020 for Barcelona",
     "image": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Back.jpg",
@@ -1620,7 +1620,7 @@ const retrosProducts = [
     "id": 2007,
     "name": "Bayern München Home 2013-2014 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2013-2014 for Bayern München",
     "image": "Jerseys/Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Back.jpg",
@@ -1630,7 +1630,7 @@ const retrosProducts = [
     "id": 2008,
     "name": "Chelsea Home 2011-2012 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2011-2012 for Chelsea",
     "image": "Jerseys/Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Back.jpg",
@@ -1640,7 +1640,7 @@ const retrosProducts = [
     "id": 2009,
     "name": "Inter Mailand Home 2009-2010 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2009-2010 for Inter Mailand",
     "image": "Jerseys/Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Back.jpg",
@@ -1650,7 +1650,7 @@ const retrosProducts = [
     "id": 2010,
     "name": "Juventus Home 1995-1997 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 1995-1997 for Juventus",
     "image": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Back.jpg",
@@ -1660,7 +1660,7 @@ const retrosProducts = [
     "id": 2011,
     "name": "Juventus Home 2018-2019 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2018-2019 for Juventus",
     "image": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Back.jpg",
@@ -1670,7 +1670,7 @@ const retrosProducts = [
     "id": 2012,
     "name": "Liverpool Home 2018-2019 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2018-2019 for Liverpool",
     "image": "Jerseys/Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Back.jpg",
@@ -1680,7 +1680,7 @@ const retrosProducts = [
     "id": 2013,
     "name": "Manchester City Home 2011-2012 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2011-2012 for Manchester City",
     "image": "Jerseys/Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Back.jpg",
@@ -1690,7 +1690,7 @@ const retrosProducts = [
     "id": 2014,
     "name": "Manchester United Home 2007-2008 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2007-2008 for Manchester United",
     "image": "Jerseys/Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Back.jpg",
@@ -1700,7 +1700,7 @@ const retrosProducts = [
     "id": 2015,
     "name": "Marseille Home 1992-1993 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 1992-1993 for Marseille",
     "image": "Jerseys/Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Back.jpg",
@@ -1710,7 +1710,7 @@ const retrosProducts = [
     "id": 2016,
     "name": "PSG Home 2017-2018 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2017-2018 for PSG",
     "image": "Jerseys/Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Back.jpg",
@@ -1720,7 +1720,7 @@ const retrosProducts = [
     "id": 2017,
     "name": "Real Madrid Away 2016-2017 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Away jersey 2016-2017 for Real Madrid",
     "image": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Back.jpg",
@@ -1730,7 +1730,7 @@ const retrosProducts = [
     "id": 2018,
     "name": "Real Madrid Away 2017-2018 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Away jersey 2017-2018 for Real Madrid",
     "image": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Back.jpg",
@@ -1740,7 +1740,7 @@ const retrosProducts = [
     "id": 2019,
     "name": "Real Madrid Home 2017-2018 Front",
     "category": "retro-clubs",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2017-2018 for Real Madrid",
     "image": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Back.jpg",
@@ -1750,7 +1750,7 @@ const retrosProducts = [
     "id": 2020,
     "name": "Argentina Home 2022 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2022 for Argentina",
     "image": "Jerseys/Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Back.jpg",
@@ -1760,7 +1760,7 @@ const retrosProducts = [
     "id": 2021,
     "name": "Brazil Home 2018 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2018 for Brazil",
     "image": "Jerseys/Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Back.jpg",
@@ -1770,7 +1770,7 @@ const retrosProducts = [
     "id": 2022,
     "name": "Croatia Home 1998 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 1998 for Croatia",
     "image": "Jerseys/Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Back.jpg",
@@ -1780,7 +1780,7 @@ const retrosProducts = [
     "id": 2023,
     "name": "England Home 1994-1995 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 1994-1995 for England",
     "image": "Jerseys/Jerseys/Retros/National Teams/England/England home 1994-1995 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/England/England home 1994-1995 back.jpg",
@@ -1790,7 +1790,7 @@ const retrosProducts = [
     "id": 2024,
     "name": "England Home 2003-2004 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2003-2004 for England",
     "image": "Jerseys/Jerseys/Retros/National Teams/England/England home 2003-2004 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/England/England home 2003-2004 Back.jpg",
@@ -1800,7 +1800,7 @@ const retrosProducts = [
     "id": 2025,
     "name": "France Home 2018 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2018 for France",
     "image": "Jerseys/Jerseys/Retros/National Teams/France/France home 2018 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/France/France home 2018 Back.jpg",
@@ -1810,7 +1810,7 @@ const retrosProducts = [
     "id": 2026,
     "name": "Germany Home 2014 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2014 for Germany",
     "image": "Jerseys/Jerseys/Retros/National Teams/Germany/Germany home 2014 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Germany/Germany home 2014 Back.jpg",
@@ -1820,7 +1820,7 @@ const retrosProducts = [
     "id": 2027,
     "name": "Italy Home 2006 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2006 for Italy",
     "image": "Jerseys/Jerseys/Retros/National Teams/Italy/Italy Home 2006 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Italy/Italy Home 2006 Back.jpg",
@@ -1830,7 +1830,7 @@ const retrosProducts = [
     "id": 2028,
     "name": "Japan Home 2018 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2018 for Japan",
     "image": "Jerseys/Jerseys/Retros/National Teams/Japan/Japan Home 2018 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Japan/Japan Home 2018 Back.jpg",
@@ -1840,7 +1840,7 @@ const retrosProducts = [
     "id": 2029,
     "name": "Marocco Home 1998 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 1998 for Marocco",
     "image": "Jerseys/Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Back.jpg",
@@ -1850,7 +1850,7 @@ const retrosProducts = [
     "id": 2030,
     "name": "Mexico Home 2014 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2014 for Mexico",
     "image": "Jerseys/Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Back.jpg",
@@ -1860,7 +1860,7 @@ const retrosProducts = [
     "id": 2031,
     "name": "Netherlands Home 2014-2015 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2014-2015 for Netherlands",
     "image": "Jerseys/Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 Back.jpg",
@@ -1870,7 +1870,7 @@ const retrosProducts = [
     "id": 2032,
     "name": "Nigeria Home 1994-1995 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 1994-1995 for Nigeria",
     "image": "Jerseys/Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Back.jpg",
@@ -1880,7 +1880,7 @@ const retrosProducts = [
     "id": 2033,
     "name": "Portugal Home 2016 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2016 for Portugal",
     "image": "Jerseys/Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Back.jpg",
@@ -1890,7 +1890,7 @@ const retrosProducts = [
     "id": 2034,
     "name": "Senegal Home 2002 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2002 for Senegal",
     "image": "Jerseys/Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Back.jpg",
@@ -1900,7 +1900,7 @@ const retrosProducts = [
     "id": 2035,
     "name": "Spain Home 2010 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2010 for Spain",
     "image": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2010 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2010 Back.jpg",
@@ -1910,7 +1910,7 @@ const retrosProducts = [
     "id": 2036,
     "name": "Spain Home 2012 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 2012 for Spain",
     "image": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2012 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2012 Back.jpg",
@@ -1920,7 +1920,7 @@ const retrosProducts = [
     "id": 2037,
     "name": "Türkiye Home 1996 Front",
     "category": "retro-nations",
-    "price": 89.99,
+    "price": 37,
     "description": "Retro Home jersey 1996 for Türkiye",
     "image": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Back.jpg",
@@ -2023,7 +2023,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
         <h3>${pair.baseName}</h3>
         <div class="product-price">
           <span class="price-original">CHF 79</span>
-          <span class="price-sale">CHF 33</span>
+          <span class="price-sale">CHF 35</span>
         </div>
       </div>
       ${addonsHtml}
@@ -2207,7 +2207,7 @@ function renderRetros() {
         <h3>${baseName}</h3>
         <div class="product-price">
           <span class="price-original">CHF 89</span>
-          <span class="price-sale">CHF 49</span>
+          <span class="price-sale">CHF 37</span>
         </div>
       </div>
       <button class="add-to-cart-btn" data-id="${product.id}">Add to cart</button>
@@ -2862,16 +2862,10 @@ Once we receive your payment, we will contact you to confirm your order. Thank y
     };
 
     try {
-      // 1️⃣ Send to customer
+      // Send to customer (BCC to jerseyphase@gmail.com via EmailJS template)
       await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
         ...templateParams,
-        email,
-      });
-
-      // 2️⃣ Send to shop owner
-      await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
-        ...templateParams,
-        email: "jerseyphase@gmail.com",
+        to_email: email,
       });
 
       successMessage.hidden = false;
