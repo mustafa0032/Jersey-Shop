@@ -2223,7 +2223,7 @@ function renderRetros() {
         const productId = Number(btn.getAttribute("data-id"));
         const product = retrosProducts.find((item) => item.id === productId);
         if (!product) return;
-        addToCart({ id: product.id, name: product.name, price: 49, quantity: 1, image: product.image || "https://via.placeholder.com/60x60?text=Jersey" });
+        addToCart({ id: product.id, name: product.name, price: product.price, quantity: 1, image: product.image || "https://via.placeholder.com/60x60?text=Jersey" });
         updateCartCount();
       });
     });

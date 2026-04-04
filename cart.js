@@ -7,12 +7,20 @@ function getCart() {
     const data = JSON.parse(raw);
     if (!Array.isArray(data)) return [];
     // Migration: give a uid to any old item that doesn't have one yet
+    // + fix old wrong base price 33 → 35
     let changed = false;
     data.forEach((item) => {
       if (!item.uid) {
         item.uid = Date.now().toString(36) + Math.random().toString(36).slice(2);
         changed = true;
       }
+      // Correct legacy cart items saved with the wrong base price of 33
+      if (item.price === 33) { item.price = 35; changed = true; }
+      if (item.price === 46) { item.price = 48; changed = true; } // 33+13 → 35+13
+      if (item.price === 37) { item.price = 39; changed = true; } // 33+4  → 35+4
+      if (item.price === 50) { item.price = 52; changed = true; } // 33+13+4 → 35+13+4
+      // Correct legacy Retro cart items saved with the wrong price of 49
+      if (item.price === 49) { item.price = 37; changed = true; }
     });
     if (changed) localStorage.setItem(CART_KEY, JSON.stringify(data));
     return data;
