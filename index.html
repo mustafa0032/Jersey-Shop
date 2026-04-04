@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JerseyPhase - Premium Football Jerseys</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+
+    <!-- ── HEADER ──────────────────────────────────────────────────── -->
+    <header class="header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo"><span class="logo-jers">Jersey</span><span class="logo-hub">Phase</span></a>
+        <div class="header-right">
+          <a href="checkout.html" class="nav-link cart-link mobile-cart">
+            <span class="cart-icon">🛒</span>
+            <span id="cart-count-mobile" class="cart-badge">0</span>
+          </a>
+          <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">☰</button>
+        </div>
+
+        <nav class="nav" id="nav-menu">
+          <ul class="nav-list">
+
+            <!-- Fan Edition: Level 1 = Season, Level 2 = Teams -->
+            <li class="has-flyout">
+              <a href="#fan-edition" class="nav-link">Fan Edition</a>
+              <ul class="flyout-l1">
+                <li>
+                  <a href="#fan-edition" class="season-row" onclick="filterByTeam(null,'products-grid','fan-edition')">
+                    Season 25/26 <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2">
+                    <li><a href="#fan-edition" onclick="filterByTeam('AC Milan','products-grid','fan-edition')">AC Milan</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Ajax','products-grid','fan-edition')">Ajax</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Arsenal','products-grid','fan-edition')">Arsenal</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Barcelona','products-grid','fan-edition')">Barcelona</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Bayern München','products-grid','fan-edition')">Bayern München</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Benfica','products-grid','fan-edition')">Benfica</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Betis','products-grid','fan-edition')">Betis</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Bilbao','products-grid','fan-edition')">Bilbao</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Celtic','products-grid','fan-edition')">Celtic</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Chelsea','products-grid','fan-edition')">Chelsea</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Flamengo','products-grid','fan-edition')">Flamengo</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Inter Miami','products-grid','fan-edition')">Inter Miami</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Inter Milan','products-grid','fan-edition')">Inter Milan</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Juventus','products-grid','fan-edition')">Juventus</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Liverpool','products-grid','fan-edition')">Liverpool</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Manchester City','products-grid','fan-edition')">Manchester City</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Manchester United','products-grid','fan-edition')">Man. United</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Marseille','products-grid','fan-edition')">Marseille</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Mineiro','products-grid','fan-edition')">Mineiro</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Minens','products-grid','fan-edition')">Minens</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Napoli','products-grid','fan-edition')">Napoli</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('New Castle','products-grid','fan-edition')">Newcastle</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Palmeiras','products-grid','fan-edition')">Palmeiras</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Paris','products-grid','fan-edition')">Paris (PSG)</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Porto','products-grid','fan-edition')">Porto</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Real Madrid','products-grid','fan-edition')">Real Madrid</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Rome','products-grid','fan-edition')">Roma</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Santos','products-grid','fan-edition')">Santos</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Sao Paulo','products-grid','fan-edition')">Sao Paulo</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Sporting Lissabon','products-grid','fan-edition')">Sporting CP</a></li>
+                    <li><a href="#fan-edition" onclick="filterByTeam('Totenham','products-grid','fan-edition')">Tottenham</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <!-- National Teams -->
+            <li class="has-flyout">
+              <a href="#national-teams" class="nav-link">National Teams</a>
+              <ul class="flyout-l1">
+                <li>
+                  <a href="#national-teams" class="season-row" onclick="filterByTeam(null,'national-teams-grid','national-teams')">
+                    World Cup 2026 <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2">
+                    <li><a href="#national-teams" onclick="filterByTeam('Algeria','national-teams-grid','national-teams')">Algeria</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Argentina','national-teams-grid','national-teams')">Argentina</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Austria','national-teams-grid','national-teams')">Austria</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Belgium','national-teams-grid','national-teams')">Belgium</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Brazil','national-teams-grid','national-teams')">Brazil</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Canada','national-teams-grid','national-teams')">Canada</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Chile','national-teams-grid','national-teams')">Chile</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Colombia','national-teams-grid','national-teams')">Colombia</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Costa Rica','national-teams-grid','national-teams')">Costa Rica</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Croatia','national-teams-grid','national-teams')">Croatia</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Czech Republic','national-teams-grid','national-teams')">Czech Republic</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Ecuador','national-teams-grid','national-teams')">Ecuador</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('England','national-teams-grid','national-teams')">England</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('France','national-teams-grid','national-teams')">France</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Germany','national-teams-grid','national-teams')">Germany</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Ghana','national-teams-grid','national-teams')">Ghana</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Hungary','national-teams-grid','national-teams')">Hungary</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Iceland','national-teams-grid','national-teams')">Iceland</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Italy','national-teams-grid','national-teams')">Italy</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Ivory Coast','national-teams-grid','national-teams')">Ivory Coast</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Jamaica','national-teams-grid','national-teams')">Jamaica</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Japan','national-teams-grid','national-teams')">Japan</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Mexico','national-teams-grid','national-teams')">Mexico</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Morocco','national-teams-grid','national-teams')">Morocco</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Netherlands','national-teams-grid','national-teams')">Netherlands</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('New Zealand','national-teams-grid','national-teams')">New Zealand</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Nigeria','national-teams-grid','national-teams')">Nigeria</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Norway','national-teams-grid','national-teams')">Norway</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Paraguay','national-teams-grid','national-teams')">Paraguay</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Peru','national-teams-grid','national-teams')">Peru</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Poland','national-teams-grid','national-teams')">Poland</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Portugal','national-teams-grid','national-teams')">Portugal</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Saudi Arabia','national-teams-grid','national-teams')">Saudi Arabia</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Scotland','national-teams-grid','national-teams')">Scotland</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Senegal','national-teams-grid','national-teams')">Senegal</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('South Africa','national-teams-grid','national-teams')">South Africa</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('South Korea','national-teams-grid','national-teams')">South Korea</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Spain','national-teams-grid','national-teams')">Spain</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Sweden','national-teams-grid','national-teams')">Sweden</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Switzerland','national-teams-grid','national-teams')">Switzerland</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Ukraine','national-teams-grid','national-teams')">Ukraine</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('USA','national-teams-grid','national-teams')">USA</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Venezuela','national-teams-grid','national-teams')">Venezuela</a></li>
+                    <li><a href="#national-teams" onclick="filterByTeam('Wales','national-teams-grid','national-teams')">Wales</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Retros -->
+            <li class="has-flyout">
+              <a href="#retros-clubs" class="nav-link">Retros</a>
+              <ul class="flyout-l1">
+                <li>
+                  <a href="#retros-clubs" class="season-row" onclick="filterByTeam(null,'retros-clubs-grid','retros-clubs')">
+                    Club Classics <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2 flyout-left">
+                    <li><a href="#retros-clubs" onclick="filterByTeam('AC Milan','retros-clubs-grid','retros-clubs')">AC Milan</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Arsenal','retros-clubs-grid','retros-clubs')">Arsenal</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Barcelona','retros-clubs-grid','retros-clubs')">Barcelona</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Bayern München','retros-clubs-grid','retros-clubs')">Bayern München</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Chelsea','retros-clubs-grid','retros-clubs')">Chelsea</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Inter Mailand','retros-clubs-grid','retros-clubs')">Inter Mailand</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Juventus','retros-clubs-grid','retros-clubs')">Juventus</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Liverpool','retros-clubs-grid','retros-clubs')">Liverpool</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Manchester City','retros-clubs-grid','retros-clubs')">Manchester City</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Manchester United','retros-clubs-grid','retros-clubs')">Man. United</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Marseille','retros-clubs-grid','retros-clubs')">Marseille</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('PSG','retros-clubs-grid','retros-clubs')">PSG</a></li>
+                    <li><a href="#retros-clubs" onclick="filterByTeam('Real Madrid','retros-clubs-grid','retros-clubs')">Real Madrid</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#retros-nations" class="season-row" onclick="filterByTeam(null,'retros-nations-grid','retros-nations')">
+                    Nation Classics <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2 flyout-left">
+                    <li><a href="#retros-nations" onclick="filterByTeam('Argentina','retros-nations-grid','retros-nations')">Argentina</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Brazil','retros-nations-grid','retros-nations')">Brazil</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Croatia','retros-nations-grid','retros-nations')">Croatia</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('England','retros-nations-grid','retros-nations')">England</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('France','retros-nations-grid','retros-nations')">France</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Germany','retros-nations-grid','retros-nations')">Germany</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Italy','retros-nations-grid','retros-nations')">Italy</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Japan','retros-nations-grid','retros-nations')">Japan</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Marocco','retros-nations-grid','retros-nations')">Marocco</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Mexico','retros-nations-grid','retros-nations')">Mexico</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Netherlands','retros-nations-grid','retros-nations')">Netherlands</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Nigeria','retros-nations-grid','retros-nations')">Nigeria</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Portugal','retros-nations-grid','retros-nations')">Portugal</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Senegal','retros-nations-grid','retros-nations')">Senegal</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Spain','retros-nations-grid','retros-nations')">Spain</a></li>
+                    <li><a href="#retros-nations" onclick="filterByTeam('Türkiye','retros-nations-grid','retros-nations')">Türkiye</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Cart -->
+            <li>
+              <a href="checkout.html" class="nav-link cart-link">
+                <span class="cart-icon">🛒</span> Cart
+                <span id="cart-count" class="cart-badge">0</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main-content">
+
+      <!-- ── HERO ──────────────────────────────────────────────────── -->
+      <section class="hero-banner">
+        <div class="hero-banner-inner container">
+          <div class="hero-text">
+            <span class="hero-eyebrow">Season 25/26 · Now Available</span>
+            <h1>Premium Football Jerseys</h1>
+            <p>Club kits, national teams, and iconic retros — all in one place. Fast delivery, premium quality.</p>
+            <div class="hero-cta-group">
+              <a href="#fan-edition" class="btn btn-primary">Shop Fan Edition</a>
+              <a href="#retros-clubs" class="btn btn-outline">Explore Retros</a>
+              <a href="#more-jerseys" class="btn btn-ghost-green">🔍 Can't find your jersey?</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── REVIEWS SLIDER ───────────────────────────────────────────── -->
+      <section class="reviews-section">
+        <div class="container">
+          <div class="reviews-header">
+            <div class="reviews-title-wrap">
+              <span class="reviews-stars-overall">★★★★★</span>
+              <span class="reviews-headline">What our customers say</span>
+            </div>
+            <button class="write-review-btn" id="write-review-btn">✍️ Write a Review</button>
+          </div>
+        </div>
+        <div class="reviews-slider-outer container">
+          <button class="reviews-arrow rev-prev" id="rev-prev" aria-label="Previous">&#8592;</button>
+          <div class="reviews-viewport" id="reviews-viewport">
+            <div class="reviews-track" id="reviews-track"></div>
+          </div>
+          <button class="reviews-arrow rev-next" id="rev-next" aria-label="Next">&#8594;</button>
+        </div>
+        <div class="reviews-dots container" id="reviews-dots"></div>
+      </section>
+
+      <!-- ── SEARCH BAR ──────────────────────────────────────────────── -->
+      <section class="search-section container">
+        <div class="search-bar-wrap">
+          <span class="search-icon-left">🔍</span>
+          <input
+            type="text"
+            id="global-search"
+            class="search-input"
+            placeholder="Search jerseys — e.g. Liverpool, Argentina, Bayern..."
+            autocomplete="off"
+          />
+          <button class="search-clear" id="search-clear" aria-label="Clear search" hidden>✕</button>
+        </div>
+      </section>
+
+      <!-- ── SEARCH RESULTS (shown while searching) ─────────────────── -->
+      <section id="search-results-section" class="products-section container" style="display:none;">
+        <div class="section-heading">
+          <h2 class="search-results-title">Search Results</h2>
+          <p id="search-results-count" class="search-results-count"></p>
+        </div>
+        <div class="products-grid" id="search-results-grid"></div>
+        <div id="search-no-results" class="search-no-results" style="display:none;">
+          <span>😕</span>
+          <p>No jerseys found for "<span id="search-query-display"></span>"</p>
+        </div>
+      </section>
+
+      <!-- ── CATEGORY PILLS ────────────────────────────────────────── -->
+      <section class="category-nav container" id="category-nav">
+        <a href="#fan-edition" class="cat-pill active">🏟 Fan Edition</a>
+        <a href="#national-teams" class="cat-pill">🌍 National Teams</a>
+        <a href="#retros-clubs" class="cat-pill">🏆 Club Retros</a>
+        <a href="#retros-nations" class="cat-pill">🌐 Nation Retros</a>
+      </section>
+
+      <!-- ── SIZE GUIDE ────────────────────────────────────────────── -->
+      <div class="size-guide-wrap container">
+        <button class="size-guide-toggle" onclick="this.classList.toggle('open');document.getElementById('size-guide-table').classList.toggle('open')">
+          📏 Größentabelle <span class="size-guide-arrow">▾</span>
+        </button>
+        <div class="size-guide-table" id="size-guide-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Größe</th>
+                <th>Grösse (cm)</th>
+                <th>Brust ½ (cm)</th>
+                <th>Länge (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>S</td><td>165–170</td><td>49–51</td><td>67–69</td></tr>
+              <tr><td>M</td><td>170–175</td><td>51–53</td><td>69–71</td></tr>
+              <tr><td>L</td><td>175–180</td><td>53–55</td><td>71–73</td></tr>
+              <tr><td>XL</td><td>180–190</td><td>55–57</td><td>73–76</td></tr>
+              <tr><td>XXL</td><td>185–195</td><td>57–59</td><td>75–79</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── FAN EDITION ────────────────────────────────────────────── -->
+      <section id="fan-edition" class="products-section container">
+        <div class="section-heading">
+          <span class="section-tag">Season 25/26</span>
+          <h2>Fan Edition</h2>
+          <p>The latest club jerseys — home &amp; away, front &amp; back.</p>
+          <a href="#contact" class="more-available-hint">+ More clubs available — ask us →</a>
+        </div>
+        <div class="products-grid" id="products-grid"></div>
+      </section>
+
+      <div class="banner-divider">
+        <div class="container"><span>🌍 Representing your nation</span></div>
+      </div>
+
+      <!-- ── NATIONAL TEAMS ─────────────────────────────────────────── -->
+      <section id="national-teams" class="products-section container">
+        <div class="section-heading">
+          <span class="section-tag">World Cup 2026</span>
+          <h2>National Teams</h2>
+          <p>Official jerseys for the biggest tournament in the world.</p>
+          <a href="#contact" class="more-available-hint">+ More nations available — ask us →</a>
+        </div>
+        <div class="products-grid" id="national-teams-grid"></div>
+      </section>
+
+      <div class="banner-divider dark">
+        <div class="container"><span>🏆 Classics never go out of style</span></div>
+      </div>
+
+      <!-- ── RETROS: CLUBS ──────────────────────────────────────────── -->
+      <section id="retros-clubs" class="products-section container">
+        <div class="section-heading">
+          <span class="section-tag retro-tag">Retros</span>
+          <h2>Club Classics</h2>
+          <p>Iconic jerseys from legendary seasons — front, back &amp; badge.</p>
+          <a href="#contact" class="more-available-hint">+ Many more retros available — ask us →</a>
+        </div>
+        <div class="products-grid" id="retros-clubs-grid"></div>
+      </section>
+
+      <!-- ── RETROS: NATIONAL TEAMS ─────────────────────────────────── -->
+      <section id="retros-nations" class="products-section container">
+        <div class="section-heading">
+          <span class="section-tag retro-tag">Retros</span>
+          <h2>Nation Classics</h2>
+          <p>Relive iconic World Cup &amp; tournament moments.</p>
+          <a href="#contact" class="more-available-hint">+ More classic nations available — ask us →</a>
+        </div>
+        <div class="products-grid" id="retros-nations-grid"></div>
+      </section>
+
+      <!-- ── MORE JERSEYS CTA ──────────────────────────────────────────── -->
+      <section class="more-jerseys-section" id="more-jerseys">
+        <div class="container more-jerseys-inner">
+          <div class="mj-badge">500+ Jerseys Available</div>
+          <h2 class="mj-title">Can't find your jersey?</h2>
+          <p class="mj-sub">We stock hundreds more than what's listed here — including rare retros, full new-season club kits and all national team jerseys for World Cup 2026. Just tell us what you're looking for.</p>
+          <div class="mj-tags">
+            <span class="mj-tag">🏆 Retro Classics</span>
+            <span class="mj-tag">⚽ New Season 25/26</span>
+            <span class="mj-tag">🌍 National Teams 2026</span>
+            <span class="mj-tag">✏️ Custom Backprint</span>
+          </div>
+          <a href="#contact" class="mj-btn">Ask about a jersey →</a>
+        </div>
+      </section>
+
+      <!-- ── ABOUT ──────────────────────────────────────────────────── -->
+      <section id="about" class="info-section">
+        <div class="container">
+          <h2>About JerseyPhase</h2>
+          <p class="spoken">At JerseyPhase we combine elite quality with clean design. No memberships. No hidden fees. Just your favorite team in premium fit.</p>
+        </div>
+      </section>
+
+      <section id="contact" class="info-section alt">
+        <div class="container">
+          <h2>Contact</h2>
+          <p class="contact-email-line">📧 <a href="mailto:jerseyphase@gmail.com">jerseyphase@gmail.com</a></p>
+
+          <div class="contact-form-wrap">
+            <h3 class="contact-form-title">Send us a message</h3>
+            <form id="contact-form" class="contact-form" novalidate>
+              <div class="contact-row-two">
+                <div class="contact-field">
+                  <label for="cf-name">Your Name *</label>
+                  <input type="text" id="cf-name" name="name" placeholder="e.g. Marco" required />
+                </div>
+                <div class="contact-field">
+                  <label for="cf-email">Your Email *</label>
+                  <input type="email" id="cf-email" name="email" placeholder="you@example.com" required />
+                </div>
+              </div>
+              <div class="contact-field">
+                <label for="cf-subject">Subject *</label>
+                <input type="text" id="cf-subject" name="subject" placeholder="e.g. Question about my order" required />
+              </div>
+              <div class="contact-field">
+                <label for="cf-message">Message *</label>
+                <textarea id="cf-message" name="message" rows="5" placeholder="How can we help you?" required></textarea>
+              </div>
+              <button type="submit" class="contact-submit-btn">Send Message →</button>
+              <div id="contact-success" class="contact-alert contact-success" style="display:none;">
+                ✅ Message sent! We'll get back to you shortly.
+              </div>
+              <div id="contact-error" class="contact-alert contact-error" style="display:none;">
+                ❌ Something went wrong. Please email us directly at jerseyphase@gmail.com
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container">© 2026 JerseyPhase. Built for modern football fans.</div>
+    </footer>
+
+    <!-- ── LIGHTBOX ───────────────────────────────────────────────────── -->
+    <div class="lightbox-overlay" id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <div class="lightbox-inner">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close">✕</button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous">&#8592;</button>
+        <img id="lightbox-img" src="" alt="Jersey preview" />
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next">&#8594;</button>
+        <div class="lightbox-footer">
+          <span class="lightbox-label" id="lightbox-label"></span>
+          <div class="lightbox-dots" id="lightbox-dots"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── REVIEW PHOTO LIGHTBOX ────────────────────────────────────── -->
+    <div id="review-photo-lightbox" role="dialog" aria-modal="true" aria-label="Review photo">
+      <button id="review-photo-lightbox-close" aria-label="Close">✕</button>
+      <img src="" alt="Customer review photo" />
+    </div>
+
+    <!-- ── REVIEW MODAL ──────────────────────────────────────────────── -->
+    <div class="review-overlay" id="review-overlay">
+      <div class="review-modal">
+        <button class="review-close" id="review-close" aria-label="Close">✕</button>
+        <h3>Write a Review</h3>
+        <p class="review-modal-sub">
+          Reviews are verified against your order before publishing. Please enter the email address you used when ordering — we'll check it against our order list.
+        </p>
+        <form id="review-form" novalidate>
+          <div class="review-form-row">
+            <label>Order Email *</label>
+            <input type="email" name="orderEmail" placeholder="Email you used when ordering" required />
+          </div>
+          <div class="review-form-row">
+            <label>Your Name *</label>
+            <input type="text" name="reviewerName" placeholder="e.g. Marco T." required />
+          </div>
+          <div class="review-form-row">
+            <label>Jersey ordered *</label>
+            <input type="text" name="jersey" placeholder="e.g. Barcelona Home 25/26" required />
+          </div>
+          <div class="review-form-row">
+            <label>Rating *</label>
+            <div class="star-picker" id="star-picker">
+              <span class="star" data-value="1">★</span>
+              <span class="star" data-value="2">★</span>
+              <span class="star" data-value="3">★</span>
+              <span class="star" data-value="4">★</span>
+              <span class="star" data-value="5">★</span>
+            </div>
+            <input type="hidden" name="rating" id="rating-input" />
+          </div>
+          <div class="review-form-row">
+            <label>Your Review *</label>
+            <textarea name="review" rows="4" placeholder="Tell other customers about the quality, fit, delivery..." required></textarea>
+          </div>
+          <div class="review-form-row">
+            <label>Photo (optional)</label>
+            <label class="photo-upload-label">
+              <input type="file" id="review-photo-input" accept="image/*" />
+              <span class="photo-upload-btn">📷 Add Photo</span>
+              <span class="photo-upload-name" id="photo-name">No file chosen</span>
+            </label>
+            <div class="photo-preview-wrap" id="photo-preview-wrap" style="display:none;">
+              <img id="photo-preview" src="" alt="Preview" />
+              <button type="button" class="photo-remove-btn" id="photo-remove-btn">✕</button>
+            </div>
+          </div>
+          <button type="submit" class="review-submit-btn">Submit Review →</button>
+          <p class="review-note">📋 Your review will be published after we verify your order (usually within 24h).</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- ── STICKY FLOATING BUTTON ───────────────────────────────────── -->
+    <a href="#more-jerseys" class="sticky-jersey-btn" id="sticky-jersey-btn">
+      🔍 Can't find your jersey?
+    </a>
+
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // Show sticky button after scrolling past hero
+      const stickyBtn = document.getElementById("sticky-jersey-btn");
+      const hero = document.querySelector(".hero-banner");
+      window.addEventListener("scroll", () => {
+        const heroBottom = hero ? hero.getBoundingClientRect().bottom : 0;
+        stickyBtn.classList.toggle("sticky-jersey-btn--visible", heroBottom < 0);
+      }, { passive: true });
+    </script>
+  </body>
+</html>

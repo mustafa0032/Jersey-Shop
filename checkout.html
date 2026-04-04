@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout – JerseyPhase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="checkout.css" />
+  </head>
+  <body>
+
+    <!-- ── HEADER (same flyout nav as index.html) ───────────────────── -->
+    <header class="header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo"><span class="logo-jers">Jersey</span><span class="logo-hub">Phase</span></a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">☰</button>
+
+        <nav class="nav" id="nav-menu">
+          <ul class="nav-list">
+
+            <!-- Fan Edition -->
+            <li class="has-flyout">
+              <a href="index.html#fan-edition" class="nav-link">Fan Edition</a>
+              <ul class="flyout-l1">
+                <li>
+                  <a href="index.html#fan-edition" class="season-row">
+                    Season 25/26 <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2">
+                    <li><a href="index.html#fan-edition">AC Milan</a></li>
+                    <li><a href="index.html#fan-edition">Ajax</a></li>
+                    <li><a href="index.html#fan-edition">Arsenal</a></li>
+                    <li><a href="index.html#fan-edition">Barcelona</a></li>
+                    <li><a href="index.html#fan-edition">Bayern München</a></li>
+                    <li><a href="index.html#fan-edition">Benfica</a></li>
+                    <li><a href="index.html#fan-edition">Betis</a></li>
+                    <li><a href="index.html#fan-edition">Bilbao</a></li>
+                    <li><a href="index.html#fan-edition">Celtic</a></li>
+                    <li><a href="index.html#fan-edition">Chelsea</a></li>
+                    <li><a href="index.html#fan-edition">Flamengo</a></li>
+                    <li><a href="index.html#fan-edition">Inter Miami</a></li>
+                    <li><a href="index.html#fan-edition">Inter Milan</a></li>
+                    <li><a href="index.html#fan-edition">Juventus</a></li>
+                    <li><a href="index.html#fan-edition">Liverpool</a></li>
+                    <li><a href="index.html#fan-edition">Manchester City</a></li>
+                    <li><a href="index.html#fan-edition">Man. United</a></li>
+                    <li><a href="index.html#fan-edition">Marseille</a></li>
+                    <li><a href="index.html#fan-edition">Mineiro</a></li>
+                    <li><a href="index.html#fan-edition">Minens</a></li>
+                    <li><a href="index.html#fan-edition">Napoli</a></li>
+                    <li><a href="index.html#fan-edition">Newcastle</a></li>
+                    <li><a href="index.html#fan-edition">Palmeiras</a></li>
+                    <li><a href="index.html#fan-edition">Paris (PSG)</a></li>
+                    <li><a href="index.html#fan-edition">Porto</a></li>
+                    <li><a href="index.html#fan-edition">Real Madrid</a></li>
+                    <li><a href="index.html#fan-edition">Roma</a></li>
+                    <li><a href="index.html#fan-edition">Santos</a></li>
+                    <li><a href="index.html#fan-edition">Sao Paulo</a></li>
+                    <li><a href="index.html#fan-edition">Sporting CP</a></li>
+                    <li><a href="index.html#fan-edition">Tottenham</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <!-- National Teams -->
+            <li class="has-flyout">
+              <a href="index.html#national-teams" class="nav-link">National Teams</a>
+              <ul class="flyout-l1">
+                <li>
+                  <a href="index.html#national-teams" class="season-row">
+                    World Cup 2026 <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2">
+                    <li><a href="index.html#national-teams">Algeria</a></li>
+                    <li><a href="index.html#national-teams">Argentina</a></li>
+                    <li><a href="index.html#national-teams">Austria</a></li>
+                    <li><a href="index.html#national-teams">Belgium</a></li>
+                    <li><a href="index.html#national-teams">Brazil</a></li>
+                    <li><a href="index.html#national-teams">Canada</a></li>
+                    <li><a href="index.html#national-teams">Chile</a></li>
+                    <li><a href="index.html#national-teams">Colombia</a></li>
+                    <li><a href="index.html#national-teams">Costa Rica</a></li>
+                    <li><a href="index.html#national-teams">Croatia</a></li>
+                    <li><a href="index.html#national-teams">Czech Republic</a></li>
+                    <li><a href="index.html#national-teams">Ecuador</a></li>
+                    <li><a href="index.html#national-teams">England</a></li>
+                    <li><a href="index.html#national-teams">France</a></li>
+                    <li><a href="index.html#national-teams">Germany</a></li>
+                    <li><a href="index.html#national-teams">Ghana</a></li>
+                    <li><a href="index.html#national-teams">Hungary</a></li>
+                    <li><a href="index.html#national-teams">Iceland</a></li>
+                    <li><a href="index.html#national-teams">Italy</a></li>
+                    <li><a href="index.html#national-teams">Ivory Coast</a></li>
+                    <li><a href="index.html#national-teams">Jamaica</a></li>
+                    <li><a href="index.html#national-teams">Japan</a></li>
+                    <li><a href="index.html#national-teams">Mexico</a></li>
+                    <li><a href="index.html#national-teams">Morocco</a></li>
+                    <li><a href="index.html#national-teams">Netherlands</a></li>
+                    <li><a href="index.html#national-teams">New Zealand</a></li>
+                    <li><a href="index.html#national-teams">Nigeria</a></li>
+                    <li><a href="index.html#national-teams">Norway</a></li>
+                    <li><a href="index.html#national-teams">Paraguay</a></li>
+                    <li><a href="index.html#national-teams">Peru</a></li>
+                    <li><a href="index.html#national-teams">Poland</a></li>
+                    <li><a href="index.html#national-teams">Portugal</a></li>
+                    <li><a href="index.html#national-teams">Saudi Arabia</a></li>
+                    <li><a href="index.html#national-teams">Scotland</a></li>
+                    <li><a href="index.html#national-teams">Senegal</a></li>
+                    <li><a href="index.html#national-teams">South Africa</a></li>
+                    <li><a href="index.html#national-teams">South Korea</a></li>
+                    <li><a href="index.html#national-teams">Spain</a></li>
+                    <li><a href="index.html#national-teams">Sweden</a></li>
+                    <li><a href="index.html#national-teams">Switzerland</a></li>
+                    <li><a href="index.html#national-teams">Ukraine</a></li>
+                    <li><a href="index.html#national-teams">USA</a></li>
+                    <li><a href="index.html#national-teams">Venezuela</a></li>
+                    <li><a href="index.html#national-teams">Wales</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Retros -->
+            <li class="has-flyout">
+              <a href="index.html#retros-clubs" class="nav-link">Retros</a>
+              <ul class="flyout-l1">
+                <li>
+                  <a href="index.html#retros-clubs" class="season-row">
+                    Club Classics <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2 flyout-left">
+                    <li><a href="index.html#retros-clubs">AC Milan</a></li>
+                    <li><a href="index.html#retros-clubs">Arsenal</a></li>
+                    <li><a href="index.html#retros-clubs">Barcelona</a></li>
+                    <li><a href="index.html#retros-clubs">Bayern München</a></li>
+                    <li><a href="index.html#retros-clubs">Chelsea</a></li>
+                    <li><a href="index.html#retros-clubs">Inter Mailand</a></li>
+                    <li><a href="index.html#retros-clubs">Juventus</a></li>
+                    <li><a href="index.html#retros-clubs">Liverpool</a></li>
+                    <li><a href="index.html#retros-clubs">Manchester City</a></li>
+                    <li><a href="index.html#retros-clubs">Man. United</a></li>
+                    <li><a href="index.html#retros-clubs">Marseille</a></li>
+                    <li><a href="index.html#retros-clubs">PSG</a></li>
+                    <li><a href="index.html#retros-clubs">Real Madrid</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="index.html#retros-nations" class="season-row">
+                    Nation Classics <span class="arrow">▶</span>
+                  </a>
+                  <ul class="flyout-l2 flyout-left">
+                    <li><a href="index.html#retros-nations">Argentina</a></li>
+                    <li><a href="index.html#retros-nations">Brazil</a></li>
+                    <li><a href="index.html#retros-nations">Croatia</a></li>
+                    <li><a href="index.html#retros-nations">England</a></li>
+                    <li><a href="index.html#retros-nations">France</a></li>
+                    <li><a href="index.html#retros-nations">Germany</a></li>
+                    <li><a href="index.html#retros-nations">Italy</a></li>
+                    <li><a href="index.html#retros-nations">Japan</a></li>
+                    <li><a href="index.html#retros-nations">Marocco</a></li>
+                    <li><a href="index.html#retros-nations">Mexico</a></li>
+                    <li><a href="index.html#retros-nations">Netherlands</a></li>
+                    <li><a href="index.html#retros-nations">Nigeria</a></li>
+                    <li><a href="index.html#retros-nations">Portugal</a></li>
+                    <li><a href="index.html#retros-nations">Senegal</a></li>
+                    <li><a href="index.html#retros-nations">Spain</a></li>
+                    <li><a href="index.html#retros-nations">Türkiye</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Cart -->
+            <li>
+              <a href="checkout.html" class="nav-link cart-link">
+                <span class="cart-icon">🛒</span> Cart
+                <span id="cart-count" class="cart-badge">0</span>
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ── CHECKOUT MAIN ─────────────────────────────────────────────── -->
+    <main class="checkout-page">
+      <div class="container checkout-grid">
+
+        <!-- LEFT: Cart Summary -->
+        <section class="checkout-panel cart-panel">
+          <div class="panel-header">
+            <span class="panel-icon">🛒</span>
+            <h2>Your Cart</h2>
+          </div>
+          <div id="cart-empty" class="cart-empty">
+            <span class="cart-empty-icon">👕</span>
+            <p>Your cart is empty.</p>
+            <a href="index.html" class="btn-outline-sm">Browse jerseys</a>
+          </div>
+          <div id="cart-items" class="cart-items"></div>
+          <div class="cart-total-row" id="cart-total-row">
+            <span>Total</span>
+            <strong>CHF <span id="cart-total">0.00</span></strong>
+          </div>
+
+          <div class="cart-info-box">
+            <div class="cart-info-row">🚚 <span><strong>Gratis Versand</strong> — übernommen von JerseyPhase</span></div>
+            <div class="cart-info-row">⏱️ <span><strong>Bearbeitungszeit:</strong> 2–5 Tage</span></div>
+            <div class="cart-info-row">📦 <span><strong>Lieferzeit:</strong> 7–14 Tage</span></div>
+          </div>
+
+        </section>
+
+        <!-- RIGHT: Order Form -->
+        <section class="checkout-panel form-panel">
+          <div class="panel-header">
+            <span class="panel-icon">📦</span>
+            <h2>Shipping Details</h2>
+          </div>
+          <p class="panel-sub">No login required — we'll contact you to confirm your order.</p>
+
+          <form id="checkout-form" class="checkout-form" action="https://formspree.io/f/mreokeok" method="POST" novalidate>
+
+            <div class="form-row">
+              <label for="fullName">Full name *</label>
+              <input type="text" id="fullName" name="fullName" required placeholder="Your full name" />
+            </div>
+
+            <div class="form-row">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required placeholder="you@example.com" />
+            </div>
+
+            <div class="form-row">
+              <label for="phone">Phone number *</label>
+              <input type="tel" id="phone" name="phone" required placeholder="+41 79 123 45 67" pattern="[0-9+\-()\s]{7,}" />
+            </div>
+
+            <div class="form-row">
+              <label for="address">Shipping address *</label>
+              <input type="text" id="address" name="address" required placeholder="Musterstrasse 12" />
+            </div>
+
+            <div class="row-2">
+              <div class="form-row">
+                <label for="city">City *</label>
+                <input type="text" id="city" name="city" required placeholder="Zürich" />
+              </div>
+              <div class="form-row">
+                <label for="postalCode">Postal code *</label>
+                <input type="text" id="postalCode" name="postalCode" required placeholder="8000" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="country">Country *</label>
+              <select id="country" name="country" required>
+                <option value="" disabled selected>Select your country…</option>
+                <option value="CH">Switzerland 🇨🇭</option>
+                <option value="DE">Germany 🇩🇪</option>
+                <option value="AT">Austria 🇦🇹</option>
+                <option value="FR">France 🇫🇷</option>
+                <option value="IT">Italy 🇮🇹</option>
+                <option value="NL">Netherlands 🇳🇱</option>
+                <option value="BE">Belgium 🇧🇪</option>
+                <option value="ES">Spain 🇪🇸</option>
+                <option value="PT">Portugal 🇵🇹</option>
+                <option value="GB">United Kingdom 🇬🇧</option>
+                <option value="US">United States 🇺🇸</option>
+                <option value="CA">Canada 🇨🇦</option>
+                <option value="AU">Australia 🇦🇺</option>
+                <option value="TR">Turkey 🇹🇷</option>
+                <option value="SA">Saudi Arabia 🇸🇦</option>
+                <option value="AE">UAE 🇦🇪</option>
+                <option value="SE">Sweden 🇸🇪</option>
+                <option value="NO">Norway 🇳🇴</option>
+                <option value="DK">Denmark 🇩🇰</option>
+                <option value="PL">Poland 🇵🇱</option>
+                <option value="BR">Brazil 🇧🇷</option>
+                <option value="JP">Japan 🇯🇵</option>
+                <option value="OTHER">Other</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="notes">Notes (optional)</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Any special requests..."></textarea>
+            </div>
+
+            <!-- ── STRIPE CARD FIELDS ──────────────────────────────── -->
+            <div class="form-row" id="stripe-card-section">
+              <label>💳 Card Details *</label>
+              <div class="stripe-split-fields">
+                <div class="stripe-field-full">
+                  <label class="stripe-field-label">Card Number</label>
+                  <div id="stripe-card-number" class="stripe-card-input"></div>
+                </div>
+                <div class="stripe-field-row">
+                  <div class="stripe-field-half">
+                    <label class="stripe-field-label">Expiry Date</label>
+                    <div id="stripe-card-expiry" class="stripe-card-input"></div>
+                  </div>
+                  <div class="stripe-field-half">
+                    <label class="stripe-field-label">CVC</label>
+                    <div id="stripe-card-cvc" class="stripe-card-input"></div>
+                  </div>
+                </div>
+              </div>
+              <div id="stripe-card-errors" class="stripe-card-error" role="alert"></div>
+            </div>
+            <!-- ──────────────────────────────────────────────────────── -->
+
+            <button type="submit" class="btn-submit" id="stripe-submit-btn">
+              Pay &amp; Place Order →
+            </button>
+
+            <div id="checkout-success" class="success-alert" role="status" aria-live="polite" hidden>
+              ✅ Payment successful! Your order has been placed.<br/>
+              <small>📧 Please check your <strong>Spam / Junk folder</strong> if you don't see our confirmation email in your inbox.</small>
+            </div>
+            <div id="checkout-error" class="error-alert" role="alert" hidden></div>
+          </form>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 JerseyPhase. All rights reserved.</p>
+    </footer>
+
+    <!-- Stripe.js must load before script.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>emailjs.init("kktW89XjiOjRLC2MD");</script>
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
