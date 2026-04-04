@@ -2027,7 +2027,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
         </div>
       </div>
       ${addonsHtml}
-      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="33">Add to cart — CHF 33</button>
+      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="35">Add to cart — CHF 35</button>
     `;
     grid.appendChild(card);
   });
@@ -2060,7 +2060,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
       // Live price update
       card.querySelectorAll(".addon-check").forEach((check) => {
         check.addEventListener("change", () => {
-          let total = 33;
+          let total = 35;
           card.querySelectorAll(".addon-check:checked").forEach(c => {
             total += Number(c.dataset.price);
           });
@@ -2102,7 +2102,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
           if (n || r) backprintDetail = [n, r].filter(Boolean).join(" #");
         }
       }
-      const total = Number(btn.textContent.match(/\d+$/)?.[0] || 33);
+      const total = Number(btn.textContent.match(/\d+$/)?.[0] || 35);
       // Use card's h3 (baseName) — already stripped of Front/Back
       const cleanName = card.querySelector("h3")?.textContent || product.name;
       addToCart({
@@ -2730,7 +2730,7 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
             if (n || r) backprintDetail = [n, r].filter(Boolean).join(" #");
           }
         }
-        const total = Number(btn.textContent.match(/\d+$/)?.[0] || product.price || 33);
+        const total = Number(btn.textContent.match(/\d+$/)?.[0] || product.price || 35);
         addToCart({
           id: product.id,
           name: product.name + (extras.length ? " (" + extras.join(", ") + ")" : ""),
