@@ -3,6 +3,7 @@ const JP_TRANSLATIONS = {
   en: {
     // Navbar
     "nav.cart": "🛒 Cart",
+    "nav.cart.label": "Cart",
 
     // Hero
     "hero.eyebrow":   "Season 25/26 · Now Available",
@@ -129,6 +130,7 @@ const JP_TRANSLATIONS = {
     "cart.discount.ok":        "✅ Code applied — {p}% discount!",
     "cart.discount.err":       "❌ Invalid discount code.",
     "cart.discount.label":     "🎉 Discount ({p}%)",
+    "cart.discount.label.10":  "🎉 Discount (10%)",
     "cart.total":              "Total",
     "cart.shipping":           "🚚 <strong>Free Shipping</strong> — covered by JerseyPhase",
     "cart.processing":         "⏱️ <strong>Processing time:</strong> 2–5 days",
@@ -159,6 +161,7 @@ const JP_TRANSLATIONS = {
   de: {
     // Navbar
     "nav.cart": "🛒 Warenkorb",
+    "nav.cart.label": "Warenkorb",
 
     // Hero
     "hero.eyebrow":   "Saison 25/26 · Jetzt verfügbar",
@@ -285,6 +288,7 @@ const JP_TRANSLATIONS = {
     "cart.discount.ok":        "✅ Code angewendet — {p}% Rabatt!",
     "cart.discount.err":       "❌ Ungültiger Rabattcode.",
     "cart.discount.label":     "🎉 Rabatt ({p}%)",
+    "cart.discount.label.10":  "🎉 Rabatt (10%)",
     "cart.total":              "Gesamt",
     "cart.shipping":           "🚚 <strong>Gratis Versand</strong> — übernommen von JerseyPhase",
     "cart.processing":         "⏱️ <strong>Bearbeitungszeit:</strong> 2–5 Tage",
