@@ -2210,7 +2210,19 @@ function renderRetros() {
           <span class="price-sale">CHF 37</span>
         </div>
       </div>
-      <button class="add-to-cart-btn" data-id="${product.id}">Add to cart</button>
+      <div class="product-addons">
+        <div class="size-row">
+          <label class="size-label">Size</label>
+          <div class="size-options">
+            <button type="button" class="size-btn" data-size="S">S</button>
+            <button type="button" class="size-btn" data-size="M">M</button>
+            <button type="button" class="size-btn" data-size="L">L</button>
+            <button type="button" class="size-btn" data-size="XL">XL</button>
+            <button type="button" class="size-btn" data-size="XXL">XXL</button>
+          </div>
+        </div>
+      </div>
+      <button class="add-to-cart-btn" data-id="${product.id}">Add to cart — CHF 37</button>
     `;
     grid.appendChild(card);
   });
@@ -2218,12 +2230,33 @@ function renderRetros() {
   ["retros-clubs-grid", "retros-nations-grid"].forEach(gridId => {
     const grid = document.getElementById(gridId);
     if (!grid) return;
+
+    // Size button toggle
+    grid.querySelectorAll(".product-card").forEach((card) => {
+      card.querySelectorAll(".size-btn").forEach(sBtn => {
+        sBtn.addEventListener("click", () => {
+          card.querySelectorAll(".size-btn").forEach(b => b.classList.remove("selected"));
+          sBtn.classList.add("selected");
+        });
+      });
+    });
+
     grid.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const productId = Number(btn.getAttribute("data-id"));
         const product = retrosProducts.find((item) => item.id === productId);
         if (!product) return;
-        addToCart({ id: product.id, name: product.name, price: product.price, quantity: 1, image: product.image || "https://via.placeholder.com/60x60?text=Jersey" });
+        const card = btn.closest(".product-card");
+        const activeSize = card ? card.querySelector(".size-btn.selected") : null;
+        if (!activeSize) {
+          const sizeOptions = card ? card.querySelector(".size-options") : null;
+          if (sizeOptions) {
+            sizeOptions.classList.add("size-error");
+            setTimeout(() => sizeOptions.classList.remove("size-error"), 1500);
+          }
+          return;
+        }
+        addToCart({ id: product.id, name: product.name, size: activeSize.dataset.size, price: product.price, quantity: 1, image: product.image || "https://via.placeholder.com/60x60?text=Jersey" });
         updateCartCount();
       });
     });
