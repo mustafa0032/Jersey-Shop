@@ -178,11 +178,19 @@
             <!-- Cart -->
             <li>
               <a href="checkout.html" class="nav-link cart-link">
-                <span class="cart-icon">🛒</span> Cart
+                <span class="cart-icon">🛒</span> <span data-i18n="nav.cart.label">Cart</span>
                 <span id="cart-count" class="cart-badge">0</span>
               </a>
             </li>
 
+            <!-- Language switcher -->
+            <li class="lang-switcher-li">
+              <div class="lang-switcher">
+                <button class="lang-btn" data-lang="en">EN</button>
+                <span class="lang-sep">|</span>
+                <button class="lang-btn" data-lang="de">DE</button>
+              </div>
+            </li>
           </ul>
         </nav>
       </div>
@@ -196,23 +204,41 @@
         <section class="checkout-panel cart-panel">
           <div class="panel-header">
             <span class="panel-icon">🛒</span>
-            <h2>Your Cart</h2>
+            <h2 data-i18n="cart.title">Your Cart</h2>
           </div>
           <div id="cart-empty" class="cart-empty">
             <span class="cart-empty-icon">👕</span>
-            <p>Your cart is empty.</p>
-            <a href="index.html" class="btn-outline-sm">Browse jerseys</a>
+            <p data-i18n="cart.empty">Your cart is empty.</p>
+            <a href="index.html" class="btn-outline-sm" data-i18n="cart.browse">Browse jerseys</a>
           </div>
           <div id="cart-items" class="cart-items"></div>
           <div class="cart-total-row" id="cart-total-row">
-            <span>Total</span>
+            <span data-i18n="cart.subtotal">Subtotal</span>
             <strong>CHF <span id="cart-total">0.00</span></strong>
           </div>
 
+          <!-- Discount code -->
+          <div class="discount-row" id="discount-row">
+            <div class="discount-input-wrap">
+              <input type="text" id="discount-input" placeholder="Enter discount code…" data-i18n-ph="cart.discount.ph" autocomplete="off" />
+              <button type="button" id="discount-apply-btn" data-i18n="cart.discount.apply">Apply</button>
+            </div>
+            <div id="discount-msg" class="discount-msg"></div>
+          </div>
+
+          <div class="cart-discount-row" id="cart-discount-row" style="display:none;">
+            <span data-i18n="cart.discount.label.10">🎉 Discount (10%)</span>
+            <strong class="discount-amount">− CHF <span id="cart-discount-amount">0.00</span></strong>
+          </div>
+          <div class="cart-final-row" id="cart-final-row" style="display:none;">
+            <span><strong data-i18n="cart.total">Total</strong></span>
+            <strong>CHF <span id="cart-final-total">0.00</span></strong>
+          </div>
+
           <div class="cart-info-box">
-            <div class="cart-info-row">🚚 <span><strong>Gratis Versand</strong> — übernommen von JerseyPhase</span></div>
-            <div class="cart-info-row">⏱️ <span><strong>Bearbeitungszeit:</strong> 2–5 Tage</span></div>
-            <div class="cart-info-row">📦 <span><strong>Lieferzeit:</strong> 7–14 Tage</span></div>
+            <div class="cart-info-row"><span data-i18n="cart.shipping">🚚 <strong>Free Shipping</strong> — covered by JerseyPhase</span></div>
+            <div class="cart-info-row"><span data-i18n="cart.processing">⏱️ <strong>Processing time:</strong> 2–5 days</span></div>
+            <div class="cart-info-row"><span data-i18n="cart.delivery">📦 <strong>Delivery time:</strong> 7–14 days</span></div>
           </div>
 
         </section>
@@ -221,45 +247,45 @@
         <section class="checkout-panel form-panel">
           <div class="panel-header">
             <span class="panel-icon">📦</span>
-            <h2>Shipping Details</h2>
+            <h2 data-i18n="checkout.title">Shipping Details</h2>
           </div>
-          <p class="panel-sub">No login required — we'll contact you to confirm your order.</p>
+          <p class="panel-sub" data-i18n="checkout.sub">No login required — we'll contact you to confirm your order.</p>
 
           <form id="checkout-form" class="checkout-form" action="https://formspree.io/f/mreokeok" method="POST" novalidate>
 
             <div class="form-row">
-              <label for="fullName">Full name *</label>
-              <input type="text" id="fullName" name="fullName" required placeholder="Your full name" />
+              <label for="fullName" data-i18n="checkout.name.lbl">Full name *</label>
+              <input type="text" id="fullName" name="fullName" required placeholder="Your full name" data-i18n-ph="checkout.name.ph" />
             </div>
 
             <div class="form-row">
-              <label for="email">Email *</label>
+              <label for="email" data-i18n="checkout.email.lbl">Email *</label>
               <input type="email" id="email" name="email" required placeholder="you@example.com" />
             </div>
 
             <div class="form-row">
-              <label for="phone">Phone number *</label>
-              <input type="tel" id="phone" name="phone" required placeholder="+41 79 123 45 67" pattern="[0-9+\-()\s]{7,}" />
+              <label for="phone" data-i18n="checkout.phone.lbl">Phone number *</label>
+              <input type="tel" id="phone" name="phone" required placeholder="+41 79 123 45 67" data-i18n-ph="checkout.phone.ph" pattern="[0-9+\-()\s]{7,}" />
             </div>
 
             <div class="form-row">
-              <label for="address">Shipping address *</label>
-              <input type="text" id="address" name="address" required placeholder="Musterstrasse 12" />
+              <label for="address" data-i18n="checkout.address.lbl">Shipping address *</label>
+              <input type="text" id="address" name="address" required placeholder="Musterstrasse 12" data-i18n-ph="checkout.address.ph" />
             </div>
 
             <div class="row-2">
               <div class="form-row">
-                <label for="city">City *</label>
-                <input type="text" id="city" name="city" required placeholder="Zürich" />
+                <label for="city" data-i18n="checkout.city.lbl">City *</label>
+                <input type="text" id="city" name="city" required placeholder="Zürich" data-i18n-ph="checkout.city.ph" />
               </div>
               <div class="form-row">
-                <label for="postalCode">Postal code *</label>
+                <label for="postalCode" data-i18n="checkout.postal.lbl">Postal code *</label>
                 <input type="text" id="postalCode" name="postalCode" required placeholder="8000" />
               </div>
             </div>
 
             <div class="form-row">
-              <label for="country">Country *</label>
+              <label for="country" data-i18n="checkout.country.lbl">Country *</label>
               <select id="country" name="country" required>
                 <option value="" disabled selected>Select your country…</option>
                 <option value="CH">Switzerland 🇨🇭</option>
@@ -289,13 +315,13 @@
             </div>
 
             <div class="form-row">
-              <label for="notes">Notes (optional)</label>
-              <textarea id="notes" name="notes" rows="3" placeholder="Any special requests..."></textarea>
+              <label for="notes" data-i18n="checkout.notes.lbl">Notes (optional)</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Any special requests..." data-i18n-ph="checkout.notes.ph"></textarea>
             </div>
 
             <!-- ── STRIPE CARD FIELDS ──────────────────────────────── -->
             <div class="form-row" id="stripe-card-section">
-              <label>💳 Card Details *</label>
+              <label data-i18n="checkout.card.lbl">💳 Card Details *</label>
               <div class="stripe-split-fields">
                 <div class="stripe-field-full">
                   <label class="stripe-field-label">Card Number</label>
@@ -316,7 +342,7 @@
             </div>
             <!-- ──────────────────────────────────────────────────────── -->
 
-            <button type="submit" class="btn-submit" id="stripe-submit-btn">
+            <button type="submit" class="btn-submit" id="stripe-submit-btn" data-i18n="checkout.submit">
               Pay &amp; Place Order →
             </button>
 
@@ -339,6 +365,7 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>emailjs.init("kktW89XjiOjRLC2MD");</script>
+    <script src="lang.js"></script>
     <script src="cart.js"></script>
     <script src="script.js"></script>
   </body>

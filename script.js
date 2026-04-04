@@ -1986,7 +1986,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
     const addonsHtml = showAddons ? `
       <div class="product-addons">
         <div class="size-row">
-          <label class="size-label">Size</label>
+          <label class="size-label">${t("product.size")}</label>
           <div class="size-options">
             <button type="button" class="size-btn" data-size="S">S</button>
             <button type="button" class="size-btn" data-size="M">M</button>
@@ -1997,15 +1997,15 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
         </div>
         <label class="addon-option">
           <input type="checkbox" class="addon-check" data-price="13">
-          <span>+ Shorts <span class="addon-price">+13 CHF</span></span>
+          <span>${t("product.shorts")} <span class="addon-price">+13 CHF</span></span>
         </label>
         <label class="addon-option addon-backprint-label">
           <input type="checkbox" class="addon-check addon-backprint-check" data-price="4">
-          <span>+ Backprint (Name &amp; Nr.) <span class="addon-price">+4 CHF</span></span>
+          <span>${t("product.backprint")} <span class="addon-price">+4 CHF</span></span>
         </label>
         <div class="backprint-fields" style="display:none;">
-          <input type="text" class="backprint-name" placeholder="Player name (e.g. MÜLLER)" maxlength="20" />
-          <input type="text" class="backprint-number" placeholder="Number (e.g. 9)" maxlength="3" />
+          <input type="text" class="backprint-name" placeholder="${t("product.name.ph")}" maxlength="20" />
+          <input type="text" class="backprint-number" placeholder="${t("product.number.ph")}" maxlength="3" />
         </div>
       </div>` : "";
 
@@ -2027,7 +2027,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
         </div>
       </div>
       ${addonsHtml}
-      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="35">Add to cart — CHF 35</button>
+      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="35">${t("product.addtocart")} 35</button>
     `;
     grid.appendChild(card);
   });
@@ -2064,7 +2064,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
           card.querySelectorAll(".addon-check:checked").forEach(c => {
             total += Number(c.dataset.price);
           });
-          btn.textContent = `Add to cart — CHF ${total}`;
+          btn.textContent = `${t("product.addtocart")} ${total}`;
         });
       });
     });
@@ -2119,6 +2119,10 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
   });
 
   // ── VIEW MORE ──────────────────────────────────────────────────────
+  // Remove any existing view-more wrapper before adding a new one
+  const existingVm = grid.nextElementSibling;
+  if (existingVm && existingVm.classList.contains("view-more-wrapper")) existingVm.remove();
+
   const INITIAL_LIMIT = 8;
   const allRenderedCards = grid.querySelectorAll(".product-card");
   if (allRenderedCards.length > INITIAL_LIMIT) {
@@ -2128,7 +2132,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
     const remaining = allRenderedCards.length - INITIAL_LIMIT;
     const vmWrap = document.createElement("div");
     vmWrap.className = "view-more-wrapper";
-    vmWrap.innerHTML = `<button class="view-more-btn">View more <span class="view-more-count">${remaining} more jerseys</span></button>`;
+    vmWrap.innerHTML = `<button class="view-more-btn">${t("product.viewmore")} <span class="view-more-count">${remaining} ${t("product.morejerseys")}</span></button>`;
     grid.insertAdjacentElement("afterend", vmWrap);
     vmWrap.querySelector(".view-more-btn").addEventListener("click", () => {
       grid.querySelectorAll("[data-extra-card]").forEach(c => { c.style.display = ""; delete c.dataset.extraCard; });
@@ -2212,7 +2216,7 @@ function renderRetros() {
       </div>
       <div class="product-addons">
         <div class="size-row">
-          <label class="size-label">Size</label>
+          <label class="size-label">${t("product.size")}</label>
           <div class="size-options">
             <button type="button" class="size-btn" data-size="S">S</button>
             <button type="button" class="size-btn" data-size="M">M</button>
@@ -2222,7 +2226,7 @@ function renderRetros() {
           </div>
         </div>
       </div>
-      <button class="add-to-cart-btn" data-id="${product.id}">Add to cart — CHF 37</button>
+      <button class="add-to-cart-btn" data-id="${product.id}">${t("product.addtocart")} 37</button>
     `;
     grid.appendChild(card);
   });
@@ -2262,6 +2266,10 @@ function renderRetros() {
     });
 
     // ── VIEW MORE ────────────────────────────────────────────────────
+    // Remove any existing view-more wrapper before adding a new one
+    const existingRetroVm = grid.nextElementSibling;
+    if (existingRetroVm && existingRetroVm.classList.contains("view-more-wrapper")) existingRetroVm.remove();
+
     const RETRO_LIMIT = 8;
     const retroCards = grid.querySelectorAll(".product-card");
     if (retroCards.length > RETRO_LIMIT) {
@@ -2271,7 +2279,7 @@ function renderRetros() {
       const remaining = retroCards.length - RETRO_LIMIT;
       const vmWrap = document.createElement("div");
       vmWrap.className = "view-more-wrapper";
-      vmWrap.innerHTML = `<button class="view-more-btn">View more <span class="view-more-count">${remaining} more jerseys</span></button>`;
+      vmWrap.innerHTML = `<button class="view-more-btn">${t("product.viewmore")} <span class="view-more-count">${remaining} ${t("product.morejerseys")}</span></button>`;
       grid.insertAdjacentElement("afterend", vmWrap);
       vmWrap.querySelector(".view-more-btn").addEventListener("click", () => {
         grid.querySelectorAll("[data-extra-card]").forEach(c => { c.style.display = ""; delete c.dataset.extraCard; });
@@ -2888,7 +2896,11 @@ if (checkoutForm) {
       return;
     }
 
-    const total = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+    const subtotal         = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+    const discountPercent  = (typeof getDiscountPercent === "function") ? getDiscountPercent() : 0;
+    const discountCode     = (typeof getActiveDiscount  === "function") ? getActiveDiscount()  : null;
+    const discountSaving   = +(subtotal * discountPercent / 100).toFixed(2);
+    const total            = +(subtotal - discountSaving).toFixed(2);
 
     // ── Build readable cart list ────────────────────────────────────────
     const cartText = cart.map((item, i) => {
@@ -2976,6 +2988,9 @@ if (checkoutForm) {
       }).catch(() => {}); // silent if server not running
 
       // ── Step 4: Send confirmation email via EmailJS ─────────────────
+      const discountLine = discountPercent > 0
+        ? `\nDiscount code: ${discountCode} (−${discountPercent}%)  −CHF ${discountSaving.toFixed(2)}`
+        : "";
       const templateParams = {
         name:         fullName,
         title:        `Order ${order_id} — CHF ${total.toFixed(2)}`,
@@ -2985,12 +3000,12 @@ if (checkoutForm) {
         address:      `${address}, ${postalCode} ${city}, ${countryCode}`,
         notes:        notes || "—",
         cart_items:   cartText,
-        total:        `CHF ${total.toFixed(2)}`,
+        total:        `CHF ${total.toFixed(2)}${discountLine ? `\nSubtotal: CHF ${subtotal.toFixed(2)}${discountLine}` : ""}`,
         reply_to:     email,
         payment_info: `----------------------------
 PAYMENT CONFIRMED ✅
 ----------------------------
-CHF ${total.toFixed(2)} paid by card via Stripe.
+CHF ${total.toFixed(2)} paid by card via Stripe.${discountPercent > 0 ? `\n(Discount code ${discountCode}: −${discountPercent}%, saved CHF ${discountSaving.toFixed(2)})` : ""}
 Stripe Payment ID: ${paymentIntent.id}
 Order ID: ${order_id}
 ----------------------------

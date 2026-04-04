@@ -183,9 +183,18 @@
             <!-- Cart -->
             <li>
               <a href="checkout.html" class="nav-link cart-link">
-                <span class="cart-icon">🛒</span> Cart
+                <span class="cart-icon">🛒</span> <span data-i18n="nav.cart.label">Cart</span>
                 <span id="cart-count" class="cart-badge">0</span>
               </a>
+            </li>
+
+            <!-- Language switcher -->
+            <li class="lang-switcher-li">
+              <div class="lang-switcher">
+                <button class="lang-btn" data-lang="en">EN</button>
+                <span class="lang-sep">|</span>
+                <button class="lang-btn" data-lang="de">DE</button>
+              </div>
             </li>
           </ul>
         </nav>
@@ -198,13 +207,13 @@
       <section class="hero-banner">
         <div class="hero-banner-inner container">
           <div class="hero-text">
-            <span class="hero-eyebrow">Season 25/26 · Now Available</span>
-            <h1>Premium Football Jerseys</h1>
-            <p>Club kits, national teams, and iconic retros — all in one place. Fast delivery, premium quality.</p>
+            <span class="hero-eyebrow" data-i18n="hero.eyebrow">Season 25/26 · Now Available</span>
+            <h1 data-i18n="hero.title">Premium Football Jerseys</h1>
+            <p data-i18n="hero.subtitle">Club kits, national teams, and iconic retros — all in one place. Fast delivery, premium quality.</p>
             <div class="hero-cta-group">
-              <a href="#fan-edition" class="btn btn-primary">Shop Fan Edition</a>
-              <a href="#retros-clubs" class="btn btn-outline">Explore Retros</a>
-              <a href="#more-jerseys" class="btn btn-ghost-green">🔍 Can't find your jersey?</a>
+              <a href="#fan-edition" class="btn btn-primary" data-i18n="hero.cta.shop">Shop Fan Edition</a>
+              <a href="#retros-clubs" class="btn btn-outline" data-i18n="hero.cta.retros">Explore Retros</a>
+              <a href="#more-jerseys" class="btn btn-ghost-green" data-i18n="hero.cta.find">🔍 Can't find your jersey?</a>
             </div>
           </div>
         </div>
@@ -216,9 +225,9 @@
           <div class="reviews-header">
             <div class="reviews-title-wrap">
               <span class="reviews-stars-overall">★★★★★</span>
-              <span class="reviews-headline">What our customers say</span>
+              <span class="reviews-headline" data-i18n="reviews.headline">What our customers say</span>
             </div>
-            <button class="write-review-btn" id="write-review-btn">✍️ Write a Review</button>
+            <button class="write-review-btn" id="write-review-btn" data-i18n="reviews.write">✍️ Write a Review</button>
           </div>
         </div>
         <div class="reviews-slider-outer container">
@@ -240,6 +249,7 @@
             id="global-search"
             class="search-input"
             placeholder="Search jerseys — e.g. Liverpool, Argentina, Bayern..."
+            data-i18n-ph="search.placeholder"
             autocomplete="off"
           />
           <button class="search-clear" id="search-clear" aria-label="Clear search" hidden>✕</button>
@@ -249,7 +259,7 @@
       <!-- ── SEARCH RESULTS (shown while searching) ─────────────────── -->
       <section id="search-results-section" class="products-section container" style="display:none;">
         <div class="section-heading">
-          <h2 class="search-results-title">Search Results</h2>
+          <h2 class="search-results-title" data-i18n="search.results.title">Search Results</h2>
           <p id="search-results-count" class="search-results-count"></p>
         </div>
         <div class="products-grid" id="search-results-grid"></div>
@@ -261,25 +271,25 @@
 
       <!-- ── CATEGORY PILLS ────────────────────────────────────────── -->
       <section class="category-nav container" id="category-nav">
-        <a href="#fan-edition" class="cat-pill active">🏟 Fan Edition</a>
-        <a href="#national-teams" class="cat-pill">🌍 National Teams</a>
-        <a href="#retros-clubs" class="cat-pill">🏆 Club Retros</a>
-        <a href="#retros-nations" class="cat-pill">🌐 Nation Retros</a>
+        <a href="#fan-edition" class="cat-pill active" data-i18n="cat.fanedition">🏟 Fan Edition</a>
+        <a href="#national-teams" class="cat-pill" data-i18n="cat.national">🌍 National Teams</a>
+        <a href="#retros-clubs" class="cat-pill" data-i18n="cat.retroclubs">🏆 Club Retros</a>
+        <a href="#retros-nations" class="cat-pill" data-i18n="cat.retronations">🌐 Nation Retros</a>
       </section>
 
       <!-- ── SIZE GUIDE ────────────────────────────────────────────── -->
       <div class="size-guide-wrap container">
-        <button class="size-guide-toggle" onclick="this.classList.toggle('open');document.getElementById('size-guide-table').classList.toggle('open')">
-          📏 Größentabelle <span class="size-guide-arrow">▾</span>
+        <button class="size-guide-toggle" onclick="this.classList.toggle('open');document.getElementById('size-guide-table').classList.toggle('open')" data-i18n="size.toggle">
+          📏 Size Guide ▾
         </button>
         <div class="size-guide-table" id="size-guide-table">
           <table>
             <thead>
               <tr>
-                <th>Größe</th>
-                <th>Grösse (cm)</th>
-                <th>Brust ½ (cm)</th>
-                <th>Länge (cm)</th>
+                <th data-i18n="size.size">Size</th>
+                <th data-i18n="size.height">Height (cm)</th>
+                <th data-i18n="size.chest">Chest ½ (cm)</th>
+                <th data-i18n="size.length">Length (cm)</th>
               </tr>
             </thead>
             <tbody>
@@ -296,40 +306,40 @@
       <!-- ── FAN EDITION ────────────────────────────────────────────── -->
       <section id="fan-edition" class="products-section container">
         <div class="section-heading">
-          <span class="section-tag">Season 25/26</span>
-          <h2>Fan Edition</h2>
-          <p>The latest club jerseys — home &amp; away, front &amp; back.</p>
-          <a href="#contact" class="more-available-hint">+ More clubs available — ask us →</a>
+          <span class="section-tag" data-i18n="section.fe.tag">Season 25/26</span>
+          <h2 data-i18n="section.fe.title">Fan Edition</h2>
+          <p data-i18n="section.fe.sub">The latest club jerseys — home &amp; away, front &amp; back.</p>
+          <a href="#contact" class="more-available-hint" data-i18n="section.fe.more">+ More clubs available — ask us →</a>
         </div>
         <div class="products-grid" id="products-grid"></div>
       </section>
 
       <div class="banner-divider">
-        <div class="container"><span>🌍 Representing your nation</span></div>
+        <div class="container"><span data-i18n="banner.national">🌍 Representing your nation</span></div>
       </div>
 
       <!-- ── NATIONAL TEAMS ─────────────────────────────────────────── -->
       <section id="national-teams" class="products-section container">
         <div class="section-heading">
-          <span class="section-tag">World Cup 2026</span>
-          <h2>National Teams</h2>
-          <p>Official jerseys for the biggest tournament in the world.</p>
-          <a href="#contact" class="more-available-hint">+ More nations available — ask us →</a>
+          <span class="section-tag" data-i18n="section.nt.tag">World Cup 2026</span>
+          <h2 data-i18n="section.nt.title">National Teams</h2>
+          <p data-i18n="section.nt.sub">Official jerseys for the biggest tournament in the world.</p>
+          <a href="#contact" class="more-available-hint" data-i18n="section.nt.more">+ More nations available — ask us →</a>
         </div>
         <div class="products-grid" id="national-teams-grid"></div>
       </section>
 
       <div class="banner-divider dark">
-        <div class="container"><span>🏆 Classics never go out of style</span></div>
+        <div class="container"><span data-i18n="banner.retro">🏆 Classics never go out of style</span></div>
       </div>
 
       <!-- ── RETROS: CLUBS ──────────────────────────────────────────── -->
       <section id="retros-clubs" class="products-section container">
         <div class="section-heading">
           <span class="section-tag retro-tag">Retros</span>
-          <h2>Club Classics</h2>
-          <p>Iconic jerseys from legendary seasons — front, back &amp; badge.</p>
-          <a href="#contact" class="more-available-hint">+ Many more retros available — ask us →</a>
+          <h2 data-i18n="section.rc.title">Club Classics</h2>
+          <p data-i18n="section.rc.sub">Iconic jerseys from legendary seasons — front, back &amp; badge.</p>
+          <a href="#contact" class="more-available-hint" data-i18n="section.rc.more">+ Many more retros available — ask us →</a>
         </div>
         <div class="products-grid" id="retros-clubs-grid"></div>
       </section>
@@ -338,9 +348,9 @@
       <section id="retros-nations" class="products-section container">
         <div class="section-heading">
           <span class="section-tag retro-tag">Retros</span>
-          <h2>Nation Classics</h2>
-          <p>Relive iconic World Cup &amp; tournament moments.</p>
-          <a href="#contact" class="more-available-hint">+ More classic nations available — ask us →</a>
+          <h2 data-i18n="section.rn.title">Nation Classics</h2>
+          <p data-i18n="section.rn.sub">Relive iconic World Cup &amp; tournament moments.</p>
+          <a href="#contact" class="more-available-hint" data-i18n="section.rn.more">+ More classic nations available — ask us →</a>
         </div>
         <div class="products-grid" id="retros-nations-grid"></div>
       </section>
@@ -348,54 +358,54 @@
       <!-- ── MORE JERSEYS CTA ──────────────────────────────────────────── -->
       <section class="more-jerseys-section" id="more-jerseys">
         <div class="container more-jerseys-inner">
-          <div class="mj-badge">500+ Jerseys Available</div>
-          <h2 class="mj-title">Can't find your jersey?</h2>
-          <p class="mj-sub">We stock hundreds more than what's listed here — including rare retros, full new-season club kits and all national team jerseys for World Cup 2026. Just tell us what you're looking for.</p>
+          <div class="mj-badge" data-i18n="mj.badge">500+ Jerseys Available</div>
+          <h2 class="mj-title" data-i18n="mj.title">Can't find your jersey?</h2>
+          <p class="mj-sub" data-i18n="mj.sub">We stock hundreds more than what's listed here — including rare retros, full new-season club kits and all national team jerseys for World Cup 2026. Just tell us what you're looking for.</p>
           <div class="mj-tags">
-            <span class="mj-tag">🏆 Retro Classics</span>
-            <span class="mj-tag">⚽ New Season 25/26</span>
-            <span class="mj-tag">🌍 National Teams 2026</span>
-            <span class="mj-tag">✏️ Custom Backprint</span>
+            <span class="mj-tag" data-i18n="mj.tag1">🏆 Retro Classics</span>
+            <span class="mj-tag" data-i18n="mj.tag2">⚽ New Season 25/26</span>
+            <span class="mj-tag" data-i18n="mj.tag3">🌍 National Teams 2026</span>
+            <span class="mj-tag" data-i18n="mj.tag4">✏️ Custom Backprint</span>
           </div>
-          <a href="#contact" class="mj-btn">Ask about a jersey →</a>
+          <a href="#contact" class="mj-btn" data-i18n="mj.btn">Ask about a jersey →</a>
         </div>
       </section>
 
       <!-- ── ABOUT ──────────────────────────────────────────────────── -->
       <section id="about" class="info-section">
         <div class="container">
-          <h2>About JerseyPhase</h2>
-          <p class="spoken">At JerseyPhase we combine elite quality with clean design. No memberships. No hidden fees. Just your favorite team in premium fit.</p>
+          <h2 data-i18n="about.title">About JerseyPhase</h2>
+          <p class="spoken" data-i18n="about.text">At JerseyPhase we combine elite quality with clean design. No memberships. No hidden fees. Just your favorite team in premium fit.</p>
         </div>
       </section>
 
       <section id="contact" class="info-section alt">
         <div class="container">
-          <h2>Contact</h2>
+          <h2 data-i18n="contact.title">Contact</h2>
           <p class="contact-email-line">📧 <a href="mailto:jerseyphase@gmail.com">jerseyphase@gmail.com</a></p>
 
           <div class="contact-form-wrap">
-            <h3 class="contact-form-title">Send us a message</h3>
+            <h3 class="contact-form-title" data-i18n="contact.send">Send us a message</h3>
             <form id="contact-form" class="contact-form" novalidate>
               <div class="contact-row-two">
                 <div class="contact-field">
-                  <label for="cf-name">Your Name *</label>
-                  <input type="text" id="cf-name" name="name" placeholder="e.g. Marco" required />
+                  <label for="cf-name" data-i18n="contact.name.lbl">Your Name *</label>
+                  <input type="text" id="cf-name" name="name" placeholder="e.g. Marco" data-i18n-ph="contact.name.ph" required />
                 </div>
                 <div class="contact-field">
-                  <label for="cf-email">Your Email *</label>
+                  <label for="cf-email" data-i18n="contact.email.lbl">Your Email *</label>
                   <input type="email" id="cf-email" name="email" placeholder="you@example.com" required />
                 </div>
               </div>
               <div class="contact-field">
-                <label for="cf-subject">Subject *</label>
-                <input type="text" id="cf-subject" name="subject" placeholder="e.g. Question about my order" required />
+                <label for="cf-subject" data-i18n="contact.subject.lbl">Subject *</label>
+                <input type="text" id="cf-subject" name="subject" placeholder="e.g. Question about my order" data-i18n-ph="contact.subject.ph" required />
               </div>
               <div class="contact-field">
-                <label for="cf-message">Message *</label>
-                <textarea id="cf-message" name="message" rows="5" placeholder="How can we help you?" required></textarea>
+                <label for="cf-message" data-i18n="contact.message.lbl">Message *</label>
+                <textarea id="cf-message" name="message" rows="5" placeholder="How can we help you?" data-i18n-ph="contact.message.ph" required></textarea>
               </div>
-              <button type="submit" class="contact-submit-btn">Send Message →</button>
+              <button type="submit" class="contact-submit-btn" data-i18n="contact.submit">Send Message →</button>
               <div id="contact-success" class="contact-alert contact-success" style="display:none;">
                 ✅ Message sent! We'll get back to you shortly.
               </div>
@@ -410,7 +420,7 @@
     </main>
 
     <footer class="footer">
-      <div class="container">© 2026 JerseyPhase. Built for modern football fans.</div>
+      <div class="container" data-i18n="footer">© 2026 JerseyPhase. Built for modern football fans.</div>
     </footer>
 
     <!-- ── LIGHTBOX ───────────────────────────────────────────────────── -->
@@ -437,8 +447,8 @@
     <div class="review-overlay" id="review-overlay">
       <div class="review-modal">
         <button class="review-close" id="review-close" aria-label="Close">✕</button>
-        <h3>Write a Review</h3>
-        <p class="review-modal-sub">
+        <h3 data-i18n="review.title">Write a Review</h3>
+        <p class="review-modal-sub" data-i18n="review.sub">
           Reviews are verified against your order before publishing. Please enter the email address you used when ordering — we'll check it against our order list.
         </p>
         <form id="review-form" novalidate>
@@ -488,10 +498,11 @@
     </div>
 
     <!-- ── STICKY FLOATING BUTTON ───────────────────────────────────── -->
-    <a href="#more-jerseys" class="sticky-jersey-btn" id="sticky-jersey-btn">
+    <a href="#more-jerseys" class="sticky-jersey-btn" id="sticky-jersey-btn" data-i18n="sticky.find">
       🔍 Can't find your jersey?
     </a>
 
+    <script src="lang.js"></script>
     <script src="cart.js"></script>
     <script src="script.js"></script>
     <script>

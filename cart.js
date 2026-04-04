@@ -1,5 +1,52 @@
 const CART_KEY = "jerseyhub_cart";
 
+// ── Discount state ────────────────────────────────────────────────────
+const DISCOUNT_CODES = { "SECRET10": 10 }; // code → percent
+let activeDiscountCode    = null;
+let activeDiscountPercent = 0;
+
+function applyDiscountCode(code) {
+  const upper = (code || "").trim().toUpperCase();
+  if (DISCOUNT_CODES[upper] !== undefined) {
+    activeDiscountCode    = upper;
+    activeDiscountPercent = DISCOUNT_CODES[upper];
+    return { ok: true, percent: activeDiscountPercent };
+  }
+  return { ok: false };
+}
+
+function removeDiscount() {
+  activeDiscountCode    = null;
+  activeDiscountPercent = 0;
+}
+
+function getDiscountPercent()  { return activeDiscountPercent; }
+function getActiveDiscount()   { return activeDiscountCode; }
+function getDiscountedTotal()  {
+  const raw = getCartTotal();
+  return +(raw * (1 - activeDiscountPercent / 100)).toFixed(2);
+}
+
+function updateDiscountUI() {
+  const discountRow    = document.getElementById("cart-discount-row");
+  const finalRow       = document.getElementById("cart-final-row");
+  const discountAmount = document.getElementById("cart-discount-amount");
+  const finalTotal     = document.getElementById("cart-final-total");
+  if (!discountRow) return;
+  if (activeDiscountPercent > 0) {
+    const raw      = getCartTotal();
+    const saving   = +(raw * activeDiscountPercent / 100).toFixed(2);
+    const discounted = getDiscountedTotal();
+    if (discountAmount) discountAmount.textContent = saving.toFixed(2);
+    if (finalTotal)     finalTotal.textContent     = discounted.toFixed(2);
+    discountRow.style.display = "";
+    if (finalRow) finalRow.style.display = "";
+  } else {
+    discountRow.style.display = "none";
+    if (finalRow) finalRow.style.display = "none";
+  }
+}
+
 function getCart() {
   try {
     const raw = localStorage.getItem(CART_KEY);
@@ -169,6 +216,7 @@ function renderCart() {
   });
 
   totalEl.textContent = getCartTotal().toFixed(2);
+  updateDiscountUI();
 
   container.querySelectorAll(".qty-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -194,7 +242,44 @@ function renderCart() {
 
 // Basic init on script load if checkout page is active
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", renderCart);
+  document.addEventListener("DOMContentLoaded", () => { renderCart(); initDiscountUI(); });
 } else {
   renderCart();
+  initDiscountUI();
+}
+
+function initDiscountUI() {
+  const applyBtn = document.getElementById("discount-apply-btn");
+  const input    = document.getElementById("discount-input");
+  const msg      = document.getElementById("discount-msg");
+  if (!applyBtn || !input) return;
+
+  function tryApply() {
+    const result = applyDiscountCode(input.value);
+    if (result.ok) {
+      msg.textContent  = t("cart.discount.ok", { p: result.percent });
+      msg.className    = "discount-msg discount-ok";
+      input.disabled   = true;
+      applyBtn.textContent = t("cart.discount.remove");
+      applyBtn.onclick = removeAndReset;
+    } else {
+      msg.textContent = t("cart.discount.err");
+      msg.className   = "discount-msg discount-err";
+    }
+    renderCart();
+  }
+
+  function removeAndReset() {
+    removeDiscount();
+    input.disabled       = false;
+    input.value          = "";
+    msg.textContent      = "";
+    msg.className        = "discount-msg";
+    applyBtn.textContent = t("cart.discount.apply");
+    applyBtn.onclick     = tryApply;
+    renderCart();
+  }
+
+  applyBtn.onclick = tryApply;
+  input.addEventListener("keydown", (e) => { if (e.key === "Enter") tryApply(); });
 }

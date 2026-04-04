@@ -178,6 +178,82 @@
   font-weight: 700;
 }
 
+/* ── DISCOUNT CODE ───────────────────────────────────────────────────── */
+.discount-row {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.discount-input-wrap {
+  display: flex;
+  gap: 0.5rem;
+}
+.discount-input-wrap input {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.discount-input-wrap input:focus {
+  border-color: rgba(255,255,255,0.4);
+}
+.discount-input-wrap input:disabled {
+  opacity: 0.5;
+}
+.discount-input-wrap button {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.discount-input-wrap button:hover {
+  background: rgba(255,255,255,0.18);
+}
+.discount-msg {
+  font-size: 0.82rem;
+  min-height: 1rem;
+}
+.discount-ok  { color: #4ade80; }
+.discount-err { color: #f87171; }
+
+.cart-discount-row {
+  margin-top: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #4ade80;
+  font-size: 0.95rem;
+}
+.discount-amount { color: #4ade80; font-weight: 700; }
+
+.cart-final-row {
+  margin-top: 0.6rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 1rem;
+}
+.cart-final-row strong {
+  color: #4ade80;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
 /* ── CHECKOUT FORM ───────────────────────────────────────────────────── */
 .checkout-form {
   display: flex;
