@@ -17,7 +17,6 @@ function getCart() {
       // Correct legacy cart items saved with the wrong base price of 33
       if (item.price === 33) { item.price = 35; changed = true; }
       if (item.price === 46) { item.price = 48; changed = true; } // 33+13 → 35+13
-      if (item.price === 37) { item.price = 39; changed = true; } // 33+4  → 35+4
       if (item.price === 50) { item.price = 52; changed = true; } // 33+13+4 → 35+13+4
       // Correct legacy Retro cart items saved with the wrong price of 49
       if (item.price === 49) { item.price = 37; changed = true; }
