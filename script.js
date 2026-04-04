@@ -2500,9 +2500,10 @@ function initReviewModal() {
     const reviewText   = form.querySelector("[name='review']").value.trim();
     const dateStr      = new Date().toLocaleDateString("de-CH", { month: "long", year: "numeric" });
 
-    // Submit review to local server (saved to reviews-pending.json)
+    // Submit review to local server (saved to reviews-pending.json for admin panel)
+    let savedToAdmin = false;
     try {
-      await fetch("/api/review/submit", {
+      const apiRes = await fetch("/api/review/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -2510,18 +2511,27 @@ function initReviewModal() {
           text: reviewText, photo: photoBase64, date: dateStr, email: orderEmail,
         }),
       });
-    } catch(err) {}
+      savedToAdmin = apiRes.ok;
+    } catch(err) {
+      savedToAdmin = false;
+    }
 
-    // Also notify owner via Formspree email
+    // Always notify owner via Formspree email (contains full data for manual entry if API failed)
+    const starsDisplay = "⭐".repeat(selectedRating) + "☆".repeat(5 - selectedRating);
     try {
       await fetch("https://formspree.io/f/mreokeok", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
-          _subject: "⭐ New Review – JerseyPhase",
-          orderEmail, name: reviewerName, jersey,
-          rating: selectedRating + "/5", review: reviewText,
-          hasPhoto: photoBase64 ? "Yes" : "No",
+          _subject: "⭐ New Review – JerseyPhase" + (savedToAdmin ? "" : " [ADMIN SAVE FAILED – manual entry needed]"),
+          "Customer Email": orderEmail,
+          "Reviewer Name": reviewerName,
+          "Jersey": jersey,
+          "Rating": starsDisplay + " (" + selectedRating + "/5)",
+          "Review Text": reviewText,
+          "Date": dateStr,
+          "Photo Attached": photoBase64 ? "Yes" : "No",
+          "Saved to Admin Panel": savedToAdmin ? "Yes ✅" : "No ❌ – please add manually via Admin → ✍️ Review hinzufügen",
         }),
       });
     } catch(err) {}
