@@ -2225,8 +2225,16 @@ function renderRetros() {
             <button type="button" class="size-btn" data-size="XXL">XXL</button>
           </div>
         </div>
+        <label class="addon-option addon-backprint-label">
+          <input type="checkbox" class="addon-check addon-backprint-check" data-price="4">
+          <span>${t("product.backprint")} <span class="addon-price">+4 CHF</span></span>
+        </label>
+        <div class="backprint-fields" style="display:none;">
+          <input type="text" class="backprint-name" placeholder="${t("product.name.ph")}" maxlength="20" />
+          <input type="text" class="backprint-number" placeholder="${t("product.number.ph")}" maxlength="3" />
+        </div>
       </div>
-      <button class="add-to-cart-btn" data-id="${product.id}">${t("product.addtocart")} 37</button>
+      <button class="add-to-cart-btn" data-id="${product.id}">${t("product.addtocart")} ${product.price}</button>
     `;
     grid.appendChild(card);
   });
@@ -2235,12 +2243,40 @@ function renderRetros() {
     const grid = document.getElementById(gridId);
     if (!grid) return;
 
-    // Size button toggle
+    // Size button toggle + backprint listeners + live price update
     grid.querySelectorAll(".product-card").forEach((card) => {
+      const btn = card.querySelector(".add-to-cart-btn");
+      const productId = Number(btn?.getAttribute("data-id"));
+      const product = retrosProducts.find(p => p.id === productId);
+      const basePrice = product ? product.price : 37;
+
       card.querySelectorAll(".size-btn").forEach(sBtn => {
         sBtn.addEventListener("click", () => {
           card.querySelectorAll(".size-btn").forEach(b => b.classList.remove("selected"));
           sBtn.classList.add("selected");
+        });
+      });
+
+      // Show/hide backprint fields
+      const backprintCheck  = card.querySelector(".addon-backprint-check");
+      const backprintFields = card.querySelector(".backprint-fields");
+      if (backprintCheck && backprintFields) {
+        backprintCheck.addEventListener("change", () => {
+          backprintFields.style.display = backprintCheck.checked ? "flex" : "none";
+          if (!backprintCheck.checked) {
+            backprintFields.querySelectorAll("input").forEach(i => i.value = "");
+          }
+        });
+      }
+
+      // Live price update
+      card.querySelectorAll(".addon-check").forEach((check) => {
+        check.addEventListener("change", () => {
+          let total = basePrice;
+          card.querySelectorAll(".addon-check:checked").forEach(c => {
+            total += Number(c.dataset.price);
+          });
+          if (btn) btn.textContent = `${t("product.addtocart")} ${total}`;
         });
       });
     });
@@ -2260,7 +2296,31 @@ function renderRetros() {
           }
           return;
         }
-        addToCart({ id: product.id, name: product.name, size: activeSize.dataset.size, price: product.price, quantity: 1, image: product.image || "https://via.placeholder.com/60x60?text=Jersey" });
+        let extras = [];
+        let backprintDetail = "";
+        if (card) {
+          card.querySelectorAll(".addon-check:checked").forEach(c => {
+            extras.push(c.closest(".addon-option").querySelector("span").textContent.trim());
+          });
+          const bpCheck  = card.querySelector(".addon-backprint-check");
+          const bpName   = card.querySelector(".backprint-name");
+          const bpNumber = card.querySelector(".backprint-number");
+          if (bpCheck && bpCheck.checked) {
+            const n = bpName   ? bpName.value.trim()   : "";
+            const r = bpNumber ? bpNumber.value.trim()  : "";
+            if (n || r) backprintDetail = [n, r].filter(Boolean).join(" #");
+          }
+        }
+        const total = Number(btn.textContent.match(/\d+$/)?.[0] || product.price);
+        addToCart({
+          id: product.id,
+          name: product.name + (extras.length ? " (" + extras.join(", ") + ")" : ""),
+          size: activeSize.dataset.size,
+          backprint: backprintDetail,
+          price: total,
+          quantity: 1,
+          image: product.image || "https://via.placeholder.com/60x60?text=Jersey"
+        });
         updateCartCount();
       });
     });
@@ -2758,12 +2818,40 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
       resultsGrid.appendChild(inner);
     });
 
-    // Re-attach size button toggle listeners on the cloned cards
+    // Re-attach size button toggle + backprint listeners on the cloned cards
     resultsGrid.querySelectorAll(".product-card").forEach((card) => {
       card.querySelectorAll(".size-btn").forEach(sBtn => {
         sBtn.addEventListener("click", () => {
           card.querySelectorAll(".size-btn").forEach(b => b.classList.remove("selected"));
           sBtn.classList.add("selected");
+        });
+      });
+
+      // Show/hide backprint fields
+      const backprintCheck  = card.querySelector(".addon-backprint-check");
+      const backprintFields = card.querySelector(".backprint-fields");
+      if (backprintCheck && backprintFields) {
+        backprintCheck.addEventListener("change", () => {
+          backprintFields.style.display = backprintCheck.checked ? "flex" : "none";
+          if (!backprintCheck.checked) {
+            backprintFields.querySelectorAll("input").forEach(i => i.value = "");
+          }
+        });
+      }
+
+      // Live price update for addons
+      const btn = card.querySelector(".add-to-cart-btn");
+      const productId = Number(btn?.getAttribute("data-id"));
+      const allProducts = [...products, ...nationalTeamsProducts, ...retrosProducts];
+      const product = allProducts.find(p => p.id === productId);
+      const basePrice = product ? product.price : 35;
+      card.querySelectorAll(".addon-check").forEach((check) => {
+        check.addEventListener("change", () => {
+          let total = basePrice;
+          card.querySelectorAll(".addon-check:checked").forEach(c => {
+            total += Number(c.dataset.price);
+          });
+          if (btn) btn.textContent = `${t("product.addtocart")} ${total}`;
         });
       });
     });
