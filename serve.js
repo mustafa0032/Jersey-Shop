@@ -146,6 +146,20 @@ http.createServer(async (req, res) => {
     return json(res, 200, { ok: true });
   }
 
+  // ── DISCOUNT CODE VALIDATION ────────────────────────────────────
+
+  // POST /api/discount/validate  — validates a discount code server-side
+  if (req.method === "POST" && url === "/api/discount/validate") {
+    const body = await parseBody(req);
+    // Discount codes are ONLY stored here on the server — never sent to the browser
+    const DISCOUNT_CODES = { "SECRET10": 10 };
+    const code = (body.code || "").trim().toUpperCase();
+    if (DISCOUNT_CODES[code] !== undefined) {
+      return json(res, 200, { ok: true, percent: DISCOUNT_CODES[code] });
+    }
+    return json(res, 200, { ok: false });
+  }
+
   // ── STRIPE PAYMENT API ──────────────────────────────────────────
 
   // GET /api/stripe-public-key  — frontend fetches the publishable key
