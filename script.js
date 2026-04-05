@@ -2758,6 +2758,16 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
       resultsGrid.appendChild(inner);
     });
 
+    // Re-attach size button toggle listeners on the cloned cards
+    resultsGrid.querySelectorAll(".product-card").forEach((card) => {
+      card.querySelectorAll(".size-btn").forEach(sBtn => {
+        sBtn.addEventListener("click", () => {
+          card.querySelectorAll(".size-btn").forEach(b => b.classList.remove("selected"));
+          sBtn.classList.add("selected");
+        });
+      });
+    });
+
     // Re-attach cart button listeners on the cloned cards
     resultsGrid.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -2768,7 +2778,19 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
         const card = btn.closest(".product-card");
         let extras = [];
         let backprintDetail = "";
+        let selectedSize = "";
         if (card) {
+          // Get selected size (required if size buttons exist)
+          const sizeOptions = card.querySelector(".size-options");
+          const activeSize  = card.querySelector(".size-btn.selected");
+          if (sizeOptions) {
+            selectedSize = activeSize ? activeSize.dataset.size : "";
+            if (!selectedSize) {
+              sizeOptions.classList.add("size-error");
+              setTimeout(() => sizeOptions.classList.remove("size-error"), 1500);
+              return;
+            }
+          }
           card.querySelectorAll(".addon-check:checked").forEach(c => {
             extras.push(c.closest(".addon-option").querySelector("span").textContent.trim());
           });
@@ -2782,9 +2804,11 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
           }
         }
         const total = Number(btn.textContent.match(/\d+$/)?.[0] || product.price || 35);
+        const cleanName = card?.querySelector("h3")?.textContent || product.name;
         addToCart({
           id: product.id,
-          name: product.name + (extras.length ? " (" + extras.join(", ") + ")" : ""),
+          name: cleanName + (extras.length ? " (" + extras.join(", ") + ")" : ""),
+          size: selectedSize,
           backprint: backprintDetail,
           price: total,
           quantity: 1,
