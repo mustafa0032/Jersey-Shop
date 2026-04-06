@@ -217,30 +217,36 @@ function obfuscate(src) {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Main
+//
+// Workflow:
+//   EDIT files in  src/          ← human-readable source
+//   RUN  node build.js           ← obfuscates src/ → main folder
+//   DEPLOY from main folder      ← obfuscated files served to visitors
 // ─────────────────────────────────────────────────────────────────────────────
-if (!fs.existsSync(SRC_DIR)) fs.mkdirSync(SRC_DIR);
+if (!fs.existsSync(SRC_DIR)) {
+  console.error("❌  src/ folder not found. Put your source files there first.");
+  process.exit(1);
+}
 
 let anyError = false;
 
 for (const file of TARGETS) {
-  const srcPath  = path.join(ROOT, file);
-  const backPath = path.join(SRC_DIR, file);
+  const srcPath  = path.join(SRC_DIR, file); // READ from src/
+  const outPath  = path.join(ROOT,    file); // WRITE to main folder
 
   if (!fs.existsSync(srcPath)) {
-    console.warn(`⚠️  Skipping ${file} — not found`);
+    console.warn(`⚠️  Skipping ${file} — not found in src/`);
     continue;
   }
 
   try {
     const original = fs.readFileSync(srcPath, "utf8");
-    fs.writeFileSync(backPath, original, "utf8"); // backup
-
-    const code = obfuscate(original);
-    fs.writeFileSync(srcPath, code, "utf8");
+    const code     = obfuscate(original);
+    fs.writeFileSync(outPath, code, "utf8");
 
     const origSize = Buffer.byteLength(original, "utf8");
     const newSize  = Buffer.byteLength(code,     "utf8");
-    console.log(`✅  ${file}  (${origSize} B → ${newSize} B)`);
+    console.log(`✅  src/${file}  →  ${file}  (${origSize} B → ${newSize} B)`);
   } catch (err) {
     console.error(`❌  ${file} failed:`, err.message);
     anyError = true;
@@ -248,6 +254,6 @@ for (const file of TARGETS) {
 }
 
 console.log(anyError
-  ? "\n⚠️  Some files failed. Originals are in  src/"
-  : "\n✅  Done. Originals saved to  src/  — edit there, then run  node build.js  again."
+  ? "\n⚠️  Some files failed."
+  : "\n✅  Done. Always edit files in  src/  then run  node build.js  again."
 );

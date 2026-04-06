@@ -1,13 +1,13 @@
-const CART_KEY="\u006a\u0065\u0072\u0073\u0065\u0079\u0068\u0075\u0062\u005f\u0063\u0061\u0072\u0074";
+const CART_KEY="jerseyhub_cart";
 
 let activeDiscountCode=null;
 let activeDiscountPercent=0;
 
 async function applyDiscountCode(code){
 try{
-const res=await fetch("\u002f\u0061\u0070\u0069\u002f\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002f\u0076\u0061\u006c\u0069\u0064\u0061\u0074\u0065",{
-method:"\u0050\u004f\u0053\u0054",
-headers:{"\u0043\u006f\u006e\u0074\u0065\u006e\u0074\u002d\u0054\u0079\u0070\u0065":"\u0061\u0070\u0070\u006c\u0069\u0063\u0061\u0074\u0069\u006f\u006e\u002f\u006a\u0073\u006f\u006e"},
+const res=await fetch("/api/discount/validate",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
 body:JSON.stringify({code}),
 });
 const data=await res.json();
@@ -35,10 +35,10 @@ return+(raw*(1-activeDiscountPercent/100)).toFixed(2);
 }
 
 function updateDiscountUI(){
-const discountRow=document.getElementById("\u0063\u0061\u0072\u0074\u002d\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002d\u0072\u006f\u0077");
-const finalRow=document.getElementById("\u0063\u0061\u0072\u0074\u002d\u0066\u0069\u006e\u0061\u006c\u002d\u0072\u006f\u0077");
-const discountAmount=document.getElementById("\u0063\u0061\u0072\u0074\u002d\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002d\u0061\u006d\u006f\u0075\u006e\u0074");
-const finalTotal=document.getElementById("\u0063\u0061\u0072\u0074\u002d\u0066\u0069\u006e\u0061\u006c\u002d\u0074\u006f\u0074\u0061\u006c");
+const discountRow=document.getElementById("cart-discount-row");
+const finalRow=document.getElementById("cart-final-row");
+const discountAmount=document.getElementById("cart-discount-amount");
+const finalTotal=document.getElementById("cart-final-total");
 if(!discountRow)return;
 if(activeDiscountPercent>0){
 const raw=getCartTotal();
@@ -49,8 +49,8 @@ if(finalTotal)finalTotal.textContent=discounted.toFixed(2);
 discountRow.style.display="";
 if(finalRow)finalRow.style.display="";
 }else{
-discountRow.style.display="\u006e\u006f\u006e\u0065";
-if(finalRow)finalRow.style.display="\u006e\u006f\u006e\u0065";
+discountRow.style.display="none";
+if(finalRow)finalRow.style.display="none";
 }
 }
 
@@ -98,19 +98,19 @@ a.price===b.price&&
 }
 
 function showCartToast(name){
-let toast=document.getElementById("\u0063\u0061\u0072\u0074\u002d\u0074\u006f\u0061\u0073\u0074");
+let toast=document.getElementById("cart-toast");
 if(!toast){
-toast=document.createElement("\u0064\u0069\u0076");
-toast.id="\u0063\u0061\u0072\u0074\u002d\u0074\u006f\u0061\u0073\u0074";
+toast=document.createElement("div");
+toast.id="cart-toast";
 document.body.appendChild(toast);
 }
 toast.innerHTML=`<span class="cart-toast-icon">✅</span><span class="cart-toast-text"><strong>${name}</strong>wurde zum Warenkorb hinzugefügt!</span>`;
-toast.classList.remove("\u0063\u0061\u0072\u0074\u002d\u0074\u006f\u0061\u0073\u0074\u002d\u002d\u0068\u0069\u0064\u0065");
-toast.classList.add("\u0063\u0061\u0072\u0074\u002d\u0074\u006f\u0061\u0073\u0074\u002d\u002d\u0073\u0068\u006f\u0077");
+toast.classList.remove("cart-toast--hide");
+toast.classList.add("cart-toast--show");
 clearTimeout(toast._hideTimer);
 toast._hideTimer=setTimeout(()=>{
-toast.classList.remove("\u0063\u0061\u0072\u0074\u002d\u0074\u006f\u0061\u0073\u0074\u002d\u002d\u0073\u0068\u006f\u0077");
-toast.classList.add("\u0063\u0061\u0072\u0074\u002d\u0074\u006f\u0061\u0073\u0074\u002d\u002d\u0068\u0069\u0064\u0065");
+toast.classList.remove("cart-toast--show");
+toast.classList.add("cart-toast--hide");
 },3000);
 }
 
@@ -157,16 +157,16 @@ renderCart();
 
 function updateCartCount(){
 const count=getCartCount();
-const badge=document.getElementById("\u0063\u0061\u0072\u0074\u002d\u0063\u006f\u0075\u006e\u0074");
+const badge=document.getElementById("cart-count");
 if(badge)badge.textContent=count;
-const mobileBadge=document.getElementById("\u0063\u0061\u0072\u0074\u002d\u0063\u006f\u0075\u006e\u0074\u002d\u006d\u006f\u0062\u0069\u006c\u0065");
+const mobileBadge=document.getElementById("cart-count-mobile");
 if(mobileBadge)mobileBadge.textContent=count;
 }
 
 function renderCart(){
-const container=document.getElementById("\u0063\u0061\u0072\u0074\u002d\u0069\u0074\u0065\u006d\u0073");
-const message=document.getElementById("\u0063\u0061\u0072\u0074\u002d\u0065\u006d\u0070\u0074\u0079");
-const totalEl=document.getElementById("\u0063\u0061\u0072\u0074\u002d\u0074\u006f\u0074\u0061\u006c");
+const container=document.getElementById("cart-items");
+const message=document.getElementById("cart-empty");
+const totalEl=document.getElementById("cart-total");
 const cart=getCart();
 
 if(!container||!totalEl||!message)return;
@@ -174,17 +174,17 @@ if(!container||!totalEl||!message)return;
 container.innerHTML="";
 
 if(cart.length===0){
-message.style.display="\u0062\u006c\u006f\u0063\u006b";
-totalEl.textContent="\u0030\u002e\u0030\u0030";
+message.style.display="block";
+totalEl.textContent="0.00";
 updateCartCount();
 return;
 }
 
-message.style.display="\u006e\u006f\u006e\u0065";
+message.style.display="none";
 
 cart.forEach((item)=>{
-const itemEl=document.createElement("\u0064\u0069\u0076");
-itemEl.className="\u0063\u0061\u0072\u0074\u002d\u0069\u0074\u0065\u006d";
+const itemEl=document.createElement("div");
+itemEl.className="cart-item";
 
 const sizeHtml=item.size
 ?`<span class="cart-size-badge">Size:${item.size}</span>`
@@ -217,20 +217,20 @@ container.appendChild(itemEl);
 totalEl.textContent=getCartTotal().toFixed(2);
 updateDiscountUI();
 
-container.querySelectorAll("\u002e\u0071\u0074\u0079\u002d\u0062\u0074\u006e").forEach((btn)=>{
-btn.addEventListener("\u0063\u006c\u0069\u0063\u006b",()=>{
+container.querySelectorAll(".qty-btn").forEach((btn)=>{
+btn.addEventListener("click",()=>{
 const uid=btn.dataset.uid;
 const action=btn.dataset.action;
 const item=getCart().find((i)=>i.uid===uid);
 if(!item)return;
-const nextQty=action==="\u0069\u006e\u0063\u0072\u0065\u0061\u0073\u0065"?item.quantity+1:item.quantity-1;
+const nextQty=action==="increase"?item.quantity+1:item.quantity-1;
 updateQuantity(uid,nextQty);
 updateCartCount();
 });
 });
 
-container.querySelectorAll("\u002e\u0072\u0065\u006d\u006f\u0076\u0065\u002d\u0062\u0074\u006e").forEach((btn)=>{
-btn.addEventListener("\u0063\u006c\u0069\u0063\u006b",()=>{
+container.querySelectorAll(".remove-btn").forEach((btn)=>{
+btn.addEventListener("click",()=>{
 removeFromCart(btn.dataset.uid);
 updateCartCount();
 });
@@ -239,34 +239,34 @@ updateCartCount();
 updateCartCount();
 }
 
-if(document.readyState==="\u006c\u006f\u0061\u0064\u0069\u006e\u0067"){
-document.addEventListener("\u0044\u004f\u004d\u0043\u006f\u006e\u0074\u0065\u006e\u0074\u004c\u006f\u0061\u0064\u0065\u0064",()=>{renderCart();initDiscountUI();});
+if(document.readyState==="loading"){
+document.addEventListener("DOMContentLoaded",()=>{renderCart();initDiscountUI();});
 }else{
 renderCart();
 initDiscountUI();
 }
 
 function initDiscountUI(){
-const applyBtn=document.getElementById("\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002d\u0061\u0070\u0070\u006c\u0079\u002d\u0062\u0074\u006e");
-const input=document.getElementById("\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002d\u0069\u006e\u0070\u0075\u0074");
-const msg=document.getElementById("\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002d\u006d\u0073\u0067");
+const applyBtn=document.getElementById("discount-apply-btn");
+const input=document.getElementById("discount-input");
+const msg=document.getElementById("discount-msg");
 if(!applyBtn||!input)return;
 
 async function tryApply(){
 applyBtn.disabled=true;
-applyBtn.textContent="\u2026";
+applyBtn.textContent="…";
 const result=await applyDiscountCode(input.value);
 applyBtn.disabled=false;
 if(result.ok){
-msg.textContent=t("\u0063\u0061\u0072\u0074\u002e\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002e\u006f\u006b",{p:result.percent});
-msg.className="\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002d\u006d\u0073\u0067\u0020\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002d\u006f\u006b";
+msg.textContent=t("cart.discount.ok",{p:result.percent});
+msg.className="discount-msg discount-ok";
 input.disabled=true;
-applyBtn.textContent=t("\u0063\u0061\u0072\u0074\u002e\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002e\u0072\u0065\u006d\u006f\u0076\u0065");
+applyBtn.textContent=t("cart.discount.remove");
 applyBtn.onclick=removeAndReset;
 }else{
-msg.textContent=t("\u0063\u0061\u0072\u0074\u002e\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002e\u0065\u0072\u0072");
-msg.className="\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002d\u006d\u0073\u0067\u0020\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002d\u0065\u0072\u0072";
-applyBtn.textContent=t("\u0063\u0061\u0072\u0074\u002e\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002e\u0061\u0070\u0070\u006c\u0079");
+msg.textContent=t("cart.discount.err");
+msg.className="discount-msg discount-err";
+applyBtn.textContent=t("cart.discount.apply");
 }
 renderCart();
 }
@@ -276,12 +276,12 @@ removeDiscount();
 input.disabled=false;
 input.value="";
 msg.textContent="";
-msg.className="\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002d\u006d\u0073\u0067";
-applyBtn.textContent=t("\u0063\u0061\u0072\u0074\u002e\u0064\u0069\u0073\u0063\u006f\u0075\u006e\u0074\u002e\u0061\u0070\u0070\u006c\u0079");
+msg.className="discount-msg";
+applyBtn.textContent=t("cart.discount.apply");
 applyBtn.onclick=tryApply;
 renderCart();
 }
 
 applyBtn.onclick=tryApply;
-input.addEventListener("\u006b\u0065\u0079\u0064\u006f\u0077\u006e",(e)=>{if(e.key==="\u0045\u006e\u0074\u0065\u0072")tryApply();});
+input.addEventListener("keydown",(e)=>{if(e.key==="Enter")tryApply();});
 }

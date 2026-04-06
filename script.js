@@ -2856,7 +2856,7 @@ let line=`${i+1}. ${item.name}×${item.quantity}CHF ${(item.price*item.quantity)
 if(item.size)line+=`|Size:${item.size}`;
 if(item.backprint)line+=`|Backprint:${item.backprint}`;
 return line;
-}).join("\u005c\u006e");
+}).join("\u000a");
 const order_id="\u004a\u0042\u002d"+Date.now().toString(36).toUpperCase().slice(-5);
 submitBtn.disabled=true;
 submitBtn.textContent="\u0050\u0072\u006f\u0063\u0065\u0073\u0073\u0069\u006e\u0067\u2026";
@@ -2924,7 +2924,8 @@ stripe_payment_id:paymentIntent.id,
 }),
 }).catch(()=>{});
 const discountLine=discountPercent>0
-?`\nDiscount code:${discountCode}(−${discountPercent}%)−CHF ${discountSaving.toFixed(2)}`
+?`
+Discount code:${discountCode}(−${discountPercent}%)−CHF ${discountSaving.toFixed(2)}`
 :"";
 const templateParams={
 name:fullName,
@@ -2935,12 +2936,14 @@ phone,
 address:`${address},${postalCode}${city},${countryCode}`,
 notes:notes||"\u2014",
 cart_items:cartText,
-total:`CHF ${total.toFixed(2)}${discountLine?`\nSubtotal:CHF ${subtotal.toFixed(2)}${discountLine}`:""}`,
+total:`CHF ${total.toFixed(2)}${discountLine?`
+Subtotal:CHF ${subtotal.toFixed(2)}${discountLine}`:""}`,
 reply_to:email,
 payment_info:`----------------------------
 PAYMENT CONFIRMED ✅
 ----------------------------
-CHF ${total.toFixed(2)}paid by card via Stripe.${discountPercent>0?`\n(Discount code ${discountCode}:−${discountPercent}%,saved CHF ${discountSaving.toFixed(2)})`:""}
+CHF ${total.toFixed(2)}paid by card via Stripe.${discountPercent>0?`
+(Discount code ${discountCode}:−${discountPercent}%,saved CHF ${discountSaving.toFixed(2)})`:""}
 Stripe Payment ID:${paymentIntent.id}
 Order ID:${order_id}
 ----------------------------
