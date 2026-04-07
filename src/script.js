@@ -1953,6 +1953,14 @@ function slideImage(sliderId, direction) {
 
 
 // ── GENERIC PAIRED SECTION RENDERER (Fan Edition + National Teams) ────────
+// Teams currently out of stock for shorts — shorts option hidden on their cards
+const NO_SHORTS_TEAMS = new Set([
+  "Czech Republic", "Costa Rica", "Ecuador", "Chile", "Iceland",
+  "Ghana", "Hungary", "Jamaica", "New Zealand", "Nigeria",
+  "Norway", "Peru", "Poland", "Scotland", "South Korea",
+  "Sweden", "Ukraine", "Venezuela", "Wales",
+]);
+
 function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
   const grid = document.getElementById(gridId);
   if (!grid) return;
@@ -1983,6 +1991,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
     const hasBack = pair.back !== null;
     const sliderId = `${idPrefix}-slider-${index}`;
 
+    const shortsAvailable = !NO_SHORTS_TEAMS.has(teamName);
     const addonsHtml = showAddons ? `
       <div class="product-addons">
         <div class="size-row">
@@ -1995,10 +2004,11 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
             <button type="button" class="size-btn" data-size="XXL">XXL</button>
           </div>
         </div>
+        ${shortsAvailable ? `
         <label class="addon-option">
           <input type="checkbox" class="addon-check" data-price="13">
           <span>${t("product.shorts")} <span class="addon-price">+13 CHF</span></span>
-        </label>
+        </label>` : ""}
         <label class="addon-option addon-backprint-label">
           <input type="checkbox" class="addon-check addon-backprint-check" data-price="4">
           <span>${t("product.backprint")} <span class="addon-price">+4 CHF</span></span>

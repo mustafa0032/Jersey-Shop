@@ -1943,6 +1943,12 @@ if(label){
 label.textContent=newIndex===0?"\u0046\u0072\u006f\u006e\u0074":"\u0042\u0061\u0063\u006b";
 }
 }
+const NO_SHORTS_TEAMS=new Set([
+"\u0043\u007a\u0065\u0063\u0068\u0020\u0052\u0065\u0070\u0075\u0062\u006c\u0069\u0063","\u0043\u006f\u0073\u0074\u0061\u0020\u0052\u0069\u0063\u0061","\u0045\u0063\u0075\u0061\u0064\u006f\u0072","\u0043\u0068\u0069\u006c\u0065","\u0049\u0063\u0065\u006c\u0061\u006e\u0064",
+"\u0047\u0068\u0061\u006e\u0061","\u0048\u0075\u006e\u0067\u0061\u0072\u0079","\u004a\u0061\u006d\u0061\u0069\u0063\u0061","\u004e\u0065\u0077\u0020\u005a\u0065\u0061\u006c\u0061\u006e\u0064","\u004e\u0069\u0067\u0065\u0072\u0069\u0061",
+"\u004e\u006f\u0072\u0077\u0061\u0079","\u0050\u0065\u0072\u0075","\u0050\u006f\u006c\u0061\u006e\u0064","\u0053\u0063\u006f\u0074\u006c\u0061\u006e\u0064","\u0053\u006f\u0075\u0074\u0068\u0020\u004b\u006f\u0072\u0065\u0061",
+"\u0053\u0077\u0065\u0064\u0065\u006e","\u0055\u006b\u0072\u0061\u0069\u006e\u0065","\u0056\u0065\u006e\u0065\u007a\u0075\u0065\u006c\u0061","\u0057\u0061\u006c\u0065\u0073",
+]);
 function renderPairedSection(productsArr,gridId,idPrefix,showAddons){
 const grid=document.getElementById(gridId);
 if(!grid)return;
@@ -1969,6 +1975,7 @@ card.className="\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u002d\u0063\u0061\u00
 card.dataset.team=teamName;
 const hasBack=pair.back!==null;
 const sliderId=`${idPrefix}-slider-${index}`;
+const shortsAvailable=!NO_SHORTS_TEAMS.has(teamName);
 const addonsHtml=showAddons?`
 <div class="product-addons">
 <div class="size-row">
@@ -1981,10 +1988,11 @@ const addonsHtml=showAddons?`
 <button type="button" class="size-btn" data-size="XXL">XXL</button>
 </div>
 </div>
+${shortsAvailable?`
 <label class="addon-option">
 <input type="checkbox" class="addon-check" data-price="13">
 <span>${t("product.shorts")}<span class="addon-price">+13 CHF</span></span>
-</label>
+</label>`:""}
 <label class="addon-option addon-backprint-label">
 <input type="checkbox" class="addon-check addon-backprint-check" data-price="4">
 <span>${t("product.backprint")}<span class="addon-price">+4 CHF</span></span>
@@ -2856,7 +2864,7 @@ let line=`${i+1}. ${item.name}×${item.quantity}CHF ${(item.price*item.quantity)
 if(item.size)line+=`|Size:${item.size}`;
 if(item.backprint)line+=`|Backprint:${item.backprint}`;
 return line;
-}).join("\u000a");
+}).join("\u000d\u000a");
 const order_id="\u004a\u0042\u002d"+Date.now().toString(36).toUpperCase().slice(-5);
 submitBtn.disabled=true;
 submitBtn.textContent="\u0050\u0072\u006f\u0063\u0065\u0073\u0073\u0069\u006e\u0067\u2026";
