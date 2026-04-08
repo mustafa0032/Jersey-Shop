@@ -319,31 +319,17 @@
               <textarea id="notes" name="notes" rows="3" placeholder="Any special requests..." data-i18n-ph="checkout.notes.ph"></textarea>
             </div>
 
-            <!-- ── STRIPE CARD FIELDS ──────────────────────────────── -->
-            <div class="form-row" id="stripe-card-section">
-              <label data-i18n="checkout.card.lbl">💳 Card Details *</label>
-              <div class="stripe-split-fields">
-                <div class="stripe-field-full">
-                  <label class="stripe-field-label">Card Number</label>
-                  <div id="stripe-card-number" class="stripe-card-input"></div>
-                </div>
-                <div class="stripe-field-row">
-                  <div class="stripe-field-half">
-                    <label class="stripe-field-label">Expiry Date</label>
-                    <div id="stripe-card-expiry" class="stripe-card-input"></div>
-                  </div>
-                  <div class="stripe-field-half">
-                    <label class="stripe-field-label">CVC</label>
-                    <div id="stripe-card-cvc" class="stripe-card-input"></div>
-                  </div>
-                </div>
-              </div>
-              <div id="stripe-card-errors" class="stripe-card-error" role="alert"></div>
+            <!-- ── NOWPAYMENTS ─────────────────────────────────────── -->
+            <div class="form-row" id="nowpayments-section">
+              <label>💎 Zahlungsmethode</label>
+              <p style="color:rgba(255,255,255,0.6);font-size:0.88rem;margin:4px 0 0;">
+                Du wirst nach dem Klick zu NOWPayments weitergeleitet — dort kannst du mit Krypto und anderen Methoden bezahlen.
+              </p>
             </div>
             <!-- ──────────────────────────────────────────────────────── -->
 
             <button type="submit" class="btn-submit" id="stripe-submit-btn" data-i18n="checkout.submit">
-              Pay &amp; Place Order →
+              Jetzt bezahlen →
             </button>
 
             <div id="checkout-success" class="success-alert" role="status" aria-live="polite" hidden>
@@ -361,8 +347,6 @@
       <p>© 2026 JerseyPhase. All rights reserved.</p>
     </footer>
 
-    <!-- Stripe.js must load before script.js -->
-    <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>emailjs.init("kktW89XjiOjRLC2MD");</script>
     <script src="lang.js?v=1775637990658"></script>
