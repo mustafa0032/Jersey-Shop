@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JerseyPhase — Wartung</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', 'Inter', sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* ── Hintergrund-Gitter ── */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* ── Spielfeld ── */
+    .field {
+      position: relative;
+      width: 340px;
+      height: 200px;
+      border: 3px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1a3a1a 0%, #0f2a0f 100%);
+      margin-bottom: 48px;
+      overflow: hidden;
+    }
+
+    /* Spielfeld-Linien */
+    .field::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: rgba(255,255,255,0.15);
+      transform: translateX(-50%);
+    }
+    .field::after {
+      content: "";
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 70px; height: 70px;
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Tore */
+    .goal-left, .goal-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 80px;
+      border: 2px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.04);
+    }
+    .goal-left  { left: -2px; border-left: none; border-radius: 0 6px 6px 0; }
+    .goal-right { right: -2px; border-right: none; border-radius: 6px 0 0 6px; }
+
+    /* ── Ball ── */
+    .ball {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%);
+      animation: kick 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    .ball svg {
+      width: 100%;
+      height: 100%;
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes kick {
+      0%   { left: 10px;  top: 50%; }
+      30%  { left: 150px; top: 30%; }
+      60%  { left: 300px; top: 50%; }
+      75%  { left: 315px; top: 50%; }
+      76%  { left: 305px; top: 50%; }
+      85%  { left: 150px; top: 65%; }
+      100% { left: 10px;  top: 50%; }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ── Netz-Flash bei Tor ── */
+    .goal-right {
+      animation: goal-flash 3s infinite;
+    }
+    @keyframes goal-flash {
+      0%, 70%, 100% { background: rgba(255,255,255,0.04); box-shadow: none; }
+      74%  { background: rgba(255,215,0,0.25); box-shadow: 0 0 20px rgba(255,215,0,0.5); }
+      78%  { background: rgba(255,255,255,0.04); box-shadow: none; }
+    }
+
+    /* ── Text ── */
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .logo span { color: #e11d48; }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.55);
+      max-width: 380px;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .badge {
+      margin-top: 36px;
+      padding: 8px 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.5px;
+    }
+
+    /* Ticker-Punkte */
+    .dots span {
+      animation: blink 1.4s infinite;
+      opacity: 0;
+    }
+    .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0; }
+      40%            { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">Jersey<span>Phase</span></div>
+
+  <!-- Spielfeld-Animation -->
+  <div class="field">
+    <div class="goal-left"></div>
+    <div class="goal-right"></div>
+
+    <div class="ball">
+      <!-- Fussball SVG -->
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" fill="#fff" stroke="#222" stroke-width="3"/>
+        <!-- Pentagons -->
+        <polygon points="50,10 62,30 50,38 38,30" fill="#222"/>
+        <polygon points="85,32 80,55 65,52 62,30" fill="#222"/>
+        <polygon points="75,72 58,80 50,65 65,52" fill="#222"/>
+        <polygon points="25,72 35,65 50,65 42,80" fill="#222"/>
+        <polygon points="15,32 38,30 35,52 20,55" fill="#222"/>
+        <polygon points="50,65 35,52 50,38 65,52" fill="#222"/>
+      </svg>
+    </div>
+  </div>
+
+  <h1>Kurze Auszeit ⚽</h1>
+  <p>
+    Wir arbeiten gerade an etwas Grossartigem.<br/>
+    <strong>JerseyPhase</strong> ist bald wieder für dich da!
+  </p>
+
+  <div class="badge">
+    Wir sind gleich zurück<span class="dots"><span>.</span><span>.</span><span>.</span></span>
+  </div>
+
+</body>
+</html>
