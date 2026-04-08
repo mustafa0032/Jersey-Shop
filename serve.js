@@ -59,6 +59,18 @@ http.createServer(async (req, res) => {
 
   const url = decodeURIComponent(req.url.split("?")[0]);
 
+  // ── WARTUNGSMODUS ─────────────────────────────────────────────────
+  const MAINTENANCE = false; // auf true setzen um Wartungsseite zu aktivieren
+  if (MAINTENANCE && !url.startsWith("/api/") && url !== "/maintenance.html") {
+    const mFile = path.join(ROOT, "maintenance.html");
+    fs.readFile(mFile, (err, data) => {
+      res.writeHead(503, { "Content-Type": "text/html" });
+      res.end(err ? "<h1>Wartung</h1>" : data);
+    });
+    return;
+  }
+  // ─────────────────────────────────────────────────────────────────
+
   // ── API ROUTES ────────────────────────────────────────────────────
 
   // POST /api/review/submit  — customer submits a new review
