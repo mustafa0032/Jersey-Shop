@@ -502,10 +502,22 @@
       🔍 Can't find your jersey?
     </a>
 
-    <script src="lang.js?v=1775636281280"></script>
-    <script src="cart.js?v=1775636281280"></script>
-    <script src="script.js?v=1775636281280"></script>
+    <script src="lang.js?v=1775637990658"></script>
+    <script src="cart.js?v=1775637990658"></script>
+    <script src="script.js?v=1775637990658"></script>
     <script>
+      // Force-remove shorts option for specific teams after render
+      document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+          document.querySelectorAll(".product-card[data-team='Chile']").forEach(function(card) {
+            card.querySelectorAll(".addon-option").forEach(function(label) {
+              if (label.querySelector('input[data-price="13"]')) {
+                label.remove();
+              }
+            });
+          });
+        }, 500);
+      });
       // Show sticky button after scrolling past hero
       const stickyBtn = document.getElementById("sticky-jersey-btn");
       const hero = document.querySelector(".hero-banner");

@@ -3051,8 +3051,7 @@ if (checkoutForm) {
       if (item.size)      line += `  |  Size: ${item.size}`;
       if (item.backprint) line += `  |  Backprint: ${item.backprint}`;
       return line;
-    }).join("
-");
+    }).join("\n");
 
     // Unique order ID e.g. JB-K3F2X
     const order_id = "JB-" + Date.now().toString(36).toUpperCase().slice(-5);
