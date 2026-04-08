@@ -8,6 +8,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const PORT    = 8080;
 const ROOT    = __dirname;
+const VERSION = Date.now(); // cache-busting version, changes on every server restart
 const PENDING  = path.join(ROOT, "reviews-pending.json");
 const APPROVED = path.join(ROOT, "reviews-approved.json");
 const ORDERS   = path.join(ROOT, "orders.json");
@@ -248,11 +249,21 @@ http.createServer(async (req, res) => {
     if (err) { res.writeHead(404); res.end("Not found: " + url); return; }
     const ext  = path.extname(filePath).toLowerCase();
     const mime = MIME[ext] || "application/octet-stream";
-    res.writeHead(200, { "Content-Type": mime });
+    const isJs = ext === ".js";
+    res.writeHead(200, { "Content-Type": mime, "Cache-Control": isJs ? "no-store" : "no-cache" });
     res.end(data);
   });
 
 }).listen(PORT, "127.0.0.1", () => {
+  // Stamp a fresh ?v= into HTML files so browsers never serve stale JS
+  ["index.html", "checkout.html", "admin.html"].forEach(file => {
+    const p = path.join(ROOT, file);
+    if (!fs.existsSync(p)) return;
+    const html = fs.readFileSync(p, "utf8")
+      .replace(/\?v=\d+/g, "?v=" + VERSION);
+    fs.writeFileSync(p, html, "utf8");
+  });
+
   console.log("");
   console.log("  ✅  JerseyPhase is running!");
   console.log("  👉  Shop:   http://localhost:" + PORT);

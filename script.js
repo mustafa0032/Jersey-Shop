@@ -1970,12 +1970,16 @@ usedIds.add(product.id);
 });
 pairs.forEach((pair,index)=>{
 const card=document.createElement("\u0064\u0069\u0076");
-const teamName=pair.baseName.replace(/(Home|Away|Away Black)$/,"");
+const teamName=pair.baseName.replace(/(Home|Away|Away Black)(\s.*)?$/,"");
 card.className="\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u002d\u0063\u0061\u0072\u0064";
 card.dataset.team=teamName;
 const hasBack=pair.back!==null;
 const sliderId=`${idPrefix}-slider-${index}`;
-const shortsAvailable=!NO_SHORTS_TEAMS.has(teamName);
+const shortsHtml=NO_SHORTS_TEAMS.has(teamName)?"":
+'\u003c\u006c\u0061\u0062\u0065\u006c\u0020\u0063\u006c\u0061\u0073\u0073\u003d\u0022\u0061\u0064\u0064\u006f\u006e\u002d\u006f\u0070\u0074\u0069\u006f\u006e\u0022\u003e'+
+'\u003c\u0069\u006e\u0070\u0075\u0074\u0020\u0074\u0079\u0070\u0065\u003d\u0022\u0063\u0068\u0065\u0063\u006b\u0062\u006f\u0078\u0022\u0020\u0063\u006c\u0061\u0073\u0073\u003d\u0022\u0061\u0064\u0064\u006f\u006e\u002d\u0063\u0068\u0065\u0063\u006b\u0022\u0020\u0064\u0061\u0074\u0061\u002d\u0070\u0072\u0069\u0063\u0065\u003d\u0022\u0031\u0033\u0022\u003e'+
+'\u003c\u0073\u0070\u0061\u006e\u003e'+t("\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u002e\u0073\u0068\u006f\u0072\u0074\u0073")+'\u0020\u003c\u0073\u0070\u0061\u006e\u0020\u0063\u006c\u0061\u0073\u0073\u003d\u0022\u0061\u0064\u0064\u006f\u006e\u002d\u0070\u0072\u0069\u0063\u0065\u0022\u003e\u002b\u0031\u0033\u0020\u0043\u0048\u0046\u003c\u002f\u0073\u0070\u0061\u006e\u003e\u003c\u002f\u0073\u0070\u0061\u006e\u003e'+
+'\u003c\u002f\u006c\u0061\u0062\u0065\u006c\u003e';
 const addonsHtml=showAddons?`
 <div class="product-addons">
 <div class="size-row">
@@ -1988,11 +1992,7 @@ const addonsHtml=showAddons?`
 <button type="button" class="size-btn" data-size="XXL">XXL</button>
 </div>
 </div>
-${shortsAvailable?`
-<label class="addon-option">
-<input type="checkbox" class="addon-check" data-price="13">
-<span>${t("product.shorts")}<span class="addon-price">+13 CHF</span></span>
-</label>`:""}
+${shortsHtml}
 <label class="addon-option addon-backprint-label">
 <input type="checkbox" class="addon-check addon-backprint-check" data-price="4">
 <span>${t("product.backprint")}<span class="addon-price">+4 CHF</span></span>
@@ -2118,6 +2118,15 @@ vmWrap.remove();
 }
 function renderNationalTeams(){
 renderPairedSection(nationalTeamsProducts,"\u006e\u0061\u0074\u0069\u006f\u006e\u0061\u006c\u002d\u0074\u0065\u0061\u006d\u0073\u002d\u0067\u0072\u0069\u0064","\u006e\u0074",true);
+document.querySelectorAll("\u0023\u006e\u0061\u0074\u0069\u006f\u006e\u0061\u006c\u002d\u0074\u0065\u0061\u006d\u0073\u002d\u0067\u0072\u0069\u0064\u0020\u002e\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u002d\u0063\u0061\u0072\u0064").forEach(card=>{
+if(NO_SHORTS_TEAMS.has(card.dataset.team)){
+card.querySelectorAll("\u002e\u0061\u0064\u0064\u006f\u006e\u002d\u006f\u0070\u0074\u0069\u006f\u006e").forEach(label=>{
+if(label.querySelector('\u0069\u006e\u0070\u0075\u0074\u005b\u0064\u0061\u0074\u0061\u002d\u0070\u0072\u0069\u0063\u0065\u003d\u0022\u0031\u0033\u0022\u005d')){
+label.remove();
+}
+});
+}
+});
 }
 function filterByTeam(team,gridId,sectionId){
 const grid=document.getElementById(gridId);

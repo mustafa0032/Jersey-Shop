@@ -1985,13 +1985,17 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
 
   pairs.forEach((pair, index) => {
     const card = document.createElement("div");
-    const teamName = pair.baseName.replace(/ (Home|Away|Away Black)$/, "");
+    const teamName = pair.baseName.replace(/ (Home|Away|Away Black)(\s.*)?$/, "");
     card.className = "product-card";
     card.dataset.team = teamName;
     const hasBack = pair.back !== null;
     const sliderId = `${idPrefix}-slider-${index}`;
 
-    const shortsAvailable = !NO_SHORTS_TEAMS.has(teamName);
+    const shortsHtml = NO_SHORTS_TEAMS.has(teamName) ? "" :
+      '<label class="addon-option">' +
+        '<input type="checkbox" class="addon-check" data-price="13">' +
+        '<span>' + t("product.shorts") + ' <span class="addon-price">+13 CHF</span></span>' +
+      '</label>';
     const addonsHtml = showAddons ? `
       <div class="product-addons">
         <div class="size-row">
@@ -2004,11 +2008,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
             <button type="button" class="size-btn" data-size="XXL">XXL</button>
           </div>
         </div>
-        ${shortsAvailable ? `
-        <label class="addon-option">
-          <input type="checkbox" class="addon-check" data-price="13">
-          <span>${t("product.shorts")} <span class="addon-price">+13 CHF</span></span>
-        </label>` : ""}
+        ${shortsHtml}
         <label class="addon-option addon-backprint-label">
           <input type="checkbox" class="addon-check addon-backprint-check" data-price="4">
           <span>${t("product.backprint")} <span class="addon-price">+4 CHF</span></span>
@@ -2153,6 +2153,17 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
 
 function renderNationalTeams() {
   renderPairedSection(nationalTeamsProducts, "national-teams-grid", "nt", true);
+  // After render: physically remove the shorts option from out-of-stock countries.
+  // This runs as a direct DOM cleanup so it works regardless of caching or template issues.
+  document.querySelectorAll("#national-teams-grid .product-card").forEach(card => {
+    if (NO_SHORTS_TEAMS.has(card.dataset.team)) {
+      card.querySelectorAll(".addon-option").forEach(label => {
+        if (label.querySelector('input[data-price="13"]')) {
+          label.remove();
+        }
+      });
+    }
+  });
 }
 
 // Filter products by team name
