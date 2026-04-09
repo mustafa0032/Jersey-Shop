@@ -2941,26 +2941,66 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
   });
 })();
 
-// ── Checkout form — NOWPayments + EmailJS confirmation ───────────────────────
+// ── Checkout form — Stripe Payment + EmailJS confirmation ────────────────────
 const EMAILJS_SERVICE  = "service_2nkjmgb";
 const EMAILJS_TEMPLATE = "template_mhnuwwt";
 
-// ── Show success message if returning from NOWPayments ───────────────────────
-if (window.location.search.includes("payment=success")) {
-  const successMessage = document.getElementById("checkout-success");
-  if (successMessage) {
-    successMessage.hidden = false;
-    clearCart();
-    if (typeof updateCartCount === "function") updateCartCount();
-  }
-}
-
-// ── Checkout form (runs only on checkout page) ────────────────────────────────
+// ── Stripe initialisation (runs only on checkout page) ───────────────────────
 const checkoutForm = document.getElementById("checkout-form");
 if (checkoutForm) {
   const successMessage = document.getElementById("checkout-success");
   const errorMessage   = document.getElementById("checkout-error");
   const submitBtn      = document.getElementById("stripe-submit-btn");
+
+  let stripe     = null;
+  let cardNumber = null;
+  let cardExpiry = null;
+  let cardCvc    = null;
+
+  const cardStyle = {
+    base: {
+      color:           "#ffffff",
+      fontFamily:      "'Inter', 'Poppins', sans-serif",
+      fontSize:        "15px",
+      fontSmoothing:   "antialiased",
+      "::placeholder": { color: "rgba(255,255,255,0.38)" },
+    },
+    invalid: { color: "#f87171" },
+  };
+
+  // Fetch publishable key from backend, then mount split card fields
+  (async () => {
+    try {
+      const res  = await fetch("/api/stripe-public-key");
+      const data = await res.json();
+      if (!data.publicKey) throw new Error("No Stripe public key configured.");
+
+      stripe = Stripe(data.publicKey);
+      const elements = stripe.elements();
+
+      cardNumber = elements.create("cardNumber", { style: cardStyle, showIcon: true });
+      cardNumber.mount("#stripe-card-number");
+
+      cardExpiry = elements.create("cardExpiry", { style: cardStyle });
+      cardExpiry.mount("#stripe-card-expiry");
+
+      cardCvc = elements.create("cardCvc", { style: cardStyle });
+      cardCvc.mount("#stripe-card-cvc");
+
+      const errEl = document.getElementById("stripe-card-errors");
+      [cardNumber, cardExpiry, cardCvc].forEach(el => {
+        el.on("change", (event) => {
+          errEl.textContent = event.error ? event.error.message : "";
+        });
+      });
+    } catch (err) {
+      console.error("Stripe init error:", err.message);
+      const cardSection = document.getElementById("stripe-card-section");
+      if (cardSection) {
+        cardSection.innerHTML = `<p style="color:#f87171;font-size:0.9rem;">⚠️ Payment unavailable — ${err.message}</p>`;
+      }
+    }
+  })();
 
   // ── Form submit handler ───────────────────────────────────────────────────
   checkoutForm.addEventListener("submit", async (event) => {
@@ -2968,6 +3008,12 @@ if (checkoutForm) {
 
     if (!checkoutForm.checkValidity()) {
       checkoutForm.reportValidity();
+      return;
+    }
+
+    if (!stripe || !cardNumber) {
+      errorMessage.textContent = "⚠️ Payment system not loaded yet. Please refresh and try again.";
+      errorMessage.hidden = false;
       return;
     }
 
@@ -3007,11 +3053,52 @@ if (checkoutForm) {
     const order_id = "JB-" + Date.now().toString(36).toUpperCase().slice(-5);
 
     submitBtn.disabled    = true;
-    submitBtn.textContent = "Weiterleitung…";
+    submitBtn.textContent = "Processing…";
+    successMessage.hidden = true;
     errorMessage.hidden   = true;
 
     try {
-      // ── Step 1: Save order (status: pending) ────────────────────────
+      // ── Step 1: Create PaymentIntent on backend ─────────────────────
+      const piRes  = await fetch("/api/create-payment-intent", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount:         total,
+          order_id,
+          customer_email: email,
+          customer_name:  fullName,
+        }),
+      });
+      const piData = await piRes.json();
+      if (!piRes.ok || !piData.clientSecret) {
+        throw new Error(piData.error || "Could not create payment. Please try again.");
+      }
+
+      // ── Step 2: Confirm card payment via Stripe ─────────────────────
+      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(
+        piData.clientSecret,
+        {
+          payment_method: {
+            card: cardNumber,
+            billing_details: {
+              name:  fullName,
+              email,
+              phone,
+              address: {
+                line1:       address,
+                city,
+                postal_code: postalCode,
+                country:     countryCode,
+              },
+            },
+          },
+        }
+      );
+
+      if (stripeError) throw new Error(stripeError.message);
+      if (paymentIntent.status !== "succeeded") throw new Error("Payment not completed. Please try again.");
+
+      // ── Step 3: Save order to local server ──────────────────────────
       const orderItems = cart.map(i => ({
         name:      i.name,
         size:      i.size      || "",
@@ -3020,66 +3107,57 @@ if (checkoutForm) {
         price:     i.price,
         subtotal:  +(i.price * i.quantity).toFixed(2),
       }));
-      await fetch("/api/order/submit", {
+      fetch("/api/order/submit", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           order_id,
-          status:   "pending_payment",
+          status:   "paid",
           customer: { name: fullName, email, phone, address, city, postalCode, country: countryCode },
           items:    orderItems,
           total:    +total.toFixed(2),
           notes:    notes || "",
+          stripe_payment_id: paymentIntent.id,
         }),
       }).catch(() => {});
 
-      // ── Step 2: Create NOWPayments invoice ──────────────────────────
+      // ── Step 4: Send confirmation email via EmailJS ─────────────────
       const discountLine = discountPercent > 0
-        ? ` (Discount: ${discountCode} −${discountPercent}%)`
+        ? `\nDiscount code: ${discountCode} (−${discountPercent}%)  −CHF ${discountSaving.toFixed(2)}`
         : "";
-      const nowRes  = await fetch("/api/create-nowpayment", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount:            total,
-          order_id,
-          order_description: `JerseyPhase Order ${order_id} — ${cartText.split("\n")[0]}${discountLine}`,
-        }),
-      });
-      const nowData = await nowRes.json();
-      if (!nowRes.ok || !nowData.invoiceUrl) {
-        throw new Error(nowData.error || "Could not create payment. Please try again.");
-      }
+      const templateParams = {
+        name:         fullName,
+        title:        `Order ${order_id} — CHF ${total.toFixed(2)}`,
+        order_id,
+        email,
+        phone,
+        address:      `${address}, ${postalCode} ${city}, ${countryCode}`,
+        notes:        notes || "—",
+        cart_items:   cartText,
+        total:        `CHF ${total.toFixed(2)}${discountLine ? `\nSubtotal: CHF ${subtotal.toFixed(2)}${discountLine}` : ""}`,
+        reply_to:     email,
+        payment_info: `----------------------------\nPAYMENT CONFIRMED ✅\n----------------------------\nCHF ${total.toFixed(2)} paid by card via Stripe.${discountPercent > 0 ? `\n(Discount code ${discountCode}: −${discountPercent}%, saved CHF ${discountSaving.toFixed(2)})` : ""}\nStripe Payment ID: ${paymentIntent.id}\nOrder ID: ${order_id}\n----------------------------\nYour order is confirmed. We will ship it shortly!`,
+      };
 
-      // ── Step 3: Send order notification email (before redirect) ─────
-      try {
-        const templateParams = {
-          name:         fullName,
-          title:        `Order ${order_id} — CHF ${total.toFixed(2)}`,
-          order_id,
-          email,
-          phone,
-          address:      `${address}, ${postalCode} ${city}, ${countryCode}`,
-          notes:        notes || "—",
-          cart_items:   cartText,
-          total:        `CHF ${total.toFixed(2)}`,
-          reply_to:     email,
-          payment_info: `----------------------------\nPAYMENT PENDING ⏳\n----------------------------\nOrder ID: ${order_id}\nCHF ${total.toFixed(2)} — payment via NOWPayments (Krypto & mehr)\nPayment link: ${nowData.invoiceUrl}\n----------------------------\nWir senden dir eine Bestätigung sobald die Zahlung eingegangen ist.`,
-        };
-        await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, { ...templateParams, to_email: email });
-      } catch (mailErr) {
-        console.warn("EmailJS warning:", mailErr);
-      }
+      await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, { ...templateParams, to_email: email });
 
-      // ── Step 4: Redirect to NOWPayments ────────────────────────────
-      window.location.href = nowData.invoiceUrl;
+      // ── Step 5: Success ─────────────────────────────────────────────
+      successMessage.hidden = false;
+      errorMessage.hidden   = true;
+      checkoutForm.reset();
+      cardNumber.clear();
+      cardExpiry.clear();
+      cardCvc.clear();
+      clearCart();
+      updateCartCount();
 
     } catch (err) {
       console.error("Checkout error:", err);
       errorMessage.textContent = "⚠️ " + (err.message || "An error occurred. Please try again.");
       errorMessage.hidden = false;
+    } finally {
       submitBtn.disabled    = false;
-      submitBtn.textContent = "Jetzt bezahlen →";
+      submitBtn.textContent = "Pay & Place Order →";
     }
   });
 }

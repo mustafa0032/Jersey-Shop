@@ -4,6 +4,8 @@ const http   = require("http");
 const fs     = require("fs");
 const path   = require("path");
 const https  = require("https");
+const Stripe = require("stripe");
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const PORT    = 8080;
 const ROOT    = __dirname;
@@ -60,7 +62,7 @@ http.createServer(async (req, res) => {
   const url = decodeURIComponent(req.url.split("?")[0]);
 
   // ── WARTUNGSMODUS ─────────────────────────────────────────────────
-  const MAINTENANCE = false; // auf true setzen um Wartungsseite zu aktivieren
+  const MAINTENANCE = true; // auf true setzen um Wartungsseite zu aktivieren
   if (MAINTENANCE && !url.startsWith("/api/") && url !== "/maintenance.html") {
     const mFile = path.join(ROOT, "maintenance.html");
     fs.readFile(mFile, (err, data) => {
@@ -172,80 +174,38 @@ http.createServer(async (req, res) => {
     return json(res, 200, { ok: false });
   }
 
-  // ── NOWPAYMENTS API ─────────────────────────────────────────────
+  // ── STRIPE PAYMENT API ──────────────────────────────────────────
 
-  // POST /api/create-nowpayment  — creates a NOWPayments invoice and returns the payment URL
-  if (req.method === "POST" && url === "/api/create-nowpayment") {
+  // GET /api/stripe-public-key  — frontend fetches the publishable key
+  if (req.method === "GET" && url === "/api/stripe-public-key") {
+    return json(res, 200, { publicKey: process.env.STRIPE_PUBLIC_KEY || "" });
+  }
+
+  // POST /api/create-payment-intent  — creates a Stripe PaymentIntent
+  if (req.method === "POST" && url === "/api/create-payment-intent") {
     const body = await parseBody(req);
     const amountCHF = parseFloat(body.amount) || 0;
-    if (amountCHF < 0.5) {
+    const amountRappen = Math.round(amountCHF * 100);
+
+    if (amountRappen < 50) {
       return json(res, 400, { error: "Order amount is too small (minimum CHF 0.50)." });
     }
 
-    const apiKey = process.env.NOWPAYMENTS_API_KEY || "";
-    if (!apiKey) {
-      return json(res, 500, { error: "NOWPayments API key not configured." });
-    }
-
-    const payload = JSON.stringify({
-      price_amount:      amountCHF,
-      price_currency:    "chf",
-      order_id:          body.order_id          || "",
-      order_description: body.order_description || "JerseyPhase Order",
-      ipn_callback_url:  process.env.NOWPAYMENTS_IPN_URL  || "",
-      success_url:       process.env.NOWPAYMENTS_SUCCESS_URL || "http://localhost:8080/checkout.html?payment=success",
-      cancel_url:        process.env.NOWPAYMENTS_CANCEL_URL  || "http://localhost:8080/checkout.html?payment=cancelled",
-    });
-
     try {
-      const invoiceUrl = await new Promise((resolve, reject) => {
-        const options = {
-          hostname: "api.nowpayments.io",
-          path:     "/v1/invoice",
-          method:   "POST",
-          headers:  {
-            "x-api-key":     apiKey,
-            "Content-Type":  "application/json",
-            "Content-Length": Buffer.byteLength(payload),
-          },
-        };
-        const apiReq = https.request(options, apiRes => {
-          let data = "";
-          apiRes.on("data", chunk => data += chunk);
-          apiRes.on("end", () => {
-            try {
-              const parsed = JSON.parse(data);
-              if (parsed.invoice_url) resolve(parsed.invoice_url);
-              else reject(new Error(parsed.message || "NOWPayments error"));
-            } catch(e) { reject(e); }
-          });
-        });
-        apiReq.on("error", reject);
-        apiReq.write(payload);
-        apiReq.end();
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount:   amountRappen,
+        currency: "chf",
+        metadata: {
+          order_id:       body.order_id       || "",
+          customer_email: body.customer_email || "",
+          customer_name:  body.customer_name  || "",
+        },
       });
-      return json(res, 200, { invoiceUrl });
+      return json(res, 200, { clientSecret: paymentIntent.client_secret });
     } catch (err) {
-      console.error("NOWPayments error:", err.message);
+      console.error("Stripe error:", err.message);
       return json(res, 500, { error: err.message });
     }
-  }
-
-  // POST /api/nowpayments-ipn  — handles NOWPayments payment confirmation webhook
-  if (req.method === "POST" && url === "/api/nowpayments-ipn") {
-    const body = await parseBody(req);
-    if (body.payment_status === "finished" || body.payment_status === "confirmed") {
-      const orders = readJSON(ORDERS);
-      const order = orders.find(o => o.order_id === body.order_id);
-      if (order) {
-        order.status = "paid";
-        order.nowpayments_id = body.payment_id || "";
-        writeJSON(ORDERS, orders);
-      }
-    }
-    res.writeHead(200);
-    res.end("OK");
-    return;
   }
 
   // ── ORDERS API ───────────────────────────────────────────────────
