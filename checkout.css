@@ -468,3 +468,32 @@
   margin-top: 0.4rem;
   min-height: 1.2em;
 }
+
+/* ── Newsletter opt-in ── */
+.newsletter-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  transition: background 0.2s;
+}
+.newsletter-label:hover {
+  background: rgba(255,255,255,0.08);
+}
+.newsletter-label input[type="checkbox"] {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  accent-color: #e11d48;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.newsletter-label span {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+}

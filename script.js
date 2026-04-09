@@ -3026,6 +3026,7 @@ if (checkoutForm) {
     const postalCode  = document.getElementById("postalCode").value.trim();
     const countryCode = document.getElementById("country").value;
     const notes       = document.getElementById("notes").value.trim();
+    const newsletter  = document.getElementById("newsletter-optin")?.checked || false;
 
     // ── Validate cart ───────────────────────────────────────────────────
     const cart = getCart();
@@ -3116,7 +3117,8 @@ if (checkoutForm) {
           customer: { name: fullName, email, phone, address, city, postalCode, country: countryCode },
           items:    orderItems,
           total:    +total.toFixed(2),
-          notes:    notes || "",
+          notes:      notes || "",
+          newsletter: newsletter,
           stripe_payment_id: paymentIntent.id,
         }),
       }).catch(() => {});
@@ -3136,7 +3138,7 @@ if (checkoutForm) {
         cart_items:   cartText,
         total:        `CHF ${total.toFixed(2)}${discountLine ? `\nSubtotal: CHF ${subtotal.toFixed(2)}${discountLine}` : ""}`,
         reply_to:     email,
-        payment_info: `----------------------------\nPAYMENT CONFIRMED ✅\n----------------------------\nCHF ${total.toFixed(2)} paid by card via Stripe.${discountPercent > 0 ? `\n(Discount code ${discountCode}: −${discountPercent}%, saved CHF ${discountSaving.toFixed(2)})` : ""}\nStripe Payment ID: ${paymentIntent.id}\nOrder ID: ${order_id}\n----------------------------\nYour order is confirmed. We will ship it shortly!`,
+        payment_info: `----------------------------\nPAYMENT CONFIRMED ✅\n----------------------------\nCHF ${total.toFixed(2)} paid by card via Stripe.${discountPercent > 0 ? `\n(Discount code ${discountCode}: −${discountPercent}%, saved CHF ${discountSaving.toFixed(2)})` : ""}\nStripe Payment ID: ${paymentIntent.id}\nOrder ID: ${order_id}\n----------------------------\nNewsletter: ${newsletter ? "✅ Ja" : "❌ Nein"}\n----------------------------\nYour order is confirmed. We will ship it shortly!`,
       };
 
       await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, { ...templateParams, to_email: email });
