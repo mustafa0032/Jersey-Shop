@@ -1,5 +1,14 @@
 const products = [
   {
+    "id": 9999,
+    "name": "TEST Artikel Front",
+    "league": "TEST",
+    "price": 1,
+    "description": "Testartikel für Zahlungstest — CHF 1",
+    "color": "team-colors",
+    "image": "https://via.placeholder.com/400x500?text=TEST+CHF+1"
+  },
+  {
     "id": 1,
     "name": "AC Milan Home Front",
     "league": "Serie A",
