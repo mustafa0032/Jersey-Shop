@@ -62,7 +62,7 @@ http.createServer(async (req, res) => {
   const url = decodeURIComponent(req.url.split("?")[0]);
 
   // ── WARTUNGSMODUS ─────────────────────────────────────────────────
-  const MAINTENANCE = true; // auf true setzen um Wartungsseite zu aktivieren
+  const MAINTENANCE = false; // auf true setzen um Wartungsseite zu aktivieren
   if (MAINTENANCE && !url.startsWith("/api/") && url !== "/maintenance.html") {
     const mFile = path.join(ROOT, "maintenance.html");
     fs.readFile(mFile, (err, data) => {
