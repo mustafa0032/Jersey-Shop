@@ -2041,12 +2041,12 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
       <div class="product-info">
         <h3>${pair.baseName}</h3>
         <div class="product-price">
-          <span class="price-original">CHF 79</span>
-          <span class="price-sale">CHF 35</span>
+          ${pair.front.price < 35 ? "" : '<span class="price-original">CHF 79</span>'}
+          <span class="price-sale">CHF ${pair.front.price}</span>
         </div>
       </div>
       ${addonsHtml}
-      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="35">${t("product.addtocart")} 35</button>
+      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="${pair.front.price}">${t("product.addtocart")} ${pair.front.price}</button>
     `;
     grid.appendChild(card);
   });
