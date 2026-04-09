@@ -54,6 +54,10 @@
     .admin-username { font-size: 0.82rem; color: rgba(255,255,255,0.5); font-weight: 500; }
     .logout-btn { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); border-radius: 8px; padding: 0.4rem 1rem; font-size: 0.82rem; cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.2s; }
     .logout-btn:hover { border-color: #f87171; color: #f87171; }
+    .lang-toggle { display:flex; align-items:center; gap:4px; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:0.3rem 0.7rem; cursor:pointer; font-size:0.8rem; font-weight:600; letter-spacing:0.5px; }
+    .lang-opt { color:rgba(255,255,255,0.35); transition:color 0.2s; }
+    .lang-opt.active { color:#fff; }
+    .lang-divider { color:rgba(255,255,255,0.2); }
 
     .admin-main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
 
@@ -261,6 +265,11 @@
     </div>
     <div class="admin-user-info">
       <span class="admin-username" id="display-username"></span>
+      <div class="lang-toggle" id="lang-toggle" onclick="toggleAdminLang()">
+        <span id="lang-de" class="lang-opt active">DE</span>
+        <span class="lang-divider">|</span>
+        <span id="lang-en" class="lang-opt">EN</span>
+      </div>
       <button class="logout-btn" onclick="doLogout()">Logout</button>
     </div>
   </header>
@@ -889,8 +898,158 @@ async function saveManualOrder() {
   } catch(e) {
     toast("❌ Fehler beim Speichern — läuft der Server?", true);
   }
-  btn.disabled = false; btn.textContent = "Bestellung speichern";
+  btn.disabled = false; btn.textContent = adminLang === "en" ? "Save order" : "Bestellung speichern";
 }
+
+// ── LANGUAGE TOGGLE ──────────────────────────────────────────────────────────
+let adminLang = localStorage.getItem("adminLang") || "de";
+
+const ADMIN_TRANSLATIONS = {
+  de: {
+    tabOrders:     "📦 Bestellungen",
+    tabAddOrder:   "➕ Bestellung eintragen",
+    tabPending:    "⏳ Pending",
+    tabApproved:   "✅ Bestätigt",
+    tabAddReview:  "✍️ Review hinzufügen",
+    titleOrders:   "Alle Bestellungen",
+    titleAddOrder: "Bestellung manuell eintragen",
+    titlePending:  "Pending Reviews — warte auf Bestätigung",
+    titleApproved: "Bestätigte Reviews — öffentlich sichtbar",
+    titleAddReview:"Neue Review manuell hinzufügen",
+    filterAll:     "Alle",
+    filterNew:     "🔵 Neu",
+    filterProc:    "🟡 In Bearbeitung",
+    filterShipped: "🟣 Versendet",
+    filterDeliv:   "🟢 Geliefert",
+    noticeOrders:  "<strong>Für bestehende Bestellungen:</strong> Trage hier Bestellungen ein, die du per Email erhalten hast.",
+    noticePending: "<strong>So funktioniert es:</strong> Wenn ein Kunde eine Rezension schreibt, erscheint sie hier. Prüfe ob die Bestellungs-E-Mail zu einer echten Bestellung gehört — dann klick <strong>Bestätigen ✓</strong>.",
+    custData:      "👤 Kundendaten",
+    orderItems:    "🛒 Bestellte Artikel",
+    misc:          "📝 Sonstiges",
+    lblName:       "Name *",
+    lblEmail:      "Email *",
+    lblPhone:      "Telefon",
+    lblCountry:    "Land",
+    lblAddress:    "Strasse & Hausnummer",
+    lblCity:       "PLZ & Stadt",
+    lblStatus:     "Status",
+    lblNotes:      "Notizen / Anmerkungen",
+    addItem:       "+ Artikel hinzufügen",
+    saveOrder:     "Bestellung speichern ✓",
+    statusNew:     "🔵 Neu",
+    statusProc:    "🟡 In Bearbeitung",
+    statusShipped: "🟣 Versendet",
+    statusDeliv:   "🟢 Geliefert",
+  },
+  en: {
+    tabOrders:     "📦 Orders",
+    tabAddOrder:   "➕ Add Order",
+    tabPending:    "⏳ Pending",
+    tabApproved:   "✅ Approved",
+    tabAddReview:  "✍️ Add Review",
+    titleOrders:   "All Orders",
+    titleAddOrder: "Add Order Manually",
+    titlePending:  "Pending Reviews — awaiting confirmation",
+    titleApproved: "Approved Reviews — publicly visible",
+    titleAddReview:"Add New Review Manually",
+    filterAll:     "All",
+    filterNew:     "🔵 New",
+    filterProc:    "🟡 Processing",
+    filterShipped: "🟣 Shipped",
+    filterDeliv:   "🟢 Delivered",
+    noticeOrders:  "<strong>For existing orders:</strong> Enter orders you received by email here.",
+    noticePending: "<strong>How it works:</strong> When a customer writes a review, it appears here. Check if the order email belongs to a real order — then click <strong>Approve ✓</strong>.",
+    custData:      "👤 Customer Details",
+    orderItems:    "🛒 Ordered Items",
+    misc:          "📝 Other",
+    lblName:       "Name *",
+    lblEmail:      "Email *",
+    lblPhone:      "Phone",
+    lblCountry:    "Country",
+    lblAddress:    "Street & Number",
+    lblCity:       "ZIP & City",
+    lblStatus:     "Status",
+    lblNotes:      "Notes / Remarks",
+    addItem:       "+ Add Item",
+    saveOrder:     "Save Order ✓",
+    statusNew:     "🔵 New",
+    statusProc:    "🟡 Processing",
+    statusShipped: "🟣 Shipped",
+    statusDeliv:   "🟢 Delivered",
+  }
+};
+
+function applyAdminLang() {
+  const t = ADMIN_TRANSLATIONS[adminLang];
+  // Tabs
+  const tabBtns = document.querySelectorAll(".tab-btn");
+  if (tabBtns[0]) tabBtns[0].childNodes[0].textContent = t.tabOrders + " ";
+  if (tabBtns[1]) tabBtns[1].textContent = t.tabAddOrder;
+  if (tabBtns[2]) tabBtns[2].childNodes[0].textContent = t.tabPending + " ";
+  if (tabBtns[3]) tabBtns[3].childNodes[0].textContent = t.tabApproved + " ";
+  if (tabBtns[4]) tabBtns[4].textContent = t.tabAddReview;
+
+  // Section titles
+  const titles = document.querySelectorAll(".section-title");
+  const titleMap = ["titleOrders", "titleAddOrder", "titlePending", "titleApproved", "titleAddReview"];
+  document.querySelector("#tab-orders .section-title").textContent     = t.titleOrders;
+  document.querySelector("#tab-addorder .section-title").textContent   = t.titleAddOrder;
+  document.querySelector("#tab-pending .section-title").textContent    = t.titlePending;
+  document.querySelector("#tab-approved .section-title").textContent   = t.titleApproved;
+  document.querySelector("#tab-add .section-title").textContent        = t.titleAddReview;
+
+  // Filter buttons
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  if (filterBtns[0]) filterBtns[0].textContent = t.filterAll;
+  if (filterBtns[1]) filterBtns[1].textContent = t.filterNew;
+  if (filterBtns[2]) filterBtns[2].textContent = t.filterProc;
+  if (filterBtns[3]) filterBtns[3].textContent = t.filterShipped;
+  if (filterBtns[4]) filterBtns[4].textContent = t.filterDeliv;
+
+  // Notices
+  const notices = document.querySelectorAll(".notice");
+  if (notices[0]) notices[0].innerHTML = t.noticeOrders;
+  if (notices[1]) notices[1].innerHTML = t.noticePending;
+
+  // Add order form headings
+  const formH3 = document.querySelectorAll(".add-order-form h3");
+  if (formH3[0]) formH3[0].textContent = t.custData;
+  if (formH3[1]) formH3[1].textContent = t.orderItems;
+  if (formH3[2]) formH3[2].textContent = t.misc;
+
+  // Form labels in add-order
+  const labels = document.querySelectorAll(".add-order-form .form-field label");
+  const labelKeys = ["lblName","lblEmail","lblPhone","lblCountry","lblAddress","lblCity","lblStatus","lblNotes"];
+  labels.forEach((l, i) => { if (labelKeys[i]) l.textContent = t[labelKeys[i]]; });
+
+  // Add item / save buttons
+  const addItemBtn = document.querySelector(".add-item-btn");
+  if (addItemBtn) addItemBtn.textContent = t.addItem;
+  const saveBtn = document.querySelector(".save-btn");
+  if (saveBtn) saveBtn.textContent = t.saveOrder;
+
+  // Status select options
+  const statusSelect = document.getElementById("ao-status");
+  if (statusSelect) {
+    statusSelect.options[0].textContent = t.statusNew;
+    statusSelect.options[1].textContent = t.statusProc;
+    statusSelect.options[2].textContent = t.statusShipped;
+    statusSelect.options[3].textContent = t.statusDeliv;
+  }
+
+  // Toggle indicator
+  document.getElementById("lang-de").classList.toggle("active", adminLang === "de");
+  document.getElementById("lang-en").classList.toggle("active", adminLang === "en");
+}
+
+function toggleAdminLang() {
+  adminLang = adminLang === "de" ? "en" : "de";
+  localStorage.setItem("adminLang", adminLang);
+  applyAdminLang();
+}
+
+// Apply on load
+document.addEventListener("DOMContentLoaded", applyAdminLang);
 </script>
 </body>
 </html>
