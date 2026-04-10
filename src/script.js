@@ -3060,11 +3060,17 @@ if (checkoutForm) {
 
     try {
       // ── Step 1: Create PaymentIntent on backend ─────────────────────
+      // Send items so server calculates price (never trust client total)
+      const cartItemsForPI = cart.map(i => ({
+        price:    i.price,
+        quantity: i.quantity,
+      }));
       const piRes  = await fetch("/api/create-payment-intent", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount:         total,
+          items:          cartItemsForPI,
+          discount_code:  discountCode || "",
           order_id,
           customer_email: email,
           customer_name:  fullName,
@@ -3074,6 +3080,8 @@ if (checkoutForm) {
       if (!piRes.ok || !piData.clientSecret) {
         throw new Error(piData.error || "Could not create payment. Please try again.");
       }
+      // Use server-verified total for display (overrides client calculation)
+      const verifiedTotal = piData.verifiedTotal || total;
 
       // ── Step 2: Confirm card payment via Stripe ─────────────────────
       const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(
@@ -3108,7 +3116,7 @@ if (checkoutForm) {
         price:     i.price,
         subtotal:  +(i.price * i.quantity).toFixed(2),
       }));
-      fetch("/api/order/submit", {
+      const orderRes = await fetch("/api/order/submit", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -3116,12 +3124,19 @@ if (checkoutForm) {
           status:   "paid",
           customer: { name: fullName, email, phone, address, city, postalCode, country: countryCode },
           items:    orderItems,
-          total:    +total.toFixed(2),
+          total:    +(verifiedTotal || total).toFixed(2),
           notes:      notes || "",
           newsletter: newsletter,
           stripe_payment_id: paymentIntent.id,
         }),
-      }).catch(() => {});
+      });
+      if (!orderRes.ok) {
+        const orderErr = await orderRes.json().catch(() => ({}));
+        console.error("Order save failed:", orderErr.error);
+        // Payment succeeded but order log failed — show special message
+        errorMessage.textContent = `Payment received (${order_id}), but order logging failed. Please contact us at jerseyphase@gmail.com with your order ID.`;
+        errorMessage.hidden = false;
+      }
 
       // ── Step 4: Send confirmation email via EmailJS ─────────────────
       const discountLine = discountPercent > 0

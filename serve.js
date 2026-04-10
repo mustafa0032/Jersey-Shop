@@ -10,6 +10,34 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const PORT    = 8080;
 const ROOT    = __dirname;
 const VERSION = Date.now(); // cache-busting version, changes on every server restart
+
+// ── Server-side price rules (single source of truth) ──────────────
+// Base jersey: 35 CHF | +Shorts: +13 | +Backprint: +4
+const BASE_JERSEY_PRICE = 35;
+const ADDON_SHORTS      = 13;
+const ADDON_BACKPRINT   = 4;
+// All valid per-item prices: 35, 39, 48, 52
+const VALID_ITEM_PRICES = new Set([
+  BASE_JERSEY_PRICE,
+  BASE_JERSEY_PRICE + ADDON_BACKPRINT,
+  BASE_JERSEY_PRICE + ADDON_SHORTS,
+  BASE_JERSEY_PRICE + ADDON_SHORTS + ADDON_BACKPRINT,
+]);
+
+// ── Discount codes (server-only, never sent to browser) ───────────
+const DISCOUNT_CODES = { "SECRET10": 10 };
+
+// ── Rate limiter for discount validation ─────────────────────────
+// Max 5 attempts per IP per minute
+const discountRateMap = new Map();
+function checkRateLimit(ip) {
+  const now  = Date.now();
+  const entry = discountRateMap.get(ip) || { count: 0, resetAt: now + 60_000 };
+  if (now > entry.resetAt) { entry.count = 0; entry.resetAt = now + 60_000; }
+  entry.count++;
+  discountRateMap.set(ip, entry);
+  return entry.count <= 5;
+}
 const PENDING  = path.join(ROOT, "reviews-pending.json");
 const APPROVED = path.join(ROOT, "reviews-approved.json");
 const ORDERS   = path.join(ROOT, "orders.json");
@@ -164,9 +192,11 @@ http.createServer(async (req, res) => {
 
   // POST /api/discount/validate  — validates a discount code server-side
   if (req.method === "POST" && url === "/api/discount/validate") {
+    const ip = req.socket.remoteAddress || "unknown";
+    if (!checkRateLimit(ip)) {
+      return json(res, 429, { ok: false, error: "Too many attempts. Please wait a minute." });
+    }
     const body = await parseBody(req);
-    // Discount codes are ONLY stored here on the server — never sent to the browser
-    const DISCOUNT_CODES = { "SECRET10": 10 };
     const code = (body.code || "").trim().toUpperCase();
     if (DISCOUNT_CODES[code] !== undefined) {
       return json(res, 200, { ok: true, percent: DISCOUNT_CODES[code] });
@@ -183,9 +213,31 @@ http.createServer(async (req, res) => {
 
   // POST /api/create-payment-intent  — creates a Stripe PaymentIntent
   if (req.method === "POST" && url === "/api/create-payment-intent") {
-    const body = await parseBody(req);
-    const amountCHF = parseFloat(body.amount) || 0;
-    const amountRappen = Math.round(amountCHF * 100);
+    const body  = await parseBody(req);
+    const items = Array.isArray(body.items) ? body.items : [];
+
+    if (items.length === 0) {
+      return json(res, 400, { error: "Cart is empty." });
+    }
+
+    // ── Server-side price calculation (never trust client amount) ──
+    for (const item of items) {
+      const itemPrice = parseFloat(item.price);
+      if (!VALID_ITEM_PRICES.has(itemPrice)) {
+        return json(res, 400, { error: `Invalid item price: CHF ${itemPrice}` });
+      }
+      if (!Number.isInteger(item.quantity) || item.quantity < 1 || item.quantity > 20) {
+        return json(res, 400, { error: "Invalid item quantity." });
+      }
+    }
+
+    let subtotalCHF = items.reduce((sum, i) => sum + parseFloat(i.price) * i.quantity, 0);
+
+    // Apply discount code server-side if provided
+    const discountCode    = (body.discount_code || "").trim().toUpperCase();
+    const discountPercent = DISCOUNT_CODES[discountCode] || 0;
+    const totalCHF        = +(subtotalCHF * (1 - discountPercent / 100)).toFixed(2);
+    const amountRappen    = Math.round(totalCHF * 100);
 
     if (amountRappen < 50) {
       return json(res, 400, { error: "Order amount is too small (minimum CHF 0.50)." });
@@ -201,7 +253,7 @@ http.createServer(async (req, res) => {
           customer_name:  body.customer_name  || "",
         },
       });
-      return json(res, 200, { clientSecret: paymentIntent.client_secret });
+      return json(res, 200, { clientSecret: paymentIntent.client_secret, verifiedTotal: totalCHF });
     } catch (err) {
       console.error("Stripe error:", err.message);
       return json(res, 500, { error: err.message });
@@ -216,20 +268,28 @@ http.createServer(async (req, res) => {
     if (!body.customer || !body.items) {
       return json(res, 400, { error: "Missing fields" });
     }
-    const orders = readJSON(ORDERS);
-    const order = {
-      id:       Date.now(),
-      order_id: body.order_id || "",
-      date:     new Date().toLocaleString("de-CH"),
-      status:   body.status || "new",
-      customer: body.customer,
-      items:    body.items,
-      total:    body.total || 0,
-      notes:    body.notes || "",
-    };
-    orders.unshift(order);
-    writeJSON(ORDERS, orders);
-    return json(res, 200, { ok: true });
+    try {
+      const orders = readJSON(ORDERS);
+      const order = {
+        id:                Date.now(),
+        order_id:          body.order_id || "",
+        date:              new Date().toLocaleString("de-CH"),
+        status:            body.status || "new",
+        customer:          body.customer,
+        items:             body.items,
+        total:             body.total || 0,
+        notes:             body.notes || "",
+        newsletter:        body.newsletter || false,
+        stripe_payment_id: body.stripe_payment_id || "",
+      };
+      orders.unshift(order);
+      writeJSON(ORDERS, orders);
+      console.log(`[Order saved] ${order.order_id} — CHF ${order.total}`);
+      return json(res, 200, { ok: true });
+    } catch (err) {
+      console.error("[Order save FAILED]", err.message);
+      return json(res, 500, { error: "Order could not be saved. Please contact support with your payment ID." });
+    }
   }
 
   // GET /api/orders  — admin/supplier fetches all orders
