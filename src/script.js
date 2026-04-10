@@ -1547,6 +1547,16 @@ const nationalTeamsProducts = [
 
 const retrosProducts = [
   {
+    "id": 9999,
+    "name": "🧪 TEST – 1 CHF",
+    "category": "retro-clubs",
+    "price": 1,
+    "description": "Testartikel – bitte nicht bestellen",
+    "image": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Front.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
     "id": 2000,
     "name": "AC Milan Home 2006-2007 Front",
     "category": "retro-clubs",

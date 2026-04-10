@@ -29,6 +29,7 @@ const ADDON_BACKPRINT   = 4;
 const SHIPPING_CHF      = 2.90; // fixed shipping — always added server-side
 // All valid per-item prices: 35, 39, 48, 52
 const VALID_ITEM_PRICES = new Set([
+  1,                                               // TEST product
   BASE_JERSEY_PRICE,
   BASE_JERSEY_PRICE + ADDON_BACKPRINT,
   BASE_JERSEY_PRICE + ADDON_SHORTS,
