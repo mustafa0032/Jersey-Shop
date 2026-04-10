@@ -461,6 +461,79 @@ http.createServer(async (req, res) => {
     }
   }
 
+  // POST /api/contact  — contact form sends message to owner
+  if (req.method === "POST" && url === "/api/contact") {
+    const body = await parseBody(req);
+    const { name, email, subject, message } = body;
+    if (!name || !email || !subject || !message) {
+      return json(res, 400, { error: "Missing fields" });
+    }
+
+    const ip = req.socket.remoteAddress || "unknown";
+    if (!checkRateLimit(ip, "contact", 3, 10 * 60_000)) {
+      return json(res, 429, { error: "Too many requests." });
+    }
+
+    try {
+      await mailer.sendMail({
+        from:    `"JerseyPhase Contact" <${process.env.GMAIL_USER}>`,
+        to:      process.env.GMAIL_USER,
+        replyTo: email,
+        subject: `📬 Kontakt: ${subject}`,
+        text: [
+          `Neue Kontaktnachricht über JerseyPhase:`,
+          ``,
+          `Name:    ${name}`,
+          `E-Mail:  ${email}`,
+          `Betreff: ${subject}`,
+          ``,
+          `Nachricht:`,
+          message,
+        ].join("\n"),
+      });
+      return json(res, 200, { ok: true });
+    } catch (err) {
+      console.error("[Contact email error]", err.message);
+      return json(res, 500, { error: "Message could not be sent." });
+    }
+  }
+
+  // POST /api/notify-review  — notifies owner when a new review is submitted
+  if (req.method === "POST" && url === "/api/notify-review") {
+    const body = await parseBody(req);
+    const { reviewerName, jersey, rating, reviewText, orderEmail, dateStr, hasPhoto, savedToAdmin } = body;
+
+    const ip = req.socket.remoteAddress || "unknown";
+    if (!checkRateLimit(ip, "review-notify", 5, 10 * 60_000)) {
+      return json(res, 429, { error: "Too many requests." });
+    }
+
+    const starsDisplay = "⭐".repeat(Math.min(5, rating || 0)) + "☆".repeat(5 - Math.min(5, rating || 0));
+    try {
+      await mailer.sendMail({
+        from:    `"JerseyPhase Reviews" <${process.env.GMAIL_USER}>`,
+        to:      process.env.GMAIL_USER,
+        subject: `⭐ Neue Bewertung – JerseyPhase${savedToAdmin ? "" : " [ADMIN SAVE FEHLGESCHLAGEN]"}`,
+        text: [
+          `Neue Bewertung eingegangen:`,
+          ``,
+          `Kunde:      ${orderEmail || "—"}`,
+          `Name:       ${reviewerName}`,
+          `Trikot:     ${jersey}`,
+          `Bewertung:  ${starsDisplay} (${rating}/5)`,
+          `Text:       ${reviewText}`,
+          `Datum:      ${dateStr}`,
+          `Foto:       ${hasPhoto ? "Ja" : "Nein"}`,
+          `Im Admin gespeichert: ${savedToAdmin ? "Ja ✅" : "Nein ❌ – bitte manuell eintragen via Admin → ✍️ Review hinzufügen"}`,
+        ].join("\n"),
+      });
+      return json(res, 200, { ok: true });
+    } catch (err) {
+      console.error("[Review notify error]", err.message);
+      return json(res, 500, { error: "Notification could not be sent." });
+    }
+  }
+
   // GET /api/orders  — admin/supplier fetches all orders
   if (req.method === "GET" && url === "/api/orders") {
     const session = requireAuth(res, req, "any");

@@ -2604,22 +2604,20 @@ function initReviewModal() {
       savedToAdmin = false;
     }
 
-    // Always notify owner via Formspree email (contains full data for manual entry if API failed)
-    const starsDisplay = "⭐".repeat(selectedRating) + "☆".repeat(5 - selectedRating);
+    // Notify owner via server-side email
     try {
-      await fetch("https://formspree.io/f/mreokeok", {
+      await fetch("/api/notify-review", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          _subject: "⭐ New Review – JerseyPhase" + (savedToAdmin ? "" : " [ADMIN SAVE FAILED – manual entry needed]"),
-          "Customer Email": orderEmail,
-          "Reviewer Name": reviewerName,
-          "Jersey": jersey,
-          "Rating": starsDisplay + " (" + selectedRating + "/5)",
-          "Review Text": reviewText,
-          "Date": dateStr,
-          "Photo Attached": photoBase64 ? "Yes" : "No",
-          "Saved to Admin Panel": savedToAdmin ? "Yes ✅" : "No ❌ – please add manually via Admin → ✍️ Review hinzufügen",
+          reviewerName,
+          jersey,
+          rating:       selectedRating,
+          reviewText,
+          orderEmail,
+          dateStr,
+          hasPhoto:     !!photoBase64,
+          savedToAdmin,
         }),
       });
     } catch(err) {}
@@ -2659,10 +2657,10 @@ function initContactForm() {
     errorEl.style.display   = "none";
 
     try {
-      const res = await fetch("https://formspree.io/f/mreokeok", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ _subject: "📬 New Contact Message – JerseyPhase", name, email, subject, message }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, subject, message }),
       });
       if (res.ok) {
         successEl.style.display = "block";
