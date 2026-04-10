@@ -3115,6 +3115,7 @@ if (checkoutForm) {
         quantity:  i.quantity,
         price:     i.price,
         subtotal:  +(i.price * i.quantity).toFixed(2),
+        image:     i.image     || "",
       }));
       const orderRes = await fetch("/api/order/submit", {
         method:  "POST",

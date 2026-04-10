@@ -179,10 +179,13 @@
     .order-section-label { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
     .order-customer-info p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.7; }
     .order-customer-info strong { color: rgba(255,255,255,0.95); }
-    .order-item-row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.83rem; color: rgba(255,255,255,0.65); padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .order-item-row { display: flex; align-items: center; gap: 0.75rem; font-size: 0.83rem; color: rgba(255,255,255,0.65); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .order-item-row:last-child { border-bottom: none; }
-    .order-item-name { flex: 1; }
-    .order-item-qty  { color: rgba(255,255,255,0.35); }
+    .order-item-img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; background: rgba(255,255,255,0.05); }
+    .order-item-img-placeholder { width: 56px; height: 56px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+    .order-item-info { flex: 1; min-width: 0; }
+    .order-item-name { display: block; }
+    .order-item-qty  { color: rgba(255,255,255,0.35); white-space: nowrap; }
     .order-item-price { font-weight: 600; color: rgba(255,255,255,0.75); white-space: nowrap; }
     .order-total-row { margin-top: 0.75rem; display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; color: #fff; }
     .order-notes { font-size: 0.82rem; color: rgba(255,255,255,0.4); font-style: italic; margin-top: 0.5rem; }
@@ -569,7 +572,10 @@ function displayOrders() {
     const items = (o.items || []);
     const itemsHtml = items.map(i => `
       <div class="order-item-row">
-        <span class="order-item-name">${escHtml(i.name)}${i.size ? ` <span style="color:rgba(255,255,255,0.3)">· ${escHtml(i.size)}</span>` : ""}${i.backprint ? ` <span style="color:rgba(255,255,255,0.25);font-size:0.78rem">✏️ ${escHtml(i.backprint)}</span>` : ""}</span>
+        ${i.image ? `<img src="${escHtml(i.image)}" class="order-item-img" alt="${escHtml(i.name)}" onerror="this.style.display='none'" />` : `<div class="order-item-img-placeholder">👕</div>`}
+        <div class="order-item-info">
+          <span class="order-item-name">${escHtml(i.name)}${i.size ? ` <span style="color:rgba(255,255,255,0.3)">· ${escHtml(i.size)}</span>` : ""}${i.backprint ? ` <span style="color:rgba(255,255,255,0.25);font-size:0.78rem">✏️ ${escHtml(i.backprint)}</span>` : ""}</span>
+        </div>
         <span class="order-item-qty">×${i.quantity}</span>
         <span class="order-item-price">CHF ${(+(i.subtotal || i.price * i.quantity)).toFixed(2)}</span>
       </div>`).join("");
