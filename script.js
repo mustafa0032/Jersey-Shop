@@ -2037,7 +2037,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
         </div>
       </div>
       ${addonsHtml}
-      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="${pair.front.price}">${t("product.addtocart")} ${pair.front.price}</button>
+      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="${pair.front.price}" data-image-front="${pair.front.image||""}" data-image-back="${pair.back?.image||""}">${t("product.addtocart")} ${pair.front.price}</button>
     `;
     grid.appendChild(card);
   });
@@ -2115,6 +2115,9 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
       const total = Number(btn.textContent.match(/\d+$/)?.[0] || 35);
       // Use card's h3 (baseName) — already stripped of Front/Back
       const cleanName = card.querySelector("h3")?.textContent || product.name;
+      // For paired sections: front image from data attr, back image from paired product's data attr
+      const imgFront = btn.dataset.imageFront || product.image     || "";
+      const imgBack  = btn.dataset.imageBack  || product.imageBack || "";
       addToCart({
         id: product.id,
         name: cleanName + (extras.length ? " (" + extras.join(", ") + ")" : ""),
@@ -2122,8 +2125,8 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
         backprint: backprintDetail,
         price: total,
         quantity: 1,
-        image:      product.image     || "",
-        imageBack:  product.imageBack || "",
+        image:      imgFront,
+        imageBack:  imgBack,
         imageLogo:  product.imageLogo || "",
       });
       updateCartCount();

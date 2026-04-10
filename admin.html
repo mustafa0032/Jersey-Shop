@@ -574,20 +574,41 @@ function resolveItemImages(item) {
   // Returns array of { src, label } for all available images
   const imgs = [];
 
-  // If item has images saved directly (new orders)
+  // New orders: images saved directly on the item
   if (item.image)     imgs.push({ src: item.image,     label: "Front" });
   if (item.imageBack) imgs.push({ src: item.imageBack, label: "Back" });
   if (item.imageLogo) imgs.push({ src: item.imageLogo, label: "Logo" });
-
   if (imgs.length > 0) return imgs;
 
-  // Fallback: look up by name for old orders
-  const nameLower = (item.name || "").toLowerCase();
+  // Old orders: look up by name in productImageMap
+  const nameLower = (item.name || "").toLowerCase().replace(/\s*\(.*\)$/, "").trim();
+
+  // Try exact match
   let match = productImageMap[nameLower];
+
+  // Try "name Front" / "name Back" keys (Fan Edition products stored separately)
   if (!match) {
-    const key = Object.keys(productImageMap).find(k => k.startsWith(nameLower) || nameLower.startsWith(k));
+    const frontKey = Object.keys(productImageMap).find(k => k === nameLower + " front");
+    const backKey  = Object.keys(productImageMap).find(k => k === nameLower + " back");
+    if (frontKey) {
+      const f = productImageMap[frontKey];
+      const b = backKey ? productImageMap[backKey] : null;
+      if (f?.image)     imgs.push({ src: f.image,     label: "Front" });
+      if (b?.image)     imgs.push({ src: b.image,     label: "Back" });
+      return imgs;
+    }
+  }
+
+  // Partial match fallback
+  if (!match) {
+    const key = Object.keys(productImageMap).find(k =>
+      k.replace(/ (front|back)$/i, "") === nameLower ||
+      k.startsWith(nameLower) ||
+      nameLower.startsWith(k.replace(/ (front|back)$/i, ""))
+    );
     match = key ? productImageMap[key] : null;
   }
+
   if (match) {
     if (match.image)     imgs.push({ src: match.image,     label: "Front" });
     if (match.imageBack) imgs.push({ src: match.imageBack, label: "Back" });
