@@ -485,6 +485,9 @@ a { color: inherit; text-decoration: none; }
 
 /* ── FOOTER ──────────────────────────────────────────────────────── */
 .footer { background: #0a0a0f; color: rgba(255,255,255,0.4); text-align: center; padding: 2rem; font-size: 0.9rem; }
+.footer-inner { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.footer-ig-link { color: rgba(255,255,255,0.4); transition: color 0.2s; display: flex; align-items: center; }
+.footer-ig-link:hover { color: #e1306c; }
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────── */
 
