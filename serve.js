@@ -409,6 +409,42 @@ http.createServer(async (req, res) => {
       orders.unshift(order);
       writeJSON(ORDERS, orders);
       console.log(`[Order saved] ${order.order_id} — CHF ${order.total}`);
+
+      // Notify owner
+      const c = order.customer || {};
+      const itemLines = (order.items || []).map(i =>
+        `  • ${i.name}${i.size ? ` (${i.size})` : ""}${i.backprint ? ` [Backprint: ${i.backprint}]` : ""} × ${i.quantity} — CHF ${i.subtotal}`
+      ).join("\n");
+      mailer.sendMail({
+        from:    `"JerseyPhase Shop" <${process.env.GMAIL_USER}>`,
+        to:      process.env.GMAIL_USER,
+        subject: `🛒 Neue Bestellung ${order.order_id} — CHF ${order.total}`,
+        text: [
+          `🛒 NEUE BESTELLUNG EINGEGANGEN`,
+          ``,
+          `Bestellnummer: ${order.order_id}`,
+          `Datum:         ${order.date}`,
+          `Total:         CHF ${order.total}`,
+          `Stripe ID:     ${order.stripe_payment_id || "—"}`,
+          ``,
+          `══════════════════════════════`,
+          `KUNDE`,
+          `══════════════════════════════`,
+          `Name:     ${c.name || "—"}`,
+          `E-Mail:   ${c.email || "—"}`,
+          `Telefon:  ${c.phone || "—"}`,
+          `Adresse:  ${c.address || "—"}, ${c.postalCode || ""} ${c.city || ""}, ${c.country || ""}`,
+          ``,
+          `══════════════════════════════`,
+          `ARTIKEL`,
+          `══════════════════════════════`,
+          itemLines || "—",
+          ``,
+          order.notes ? `Anmerkungen: ${order.notes}` : "",
+          `Newsletter: ${order.newsletter ? "✅ Ja" : "❌ Nein"}`,
+        ].filter(l => l !== undefined).join("\n"),
+      }).catch(err => console.error("[Owner notify error]", err.message));
+
       return json(res, 200, { ok: true });
     } catch (err) {
       console.error("[Order save FAILED]", err.message);
