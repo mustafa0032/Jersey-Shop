@@ -552,11 +552,33 @@ function escHtml(str) {
 // ── ORDERS ────────────────────────────────────────────────────────────
 let allOrders = [];
 let currentFilter = "all";
+let productImageMap = {}; // name (lowercase) → image path
+
+async function loadProductImages() {
+  try {
+    const list = await api("/api/product-images");
+    list.forEach(p => {
+      if (p.image) productImageMap[p.name.toLowerCase()] = p.image;
+    });
+  } catch(e) { /* non-critical */ }
+}
+
+function resolveItemImage(item) {
+  if (item.image) return item.image;
+  // Fallback: match by item name (old orders without image field)
+  const nameLower = (item.name || "").toLowerCase();
+  // Try exact match first
+  if (productImageMap[nameLower]) return productImageMap[nameLower];
+  // Try partial match (e.g. "Ajax Away" matches "Ajax Away Front")
+  const key = Object.keys(productImageMap).find(k => k.startsWith(nameLower) || nameLower.startsWith(k));
+  return key ? productImageMap[key] : "";
+}
 
 async function renderOrders() {
   const list = document.getElementById("orders-list");
   list.innerHTML = `<div class="pending-empty"><span>⏳</span>Lädt...</div>`;
   try {
+    await loadProductImages();
     allOrders = await api("/api/orders");
   } catch(e) {
     list.innerHTML = `<div class="pending-empty"><span>❌</span>Server nicht erreichbar — bitte stelle sicher dass <strong>START TUNNEL.bat</strong> läuft und lade die Seite neu.</div>`;
@@ -580,7 +602,7 @@ function displayOrders() {
     const items = (o.items || []);
     const itemsHtml = items.map(i => `
       <div class="order-item-row">
-        ${i.image ? `<img src="${escHtml(i.image)}" class="order-item-img" alt="${escHtml(i.name)}" onerror="this.style.display='none'" onclick="openImgLightbox('${escHtml(i.image)}','${escHtml(i.name)}')" title="Klicken zum Vergrössern" />` : `<div class="order-item-img-placeholder">👕</div>`}
+        ${(()=>{ const imgSrc = resolveItemImage(i); return imgSrc ? `<img src="${escHtml(imgSrc)}" class="order-item-img" alt="${escHtml(i.name)}" onerror="this.style.display='none'" onclick="openImgLightbox(this.src,'${escHtml(i.name).replace(/'/g,"\\'")}');" title="Klicken zum Vergrössern" />` : `<div class="order-item-img-placeholder">👕</div>`; })()}
         <div class="order-item-info">
           <span class="order-item-name">${escHtml(i.name)}${i.size ? ` <span style="color:rgba(255,255,255,0.3)">· ${escHtml(i.size)}</span>` : ""}${i.backprint ? ` <span style="color:rgba(255,255,255,0.25);font-size:0.78rem">✏️ ${escHtml(i.backprint)}</span>` : ""}</span>
         </div>

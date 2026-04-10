@@ -206,6 +206,11 @@ http.createServer(async (req, res) => {
 
   // ── STRIPE PAYMENT API ──────────────────────────────────────────
 
+  // GET /api/product-images  — admin fetches product id/name/image lookup
+  if (req.method === "GET" && url === "/api/product-images") {
+    return json(res, 200, readJSON(path.join(ROOT, "product-images.json")));
+  }
+
   // GET /api/stripe-public-key  — frontend fetches the publishable key
   if (req.method === "GET" && url === "/api/stripe-public-key") {
     return json(res, 200, { publicKey: process.env.STRIPE_PUBLIC_KEY || "" });
@@ -317,6 +322,13 @@ http.createServer(async (req, res) => {
   }
 
   // ── STATIC FILES ──────────────────────────────────────────────────
+  // Block direct access to sensitive data files
+  const BLOCKED_FILES = ["orders.json","reviews-pending.json","reviews-approved.json","product-images.json",".env","serve.js"];
+  const requestedFile = url.split("/").pop().split("?")[0];
+  if (BLOCKED_FILES.includes(requestedFile)) {
+    res.writeHead(403); res.end("Forbidden"); return;
+  }
+
   let filePath = path.join(ROOT, url === "/" ? "/index.html" : url);
   fs.readFile(filePath, (err, data) => {
     if (err) { res.writeHead(404); res.end("Not found: " + url); return; }

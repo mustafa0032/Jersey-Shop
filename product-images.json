@@ -1,0 +1,467 @@
+[
+  {
+    "id": 1,
+    "name": "AC Milan Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "AC Milan Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Back.jpeg"
+  },
+  {
+    "id": 3,
+    "name": "Ajax Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Ajax/Ajax 25-26 away front.jpeg"
+  },
+  {
+    "id": 4,
+    "name": "Ajax Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Ajax/Ajax 25-26 away back.jpeg"
+  },
+  {
+    "id": 5,
+    "name": "Arsenal Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Front.jpeg"
+  },
+  {
+    "id": 6,
+    "name": "Arsenal Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Back.jpeg"
+  },
+  {
+    "id": 7,
+    "name": "Arsenal Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Front.jpeg"
+  },
+  {
+    "id": 8,
+    "name": "Arsenal Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Back.jpeg"
+  },
+  {
+    "id": 9,
+    "name": "Barcelona Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 Front.jpeg"
+  },
+  {
+    "id": 10,
+    "name": "Barcelona Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 back.jpeg"
+  },
+  {
+    "id": 11,
+    "name": "Barcelona Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 12,
+    "name": "Barcelona Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 back.jpeg"
+  },
+  {
+    "id": 13,
+    "name": "Bayern München Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Front.jpeg"
+  },
+  {
+    "id": 14,
+    "name": "Bayern München Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Back.jpeg"
+  },
+  {
+    "id": 15,
+    "name": "Bayern München Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 16,
+    "name": "Bayern München Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Back.jpeg"
+  },
+  {
+    "id": 17,
+    "name": "Benfica Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica away 25-26 Front.jpeg"
+  },
+  {
+    "id": 18,
+    "name": "Benfica Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica away 25-26 Back.jpeg"
+  },
+  {
+    "id": 19,
+    "name": "Benfica Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 20,
+    "name": "Benfica Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica home 25-26 Back.jpeg"
+  },
+  {
+    "id": 21,
+    "name": "Betis Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Betis/Betis home 25-26 Front.jpeg"
+  },
+  {
+    "id": 22,
+    "name": "Betis Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Betis/Betis home 25-26 back.jpeg"
+  },
+  {
+    "id": 23,
+    "name": "Bilbao Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Front.jpeg"
+  },
+  {
+    "id": 24,
+    "name": "Bilbao Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Back.jpeg"
+  },
+  {
+    "id": 25,
+    "name": "Celtic Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Celtic/Celtic home 25-26 Front.jpeg"
+  },
+  {
+    "id": 26,
+    "name": "Celtic Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Celtic/Celtic Home 25-26 Back.jpeg"
+  },
+  {
+    "id": 27,
+    "name": "Chelsea Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 front.jpeg"
+  },
+  {
+    "id": 28,
+    "name": "Chelsea Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 back.jpeg"
+  },
+  {
+    "id": 29,
+    "name": "Chelsea Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 30,
+    "name": "Chelsea Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea 25-26 back.jpeg"
+  },
+  {
+    "id": 31,
+    "name": "Flamengo Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Front.jpeg"
+  },
+  {
+    "id": 32,
+    "name": "Flamengo Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Back.jpeg"
+  },
+  {
+    "id": 33,
+    "name": "Inter Miami Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Front.jpeg"
+  },
+  {
+    "id": 34,
+    "name": "Inter Miami Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Back.jpeg"
+  },
+  {
+    "id": 35,
+    "name": "Inter Miami Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 36,
+    "name": "Inter Miami Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Back.jpeg"
+  },
+  {
+    "id": 37,
+    "name": "Inter Milan Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Front.jpeg"
+  },
+  {
+    "id": 38,
+    "name": "Inter Milan Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Back.jpeg"
+  },
+  {
+    "id": 39,
+    "name": "Juventus Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus away 25-26 Front.jpeg"
+  },
+  {
+    "id": 40,
+    "name": "Juventus Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus away 25-26 Back.jpeg"
+  },
+  {
+    "id": 41,
+    "name": "Juventus Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus 25-26 home Front.jpeg"
+  },
+  {
+    "id": 42,
+    "name": "Juventus Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus 25-26 home back.jpeg"
+  },
+  {
+    "id": 43,
+    "name": "Liverpool Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away front.jpeg"
+  },
+  {
+    "id": 44,
+    "name": "Liverpool Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away back.jpeg"
+  },
+  {
+    "id": 45,
+    "name": "Liverpool Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Front.jpeg"
+  },
+  {
+    "id": 46,
+    "name": "Liverpool Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Back.jpeg"
+  },
+  {
+    "id": 47,
+    "name": "Manchester City Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Front.jpeg"
+  },
+  {
+    "id": 48,
+    "name": "Manchester City Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Back.jpeg"
+  },
+  {
+    "id": 49,
+    "name": "Manchester City Away Black Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black.jpeg"
+  },
+  {
+    "id": 50,
+    "name": "Manchester City Away Black Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black back.jpeg"
+  },
+  {
+    "id": 51,
+    "name": "Manchester City Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 52,
+    "name": "Manchester City Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Back.jpeg"
+  },
+  {
+    "id": 53,
+    "name": "Manchester United Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Front.jpeg"
+  },
+  {
+    "id": 54,
+    "name": "Manchester United Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Back.jpeg"
+  },
+  {
+    "id": 55,
+    "name": "Manchester United Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 56,
+    "name": "Manchester United Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Back.jpeg"
+  },
+  {
+    "id": 57,
+    "name": "Marseille Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille away 25-26 Front.jpeg"
+  },
+  {
+    "id": 58,
+    "name": "Marseille Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille away 25-26 back.jpeg"
+  },
+  {
+    "id": 59,
+    "name": "Marseille Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille home 25-26 front.jpeg"
+  },
+  {
+    "id": 60,
+    "name": "Marseille Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille home 25-26 back.jpeg"
+  },
+  {
+    "id": 61,
+    "name": "Mineiro Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 62,
+    "name": "Mineiro Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Back.jpeg"
+  },
+  {
+    "id": 63,
+    "name": "Minens Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Minens/Minens 25-26 front.jpeg"
+  },
+  {
+    "id": 64,
+    "name": "Minens Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Minens/Minens 25-26 back.jpeg"
+  },
+  {
+    "id": 65,
+    "name": "Napoli Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 away front.jpeg"
+  },
+  {
+    "id": 66,
+    "name": "Napoli Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 away back.jpeg"
+  },
+  {
+    "id": 67,
+    "name": "Napoli Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 home front.jpeg"
+  },
+  {
+    "id": 68,
+    "name": "Napoli Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 home back.jpeg"
+  },
+  {
+    "id": 69,
+    "name": "New Castle Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/New Castle/New Castle home 25-26 Front.jpeg"
+  },
+  {
+    "id": 70,
+    "name": "New Castle Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/New Castle/New Castle home 25-26 back.jpeg"
+  },
+  {
+    "id": 71,
+    "name": "Palmeiras Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Front.jpeg"
+  },
+  {
+    "id": 72,
+    "name": "Palmeiras Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Back.jpeg"
+  },
+  {
+    "id": 73,
+    "name": "Palmeiras Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 74,
+    "name": "Palmeiras Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Back.jpeg"
+  },
+  {
+    "id": 75,
+    "name": "Paris Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Paris/Paris Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 76,
+    "name": "Paris Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Paris/Paris Home 25-26 Back.jpeg"
+  },
+  {
+    "id": 77,
+    "name": "Porto Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto away 25-26 Front.jpeg"
+  },
+  {
+    "id": 78,
+    "name": "Porto Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto away 25-26 back.jpeg"
+  },
+  {
+    "id": 79,
+    "name": "Porto Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto home 25-26 Front.jpeg"
+  },
+  {
+    "id": 80,
+    "name": "Porto Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto Home 25-26 back.jpeg"
+  },
+  {
+    "id": 81,
+    "name": "Real Madrid Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Front.jpeg"
+  },
+  {
+    "id": 82,
+    "name": "Real Madrid Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Back.jpeg"
+  },
+  {
+    "id": 83,
+    "name": "Real Madrid Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Front.jpeg"
+  },
+  {
+    "id": 84,
+    "name": "Real Madrid Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Back.jpeg"
+  },
+  {
+    "id": 85,
+    "name": "Rome Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Rome/Rome home 25-26 Front.jpeg"
+  },
+  {
+    "id": 86,
+    "name": "Rome Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Rome/Rome home 25-26 Back.jpeg"
+  },
+  {
+    "id": 87,
+    "name": "Santos Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Santos/Santos back.jpeg"
+  },
+  {
+    "id": 88,
+    "name": "Sao Paulo Away Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Front.jpeg"
+  },
+  {
+    "id": 89,
+    "name": "Sao Paulo Away Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Back.jpeg"
+  },
+  {
+    "id": 90,
+    "name": "Sporting Lissabon Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Front.jpeg"
+  },
+  {
+    "id": 91,
+    "name": "Sporting Lissabon Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Back.jpeg"
+  },
+  {
+    "id": 92,
+    "name": "Totenham Home Front",
+    "image": "Jerseys/Jerseys/Fan Edition/Totenham/Totenham home 25-26 Front.jpeg"
+  },
+  {
+    "id": 93,
+    "name": "Totenham Home Back",
+    "image": "Jerseys/Jerseys/Fan Edition/Totenham/Totenham home 25-26 back.jpeg"
+  }
+]
