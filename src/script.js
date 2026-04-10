@@ -2950,9 +2950,7 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
   });
 })();
 
-// ── Checkout form — Stripe Payment + EmailJS confirmation ────────────────────
-const EMAILJS_SERVICE  = "service_2nkjmgb";
-const EMAILJS_TEMPLATE = "template_mhnuwwt";
+// ── Checkout form — Stripe Payment + server-side email confirmation ──────────
 
 // ── Stripe initialisation (runs only on checkout page) ───────────────────────
 const checkoutForm = document.getElementById("checkout-form");
@@ -3150,25 +3148,35 @@ if (checkoutForm) {
         errorMessage.hidden = false;
       }
 
-      // ── Step 4: Send confirmation email via EmailJS ─────────────────
+      // ── Step 4: Send confirmation email via server ──────────────────
       const discountLine = discountPercent > 0
         ? `\nDiscount code: ${discountCode} (−${discountPercent}%)  −CHF ${discountSaving.toFixed(2)}`
         : "";
-      const templateParams = {
-        name:         fullName,
-        title:        `Order ${order_id} — CHF ${total.toFixed(2)}`,
-        order_id,
-        email,
-        phone,
-        address:      `${address}, ${postalCode} ${city}, ${countryCode}`,
-        notes:        notes || "—",
-        cart_items:   cartText,
-        total:        `CHF ${total.toFixed(2)}${discountLine ? `\nSubtotal: CHF ${subtotal.toFixed(2)}${discountLine}` : ""}`,
-        reply_to:     email,
-        payment_info: `----------------------------\nPAYMENT CONFIRMED ✅\n----------------------------\nCHF ${total.toFixed(2)} paid by card via Stripe.${discountPercent > 0 ? `\n(Discount code ${discountCode}: −${discountPercent}%, saved CHF ${discountSaving.toFixed(2)})` : ""}\nStripe Payment ID: ${paymentIntent.id}\nOrder ID: ${order_id}\n----------------------------\nNewsletter: ${newsletter ? "✅ Ja" : "❌ Nein"}\n----------------------------\nYour order is confirmed. We will ship it shortly!`,
-      };
-
-      await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, { ...templateParams, to_email: email });
+      await fetch("/api/send-confirmation", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name:     fullName,
+          email,
+          order_id,
+          cart_items: cartText,
+          notes:    notes || "—",
+          total:    `CHF ${(verifiedTotal || total).toFixed(2)}`,
+          payment_info: [
+            "----------------------------",
+            "ZAHLUNG BESTÄTIGT ✅",
+            "----------------------------",
+            `CHF ${(verifiedTotal || total).toFixed(2)} mit Karte bezahlt (Stripe).`,
+            discountPercent > 0 ? `Rabattcode ${discountCode}: −${discountPercent}%, gespart CHF ${discountSaving.toFixed(2)}` : "",
+            `Stripe Payment ID: ${paymentIntent.id}`,
+            `Bestellnummer: ${order_id}`,
+            "----------------------------",
+            `Newsletter: ${newsletter ? "✅ Ja" : "❌ Nein"}`,
+            "----------------------------",
+            "Deine Bestellung ist bestätigt. Wir versenden bald!",
+          ].filter(Boolean).join("\n"),
+        }),
+      }).catch(() => {}); // non-blocking — email failure doesn't affect order
 
       // ── Step 5: Success ─────────────────────────────────────────────
       successMessage.hidden = false;

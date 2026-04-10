@@ -1,11 +1,21 @@
 // JerseyPhase — Local server with Review API
 require("dotenv").config();
-const http   = require("http");
-const fs     = require("fs");
-const path   = require("path");
-const https  = require("https");
-const Stripe = require("stripe");
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const http       = require("http");
+const fs         = require("fs");
+const path       = require("path");
+const https      = require("https");
+const Stripe     = require("stripe");
+const nodemailer = require("nodemailer");
+const stripe     = Stripe(process.env.STRIPE_SECRET_KEY);
+
+// ── Nodemailer transporter (uses Gmail credentials from .env) ──────
+const mailer = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
 
 const PORT    = 8080;
 const ROOT    = __dirname;
@@ -58,6 +68,18 @@ function getSession(req) {
   if (!session) return null;
   if (Date.now() > session.expires) { sessions.delete(token); return null; }
   return session;
+}
+
+// ── Photo URL validation — only allow https:// images ─────────────
+function sanitizePhotoUrl(url) {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return null;
+    return parsed.href;
+  } catch {
+    return null; // invalid URL
+  }
 }
 
 function requireAuth(res, req, requiredRole) {
@@ -197,7 +219,7 @@ http.createServer(async (req, res) => {
       jersey:  body.jersey  || "",
       rating:  Number(body.rating) || 5,
       text:    body.text,
-      photo:   body.photo   || null,
+      photo:   sanitizePhotoUrl(body.photo),
       date:    body.date    || new Date().toLocaleDateString("de-CH", { month: "long", year: "numeric" }),
       email:   body.email   || "",
       verified: false,
@@ -384,10 +406,73 @@ http.createServer(async (req, res) => {
     }
   }
 
+  // POST /api/send-confirmation  — sends order confirmation email via nodemailer
+  if (req.method === "POST" && url === "/api/send-confirmation") {
+    const body = await parseBody(req);
+    const { name, email, order_id, cart_items, total, notes, payment_info } = body;
+    if (!email || !order_id) return json(res, 400, { error: "Missing fields" });
+
+    // Simple rate limit: max 3 emails per IP per 10 minutes
+    const ip = req.socket.remoteAddress || "unknown";
+    if (!checkRateLimit(ip, "email", 3, 10 * 60_000)) {
+      return json(res, 429, { error: "Too many requests." });
+    }
+
+    try {
+      await mailer.sendMail({
+        from:    `"JerseyPhase" <${process.env.GMAIL_USER}>`,
+        to:      email,
+        subject: `✅ Bestellung bestätigt — ${order_id}`,
+        text: [
+          `Hallo ${name},`,
+          ``,
+          `Vielen Dank für deine Bestellung bei JerseyPhase! 🎽⚽`,
+          ``,
+          `═══════════════════════════`,
+          `BESTELLÜBERSICHT`,
+          `═══════════════════════════`,
+          `Bestellnummer: ${order_id}`,
+          ``,
+          `Artikel:`,
+          cart_items || "—",
+          ``,
+          `${payment_info || ""}`,
+          notes && notes !== "—" ? `\nAnmerkungen: ${notes}` : "",
+          ``,
+          `Bei Fragen erreichst du uns unter jerseyphase@gmail.com`,
+          ``,
+          `Vielen Dank und viel Spass mit deinem Trikot! 🏆`,
+          `Dein JerseyPhase Team`,
+        ].join("\n"),
+      });
+      return json(res, 200, { ok: true });
+    } catch (err) {
+      console.error("[Email error]", err.message);
+      return json(res, 500, { error: "Email could not be sent." });
+    }
+  }
+
   // GET /api/orders  — admin/supplier fetches all orders
   if (req.method === "GET" && url === "/api/orders") {
-    if (!requireAuth(res, req, "any")) return;
-    return json(res, 200, readJSON(ORDERS));
+    const session = requireAuth(res, req, "any");
+    if (!session) return;
+    const orders = readJSON(ORDERS);
+    // Supplier sees orders but NOT customer email/phone
+    if (session.role !== "admin") {
+      const filtered = orders.map(o => ({
+        ...o,
+        customer: o.customer ? {
+          name:       o.customer.name,
+          address:    o.customer.address,
+          city:       o.customer.city,
+          postalCode: o.customer.postalCode,
+          country:    o.customer.country,
+          // email and phone intentionally omitted
+        } : {},
+      }));
+      return json(res, 200, filtered);
+    }
+    return json(res, 200, orders);
   }
 
   // POST /api/order/update-status  — admin updates order status

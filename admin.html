@@ -578,6 +578,15 @@ function escHtml(str) {
   return String(str ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
+// Only allow http/https photo URLs — blocks javascript: and data: attacks
+function safePhotoUrl(url) {
+  if (!url) return null;
+  try {
+    const p = new URL(url);
+    return (p.protocol === "https:" || p.protocol === "http:") ? escHtml(url) : null;
+  } catch { return null; }
+}
+
 // ── ORDERS ────────────────────────────────────────────────────────────
 let allOrders = [];
 let currentFilter = "all";
@@ -713,8 +722,10 @@ function displayOrders() {
         <div class="order-customer-info">
           <div class="order-section-label">Kunde</div>
           <p><strong>${escHtml(c.name || "—")}</strong></p>
-          <p>📧 ${escHtml(c.email || "—")}</p>
-          <p>📞 ${escHtml(c.phone || "—")}</p>
+          ${currentUser.role === "admin" ? `
+            <p>📧 ${escHtml(c.email || "—")}</p>
+            <p>📞 ${escHtml(c.phone || "—")}</p>
+          ` : ""}
           <p>📍 ${escHtml(c.address || "")}, ${escHtml(c.postalCode || "")} ${escHtml(c.city || "")}, ${escHtml(c.country || "")}</p>
           ${o.notes ? `<p class="order-notes">💬 ${escHtml(o.notes)}</p>` : ""}
         </div>
@@ -775,7 +786,7 @@ async function renderPending() {
     <div class="review-item" id="pending-item-${r.id}">
       <div>
         <div class="ri-stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
-        ${r.photo ? `<img class="ri-photo" src="${r.photo}" />` : ""}
+        ${safePhotoUrl(r.photo) ? `<img class="ri-photo" src="${safePhotoUrl(r.photo)}" />` : ""}
         <p class="ri-text">"${escHtml(r.text)}"</p>
         <p class="ri-meta">
           <strong>${escHtml(r.name)}</strong> · ${escHtml(r.jersey)} · ${escHtml(r.date || "")}
@@ -806,7 +817,7 @@ async function renderApproved() {
   list.innerHTML = `<div class="approved-grid">${approved.map(r => `
     <div class="appr-card" id="approved-item-${r.id}">
       ${isAdmin ? `<button class="appr-del" onclick="deleteApproved(${r.id})">✕</button>` : ""}
-      ${r.photo ? `<img class="appr-photo" src="${r.photo}" />` : ""}
+      ${safePhotoUrl(r.photo) ? `<img class="appr-photo" src="${safePhotoUrl(r.photo)}" />` : ""}
       <div class="appr-stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
       <p class="appr-text">"${escHtml(r.text)}"</p>
       <div class="appr-name">${escHtml(r.name)}</div>
