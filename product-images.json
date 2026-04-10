@@ -2,466 +2,1534 @@
   {
     "id": 1,
     "name": "AC Milan Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 2,
     "name": "AC Milan Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 3,
     "name": "Ajax Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Ajax/Ajax 25-26 away front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Ajax/Ajax 25-26 away front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 4,
     "name": "Ajax Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Ajax/Ajax 25-26 away back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Ajax/Ajax 25-26 away back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 5,
     "name": "Arsenal Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 6,
     "name": "Arsenal Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 7,
     "name": "Arsenal Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 8,
     "name": "Arsenal Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 9,
     "name": "Barcelona Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 10,
     "name": "Barcelona Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 11,
     "name": "Barcelona Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 12,
     "name": "Barcelona Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 13,
     "name": "Bayern München Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 14,
     "name": "Bayern München Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 15,
     "name": "Bayern München Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 16,
     "name": "Bayern München Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 17,
     "name": "Benfica Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 18,
     "name": "Benfica Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica away 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 19,
     "name": "Benfica Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 20,
     "name": "Benfica Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 21,
     "name": "Betis Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Betis/Betis home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Betis/Betis home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 22,
     "name": "Betis Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Betis/Betis home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Betis/Betis home 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 23,
     "name": "Bilbao Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 24,
     "name": "Bilbao Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 25,
     "name": "Celtic Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Celtic/Celtic home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Celtic/Celtic home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 26,
     "name": "Celtic Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Celtic/Celtic Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Celtic/Celtic Home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 27,
     "name": "Chelsea Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 28,
     "name": "Chelsea Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 29,
     "name": "Chelsea Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 30,
     "name": "Chelsea Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 31,
     "name": "Flamengo Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 32,
     "name": "Flamengo Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 33,
     "name": "Inter Miami Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 34,
     "name": "Inter Miami Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 35,
     "name": "Inter Miami Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 36,
     "name": "Inter Miami Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 37,
     "name": "Inter Milan Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 38,
     "name": "Inter Milan Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 39,
     "name": "Juventus Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 40,
     "name": "Juventus Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus away 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 41,
     "name": "Juventus Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus 25-26 home Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus 25-26 home Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 42,
     "name": "Juventus Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus 25-26 home back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus 25-26 home back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 43,
     "name": "Liverpool Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 44,
     "name": "Liverpool Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 45,
     "name": "Liverpool Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 46,
     "name": "Liverpool Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 47,
     "name": "Manchester City Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 48,
     "name": "Manchester City Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 49,
     "name": "Manchester City Away Black Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 50,
     "name": "Manchester City Away Black Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 51,
     "name": "Manchester City Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 52,
     "name": "Manchester City Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 53,
     "name": "Manchester United Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 54,
     "name": "Manchester United Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 55,
     "name": "Manchester United Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 56,
     "name": "Manchester United Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 57,
     "name": "Marseille Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 58,
     "name": "Marseille Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille away 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille away 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 59,
     "name": "Marseille Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille home 25-26 front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille home 25-26 front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 60,
     "name": "Marseille Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille home 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 61,
     "name": "Mineiro Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 62,
     "name": "Mineiro Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 63,
     "name": "Minens Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Minens/Minens 25-26 front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Minens/Minens 25-26 front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 64,
     "name": "Minens Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Minens/Minens 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Minens/Minens 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 65,
     "name": "Napoli Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 away front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 away front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 66,
     "name": "Napoli Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 away back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 away back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 67,
     "name": "Napoli Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 home front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 home front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 68,
     "name": "Napoli Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 home back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 home back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 69,
     "name": "New Castle Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/New Castle/New Castle home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/New Castle/New Castle home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 70,
     "name": "New Castle Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/New Castle/New Castle home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/New Castle/New Castle home 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 71,
     "name": "Palmeiras Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 72,
     "name": "Palmeiras Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 73,
     "name": "Palmeiras Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 74,
     "name": "Palmeiras Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 75,
     "name": "Paris Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Paris/Paris Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Paris/Paris Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 76,
     "name": "Paris Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Paris/Paris Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Paris/Paris Home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 77,
     "name": "Porto Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 78,
     "name": "Porto Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto away 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto away 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 79,
     "name": "Porto Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 80,
     "name": "Porto Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto Home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto Home 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 81,
     "name": "Real Madrid Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 82,
     "name": "Real Madrid Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 83,
     "name": "Real Madrid Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 84,
     "name": "Real Madrid Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 85,
     "name": "Rome Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Rome/Rome home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Rome/Rome home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 86,
     "name": "Rome Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Rome/Rome home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Rome/Rome home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 87,
     "name": "Santos Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Santos/Santos back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Santos/Santos back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 88,
     "name": "Sao Paulo Away Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 89,
     "name": "Sao Paulo Away Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 90,
     "name": "Sporting Lissabon Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 91,
     "name": "Sporting Lissabon Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 92,
     "name": "Totenham Home Front",
-    "image": "Jerseys/Jerseys/Fan Edition/Totenham/Totenham home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Totenham/Totenham home 25-26 Front.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
   },
   {
     "id": 93,
     "name": "Totenham Home Back",
-    "image": "Jerseys/Jerseys/Fan Edition/Totenham/Totenham home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Totenham/Totenham home 25-26 back.jpeg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1000,
+    "name": "Algeria Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Algeria f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1001,
+    "name": "Algeria Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Algeria b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1002,
+    "name": "Argentina Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Argentina f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1003,
+    "name": "Argentina Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Argentina b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1004,
+    "name": "Austria Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Austria f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1005,
+    "name": "Austria Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Austria b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1006,
+    "name": "Belgium Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Belgium f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1007,
+    "name": "Belgium Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Belgium b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1008,
+    "name": "Brazil Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Brazil f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1009,
+    "name": "Brazil Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Brazil b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1010,
+    "name": "Canada Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Canada f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1011,
+    "name": "Canada Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Canada b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1012,
+    "name": "Chile Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Chile f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1013,
+    "name": "Chile Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Chile b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1014,
+    "name": "Colombia Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Colombia f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1015,
+    "name": "Colombia Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Colombia b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1016,
+    "name": "Costa Rica Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Costa rica f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1017,
+    "name": "Costa Rica Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Costa rica b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1018,
+    "name": "Croatia Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Croatia f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1019,
+    "name": "Croatia Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Croatia b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1020,
+    "name": "Czech Republic Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Czech republic f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1021,
+    "name": "Czech Republic Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Czesh republic b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1022,
+    "name": "Ecuador Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ecuador f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1023,
+    "name": "Ecuador Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ecuador b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1024,
+    "name": "England Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/England f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1025,
+    "name": "England Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Englanx b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1026,
+    "name": "France Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/France f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1027,
+    "name": "France Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Frances b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1028,
+    "name": "Germany Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Germany f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1029,
+    "name": "Germany Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Germany b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1030,
+    "name": "Ghana Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ghana f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1031,
+    "name": "Ghana Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ghana b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1032,
+    "name": "Hungary Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Hungary f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1033,
+    "name": "Hungary Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Hungary b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1034,
+    "name": "Iceland Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Iceland f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1035,
+    "name": "Iceland Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Icelanx b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1036,
+    "name": "Italy Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Italia f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1037,
+    "name": "Italy Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Italia b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1038,
+    "name": "Ivory Coast Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ivory Coast f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1039,
+    "name": "Ivory Coast Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ivory Coast b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1040,
+    "name": "Jamaica Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Jamaica f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1041,
+    "name": "Jamaica Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Jamaica b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1042,
+    "name": "Japan Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Japan f.png",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1043,
+    "name": "Japan Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Japan b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1044,
+    "name": "Mexico Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Mexico f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1045,
+    "name": "Mexico Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Mexico b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1046,
+    "name": "Morocco Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Morocco f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1047,
+    "name": "Morocco Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Morocco b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1048,
+    "name": "Netherlands Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Netherland f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1049,
+    "name": "Netherlands Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Netherlanx b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1050,
+    "name": "New Zealand Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/New Zealand f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1051,
+    "name": "New Zealand Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/New Zealand b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1052,
+    "name": "Nigeria Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Nigeria f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1053,
+    "name": "Nigeria Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Nigeria b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1054,
+    "name": "Norway Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Norway f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1055,
+    "name": "Norway Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Norway b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1056,
+    "name": "Paraguay Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Paraguay f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1057,
+    "name": "Paraguay Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Paraguay b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1058,
+    "name": "Peru Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Peru f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1059,
+    "name": "Peru Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Peru b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1060,
+    "name": "Poland Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Poland f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1061,
+    "name": "Poland Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Poland b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1062,
+    "name": "Portugal Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Portugal f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1063,
+    "name": "Portugal Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Portugal b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1064,
+    "name": "Saudi Arabia Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Saudia f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1065,
+    "name": "Saudi Arabia Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Saudia b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1066,
+    "name": "Scotland Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Scotland f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1067,
+    "name": "Scotland Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Scotland b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1068,
+    "name": "Senegal Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Senegal f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1069,
+    "name": "Senegal Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Senegal b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1070,
+    "name": "South Africa Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/South Africa f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1071,
+    "name": "South Africa Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/South Africa b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1072,
+    "name": "South Korea Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/south korea f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1073,
+    "name": "South Korea Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/South Korea b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1074,
+    "name": "Spain Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Spain f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1075,
+    "name": "Spain Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Spain b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1076,
+    "name": "Sweden Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Sweden f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1077,
+    "name": "Sweden Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Sweden b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1078,
+    "name": "Switzerland Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Switzerland f.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1079,
+    "name": "Switzerland Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Switzerland b.jpg",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1080,
+    "name": "Ukraine Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ukraine f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1081,
+    "name": "Ukraine Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ukraine b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1082,
+    "name": "USA Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Usa f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1083,
+    "name": "USA Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Usa b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1084,
+    "name": "Venezuela Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Venezuela f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1085,
+    "name": "Venezuela Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/venezula b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1086,
+    "name": "Wales Home Front",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Wales f.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 1087,
+    "name": "Wales Home Back",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Wales b.webp",
+    "imageBack": "",
+    "imageLogo": ""
+  },
+  {
+    "id": 2000,
+    "name": "AC Milan Home 2006-2007 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Logo.jpg"
+  },
+  {
+    "id": 2001,
+    "name": "AC Milan Home 2010-2011 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan Home 2010-2011 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan Home 2010-2011 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/AC Milan/Ac Milan Home 2010-2011 Logo.jpg"
+  },
+  {
+    "id": 2002,
+    "name": "Arsenal Home 2002-2004 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Logo.jpg"
+  },
+  {
+    "id": 2003,
+    "name": "Arsenal Home 2019-2020 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Logo.jpg"
+  },
+  {
+    "id": 2004,
+    "name": "Barcelona Home 2013-2014 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Logo.jpg"
+  },
+  {
+    "id": 2005,
+    "name": "Barcelona Home 2015-2016 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Logo.jpg"
+  },
+  {
+    "id": 2006,
+    "name": "Barcelona Home 2019-2020 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Logo.jpg"
+  },
+  {
+    "id": 2007,
+    "name": "Bayern München Home 2013-2014 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Logo.jpg"
+  },
+  {
+    "id": 2008,
+    "name": "Chelsea Home 2011-2012 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Logo.jpg"
+  },
+  {
+    "id": 2009,
+    "name": "Inter Mailand Home 2009-2010 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Logo.jpg"
+  },
+  {
+    "id": 2010,
+    "name": "Juventus Home 1995-1997 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Logojpg.jpg"
+  },
+  {
+    "id": 2011,
+    "name": "Juventus Home 2018-2019 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Logo.jpg"
+  },
+  {
+    "id": 2012,
+    "name": "Liverpool Home 2018-2019 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Logo.jpg"
+  },
+  {
+    "id": 2013,
+    "name": "Manchester City Home 2011-2012 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Logo.jpg"
+  },
+  {
+    "id": 2014,
+    "name": "Manchester United Home 2007-2008 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Logo.jpg"
+  },
+  {
+    "id": 2015,
+    "name": "Marseille Home 1992-1993 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Logo.jpg"
+  },
+  {
+    "id": 2016,
+    "name": "PSG Home 2017-2018 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Logo.jpg"
+  },
+  {
+    "id": 2017,
+    "name": "Real Madrid Away 2016-2017 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Logo.jpg"
+  },
+  {
+    "id": 2018,
+    "name": "Real Madrid Away 2017-2018 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Logo.jpg"
+  },
+  {
+    "id": 2019,
+    "name": "Real Madrid Home 2017-2018 Front",
+    "image": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Logo.jpg"
+  },
+  {
+    "id": 2020,
+    "name": "Argentina Home 2022 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Logo.jpg"
+  },
+  {
+    "id": 2021,
+    "name": "Brazil Home 2018 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Logo.jpg"
+  },
+  {
+    "id": 2022,
+    "name": "Croatia Home 1998 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Logo.jpg"
+  },
+  {
+    "id": 2023,
+    "name": "England Home 1994-1995 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/England/England home 1994-1995 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/England/England home 1994-1995 back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/England/England home 1994-1995 logo.jpg"
+  },
+  {
+    "id": 2024,
+    "name": "England Home 2003-2004 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/England/England home 2003-2004 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/England/England home 2003-2004 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/England/England home 2003-2004 Logo.jpg"
+  },
+  {
+    "id": 2025,
+    "name": "France Home 2018 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/France/France home 2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/France/France home 2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/France/France home 2018 Logo.jpg"
+  },
+  {
+    "id": 2026,
+    "name": "Germany Home 2014 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Germany/Germany home 2014 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Germany/Germany home 2014 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Germany/Germany home 2014 Logo.jpg"
+  },
+  {
+    "id": 2027,
+    "name": "Italy Home 2006 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Italy/Italy Home 2006 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Italy/Italy Home 2006 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Italy/Italy Home 2006 Logo.jpg"
+  },
+  {
+    "id": 2028,
+    "name": "Japan Home 2018 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Japan/Japan Home 2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Japan/Japan Home 2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Japan/Japan Home 2018 Logo.jpg"
+  },
+  {
+    "id": 2029,
+    "name": "Marocco Home 1998 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Logo.jpg"
+  },
+  {
+    "id": 2030,
+    "name": "Mexico Home 2014 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Logo.jpg"
+  },
+  {
+    "id": 2031,
+    "name": "Netherlands Home 2014-2015 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 Logo.jpg"
+  },
+  {
+    "id": 2032,
+    "name": "Nigeria Home 1994-1995 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Logo.jpg"
+  },
+  {
+    "id": 2033,
+    "name": "Portugal Home 2016 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Logo.jpg"
+  },
+  {
+    "id": 2034,
+    "name": "Senegal Home 2002 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Logo.jpg"
+  },
+  {
+    "id": 2035,
+    "name": "Spain Home 2010 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2010 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2010 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2010 Logo.jpg"
+  },
+  {
+    "id": 2036,
+    "name": "Spain Home 2012 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2012 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2012 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2012 Logo.jpg"
+  },
+  {
+    "id": 2037,
+    "name": "Türkiye Home 1996 Front",
+    "image": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Logo.jpg"
   }
 ]

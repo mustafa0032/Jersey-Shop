@@ -181,8 +181,11 @@
     .order-customer-info strong { color: rgba(255,255,255,0.95); }
     .order-item-row { display: flex; align-items: center; gap: 0.75rem; font-size: 0.83rem; color: rgba(255,255,255,0.65); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .order-item-row:last-child { border-bottom: none; }
-    .order-item-img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; background: rgba(255,255,255,0.05); cursor: zoom-in; transition: transform 0.15s, border-color 0.15s; }
-    .order-item-img:hover { transform: scale(1.08); border-color: rgba(255,255,255,0.35); }
+    .order-item-imgs { display: flex; gap: 6px; flex-shrink: 0; }
+    .order-img-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: zoom-in; }
+    .order-item-img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); transition: transform 0.15s, border-color 0.15s; display: block; }
+    .order-img-wrap:hover .order-item-img { transform: scale(1.08); border-color: rgba(255,255,255,0.4); }
+    .order-img-label { font-size: 0.65rem; color: rgba(255,255,255,0.35); font-weight: 600; letter-spacing: 0.03em; }
     .order-item-img-placeholder { width: 56px; height: 56px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
     /* ── Image Lightbox ── */
     #img-lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.88); align-items: center; justify-content: center; backdrop-filter: blur(6px); }
@@ -552,26 +555,45 @@ function escHtml(str) {
 // ── ORDERS ────────────────────────────────────────────────────────────
 let allOrders = [];
 let currentFilter = "all";
-let productImageMap = {}; // name (lowercase) → image path
+let productImageMap = {}; // name (lowercase) → { image, imageBack, imageLogo }
 
 async function loadProductImages() {
   try {
     const list = await api("/api/product-images");
     list.forEach(p => {
-      if (p.image) productImageMap[p.name.toLowerCase()] = p.image;
+      productImageMap[p.name.toLowerCase()] = {
+        image:     p.image     || "",
+        imageBack: p.imageBack || "",
+        imageLogo: p.imageLogo || "",
+      };
     });
   } catch(e) { /* non-critical */ }
 }
 
-function resolveItemImage(item) {
-  if (item.image) return item.image;
-  // Fallback: match by item name (old orders without image field)
+function resolveItemImages(item) {
+  // Returns array of { src, label } for all available images
+  const imgs = [];
+
+  // If item has images saved directly (new orders)
+  if (item.image)     imgs.push({ src: item.image,     label: "Front" });
+  if (item.imageBack) imgs.push({ src: item.imageBack, label: "Back" });
+  if (item.imageLogo) imgs.push({ src: item.imageLogo, label: "Logo" });
+
+  if (imgs.length > 0) return imgs;
+
+  // Fallback: look up by name for old orders
   const nameLower = (item.name || "").toLowerCase();
-  // Try exact match first
-  if (productImageMap[nameLower]) return productImageMap[nameLower];
-  // Try partial match (e.g. "Ajax Away" matches "Ajax Away Front")
-  const key = Object.keys(productImageMap).find(k => k.startsWith(nameLower) || nameLower.startsWith(k));
-  return key ? productImageMap[key] : "";
+  let match = productImageMap[nameLower];
+  if (!match) {
+    const key = Object.keys(productImageMap).find(k => k.startsWith(nameLower) || nameLower.startsWith(k));
+    match = key ? productImageMap[key] : null;
+  }
+  if (match) {
+    if (match.image)     imgs.push({ src: match.image,     label: "Front" });
+    if (match.imageBack) imgs.push({ src: match.imageBack, label: "Back" });
+    if (match.imageLogo) imgs.push({ src: match.imageLogo, label: "Logo" });
+  }
+  return imgs;
 }
 
 async function renderOrders() {
@@ -602,7 +624,16 @@ function displayOrders() {
     const items = (o.items || []);
     const itemsHtml = items.map(i => `
       <div class="order-item-row">
-        ${(()=>{ const imgSrc = resolveItemImage(i); return imgSrc ? `<img src="${escHtml(imgSrc)}" class="order-item-img" alt="${escHtml(i.name)}" onerror="this.style.display='none'" onclick="openImgLightbox(this.src,'${escHtml(i.name).replace(/'/g,"\\'")}');" title="Klicken zum Vergrössern" />` : `<div class="order-item-img-placeholder">👕</div>`; })()}
+        ${(()=>{
+          const imgs = resolveItemImages(i);
+          if (!imgs.length) return `<div class="order-item-img-placeholder">👕</div>`;
+          return `<div class="order-item-imgs">${imgs.map(img => `
+            <div class="order-img-wrap" onclick="openImgLightbox('${img.src.replace(/'/g,"\\'")}','${escHtml(i.name).replace(/'/g,"\\'")} — ${img.label}')">
+              <img src="${escHtml(img.src)}" class="order-item-img" alt="${img.label}" onerror="this.parentElement.style.display='none'" />
+              <span class="order-img-label">${img.label}</span>
+            </div>`).join("")}
+          </div>`;
+        })()}
         <div class="order-item-info">
           <span class="order-item-name">${escHtml(i.name)}${i.size ? ` <span style="color:rgba(255,255,255,0.3)">· ${escHtml(i.size)}</span>` : ""}${i.backprint ? ` <span style="color:rgba(255,255,255,0.25);font-size:0.78rem">✏️ ${escHtml(i.backprint)}</span>` : ""}</span>
         </div>

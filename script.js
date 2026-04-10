@@ -2122,7 +2122,9 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
         backprint: backprintDetail,
         price: total,
         quantity: 1,
-        image: product.image || "https://via.placeholder.com/60x60?text=Jersey"
+        image:      product.image     || "",
+        imageBack:  product.imageBack || "",
+        imageLogo:  product.imageLogo || "",
       });
       updateCartCount();
     });
@@ -2340,7 +2342,9 @@ function renderRetros() {
           backprint: backprintDetail,
           price: total,
           quantity: 1,
-          image: product.image || "https://via.placeholder.com/60x60?text=Jersey"
+          image:      product.image     || "",
+          imageBack:  product.imageBack || "",
+          imageLogo:  product.imageLogo || "",
         });
         updateCartCount();
       });
@@ -2921,7 +2925,9 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
           backprint: backprintDetail,
           price: total,
           quantity: 1,
-          image: product.image || "https://via.placeholder.com/60x60?text=Jersey"
+          image:      product.image     || "",
+          imageBack:  product.imageBack || "",
+          imageLogo:  product.imageLogo || "",
         });
         updateCartCount();
       });
@@ -3115,7 +3121,9 @@ if (checkoutForm) {
         quantity:  i.quantity,
         price:     i.price,
         subtotal:  +(i.price * i.quantity).toFixed(2),
-        image:     i.image     || "",
+        image:      i.image     || "",
+        imageBack:  i.imageBack || "",
+        imageLogo:  i.imageLogo || "",
       }));
       const orderRes = await fetch("/api/order/submit", {
         method:  "POST",
