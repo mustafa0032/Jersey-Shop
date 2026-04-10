@@ -2676,38 +2676,7 @@ function initContactForm() {
   });
 }
 
-// ── TEST PRODUCT (remove after testing) ──────────────────────────────────
-function renderTestProduct() {
-  const grid = document.getElementById("test-product-grid");
-  if (!grid) return;
-  grid.innerHTML = `
-    <div class="product-card" style="max-width:260px;">
-      <div class="product-image-wrapper">
-        <img src="Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Front.jpg"
-             alt="Test" style="width:100%; border-radius:8px;" />
-        <span class="product-badge" style="background:#f59e0b; color:#000;">TEST</span>
-      </div>
-      <div class="product-info">
-        <h3>🧪 Testartikel</h3>
-        <div class="product-price">
-          <span class="price-sale">CHF 1.00</span>
-        </div>
-        <div class="size-selector">
-          <select class="size-select" id="test-size">
-            <option value="M">M</option>
-            <option value="L">L</option>
-          </select>
-        </div>
-        <button class="add-to-cart-btn" onclick="(function(){
-          const size = document.getElementById('test-size').value;
-          addToCart({id:9999, name:'🧪 Testartikel', price:1, size:size, image:'', imageBack:'', imageLogo:''});
-        })()">In den Warenkorb</button>
-      </div>
-    </div>`;
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  renderTestProduct();
   renderProducts();
   renderNationalTeams();
   renderRetros();
