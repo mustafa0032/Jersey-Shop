@@ -221,7 +221,7 @@ de:{
 "cart.discount.label":"🎉 Rabatt ({p}%)",
 "cart.discount.label.10":"🎉 Rabatt (10%)",
 "cart.total":"Gesamt",
-"cart.shipping":"🚚 <strong>Gratis Versand</strong> — übernommen von JerseyPhase",
+"cart.shipping":"🚚 <strong>Kostengünstige Lieferung</strong>",
 "cart.processing":"⏱️ <strong>Bearbeitungszeit:</strong> 2–5 Tage",
 "cart.delivery":"📦 <strong>Lieferzeit:</strong> 7–14 Tage",
 "checkout.title":"Lieferdetails",

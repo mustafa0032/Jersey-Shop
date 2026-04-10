@@ -29,28 +29,38 @@ activeDiscountPercent=0;
 
 function getDiscountPercent(){return activeDiscountPercent;}
 function getActiveDiscount(){return activeDiscountCode;}
+const SHIPPING_DISPLAY = 2.90; // display only — server enforces the real value
+
 function getDiscountedTotal(){
 const raw=getCartTotal();
 return+(raw*(1-activeDiscountPercent/100)).toFixed(2);
 }
 
 function updateDiscountUI(){
-const discountRow=document.getElementById("cart-discount-row");
-const finalRow=document.getElementById("cart-final-row");
-const discountAmount=document.getElementById("cart-discount-amount");
-const finalTotal=document.getElementById("cart-final-total");
+const discountRow   = document.getElementById("cart-discount-row");
+const shippingRow   = document.getElementById("cart-shipping-row");
+const finalRow      = document.getElementById("cart-final-row");
+const discountAmount= document.getElementById("cart-discount-amount");
+const finalTotal    = document.getElementById("cart-final-total");
+const shippingAmt   = document.getElementById("cart-shipping-amount");
 if(!discountRow)return;
-if(activeDiscountPercent>0){
-const raw=getCartTotal();
-const saving=+(raw*activeDiscountPercent/100).toFixed(2);
-const discounted=getDiscountedTotal();
-if(discountAmount)discountAmount.textContent=saving.toFixed(2);
-if(finalTotal)finalTotal.textContent=discounted.toFixed(2);
-discountRow.style.display="";
-if(finalRow)finalRow.style.display="";
-}else{
-discountRow.style.display="none";
-if(finalRow)finalRow.style.display="none";
+
+const raw        = getCartTotal();
+const saving     = +(raw * activeDiscountPercent / 100).toFixed(2);
+const discounted = getDiscountedTotal();
+const grandTotal = +(discounted + SHIPPING_DISPLAY).toFixed(2);
+
+// Always show shipping row
+if(shippingRow)  shippingRow.style.display = "";
+if(shippingAmt)  shippingAmt.textContent   = SHIPPING_DISPLAY.toFixed(2);
+if(finalRow)     finalRow.style.display    = "";
+if(finalTotal)   finalTotal.textContent    = grandTotal.toFixed(2);
+
+if(activeDiscountPercent > 0){
+  if(discountAmount) discountAmount.textContent = saving.toFixed(2);
+  discountRow.style.display = "";
+} else {
+  discountRow.style.display = "none";
 }
 }
 

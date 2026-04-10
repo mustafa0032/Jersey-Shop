@@ -26,6 +26,7 @@ const VERSION = Date.now(); // cache-busting version, changes on every server re
 const BASE_JERSEY_PRICE = 35;
 const ADDON_SHORTS      = 13;
 const ADDON_BACKPRINT   = 4;
+const SHIPPING_CHF      = 2.90; // fixed shipping — always added server-side
 // All valid per-item prices: 35, 39, 48, 52
 const VALID_ITEM_PRICES = new Set([
   BASE_JERSEY_PRICE,
@@ -350,8 +351,11 @@ http.createServer(async (req, res) => {
     // Apply discount code server-side if provided
     const discountCode    = (body.discount_code || "").trim().toUpperCase();
     const discountPercent = DISCOUNT_CODES[discountCode] || 0;
-    const totalCHF        = +(subtotalCHF * (1 - discountPercent / 100)).toFixed(2);
-    const amountRappen    = Math.round(totalCHF * 100);
+    const discountedCHF   = +(subtotalCHF * (1 - discountPercent / 100)).toFixed(2);
+
+    // Shipping is always added server-side — cannot be removed by client
+    const totalCHF     = +(discountedCHF + SHIPPING_CHF).toFixed(2);
+    const amountRappen = Math.round(totalCHF * 100);
 
     if (amountRappen < 50) {
       return json(res, 400, { error: "Order amount is too small (minimum CHF 0.50)." });
@@ -367,7 +371,12 @@ http.createServer(async (req, res) => {
           customer_name:  body.customer_name  || "",
         },
       });
-      return json(res, 200, { clientSecret: paymentIntent.client_secret, verifiedTotal: totalCHF });
+      return json(res, 200, {
+        clientSecret:   paymentIntent.client_secret,
+        verifiedTotal:  totalCHF,
+        shippingCHF:    SHIPPING_CHF,
+        subtotalCHF:    discountedCHF,
+      });
     } catch (err) {
       console.error("Stripe error:", err.message);
       return json(res, 500, { error: err.message });

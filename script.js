@@ -3047,7 +3047,8 @@ if (checkoutForm) {
     const discountPercent = (typeof getDiscountPercent === "function") ? getDiscountPercent() : 0;
     const discountCode    = (typeof getActiveDiscount  === "function") ? getActiveDiscount()  : null;
     const discountSaving  = +(subtotal * discountPercent / 100).toFixed(2);
-    const total           = +(subtotal - discountSaving).toFixed(2);
+    const SHIPPING        = typeof SHIPPING_DISPLAY !== "undefined" ? SHIPPING_DISPLAY : 2.90;
+    const total           = +(subtotal - discountSaving + SHIPPING).toFixed(2);
 
     // ── Build readable cart list ────────────────────────────────────────
     const cartText = cart.map((item, i) => {
@@ -3166,8 +3167,12 @@ if (checkoutForm) {
             "----------------------------",
             "ZAHLUNG BESTÄTIGT ✅",
             "----------------------------",
-            `CHF ${(verifiedTotal || total).toFixed(2)} mit Karte bezahlt (Stripe).`,
+            `Artikel: CHF ${(subtotal - discountSaving).toFixed(2)}`,
             discountPercent > 0 ? `Rabattcode ${discountCode}: −${discountPercent}%, gespart CHF ${discountSaving.toFixed(2)}` : "",
+            `Versand: CHF ${SHIPPING.toFixed(2)}`,
+            `Total: CHF ${(verifiedTotal || total).toFixed(2)}`,
+            "----------------------------",
+            `Bezahlt mit Karte (Stripe).`,
             `Stripe Payment ID: ${paymentIntent.id}`,
             `Bestellnummer: ${order_id}`,
             "----------------------------",
