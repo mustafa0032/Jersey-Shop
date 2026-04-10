@@ -450,42 +450,59 @@
 
 <script>
 // ── USERS ────────────────────────────────────────────────────────────
-const USERS = {
-  "mostafa.rasouli01": { password: "Mr05439275602$",   role: "admin"    },
-  "Liu.zhanyang":      { password: "LiuJersey2026_$",  role: "supplier" },
-};
-
-// ── AUTH ─────────────────────────────────────────────────────────────
+// ── AUTH — passwords are on the server, never in this file ───────────
 let currentUser = null;
+let authToken   = sessionStorage.getItem("jp_token") || "";
 
-function doLogin() {
+async function doLogin() {
+  const btn      = document.querySelector(".login-btn");
   const username = document.getElementById("username-input").value.trim();
-  const pw       = document.getElementById("pw-input").value;
-  const user     = USERS[username];
-  if (user && user.password === pw) {
-    sessionStorage.setItem("jp_admin_user", username);
-    startDashboard(username);
-  } else {
-    document.getElementById("login-error").textContent = "Falscher Benutzername oder Passwort.";
-    document.getElementById("pw-input").value = "";
+  const password = document.getElementById("pw-input").value;
+  const errEl    = document.getElementById("login-error");
+  if (!username || !password) { errEl.textContent = "Bitte alle Felder ausfüllen."; return; }
+  btn.disabled = true; btn.textContent = "…";
+  try {
+    const res  = await fetch("/api/login", {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify({ username, password }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.token) {
+      errEl.textContent = data.error || "Login fehlgeschlagen.";
+      document.getElementById("pw-input").value = "";
+      return;
+    }
+    authToken = data.token;
+    sessionStorage.setItem("jp_token", authToken);
+    startDashboard(data.username, data.role);
+  } catch(e) {
+    errEl.textContent = "Server nicht erreichbar.";
+  } finally {
+    btn.disabled = false; btn.textContent = "Einloggen →";
   }
 }
 document.getElementById("pw-input").addEventListener("keydown", e => { if (e.key === "Enter") doLogin(); });
 document.getElementById("username-input").addEventListener("keydown", e => { if (e.key === "Enter") document.getElementById("pw-input").focus(); });
 
-function doLogout() {
-  sessionStorage.removeItem("jp_admin_user");
+async function doLogout() {
+  await fetch("/api/logout", {
+    method:  "POST",
+    headers: { "Authorization": "Bearer " + authToken },
+  }).catch(() => {});
+  sessionStorage.removeItem("jp_token");
+  authToken = "";
   location.reload();
 }
 
-function startDashboard(username) {
-  currentUser = { username, ...USERS[username] };
+function startDashboard(username, role) {
+  currentUser = { username, role };
   document.getElementById("login-screen").style.display = "none";
   document.getElementById("dashboard").style.display = "block";
 
   // Role badge
   const badge = document.getElementById("role-badge");
-  if (currentUser.role === "admin") {
+  if (role === "admin") {
     badge.textContent = "Admin"; badge.className = "admin-badge badge-admin";
   } else {
     badge.textContent = "Supplier"; badge.className = "admin-badge badge-supplier";
@@ -493,7 +510,7 @@ function startDashboard(username) {
   document.getElementById("display-username").textContent = username;
 
   // Hide "Add Review" and "Add Order" tabs for supplier
-  if (currentUser.role === "supplier") {
+  if (role === "supplier") {
     document.getElementById("tab-add-btn").style.display = "none";
     document.getElementById("tab-addorder-btn").style.display = "none";
   }
@@ -501,24 +518,33 @@ function startDashboard(username) {
   loadDashboard();
 }
 
-// Auto-login if session exists
-const savedUser = sessionStorage.getItem("jp_admin_user");
-if (savedUser && USERS[savedUser]) {
-  setTimeout(() => startDashboard(savedUser), 0);
+// Auto-login: check saved token with server
+if (authToken) {
+  fetch("/api/auth/check", { headers: { "Authorization": "Bearer " + authToken } })
+    .then(r => r.json())
+    .then(d => { if (d.ok) startDashboard(d.username, d.role); else sessionStorage.removeItem("jp_token"); })
+    .catch(() => {});
 }
 
 // ── API HELPERS ───────────────────────────────────────────────────────
 async function api(endpoint, body) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 5000);
+  const timer = setTimeout(() => controller.abort(), 8000);
   try {
+    const headers = { "Authorization": "Bearer " + authToken };
+    if (body !== undefined) headers["Content-Type"] = "application/json";
     const res = await fetch(endpoint, {
       method:  body !== undefined ? "POST" : "GET",
-      headers: body !== undefined ? { "Content-Type": "application/json" } : {},
+      headers,
       body:    body !== undefined ? JSON.stringify(body) : undefined,
       signal:  controller.signal,
     });
     clearTimeout(timer);
+    if (res.status === 401) {
+      sessionStorage.removeItem("jp_token");
+      location.reload();
+      throw new Error("Session abgelaufen.");
+    }
     return res.json();
   } catch(e) {
     clearTimeout(timer);

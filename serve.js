@@ -27,17 +27,68 @@ const VALID_ITEM_PRICES = new Set([
 // ── Discount codes (server-only, never sent to browser) ───────────
 const DISCOUNT_CODES = { "SECRET10": 10 };
 
-// ── Rate limiter for discount validation ─────────────────────────
-// Max 5 attempts per IP per minute
-const discountRateMap = new Map();
-function checkRateLimit(ip) {
-  const now  = Date.now();
-  const entry = discountRateMap.get(ip) || { count: 0, resetAt: now + 60_000 };
-  if (now > entry.resetAt) { entry.count = 0; entry.resetAt = now + 60_000; }
-  entry.count++;
-  discountRateMap.set(ip, entry);
-  return entry.count <= 5;
+// ── Admin credentials — loaded from .env, never hardcoded ─────────
+function loadAdminUsers() {
+  const users = {};
+  for (let i = 1; i <= 10; i++) {
+    const u = process.env[`ADMIN_USER_${i}`];
+    const p = process.env[`ADMIN_PASS_${i}`];
+    const r = process.env[`ADMIN_ROLE_${i}`];
+    if (u && p && r) users[u] = { password: p, role: r };
+  }
+  return users;
 }
+
+// ── Session store (in-memory, tokens expire after 8 hours) ────────
+const crypto = require("crypto");
+const sessions = new Map(); // token → { username, role, expires }
+
+function createSession(username, role) {
+  const token   = crypto.randomBytes(32).toString("hex");
+  const expires = Date.now() + 8 * 60 * 60 * 1000; // 8h
+  sessions.set(token, { username, role, expires });
+  return token;
+}
+
+function getSession(req) {
+  const auth  = req.headers["authorization"] || "";
+  const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
+  if (!token) return null;
+  const session = sessions.get(token);
+  if (!session) return null;
+  if (Date.now() > session.expires) { sessions.delete(token); return null; }
+  return session;
+}
+
+function requireAuth(res, req, requiredRole) {
+  const session = getSession(req);
+  if (!session) {
+    json(res, 401, { error: "Nicht angemeldet." });
+    return null;
+  }
+  // "any" = both admin and supplier allowed; "admin" = admin only
+  if (requiredRole === "admin" && session.role !== "admin") {
+    json(res, 403, { error: "Kein Zugriff — nur Admin." });
+    return null;
+  }
+  return session;
+}
+
+// ── Rate limiter ──────────────────────────────────────────────────
+const rateMaps = {};
+function checkRateLimit(ip, key = "default", max = 5, windowMs = 60_000) {
+  if (!rateMaps[key]) rateMaps[key] = new Map();
+  const map   = rateMaps[key];
+  const now   = Date.now();
+  const entry = map.get(ip) || { count: 0, resetAt: now + windowMs };
+  if (now > entry.resetAt) { entry.count = 0; entry.resetAt = now + windowMs; }
+  entry.count++;
+  map.set(ip, entry);
+  return entry.count <= max;
+}
+
+// Backwards compat alias used by discount endpoint below
+const discountRateMap = new Map();
 const PENDING  = path.join(ROOT, "reviews-pending.json");
 const APPROVED = path.join(ROOT, "reviews-approved.json");
 const ORDERS   = path.join(ROOT, "orders.json");
@@ -103,6 +154,36 @@ http.createServer(async (req, res) => {
 
   // ── API ROUTES ────────────────────────────────────────────────────
 
+  // POST /api/login  — admin login, returns session token
+  if (req.method === "POST" && url === "/api/login") {
+    const ip = req.socket.remoteAddress || "unknown";
+    if (!checkRateLimit(ip, "login", 10, 60_000)) {
+      return json(res, 429, { error: "Zu viele Versuche. Bitte 1 Minute warten." });
+    }
+    const body  = await parseBody(req);
+    const users = loadAdminUsers();
+    const user  = users[body.username];
+    if (!user || user.password !== body.password) {
+      return json(res, 401, { error: "Benutzername oder Passwort falsch." });
+    }
+    const token = createSession(body.username, user.role);
+    return json(res, 200, { ok: true, token, role: user.role, username: body.username });
+  }
+
+  // POST /api/logout  — invalidates the session token
+  if (req.method === "POST" && url === "/api/logout") {
+    const auth  = (req.headers["authorization"] || "").replace("Bearer ", "");
+    sessions.delete(auth);
+    return json(res, 200, { ok: true });
+  }
+
+  // GET /api/auth/check  — verify if token is still valid
+  if (req.method === "GET" && url === "/api/auth/check") {
+    const session = getSession(req);
+    if (!session) return json(res, 401, { ok: false });
+    return json(res, 200, { ok: true, role: session.role, username: session.username });
+  }
+
   // POST /api/review/submit  — customer submits a new review
   if (req.method === "POST" && url === "/api/review/submit") {
     const body = await parseBody(req);
@@ -128,6 +209,7 @@ http.createServer(async (req, res) => {
 
   // GET /api/reviews/pending  — admin fetches pending reviews
   if (req.method === "GET" && url === "/api/reviews/pending") {
+    if (!requireAuth(res, req, "any")) return;
     return json(res, 200, readJSON(PENDING));
   }
 
@@ -138,6 +220,7 @@ http.createServer(async (req, res) => {
 
   // POST /api/review/approve  — admin approves a review
   if (req.method === "POST" && url === "/api/review/approve") {
+    if (!requireAuth(res, req, "admin")) return;
     const body    = await parseBody(req);
     const pending  = readJSON(PENDING);
     const approved = readJSON(APPROVED);
@@ -153,6 +236,7 @@ http.createServer(async (req, res) => {
 
   // POST /api/review/delete-pending  — admin rejects a pending review
   if (req.method === "POST" && url === "/api/review/delete-pending") {
+    if (!requireAuth(res, req, "admin")) return;
     const body = await parseBody(req);
     const pending = readJSON(PENDING).filter(r => r.id !== body.id);
     writeJSON(PENDING, pending);
@@ -161,6 +245,7 @@ http.createServer(async (req, res) => {
 
   // POST /api/review/delete-approved  — admin removes an approved review
   if (req.method === "POST" && url === "/api/review/delete-approved") {
+    if (!requireAuth(res, req, "admin")) return;
     const body = await parseBody(req);
     const approved = readJSON(APPROVED).filter(r => r.id !== body.id);
     writeJSON(APPROVED, approved);
@@ -169,6 +254,7 @@ http.createServer(async (req, res) => {
 
   // POST /api/review/add  — admin manually adds a verified review
   if (req.method === "POST" && url === "/api/review/add") {
+    if (!requireAuth(res, req, "admin")) return;
     const body = await parseBody(req);
     if (!body.name || !body.text || !body.rating) {
       return json(res, 400, { error: "Missing fields" });
@@ -208,6 +294,7 @@ http.createServer(async (req, res) => {
 
   // GET /api/product-images  — admin fetches product id/name/image lookup
   if (req.method === "GET" && url === "/api/product-images") {
+    if (!requireAuth(res, req, "any")) return;
     return json(res, 200, readJSON(path.join(ROOT, "product-images.json")));
   }
 
@@ -299,11 +386,13 @@ http.createServer(async (req, res) => {
 
   // GET /api/orders  — admin/supplier fetches all orders
   if (req.method === "GET" && url === "/api/orders") {
+    if (!requireAuth(res, req, "any")) return;
     return json(res, 200, readJSON(ORDERS));
   }
 
   // POST /api/order/update-status  — admin updates order status
   if (req.method === "POST" && url === "/api/order/update-status") {
+    if (!requireAuth(res, req, "any")) return;
     const body = await parseBody(req);
     const orders = readJSON(ORDERS);
     const order = orders.find(o => o.id === body.id);
@@ -315,6 +404,7 @@ http.createServer(async (req, res) => {
 
   // POST /api/order/delete  — admin deletes an order
   if (req.method === "POST" && url === "/api/order/delete") {
+    if (!requireAuth(res, req, "admin")) return;
     const body = await parseBody(req);
     const orders = readJSON(ORDERS).filter(o => o.id !== body.id);
     writeJSON(ORDERS, orders);
