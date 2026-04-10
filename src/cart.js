@@ -29,7 +29,13 @@ activeDiscountPercent=0;
 
 function getDiscountPercent(){return activeDiscountPercent;}
 function getActiveDiscount(){return activeDiscountCode;}
-const SHIPPING_DISPLAY = 2.90; // display only — server enforces the real value
+const SHIPPING_PER_ITEM = 2.90; // CHF per item — display only, server enforces the real value
+
+function getShippingDisplay(){
+  const cart = getCart();
+  const totalQty = cart.reduce((sum, i) => sum + (i.quantity || 1), 0);
+  return +(SHIPPING_PER_ITEM * totalQty).toFixed(2);
+}
 
 function getDiscountedTotal(){
 const raw=getCartTotal();
@@ -45,14 +51,15 @@ const finalTotal    = document.getElementById("cart-final-total");
 const shippingAmt   = document.getElementById("cart-shipping-amount");
 if(!discountRow)return;
 
-const raw        = getCartTotal();
-const saving     = +(raw * activeDiscountPercent / 100).toFixed(2);
-const discounted = getDiscountedTotal();
-const grandTotal = +(discounted + SHIPPING_DISPLAY).toFixed(2);
+const raw          = getCartTotal();
+const saving       = +(raw * activeDiscountPercent / 100).toFixed(2);
+const discounted   = getDiscountedTotal();
+const shippingDisp = getShippingDisplay();
+const grandTotal   = +(discounted + shippingDisp).toFixed(2);
 
 // Always show shipping row
 if(shippingRow)  shippingRow.style.display = "";
-if(shippingAmt)  shippingAmt.textContent   = SHIPPING_DISPLAY.toFixed(2);
+if(shippingAmt)  shippingAmt.textContent   = shippingDisp.toFixed(2);
 if(finalRow)     finalRow.style.display    = "";
 if(finalTotal)   finalTotal.textContent    = grandTotal.toFixed(2);
 

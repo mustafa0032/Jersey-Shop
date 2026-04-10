@@ -3045,7 +3045,8 @@ if (checkoutForm) {
     const discountPercent = (typeof getDiscountPercent === "function") ? getDiscountPercent() : 0;
     const discountCode    = (typeof getActiveDiscount  === "function") ? getActiveDiscount()  : null;
     const discountSaving  = +(subtotal * discountPercent / 100).toFixed(2);
-    const SHIPPING        = typeof SHIPPING_DISPLAY !== "undefined" ? SHIPPING_DISPLAY : 2.90;
+    const totalQty        = cart.reduce((sum, i) => sum + (i.quantity || 1), 0);
+    const SHIPPING        = +(2.90 * totalQty).toFixed(2); // 2.90 per item (display estimate, server recalculates)
     const total           = +(subtotal - discountSaving + SHIPPING).toFixed(2);
 
     // ── Build readable cart list ────────────────────────────────────────
@@ -3086,8 +3087,9 @@ if (checkoutForm) {
       if (!piRes.ok || !piData.clientSecret) {
         throw new Error(piData.error || "Could not create payment. Please try again.");
       }
-      // Use server-verified total for display (overrides client calculation)
-      const verifiedTotal = piData.verifiedTotal || total;
+      // Use server-verified values (overrides client calculation)
+      const verifiedTotal    = piData.verifiedTotal || total;
+      const verifiedShipping = piData.shippingCHF   || SHIPPING;
 
       // ── Step 2: Confirm card payment via Stripe ─────────────────────
       const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(
@@ -3167,7 +3169,7 @@ if (checkoutForm) {
             "----------------------------",
             `Artikel: CHF ${(subtotal - discountSaving).toFixed(2)}`,
             discountPercent > 0 ? `Rabattcode ${discountCode}: −${discountPercent}%, gespart CHF ${discountSaving.toFixed(2)}` : "",
-            `Versand: CHF ${SHIPPING.toFixed(2)}`,
+            `Versand: CHF ${verifiedShipping.toFixed(2)} (${totalQty} × CHF 2.90)`,
             `Total: CHF ${(verifiedTotal || total).toFixed(2)}`,
             "----------------------------",
             `Bezahlt mit Karte (Stripe).`,

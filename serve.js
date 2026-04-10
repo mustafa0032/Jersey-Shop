@@ -26,7 +26,7 @@ const VERSION = Date.now(); // cache-busting version, changes on every server re
 const BASE_JERSEY_PRICE = 35;
 const ADDON_SHORTS      = 13;
 const ADDON_BACKPRINT   = 4;
-const SHIPPING_CHF      = 2.90; // fixed shipping — always added server-side
+const SHIPPING_PER_ITEM = 2.90; // CHF per item — always calculated server-side
 // All valid per-item prices: 35, 39, 48, 52
 const VALID_ITEM_PRICES = new Set([
   BASE_JERSEY_PRICE,
@@ -346,15 +346,17 @@ http.createServer(async (req, res) => {
       }
     }
 
-    let subtotalCHF = items.reduce((sum, i) => sum + parseFloat(i.price) * i.quantity, 0);
+    let subtotalCHF  = items.reduce((sum, i) => sum + parseFloat(i.price) * i.quantity, 0);
+    const totalQty   = items.reduce((sum, i) => sum + i.quantity, 0);
 
     // Apply discount code server-side if provided
     const discountCode    = (body.discount_code || "").trim().toUpperCase();
     const discountPercent = DISCOUNT_CODES[discountCode] || 0;
     const discountedCHF   = +(subtotalCHF * (1 - discountPercent / 100)).toFixed(2);
 
-    // Shipping is always added server-side — cannot be removed by client
-    const totalCHF     = +(discountedCHF + SHIPPING_CHF).toFixed(2);
+    // Shipping = 2.90 CHF × total number of items — always calculated server-side
+    const shippingCHF  = +(SHIPPING_PER_ITEM * totalQty).toFixed(2);
+    const totalCHF     = +(discountedCHF + shippingCHF).toFixed(2);
     const amountRappen = Math.round(totalCHF * 100);
 
     if (amountRappen < 50) {
@@ -374,7 +376,7 @@ http.createServer(async (req, res) => {
       return json(res, 200, {
         clientSecret:   paymentIntent.client_secret,
         verifiedTotal:  totalCHF,
-        shippingCHF:    SHIPPING_CHF,
+        shippingCHF:    shippingCHF,
         subtotalCHF:    discountedCHF,
       });
     } catch (err) {
