@@ -181,8 +181,16 @@
     .order-customer-info strong { color: rgba(255,255,255,0.95); }
     .order-item-row { display: flex; align-items: center; gap: 0.75rem; font-size: 0.83rem; color: rgba(255,255,255,0.65); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .order-item-row:last-child { border-bottom: none; }
-    .order-item-img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; background: rgba(255,255,255,0.05); }
+    .order-item-img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; background: rgba(255,255,255,0.05); cursor: zoom-in; transition: transform 0.15s, border-color 0.15s; }
+    .order-item-img:hover { transform: scale(1.08); border-color: rgba(255,255,255,0.35); }
     .order-item-img-placeholder { width: 56px; height: 56px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+    /* ── Image Lightbox ── */
+    #img-lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.88); align-items: center; justify-content: center; backdrop-filter: blur(6px); }
+    #img-lightbox.open { display: flex; }
+    #img-lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 14px; box-shadow: 0 8px 60px rgba(0,0,0,0.7); object-fit: contain; }
+    #img-lightbox-close { position: absolute; top: 1.2rem; right: 1.4rem; font-size: 2rem; color: #fff; cursor: pointer; opacity: 0.7; line-height: 1; transition: opacity 0.2s; }
+    #img-lightbox-close:hover { opacity: 1; }
+    #img-lightbox-label { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 500; white-space: nowrap; }
     .order-item-info { flex: 1; min-width: 0; }
     .order-item-name { display: block; }
     .order-item-qty  { color: rgba(255,255,255,0.35); white-space: nowrap; }
@@ -572,7 +580,7 @@ function displayOrders() {
     const items = (o.items || []);
     const itemsHtml = items.map(i => `
       <div class="order-item-row">
-        ${i.image ? `<img src="${escHtml(i.image)}" class="order-item-img" alt="${escHtml(i.name)}" onerror="this.style.display='none'" />` : `<div class="order-item-img-placeholder">👕</div>`}
+        ${i.image ? `<img src="${escHtml(i.image)}" class="order-item-img" alt="${escHtml(i.name)}" onerror="this.style.display='none'" onclick="openImgLightbox('${escHtml(i.image)}','${escHtml(i.name)}')" title="Klicken zum Vergrössern" />` : `<div class="order-item-img-placeholder">👕</div>`}
         <div class="order-item-info">
           <span class="order-item-name">${escHtml(i.name)}${i.size ? ` <span style="color:rgba(255,255,255,0.3)">· ${escHtml(i.size)}</span>` : ""}${i.backprint ? ` <span style="color:rgba(255,255,255,0.25);font-size:0.78rem">✏️ ${escHtml(i.backprint)}</span>` : ""}</span>
         </div>
@@ -1056,6 +1064,29 @@ function toggleAdminLang() {
 
 // Apply on load
 document.addEventListener("DOMContentLoaded", applyAdminLang);
+
+// ── Image Lightbox ────────────────────────────────────────────────
+function openImgLightbox(src, label) {
+  const lb  = document.getElementById("img-lightbox");
+  const img = document.getElementById("img-lightbox-img");
+  const lbl = document.getElementById("img-lightbox-label");
+  img.src       = src;
+  lbl.textContent = label || "";
+  lb.classList.add("open");
+}
+function closeImgLightbox() {
+  document.getElementById("img-lightbox").classList.remove("open");
+  document.getElementById("img-lightbox-img").src = "";
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeImgLightbox(); });
 </script>
+
+<!-- ── IMAGE LIGHTBOX OVERLAY ───────────────────────────────────── -->
+<div id="img-lightbox" onclick="closeImgLightbox()">
+  <span id="img-lightbox-close" onclick="closeImgLightbox()">✕</span>
+  <img id="img-lightbox-img" src="" alt="Jersey preview" onclick="event.stopPropagation()" />
+  <div id="img-lightbox-label"></div>
+</div>
+
 </body>
 </html>
