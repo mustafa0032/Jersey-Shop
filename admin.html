@@ -237,6 +237,54 @@
     .add-item-btn:hover { border-color: rgba(74,222,128,0.4); color: #4ade80; }
     .order-total-display { display: flex; justify-content: flex-end; align-items: center; gap: 0.75rem; margin-top: 0.75rem; font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.8); }
 
+    /* ── COSTS SECTION ── */
+    .order-costs { margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1rem; }
+    .costs-toggle-btn { background: transparent; border: 1px dashed rgba(251,191,36,0.3); color: rgba(251,191,36,0.7); border-radius: 8px; padding: 0.35rem 0.9rem; font-size: 0.78rem; font-weight: 600; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s; }
+    .costs-toggle-btn:hover { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.5); color: #fbbf24; }
+    .costs-toggle-btn.costs-saved { border-color: rgba(74,222,128,0.3); color: #4ade80; }
+    .costs-form { display: none; margin-top: 0.9rem; background: rgba(255,255,255,0.03); border-radius: 10px; padding: 1rem; }
+    .costs-form.open { display: block; }
+    .costs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 1rem; }
+    .costs-field label { display: block; font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .costs-field input { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 8px; padding: 0.45rem 0.7rem; font-size: 0.85rem; font-family: 'Poppins', sans-serif; outline: none; box-sizing: border-box; }
+    .costs-field input:focus { border-color: #fbbf24; }
+    .costs-total-row { margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.6); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.6rem; }
+    .costs-total-row span:last-child { color: #fbbf24; }
+    .costs-save-btn { margin-top: 0.75rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24; border-radius: 8px; padding: 0.45rem 1.1rem; font-size: 0.8rem; font-weight: 700; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s; }
+    .costs-save-btn:hover { background: rgba(251,191,36,0.25); }
+    .costs-display { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .costs-display-item { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+    .costs-display-item strong { color: rgba(255,255,255,0.7); }
+
+    /* ── BUCHHALTUNG TAB ── */
+    .finance-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .finance-card { background: #13131c; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.25rem 1.5rem; }
+    .finance-card .fc-label { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .finance-card .fc-value { font-size: 1.5rem; font-weight: 800; }
+    .fc-revenue .fc-value { color: #4ade80; }
+    .fc-costs   .fc-value { color: #f87171; }
+    .fc-manual  .fc-value { color: #60a5fa; }
+    .finance-section-title { font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.07em; margin: 1.75rem 0 0.9rem; }
+    .manual-entry-form { background: #13131c; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 0.75rem; align-items: end; }
+    .manual-entry-form input, .manual-entry-form select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #fff; border-radius: 8px; padding: 0.5rem 0.75rem; font-size: 0.85rem; font-family: 'Poppins', sans-serif; outline: none; width: 100%; box-sizing: border-box; }
+    .manual-entry-form input:focus, .manual-entry-form select:focus { border-color: #4ade80; }
+    .manual-entry-form select option { background: #1e1e2d; }
+    .me-add-btn { background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3); color: #4ade80; border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.82rem; font-weight: 700; font-family: 'Poppins', sans-serif; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+    .me-add-btn:hover { background: rgba(74,222,128,0.25); }
+    .entries-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+    .entries-table th { text-align: left; font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.06em; padding: 0 0.75rem 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .entries-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: rgba(255,255,255,0.65); vertical-align: middle; }
+    .entries-table tr:last-child td { border-bottom: none; }
+    .entry-income { color: #4ade80; font-weight: 700; }
+    .entry-expense { color: #f87171; font-weight: 700; }
+    .entry-del-btn { background: transparent; border: 1px solid rgba(248,113,113,0.2); color: rgba(248,113,113,0.6); border-radius: 6px; padding: 0.3rem 0.6rem; font-size: 0.72rem; cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.2s; }
+    .entry-del-btn:hover { background: rgba(248,113,113,0.1); color: #f87171; }
+    @media (max-width: 640px) {
+      .finance-summary { grid-template-columns: 1fr; }
+      .manual-entry-form { grid-template-columns: 1fr; }
+      .costs-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── TOAST ── */
     .toast { position: fixed; bottom: 2rem; right: 2rem; background: #0a0a0f; border: 1px solid #4ade80; color: #4ade80; padding: 0.75rem 1.25rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; z-index: 9999; opacity: 0; transform: translateY(10px); transition: all 0.25s; pointer-events: none; }
     .toast.show { opacity: 1; transform: translateY(0); }
@@ -297,6 +345,7 @@
       <button class="tab-btn" onclick="switchTab('pending', this)">⏳ Pending <span id="pending-count-badge"></span></button>
       <button class="tab-btn" onclick="switchTab('approved', this)">✅ Bestätigt <span id="approved-count-badge"></span></button>
       <button class="tab-btn" id="tab-add-btn" onclick="switchTab('add', this)">✍️ Review hinzufügen</button>
+      <button class="tab-btn" id="tab-finance-btn" onclick="switchTab('finance', this)">💰 Buchhaltung</button>
     </div>
 
     <!-- Tab: Orders -->
@@ -399,6 +448,63 @@
     <div class="tab-panel" id="tab-approved">
       <p class="section-title">Bestätigte Reviews — öffentlich sichtbar</p>
       <div id="approved-list"></div>
+    </div>
+
+    <!-- Tab: Buchhaltung (admin only) -->
+    <div class="tab-panel" id="tab-finance">
+      <p class="section-title">💰 Buchhaltung</p>
+
+      <!-- Summary cards -->
+      <div class="finance-summary">
+        <div class="finance-card fc-revenue">
+          <div class="fc-label">📈 Gesamteinnahmen (Bestellungen)</div>
+          <div class="fc-value" id="fc-revenue">CHF —</div>
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.3rem;" id="fc-orders-count"></div>
+        </div>
+        <div class="finance-card fc-costs">
+          <div class="fc-label">📉 Gesamtkosten (Einkauf + Versand)</div>
+          <div class="fc-value" id="fc-costs">CHF —</div>
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.3rem;" id="fc-costs-detail"></div>
+        </div>
+        <div class="finance-card fc-manual">
+          <div class="fc-label">📋 Manuelle Einträge (Saldo)</div>
+          <div class="fc-value" id="fc-manual-balance">CHF —</div>
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.3rem;" id="fc-manual-count"></div>
+        </div>
+      </div>
+
+      <!-- Manual entry form -->
+      <div class="finance-section-title">Manuellen Eintrag hinzufügen</div>
+      <div class="manual-entry-form">
+        <div>
+          <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;display:block;margin-bottom:0.3rem;">Beschreibung</label>
+          <input type="text" id="me-desc" placeholder="z.B. Domain-Kosten, Werbung…" />
+        </div>
+        <div>
+          <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;display:block;margin-bottom:0.3rem;">Betrag (CHF)</label>
+          <input type="number" id="me-amount" placeholder="0.00" step="0.01" min="0" />
+        </div>
+        <div>
+          <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;display:block;margin-bottom:0.3rem;">Typ</label>
+          <select id="me-type">
+            <option value="expense">📉 Ausgabe</option>
+            <option value="income">📈 Einnahme</option>
+          </select>
+        </div>
+        <button class="me-add-btn" onclick="addManualEntry()">+ Hinzufügen</button>
+      </div>
+
+      <!-- Entries table -->
+      <div class="finance-section-title">Alle manuellen Einträge</div>
+      <div id="finance-entries-list" style="background:#13131c;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:0.5rem 0;overflow-x:auto;">
+        <div class="pending-empty" style="padding:1.5rem;"><span>⏳</span>Lädt…</div>
+      </div>
+
+      <!-- Order costs breakdown -->
+      <div class="finance-section-title">Kosten pro Bestellung (eingetragen vom Supplier)</div>
+      <div id="finance-order-costs" style="background:#13131c;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:0.5rem 0;overflow-x:auto;">
+        <div class="pending-empty" style="padding:1.5rem;"><span>⏳</span>Lädt…</div>
+      </div>
     </div>
 
     <!-- Tab: Add Review -->
@@ -509,10 +615,15 @@ function startDashboard(username, role) {
   }
   document.getElementById("display-username").textContent = username;
 
-  // Hide "Add Review" and "Add Order" tabs for supplier
+  // Hide tabs based on role
   if (role === "supplier") {
     document.getElementById("tab-add-btn").style.display = "none";
     document.getElementById("tab-addorder-btn").style.display = "none";
+    document.getElementById("tab-finance-btn").style.display = "none";
+  }
+  // Finance tab only visible to admin
+  if (role === "admin") {
+    document.getElementById("tab-finance-btn").style.display = "";
   }
 
   loadDashboard();
@@ -558,6 +669,7 @@ function switchTab(name, btn) {
   document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
   btn.classList.add("active");
   document.getElementById("tab-" + name).classList.add("active");
+  if (name === "finance") renderFinance();
 }
 
 // ── LOAD DASHBOARD ────────────────────────────────────────────────────
@@ -736,6 +848,7 @@ function displayOrders() {
         </div>
       </div>
       ${actionsHtml}
+      ${buildCostsSection(o)}
     </div>`;
   }).join("");
 }
@@ -768,6 +881,189 @@ async function deleteOrder(id) {
     displayOrders();
     toast("🗑️ Bestellung gelöscht.");
   } catch(e) { toast("❌ Fehler beim Löschen.", true); }
+}
+
+// ── COSTS PER ORDER ───────────────────────────────────────────────────
+function buildCostsSection(o) {
+  const costs = o.costs || {};
+  const hasCosts = costs.jersey || costs.shipping || costs.serviceFee || costs.printing;
+  const total = +((costs.jersey||0) + (costs.shipping||0) + (costs.serviceFee||0) + (costs.printing||0)).toFixed(2);
+  const btnClass = hasCosts ? "costs-toggle-btn costs-saved" : "costs-toggle-btn";
+  const btnLabel = hasCosts ? `✅ Kosten eingetragen (CHF ${total.toFixed(2)})` : "💰 Kosten eintragen";
+  return `
+  <div class="order-costs">
+    <button class="${btnClass}" onclick="toggleCostsForm(${o.id})">${btnLabel}</button>
+    ${hasCosts ? `
+    <div class="costs-display">
+      ${costs.jersey    ? `<span class="costs-display-item">Trikot: <strong>CHF ${(+costs.jersey).toFixed(2)}</strong></span>` : ""}
+      ${costs.shipping  ? `<span class="costs-display-item">Versand: <strong>CHF ${(+costs.shipping).toFixed(2)}</strong></span>` : ""}
+      ${costs.serviceFee? `<span class="costs-display-item">Service Fee: <strong>CHF ${(+costs.serviceFee).toFixed(2)}</strong></span>` : ""}
+      ${costs.printing  ? `<span class="costs-display-item">Druck: <strong>CHF ${(+costs.printing).toFixed(2)}</strong></span>` : ""}
+    </div>` : ""}
+    <div class="costs-form" id="costs-form-${o.id}">
+      <div class="costs-grid">
+        <div class="costs-field">
+          <label>Trikot Einkaufspreis (CHF)</label>
+          <input type="number" step="0.01" min="0" id="cost-jersey-${o.id}" value="${costs.jersey||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
+        </div>
+        <div class="costs-field">
+          <label>Versandkosten (CHF)</label>
+          <input type="number" step="0.01" min="0" id="cost-shipping-${o.id}" value="${costs.shipping||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
+        </div>
+        <div class="costs-field">
+          <label>Service Fee / Stripe (CHF)</label>
+          <input type="number" step="0.01" min="0" id="cost-fee-${o.id}" value="${costs.serviceFee||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
+        </div>
+        <div class="costs-field">
+          <label>Druckkosten Backprint (CHF)</label>
+          <input type="number" step="0.01" min="0" id="cost-print-${o.id}" value="${costs.printing||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
+        </div>
+      </div>
+      <div class="costs-total-row">
+        <span>Total Kosten:</span>
+        <span id="costs-total-${o.id}">CHF ${total.toFixed(2)}</span>
+      </div>
+      <button class="costs-save-btn" onclick="saveCosts(${o.id})">💾 Speichern</button>
+    </div>
+  </div>`;
+}
+
+function toggleCostsForm(id) {
+  const form = document.getElementById("costs-form-" + id);
+  if (form) form.classList.toggle("open");
+}
+
+function updateCostsTotal(id) {
+  const jersey   = parseFloat(document.getElementById("cost-jersey-"  + id)?.value) || 0;
+  const shipping = parseFloat(document.getElementById("cost-shipping-" + id)?.value) || 0;
+  const fee      = parseFloat(document.getElementById("cost-fee-"     + id)?.value) || 0;
+  const print    = parseFloat(document.getElementById("cost-print-"   + id)?.value) || 0;
+  const total    = +(jersey + shipping + fee + print).toFixed(2);
+  const el = document.getElementById("costs-total-" + id);
+  if (el) el.textContent = "CHF " + total.toFixed(2);
+}
+
+async function saveCosts(id) {
+  const jersey     = parseFloat(document.getElementById("cost-jersey-"  + id)?.value) || 0;
+  const shipping   = parseFloat(document.getElementById("cost-shipping-" + id)?.value) || 0;
+  const serviceFee = parseFloat(document.getElementById("cost-fee-"     + id)?.value) || 0;
+  const printing   = parseFloat(document.getElementById("cost-print-"   + id)?.value) || 0;
+  try {
+    await api("/api/order/update-costs", { id, costs: { jersey, shipping, serviceFee, printing } });
+    const order = allOrders.find(o => o.id === id);
+    if (order) order.costs = { jersey, shipping, serviceFee, printing };
+    displayOrders();
+    toast("✅ Kosten gespeichert!");
+  } catch(e) { toast("❌ Fehler beim Speichern.", true); }
+}
+
+// ── BUCHHALTUNG ───────────────────────────────────────────────────────
+async function renderFinance() {
+  // Calculate revenue from orders
+  const paidOrders = allOrders.filter(o => o.status !== "cancelled");
+  const totalRevenue = paidOrders.reduce((s, o) => s + (+(o.total||0)), 0);
+
+  // Calculate costs from order cost entries
+  let totalJersey = 0, totalShipping = 0, totalFee = 0, totalPrint = 0;
+  paidOrders.forEach(o => {
+    const c = o.costs || {};
+    totalJersey   += +(c.jersey    || 0);
+    totalShipping += +(c.shipping  || 0);
+    totalFee      += +(c.serviceFee|| 0);
+    totalPrint    += +(c.printing  || 0);
+  });
+  const totalOrderCosts = +(totalJersey + totalShipping + totalFee + totalPrint).toFixed(2);
+  const ordersWithCosts = paidOrders.filter(o => o.costs && (o.costs.jersey || o.costs.shipping || o.costs.serviceFee || o.costs.printing)).length;
+
+  // Update revenue card
+  document.getElementById("fc-revenue").textContent = "CHF " + totalRevenue.toFixed(2);
+  document.getElementById("fc-orders-count").textContent = `${paidOrders.length} Bestellungen`;
+
+  // Update costs card
+  document.getElementById("fc-costs").textContent = "CHF " + totalOrderCosts.toFixed(2);
+  document.getElementById("fc-costs-detail").textContent = `${ordersWithCosts} von ${paidOrders.length} Bestellungen mit Kosten`;
+
+  // Load manual entries
+  let entries = [];
+  try { entries = await api("/api/finance/entries"); } catch(e) {}
+
+  const manualIncome  = entries.filter(e => e.type === "income" ).reduce((s,e) => s + e.amount, 0);
+  const manualExpense = entries.filter(e => e.type === "expense").reduce((s,e) => s + e.amount, 0);
+  const manualBalance = +(manualIncome - manualExpense).toFixed(2);
+  document.getElementById("fc-manual-balance").textContent = (manualBalance >= 0 ? "+" : "") + "CHF " + manualBalance.toFixed(2);
+  document.getElementById("fc-manual-balance").style.color = manualBalance >= 0 ? "#4ade80" : "#f87171";
+  document.getElementById("fc-manual-count").textContent = `${entries.length} Einträge`;
+
+  // Render entries table
+  const entriesList = document.getElementById("finance-entries-list");
+  if (!entries.length) {
+    entriesList.innerHTML = `<div class="pending-empty" style="padding:1.5rem;"><span>📭</span>Keine manuellen Einträge.</div>`;
+  } else {
+    entriesList.innerHTML = `<table class="entries-table">
+      <thead><tr>
+        <th>Datum</th><th>Beschreibung</th><th>Typ</th><th>Betrag</th><th></th>
+      </tr></thead>
+      <tbody>${entries.map(e => `
+        <tr>
+          <td style="color:rgba(255,255,255,0.35);white-space:nowrap;">${escHtml(e.date)}</td>
+          <td>${escHtml(e.description)}</td>
+          <td>${e.type === "income" ? '<span style="color:#4ade80">📈 Einnahme</span>' : '<span style="color:#f87171">📉 Ausgabe</span>'}</td>
+          <td class="${e.type === "income" ? "entry-income" : "entry-expense"}">${e.type === "income" ? "+" : "−"}CHF ${(+e.amount).toFixed(2)}</td>
+          <td><button class="entry-del-btn" onclick="deleteManualEntry(${e.id})">✕</button></td>
+        </tr>`).join("")}
+      </tbody>
+    </table>`;
+  }
+
+  // Render order costs breakdown
+  const orderCostsList = document.getElementById("finance-order-costs");
+  const withCosts = paidOrders.filter(o => o.costs && (o.costs.jersey || o.costs.shipping || o.costs.serviceFee || o.costs.printing));
+  if (!withCosts.length) {
+    orderCostsList.innerHTML = `<div class="pending-empty" style="padding:1.5rem;"><span>📭</span>Noch keine Kosten eingetragen.</div>`;
+  } else {
+    orderCostsList.innerHTML = `<table class="entries-table">
+      <thead><tr>
+        <th>Bestellung</th><th>Verkauf</th><th>Trikot</th><th>Versand</th><th>Fee</th><th>Druck</th><th>Total Kosten</th>
+      </tr></thead>
+      <tbody>${withCosts.map(o => {
+        const c = o.costs;
+        const tc = +((c.jersey||0)+(c.shipping||0)+(c.serviceFee||0)+(c.printing||0)).toFixed(2);
+        return `<tr>
+          <td style="font-family:monospace;color:rgba(255,255,255,0.5);">${escHtml(o.order_id||("#"+o.id))}</td>
+          <td style="color:#4ade80;font-weight:700;">CHF ${(+(o.total||0)).toFixed(2)}</td>
+          <td>${c.jersey    ? "CHF "+(+c.jersey).toFixed(2)    : "—"}</td>
+          <td>${c.shipping  ? "CHF "+(+c.shipping).toFixed(2)  : "—"}</td>
+          <td>${c.serviceFee? "CHF "+(+c.serviceFee).toFixed(2): "—"}</td>
+          <td>${c.printing  ? "CHF "+(+c.printing).toFixed(2)  : "—"}</td>
+          <td style="color:#f87171;font-weight:700;">CHF ${tc.toFixed(2)}</td>
+        </tr>`;
+      }).join("")}
+      </tbody>
+    </table>`;
+  }
+}
+
+async function addManualEntry() {
+  const desc   = document.getElementById("me-desc").value.trim();
+  const amount = parseFloat(document.getElementById("me-amount").value);
+  const type   = document.getElementById("me-type").value;
+  if (!desc || !amount || amount <= 0) { toast("⚠️ Bitte Beschreibung und Betrag eingeben.", true); return; }
+  try {
+    await api("/api/finance/add-entry", { description: desc, amount, type });
+    document.getElementById("me-desc").value   = "";
+    document.getElementById("me-amount").value = "";
+    renderFinance();
+    toast("✅ Eintrag hinzugefügt!");
+  } catch(e) { toast("❌ Fehler.", true); }
+}
+
+async function deleteManualEntry(id) {
+  if (!confirm("Eintrag wirklich löschen?")) return;
+  try {
+    await api("/api/finance/delete-entry", { id });
+    renderFinance();
+    toast("🗑️ Eintrag gelöscht.");
+  } catch(e) { toast("❌ Fehler.", true); }
 }
 
 // ── PENDING REVIEWS ───────────────────────────────────────────────────

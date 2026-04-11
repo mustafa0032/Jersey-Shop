@@ -119,6 +119,7 @@ const discountRateMap = new Map();
 const PENDING  = path.join(ROOT, "reviews-pending.json");
 const APPROVED = path.join(ROOT, "reviews-approved.json");
 const ORDERS   = path.join(ROOT, "orders.json");
+const FINANCE  = path.join(ROOT, "finance-entries.json");
 
 const MIME = {
   ".html": "text/html", ".css": "text/css", ".js": "application/javascript",
@@ -450,6 +451,27 @@ http.createServer(async (req, res) => {
         ].filter(l => l !== undefined && l !== "").join("\n"),
       }).catch(err => console.error("[Owner notify error]", err.message));
 
+      // Notify supplier (no customer data!)
+      mailer.sendMail({
+        from:    `"JerseyPhase Shop" <${process.env.GMAIL_USER}>`,
+        to:      "youngman8811@126.com",
+        subject: `🛒 New Order Received — ${order.order_id}`,
+        text: [
+          `Hi Liu,`,
+          ``,
+          `A new order has been placed on JerseyPhase!`,
+          ``,
+          `Order ID: ${order.order_id}`,
+          `Date:     ${order.date}`,
+          `Total:    CHF ${order.total}`,
+          ``,
+          `For full details (customer, items, address) please visit the Admin Panel:`,
+          `👉 https://jerseyphase.ch/admin.html`,
+          ``,
+          `— JerseyPhase`,
+        ].join("\n"),
+      }).catch(err => console.error("[Supplier notify error]", err.message));
+
       return json(res, 200, { ok: true });
     } catch (err) {
       console.error("[Order save FAILED]", err.message);
@@ -611,6 +633,25 @@ http.createServer(async (req, res) => {
     return json(res, 200, { ok: true });
   }
 
+  // POST /api/order/update-costs  — supplier/admin saves costs for an order
+  if (req.method === "POST" && url === "/api/order/update-costs") {
+    if (!requireAuth(res, req, "any")) return;
+    const body = await parseBody(req);
+    const orders = readJSON(ORDERS);
+    const order = orders.find(o => o.id === body.id);
+    if (!order) return json(res, 404, { error: "Not found" });
+    const c = body.costs || {};
+    order.costs = {
+      jersey:     Math.max(0, parseFloat(c.jersey)     || 0),
+      shipping:   Math.max(0, parseFloat(c.shipping)   || 0),
+      serviceFee: Math.max(0, parseFloat(c.serviceFee) || 0),
+      printing:   Math.max(0, parseFloat(c.printing)   || 0),
+      enteredAt:  new Date().toLocaleString("de-CH"),
+    };
+    writeJSON(ORDERS, orders);
+    return json(res, 200, { ok: true });
+  }
+
   // POST /api/order/delete  — admin deletes an order
   if (req.method === "POST" && url === "/api/order/delete") {
     if (!requireAuth(res, req, "admin")) return;
@@ -620,9 +661,46 @@ http.createServer(async (req, res) => {
     return json(res, 200, { ok: true });
   }
 
+  // ── FINANCE API ──────────────────────────────────────────────────
+
+  // GET /api/finance/entries  — admin fetches all manual finance entries
+  if (req.method === "GET" && url === "/api/finance/entries") {
+    if (!requireAuth(res, req, "admin")) return;
+    return json(res, 200, readJSON(FINANCE));
+  }
+
+  // POST /api/finance/add-entry  — admin adds a manual finance entry
+  if (req.method === "POST" && url === "/api/finance/add-entry") {
+    if (!requireAuth(res, req, "admin")) return;
+    const body = await parseBody(req);
+    const { description, amount, type } = body;
+    if (!description || !amount || !["income","expense"].includes(type)) {
+      return json(res, 400, { error: "Missing or invalid fields." });
+    }
+    const entries = readJSON(FINANCE);
+    entries.unshift({
+      id:          Date.now(),
+      date:        new Date().toLocaleDateString("de-CH", { day:"2-digit", month:"2-digit", year:"numeric" }),
+      description: String(description).slice(0, 200),
+      amount:      Math.abs(parseFloat(amount)),
+      type,
+    });
+    writeJSON(FINANCE, entries);
+    return json(res, 200, { ok: true });
+  }
+
+  // POST /api/finance/delete-entry  — admin deletes a manual finance entry
+  if (req.method === "POST" && url === "/api/finance/delete-entry") {
+    if (!requireAuth(res, req, "admin")) return;
+    const body = await parseBody(req);
+    const entries = readJSON(FINANCE).filter(e => e.id !== body.id);
+    writeJSON(FINANCE, entries);
+    return json(res, 200, { ok: true });
+  }
+
   // ── STATIC FILES ──────────────────────────────────────────────────
   // Block direct access to sensitive data files
-  const BLOCKED_FILES = ["orders.json","reviews-pending.json","reviews-approved.json","product-images.json",".env","serve.js"];
+  const BLOCKED_FILES = ["orders.json","reviews-pending.json","reviews-approved.json","product-images.json","finance-entries.json",".env","serve.js"];
   const requestedFile = url.split("/").pop().split("?")[0];
   if (BLOCKED_FILES.includes(requestedFile)) {
     res.writeHead(403); res.end("Forbidden"); return;
