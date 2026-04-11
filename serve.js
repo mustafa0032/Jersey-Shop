@@ -663,9 +663,9 @@ http.createServer(async (req, res) => {
 
   // ── FINANCE API ──────────────────────────────────────────────────
 
-  // GET /api/finance/entries  — admin fetches all manual finance entries
+  // GET /api/finance/entries  — admin or supplier can read (for balance display)
   if (req.method === "GET" && url === "/api/finance/entries") {
-    if (!requireAuth(res, req, "admin")) return;
+    if (!requireAuth(res, req, "any")) return;
     return json(res, 200, readJSON(FINANCE));
   }
 

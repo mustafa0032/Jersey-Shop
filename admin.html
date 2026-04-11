@@ -361,6 +361,14 @@
           <button class="filter-btn" onclick="filterOrders('delivered', this)">🟢 Geliefert</button>
         </div>
       </div>
+      <!-- CNY balance banner — visible to supplier role -->
+      <div id="supplier-cny-banner" style="display:none;background:linear-gradient(135deg,rgba(74,222,128,0.08),rgba(74,222,128,0.03));border:1px solid rgba(74,222,128,0.25);border-radius:12px;padding:1rem 1.4rem;margin-bottom:1.25rem;align-items:center;gap:1.2rem;flex-wrap:wrap;">
+        <div style="font-size:1.6rem;">💰</div>
+        <div>
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.15rem;">Verbleibendes CNY-Guthaben</div>
+          <div id="supplier-cny-value" style="font-size:1.5rem;font-weight:700;color:#4ade80;font-family:monospace;">¥ —</div>
+        </div>
+      </div>
       <div id="orders-list"></div>
     </div>
 
@@ -461,47 +469,40 @@
           <div class="fc-value" id="fc-revenue">CHF —</div>
           <div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.3rem;" id="fc-orders-count"></div>
         </div>
-        <div class="finance-card fc-costs">
-          <div class="fc-label">📉 Gesamtkosten (Einkauf + Versand)</div>
-          <div class="fc-value" id="fc-costs">CHF —</div>
-          <div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.3rem;" id="fc-costs-detail"></div>
+        <div class="finance-card" style="border-color:rgba(251,191,36,0.2);">
+          <div class="fc-label">🟡 Supplier Guthaben — Aufgeladen (¥ CNY)</div>
+          <div class="fc-value" id="fc-cny-deposited" style="color:#fbbf24;">¥ —</div>
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.3rem;" id="fc-cny-deposit-count"></div>
         </div>
-        <div class="finance-card fc-manual">
-          <div class="fc-label">📋 Manuelle Einträge (Saldo)</div>
-          <div class="fc-value" id="fc-manual-balance">CHF —</div>
-          <div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.3rem;" id="fc-manual-count"></div>
+        <div class="finance-card" style="border-color:rgba(74,222,128,0.2);">
+          <div class="fc-label">✅ Verbleibendes Guthaben (¥ CNY)</div>
+          <div class="fc-value" id="fc-cny-balance" style="color:#4ade80;">¥ —</div>
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.3rem;" id="fc-cny-spent-info"></div>
         </div>
       </div>
 
-      <!-- Manual entry form -->
-      <div class="finance-section-title">Manuellen Eintrag hinzufügen</div>
+      <!-- CNY deposit form (admin only) -->
+      <div class="finance-section-title">💴 Guthaben für Supplier aufladen (nur Admin)</div>
       <div class="manual-entry-form">
         <div>
           <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;display:block;margin-bottom:0.3rem;">Beschreibung</label>
-          <input type="text" id="me-desc" placeholder="z.B. Domain-Kosten, Werbung…" />
+          <input type="text" id="me-desc" placeholder="z.B. Überweisung April, WeChat Pay…" />
         </div>
         <div>
-          <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;display:block;margin-bottom:0.3rem;">Betrag (CHF)</label>
+          <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;display:block;margin-bottom:0.3rem;">Betrag (¥ CNY)</label>
           <input type="number" id="me-amount" placeholder="0.00" step="0.01" min="0" />
         </div>
-        <div>
-          <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;display:block;margin-bottom:0.3rem;">Typ</label>
-          <select id="me-type">
-            <option value="expense">📉 Ausgabe</option>
-            <option value="income">📈 Einnahme</option>
-          </select>
-        </div>
-        <button class="me-add-btn" onclick="addManualEntry()">+ Hinzufügen</button>
+        <button class="me-add-btn" onclick="addManualEntry()" style="background:rgba(251,191,36,0.15);border-color:rgba(251,191,36,0.3);color:#fbbf24;">+ Aufladen</button>
       </div>
 
-      <!-- Entries table -->
-      <div class="finance-section-title">Alle manuellen Einträge</div>
+      <!-- CNY deposits table -->
+      <div class="finance-section-title">Alle Aufladungen (¥ CNY)</div>
       <div id="finance-entries-list" style="background:#13131c;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:0.5rem 0;overflow-x:auto;">
         <div class="pending-empty" style="padding:1.5rem;"><span>⏳</span>Lädt…</div>
       </div>
 
-      <!-- Order costs breakdown -->
-      <div class="finance-section-title">Kosten pro Bestellung (eingetragen vom Supplier)</div>
+      <!-- Order costs breakdown in CNY -->
+      <div class="finance-section-title">Kosten pro Bestellung — abgezogen vom Guthaben (¥ CNY)</div>
       <div id="finance-order-costs" style="background:#13131c;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:0.5rem 0;overflow-x:auto;">
         <div class="pending-empty" style="padding:1.5rem;"><span>⏳</span>Lädt…</div>
       </div>
@@ -682,6 +683,38 @@ function loadDashboard() {
     initPhotoUpload();
     const today = new Date().toLocaleDateString("de-CH", { month: "long", year: "numeric" });
     document.getElementById("add-date").value = today;
+  }
+  if (currentUser.role === "supplier") {
+    loadCNYBalance();
+  }
+}
+
+// ── CNY BALANCE WIDGET (supplier view) ────────────────────────────────
+async function loadCNYBalance() {
+  const banner = document.getElementById("supplier-cny-banner");
+  const valueEl = document.getElementById("supplier-cny-value");
+  if (!banner || !valueEl) return;
+  banner.style.display = "flex";
+  try {
+    const [entriesRes, ordersRes] = await Promise.all([
+      fetch("/api/finance/entries", { headers: { Authorization: "Bearer " + token } }),
+      fetch("/api/orders", { headers: { Authorization: "Bearer " + token } }),
+    ]);
+    const entries = await entriesRes.json();
+    const orders  = await ordersRes.json();
+    const totalDeposited = (Array.isArray(entries) ? entries : [])
+      .reduce((s, e) => s + +(e.amount || 0), 0);
+    const paidOrders = (Array.isArray(orders) ? orders : [])
+      .filter(o => o.payment_status === "paid");
+    const totalSpent = paidOrders.reduce((s, o) => {
+      const c = o.costs || {};
+      return s + +(c.jersey||0) + +(c.shipping||0) + +(c.serviceFee||0) + +(c.printing||0);
+    }, 0);
+    const balance = +(totalDeposited - totalSpent).toFixed(2);
+    valueEl.textContent = "¥ " + balance.toFixed(2);
+    valueEl.style.color = balance >= 0 ? "#4ade80" : "#f87171";
+  } catch (e) {
+    valueEl.textContent = "¥ —";
   }
 }
 
@@ -889,39 +922,39 @@ function buildCostsSection(o) {
   const hasCosts = costs.jersey || costs.shipping || costs.serviceFee || costs.printing;
   const total = +((costs.jersey||0) + (costs.shipping||0) + (costs.serviceFee||0) + (costs.printing||0)).toFixed(2);
   const btnClass = hasCosts ? "costs-toggle-btn costs-saved" : "costs-toggle-btn";
-  const btnLabel = hasCosts ? `✅ Kosten eingetragen (CHF ${total.toFixed(2)})` : "💰 Kosten eintragen";
+  const btnLabel = hasCosts ? `✅ Kosten eingetragen (¥ ${total.toFixed(2)} CNY)` : "💴 Kosten eintragen (¥ CNY)";
   return `
   <div class="order-costs">
     <button class="${btnClass}" onclick="toggleCostsForm(${o.id})">${btnLabel}</button>
     ${hasCosts ? `
     <div class="costs-display">
-      ${costs.jersey    ? `<span class="costs-display-item">Trikot: <strong>CHF ${(+costs.jersey).toFixed(2)}</strong></span>` : ""}
-      ${costs.shipping  ? `<span class="costs-display-item">Versand: <strong>CHF ${(+costs.shipping).toFixed(2)}</strong></span>` : ""}
-      ${costs.serviceFee? `<span class="costs-display-item">Service Fee: <strong>CHF ${(+costs.serviceFee).toFixed(2)}</strong></span>` : ""}
-      ${costs.printing  ? `<span class="costs-display-item">Druck: <strong>CHF ${(+costs.printing).toFixed(2)}</strong></span>` : ""}
+      ${costs.jersey    ? `<span class="costs-display-item">Trikot: <strong>¥${(+costs.jersey).toFixed(2)}</strong></span>` : ""}
+      ${costs.shipping  ? `<span class="costs-display-item">Versand: <strong>¥${(+costs.shipping).toFixed(2)}</strong></span>` : ""}
+      ${costs.serviceFee? `<span class="costs-display-item">Service Fee: <strong>¥${(+costs.serviceFee).toFixed(2)}</strong></span>` : ""}
+      ${costs.printing  ? `<span class="costs-display-item">Druck: <strong>¥${(+costs.printing).toFixed(2)}</strong></span>` : ""}
     </div>` : ""}
     <div class="costs-form" id="costs-form-${o.id}">
       <div class="costs-grid">
         <div class="costs-field">
-          <label>Trikot Einkaufspreis (CHF)</label>
+          <label>Trikot Einkaufspreis (¥ CNY)</label>
           <input type="number" step="0.01" min="0" id="cost-jersey-${o.id}" value="${costs.jersey||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
         </div>
         <div class="costs-field">
-          <label>Versandkosten (CHF)</label>
+          <label>Versandkosten (¥ CNY)</label>
           <input type="number" step="0.01" min="0" id="cost-shipping-${o.id}" value="${costs.shipping||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
         </div>
         <div class="costs-field">
-          <label>Service Fee / Stripe (CHF)</label>
+          <label>Service Fee / Stripe (¥ CNY)</label>
           <input type="number" step="0.01" min="0" id="cost-fee-${o.id}" value="${costs.serviceFee||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
         </div>
         <div class="costs-field">
-          <label>Druckkosten Backprint (CHF)</label>
+          <label>Druckkosten Backprint (¥ CNY)</label>
           <input type="number" step="0.01" min="0" id="cost-print-${o.id}" value="${costs.printing||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
         </div>
       </div>
       <div class="costs-total-row">
-        <span>Total Kosten:</span>
-        <span id="costs-total-${o.id}">CHF ${total.toFixed(2)}</span>
+        <span>Total Kosten (vom Guthaben abgezogen):</span>
+        <span id="costs-total-${o.id}">¥ ${total.toFixed(2)}</span>
       </div>
       <button class="costs-save-btn" onclick="saveCosts(${o.id})">💾 Speichern</button>
     </div>
@@ -940,7 +973,7 @@ function updateCostsTotal(id) {
   const print    = parseFloat(document.getElementById("cost-print-"   + id)?.value) || 0;
   const total    = +(jersey + shipping + fee + print).toFixed(2);
   const el = document.getElementById("costs-total-" + id);
-  if (el) el.textContent = "CHF " + total.toFixed(2);
+  if (el) el.textContent = "¥ " + total.toFixed(2) + " CNY";
 }
 
 async function saveCosts(id) {
@@ -959,71 +992,64 @@ async function saveCosts(id) {
 
 // ── BUCHHALTUNG ───────────────────────────────────────────────────────
 async function renderFinance() {
-  // Calculate revenue from orders
   const paidOrders = allOrders.filter(o => o.status !== "cancelled");
+
+  // Revenue (CHF) — unchanged
   const totalRevenue = paidOrders.reduce((s, o) => s + (+(o.total||0)), 0);
-
-  // Calculate costs from order cost entries
-  let totalJersey = 0, totalShipping = 0, totalFee = 0, totalPrint = 0;
-  paidOrders.forEach(o => {
-    const c = o.costs || {};
-    totalJersey   += +(c.jersey    || 0);
-    totalShipping += +(c.shipping  || 0);
-    totalFee      += +(c.serviceFee|| 0);
-    totalPrint    += +(c.printing  || 0);
-  });
-  const totalOrderCosts = +(totalJersey + totalShipping + totalFee + totalPrint).toFixed(2);
-  const ordersWithCosts = paidOrders.filter(o => o.costs && (o.costs.jersey || o.costs.shipping || o.costs.serviceFee || o.costs.printing)).length;
-
-  // Update revenue card
   document.getElementById("fc-revenue").textContent = "CHF " + totalRevenue.toFixed(2);
   document.getElementById("fc-orders-count").textContent = `${paidOrders.length} Bestellungen`;
 
-  // Update costs card
-  document.getElementById("fc-costs").textContent = "CHF " + totalOrderCosts.toFixed(2);
-  document.getElementById("fc-costs-detail").textContent = `${ordersWithCosts} von ${paidOrders.length} Bestellungen mit Kosten`;
+  // CNY spent from order costs
+  let totalSpentCNY = 0;
+  paidOrders.forEach(o => {
+    const c = o.costs || {};
+    totalSpentCNY += +(c.jersey||0) + +(c.shipping||0) + +(c.serviceFee||0) + +(c.printing||0);
+  });
+  totalSpentCNY = +totalSpentCNY.toFixed(2);
+  const ordersWithCosts = paidOrders.filter(o => o.costs && (o.costs.jersey||o.costs.shipping||o.costs.serviceFee||o.costs.printing)).length;
 
-  // Load manual entries
+  // Load CNY deposits (admin only)
   let entries = [];
   try { entries = await api("/api/finance/entries"); } catch(e) {}
 
-  const manualIncome  = entries.filter(e => e.type === "income" ).reduce((s,e) => s + e.amount, 0);
-  const manualExpense = entries.filter(e => e.type === "expense").reduce((s,e) => s + e.amount, 0);
-  const manualBalance = +(manualIncome - manualExpense).toFixed(2);
-  document.getElementById("fc-manual-balance").textContent = (manualBalance >= 0 ? "+" : "") + "CHF " + manualBalance.toFixed(2);
-  document.getElementById("fc-manual-balance").style.color = manualBalance >= 0 ? "#4ade80" : "#f87171";
-  document.getElementById("fc-manual-count").textContent = `${entries.length} Einträge`;
+  const totalDepositedCNY = +entries.reduce((s,e) => s + e.amount, 0).toFixed(2);
+  const balanceCNY        = +(totalDepositedCNY - totalSpentCNY).toFixed(2);
 
-  // Render entries table
+  // Update CNY cards
+  document.getElementById("fc-cny-deposited").textContent = "¥ " + totalDepositedCNY.toFixed(2);
+  document.getElementById("fc-cny-deposit-count").textContent = `${entries.length} Aufladungen`;
+  document.getElementById("fc-cny-balance").textContent = "¥ " + balanceCNY.toFixed(2);
+  document.getElementById("fc-cny-balance").style.color = balanceCNY >= 0 ? "#4ade80" : "#f87171";
+  document.getElementById("fc-cny-spent-info").textContent =
+    `Ausgegeben: ¥${totalSpentCNY.toFixed(2)} (${ordersWithCosts} Bestellungen)`;
+
+  // Render deposits table
   const entriesList = document.getElementById("finance-entries-list");
   if (!entries.length) {
-    entriesList.innerHTML = `<div class="pending-empty" style="padding:1.5rem;"><span>📭</span>Keine manuellen Einträge.</div>`;
+    entriesList.innerHTML = `<div class="pending-empty" style="padding:1.5rem;"><span>📭</span>Noch keine Aufladungen.</div>`;
   } else {
     entriesList.innerHTML = `<table class="entries-table">
-      <thead><tr>
-        <th>Datum</th><th>Beschreibung</th><th>Typ</th><th>Betrag</th><th></th>
-      </tr></thead>
+      <thead><tr><th>Datum</th><th>Beschreibung</th><th>Betrag (CNY)</th><th></th></tr></thead>
       <tbody>${entries.map(e => `
         <tr>
           <td style="color:rgba(255,255,255,0.35);white-space:nowrap;">${escHtml(e.date)}</td>
           <td>${escHtml(e.description)}</td>
-          <td>${e.type === "income" ? '<span style="color:#4ade80">📈 Einnahme</span>' : '<span style="color:#f87171">📉 Ausgabe</span>'}</td>
-          <td class="${e.type === "income" ? "entry-income" : "entry-expense"}">${e.type === "income" ? "+" : "−"}CHF ${(+e.amount).toFixed(2)}</td>
+          <td class="entry-income">+¥ ${(+e.amount).toFixed(2)}</td>
           <td><button class="entry-del-btn" onclick="deleteManualEntry(${e.id})">✕</button></td>
         </tr>`).join("")}
       </tbody>
     </table>`;
   }
 
-  // Render order costs breakdown
+  // Render order costs breakdown (CNY)
   const orderCostsList = document.getElementById("finance-order-costs");
-  const withCosts = paidOrders.filter(o => o.costs && (o.costs.jersey || o.costs.shipping || o.costs.serviceFee || o.costs.printing));
+  const withCosts = paidOrders.filter(o => o.costs && (o.costs.jersey||o.costs.shipping||o.costs.serviceFee||o.costs.printing));
   if (!withCosts.length) {
     orderCostsList.innerHTML = `<div class="pending-empty" style="padding:1.5rem;"><span>📭</span>Noch keine Kosten eingetragen.</div>`;
   } else {
     orderCostsList.innerHTML = `<table class="entries-table">
       <thead><tr>
-        <th>Bestellung</th><th>Verkauf</th><th>Trikot</th><th>Versand</th><th>Fee</th><th>Druck</th><th>Total Kosten</th>
+        <th>Bestellung</th><th>Einnahme (CHF)</th><th>Trikot (¥)</th><th>Versand (¥)</th><th>Fee (¥)</th><th>Druck (¥)</th><th>Total (¥)</th>
       </tr></thead>
       <tbody>${withCosts.map(o => {
         const c = o.costs;
@@ -1031,11 +1057,11 @@ async function renderFinance() {
         return `<tr>
           <td style="font-family:monospace;color:rgba(255,255,255,0.5);">${escHtml(o.order_id||("#"+o.id))}</td>
           <td style="color:#4ade80;font-weight:700;">CHF ${(+(o.total||0)).toFixed(2)}</td>
-          <td>${c.jersey    ? "CHF "+(+c.jersey).toFixed(2)    : "—"}</td>
-          <td>${c.shipping  ? "CHF "+(+c.shipping).toFixed(2)  : "—"}</td>
-          <td>${c.serviceFee? "CHF "+(+c.serviceFee).toFixed(2): "—"}</td>
-          <td>${c.printing  ? "CHF "+(+c.printing).toFixed(2)  : "—"}</td>
-          <td style="color:#f87171;font-weight:700;">CHF ${tc.toFixed(2)}</td>
+          <td>${c.jersey     ? "¥"+(+c.jersey).toFixed(2)     : "—"}</td>
+          <td>${c.shipping   ? "¥"+(+c.shipping).toFixed(2)   : "—"}</td>
+          <td>${c.serviceFee ? "¥"+(+c.serviceFee).toFixed(2) : "—"}</td>
+          <td>${c.printing   ? "¥"+(+c.printing).toFixed(2)   : "—"}</td>
+          <td style="color:#f87171;font-weight:700;">¥ ${tc.toFixed(2)}</td>
         </tr>`;
       }).join("")}
       </tbody>
@@ -1046,14 +1072,13 @@ async function renderFinance() {
 async function addManualEntry() {
   const desc   = document.getElementById("me-desc").value.trim();
   const amount = parseFloat(document.getElementById("me-amount").value);
-  const type   = document.getElementById("me-type").value;
-  if (!desc || !amount || amount <= 0) { toast("⚠️ Bitte Beschreibung und Betrag eingeben.", true); return; }
+  if (!desc || !amount || amount <= 0) { toast("⚠️ Bitte Beschreibung und CNY-Betrag eingeben.", true); return; }
   try {
-    await api("/api/finance/add-entry", { description: desc, amount, type });
+    await api("/api/finance/add-entry", { description: desc, amount, type: "deposit" });
     document.getElementById("me-desc").value   = "";
     document.getElementById("me-amount").value = "";
     renderFinance();
-    toast("✅ Eintrag hinzugefügt!");
+    toast("✅ Guthaben aufgeladen!");
   } catch(e) { toast("❌ Fehler.", true); }
 }
 
