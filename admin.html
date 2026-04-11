@@ -364,10 +364,11 @@
       <!-- CNY balance banner — visible to supplier role -->
       <div id="supplier-cny-banner" style="display:none;background:linear-gradient(135deg,rgba(74,222,128,0.08),rgba(74,222,128,0.03));border:1px solid rgba(74,222,128,0.25);border-radius:12px;padding:1rem 1.4rem;margin-bottom:1.25rem;align-items:center;gap:1.2rem;flex-wrap:wrap;">
         <div style="font-size:1.6rem;">💰</div>
-        <div>
-          <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.15rem;">Verbleibendes CNY-Guthaben</div>
+        <div style="flex:1;">
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.15rem;" id="supplier-cny-label">Verbleibendes CNY-Guthaben</div>
           <div id="supplier-cny-value" style="font-size:1.5rem;font-weight:700;color:#4ade80;font-family:monospace;">¥ —</div>
         </div>
+        <button onclick="loadCNYBalance()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.5);border-radius:8px;padding:0.35rem 0.8rem;font-size:0.78rem;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">🔄 Refresh</button>
       </div>
       <div id="orders-list"></div>
     </div>
@@ -695,18 +696,20 @@ async function loadCNYBalance() {
   const valueEl = document.getElementById("supplier-cny-value");
   if (!banner || !valueEl) return;
   banner.style.display = "flex";
+  valueEl.textContent = "¥ …";
   try {
     const [entriesRes, ordersRes] = await Promise.all([
-      fetch("/api/finance/entries", { headers: { Authorization: "Bearer " + token } }),
-      fetch("/api/orders", { headers: { Authorization: "Bearer " + token } }),
+      fetch("/api/finance/entries", { headers: { Authorization: "Bearer " + authToken } }),
+      fetch("/api/orders",          { headers: { Authorization: "Bearer " + authToken } }),
     ]);
     const entries = await entriesRes.json();
     const orders  = await ordersRes.json();
     const totalDeposited = (Array.isArray(entries) ? entries : [])
       .reduce((s, e) => s + +(e.amount || 0), 0);
-    const paidOrders = (Array.isArray(orders) ? orders : [])
-      .filter(o => o.payment_status === "paid");
-    const totalSpent = paidOrders.reduce((s, o) => {
+    // deduct costs from ALL non-cancelled orders (same logic as renderFinance)
+    const activeOrders = (Array.isArray(orders) ? orders : [])
+      .filter(o => o.status !== "cancelled");
+    const totalSpent = activeOrders.reduce((s, o) => {
       const c = o.costs || {};
       return s + +(c.jersey||0) + +(c.shipping||0) + +(c.serviceFee||0) + +(c.printing||0);
     }, 0);
@@ -799,12 +802,13 @@ function resolveItemImages(item) {
 
 async function renderOrders() {
   const list = document.getElementById("orders-list");
-  list.innerHTML = `<div class="pending-empty"><span>⏳</span>Lädt...</div>`;
+  const t = ADMIN_TRANSLATIONS[adminLang];
+  list.innerHTML = `<div class="pending-empty">${t.loading}</div>`;
   try {
     await loadProductImages();
     allOrders = await api("/api/orders");
   } catch(e) {
-    list.innerHTML = `<div class="pending-empty"><span>❌</span>Server nicht erreichbar — bitte stelle sicher dass <strong>START TUNNEL.bat</strong> läuft und lade die Seite neu.</div>`;
+    list.innerHTML = `<div class="pending-empty">${t.serverError}</div>`;
     return;
   }
   document.getElementById("orders-count-badge").textContent = allOrders.length ? `(${allOrders.length})` : "";
@@ -813,14 +817,16 @@ async function renderOrders() {
 
 function displayOrders() {
   const list = document.getElementById("orders-list");
+  const t = ADMIN_TRANSLATIONS[adminLang];
   const filtered = currentFilter === "all" ? allOrders : allOrders.filter(o => o.status === currentFilter);
   if (!filtered.length) {
-    list.innerHTML = `<div class="pending-empty"><span>📭</span>Keine Bestellungen${currentFilter !== "all" ? " in dieser Kategorie" : ""}.</div>`;
+    list.innerHTML = `<div class="pending-empty">${currentFilter !== "all" ? t.noOrdersCat : t.noOrders}</div>`;
     return;
   }
   const isAdmin = currentUser.role === "admin";
+  const statusMap = { new: t.statusNew, processing: t.statusProc, shipped: t.statusShipped, delivered: t.statusDeliv };
   list.innerHTML = filtered.map(o => {
-    const statusLabel = { new: "Neu", processing: "In Bearbeitung", shipped: "Versendet", delivered: "Geliefert" }[o.status] || o.status;
+    const statusLabel = statusMap[o.status] || o.status;
     const c = o.customer || {};
     const items = (o.items || []);
     const itemsHtml = items.map(i => `
@@ -844,16 +850,16 @@ function displayOrders() {
     const canEdit = currentUser.role === "admin" || currentUser.role === "supplier";
     const actionsHtml = canEdit ? `
       <div class="order-actions">
-        <label>Status:</label>
+        <label>${t.lblStatus}</label>
         <select class="status-select" id="sel-${o.id}">
-          <option value="new"        ${o.status==="new"        ?"selected":""}>🔵 Neu</option>
-          <option value="processing" ${o.status==="processing" ?"selected":""}>🟡 In Bearbeitung</option>
-          <option value="shipped"    ${o.status==="shipped"    ?"selected":""}>🟣 Versendet</option>
-          <option value="delivered"  ${o.status==="delivered"  ?"selected":""}>🟢 Geliefert</option>
+          <option value="new"        ${o.status==="new"        ?"selected":""}>${t.statusNew}</option>
+          <option value="processing" ${o.status==="processing" ?"selected":""}>${t.statusProc}</option>
+          <option value="shipped"    ${o.status==="shipped"    ?"selected":""}>${t.statusShipped}</option>
+          <option value="delivered"  ${o.status==="delivered"  ?"selected":""}>${t.statusDeliv}</option>
         </select>
-        <button class="update-btn" onclick="updateOrderStatus(${o.id})">Speichern</button>
-        ${isAdmin ? `<button class="order-del-btn" onclick="deleteOrder(${o.id})">✕ Löschen</button>` : ""}
-      </div>` : `<div style="margin-top:0.75rem;font-size:0.78rem;color:rgba(255,255,255,0.25);">Status: <strong style="color:rgba(255,255,255,0.5)">${statusLabel}</strong></div>`;
+        <button class="update-btn" onclick="updateOrderStatus(${o.id})">${t.labelSave}</button>
+        ${isAdmin ? `<button class="order-del-btn" onclick="deleteOrder(${o.id})">${t.labelDelete}</button>` : ""}
+      </div>` : `<div style="margin-top:0.75rem;font-size:0.78rem;color:rgba(255,255,255,0.25);">${t.lblStatus} <strong style="color:rgba(255,255,255,0.5)">${statusLabel}</strong></div>`;
     return `
     <div class="order-card status-${o.status}" id="order-card-${o.id}">
       <div class="order-head">
@@ -865,7 +871,7 @@ function displayOrders() {
       </div>
       <div class="order-body">
         <div class="order-customer-info">
-          <div class="order-section-label">Kunde</div>
+          <div class="order-section-label">${t.labelCustomer}</div>
           <p><strong>${escHtml(c.name || "—")}</strong></p>
           ${currentUser.role === "admin" ? `
             <p>📧 ${escHtml(c.email || "—")}</p>
@@ -875,8 +881,8 @@ function displayOrders() {
           ${o.notes ? `<p class="order-notes">💬 ${escHtml(o.notes)}</p>` : ""}
         </div>
         <div>
-          <div class="order-section-label">Bestellte Artikel</div>
-          ${itemsHtml || `<div style="color:rgba(255,255,255,0.25);font-size:0.85rem;">Keine Artikel</div>`}
+          <div class="order-section-label">${t.labelOrderedItems}</div>
+          ${itemsHtml || `<div style="color:rgba(255,255,255,0.25);font-size:0.85rem;">${t.noItems}</div>`}
           <div class="order-total-row"><span>Total</span><span>CHF ${(+(o.total||0)).toFixed(2)}</span></div>
         </div>
       </div>
@@ -896,67 +902,70 @@ function filterOrders(status, btn) {
 async function updateOrderStatus(id) {
   const sel = document.getElementById("sel-" + id);
   if (!sel) return;
+  const t = ADMIN_TRANSLATIONS[adminLang];
   try {
     await api("/api/order/update-status", { id, status: sel.value });
     const order = allOrders.find(o => o.id === id);
     if (order) order.status = sel.value;
     displayOrders();
-    toast("✅ Status aktualisiert!");
-  } catch(e) { toast("❌ Fehler beim Speichern.", true); }
+    toast(t.toastStatusOk);
+  } catch(e) { toast(t.toastStatusErr, true); }
 }
 
 async function deleteOrder(id) {
-  if (!confirm("Bestellung wirklich löschen?")) return;
+  const t = ADMIN_TRANSLATIONS[adminLang];
+  if (!confirm(t.confirmDelete)) return;
   try {
     await api("/api/order/delete", { id });
     allOrders = allOrders.filter(o => o.id !== id);
     document.getElementById("orders-count-badge").textContent = allOrders.length ? `(${allOrders.length})` : "";
     displayOrders();
-    toast("🗑️ Bestellung gelöscht.");
-  } catch(e) { toast("❌ Fehler beim Löschen.", true); }
+    toast(t.toastDeleteOk);
+  } catch(e) { toast(t.toastDeleteErr, true); }
 }
 
 // ── COSTS PER ORDER ───────────────────────────────────────────────────
 function buildCostsSection(o) {
+  const t = ADMIN_TRANSLATIONS[adminLang];
   const costs = o.costs || {};
   const hasCosts = costs.jersey || costs.shipping || costs.serviceFee || costs.printing;
   const total = +((costs.jersey||0) + (costs.shipping||0) + (costs.serviceFee||0) + (costs.printing||0)).toFixed(2);
   const btnClass = hasCosts ? "costs-toggle-btn costs-saved" : "costs-toggle-btn";
-  const btnLabel = hasCosts ? `✅ Kosten eingetragen (¥ ${total.toFixed(2)} CNY)` : "💴 Kosten eintragen (¥ CNY)";
+  const btnLabel = hasCosts ? `✅ ${t.costsEnter.replace("💴 ","").split("(")[0].trim()} (¥ ${total.toFixed(2)} CNY)` : t.costsEnter;
   return `
   <div class="order-costs">
-    <button class="${btnClass}" onclick="toggleCostsForm(${o.id})">${btnLabel}</button>
+    <button class="${btnClass}" onclick="toggleCostsForm(${o.id})">${hasCosts ? `✅ ${adminLang==="de"?"Kosten eingetragen":"Costs saved"} (¥ ${total.toFixed(2)} CNY)` : t.costsEnter}</button>
     ${hasCosts ? `
     <div class="costs-display">
-      ${costs.jersey    ? `<span class="costs-display-item">Trikot: <strong>¥${(+costs.jersey).toFixed(2)}</strong></span>` : ""}
-      ${costs.shipping  ? `<span class="costs-display-item">Versand: <strong>¥${(+costs.shipping).toFixed(2)}</strong></span>` : ""}
-      ${costs.serviceFee? `<span class="costs-display-item">Service Fee: <strong>¥${(+costs.serviceFee).toFixed(2)}</strong></span>` : ""}
-      ${costs.printing  ? `<span class="costs-display-item">Druck: <strong>¥${(+costs.printing).toFixed(2)}</strong></span>` : ""}
+      ${costs.jersey    ? `<span class="costs-display-item">${t.costsDisplayJersey}: <strong>¥${(+costs.jersey).toFixed(2)}</strong></span>` : ""}
+      ${costs.shipping  ? `<span class="costs-display-item">${t.costsDisplayShip}: <strong>¥${(+costs.shipping).toFixed(2)}</strong></span>` : ""}
+      ${costs.serviceFee? `<span class="costs-display-item">${t.costsDisplayFee}: <strong>¥${(+costs.serviceFee).toFixed(2)}</strong></span>` : ""}
+      ${costs.printing  ? `<span class="costs-display-item">${t.costsDisplayPrint}: <strong>¥${(+costs.printing).toFixed(2)}</strong></span>` : ""}
     </div>` : ""}
     <div class="costs-form" id="costs-form-${o.id}">
       <div class="costs-grid">
         <div class="costs-field">
-          <label>Trikot Einkaufspreis (¥ CNY)</label>
+          <label>${t.costsJersey}</label>
           <input type="number" step="0.01" min="0" id="cost-jersey-${o.id}" value="${costs.jersey||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
         </div>
         <div class="costs-field">
-          <label>Versandkosten (¥ CNY)</label>
+          <label>${t.costsShipping}</label>
           <input type="number" step="0.01" min="0" id="cost-shipping-${o.id}" value="${costs.shipping||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
         </div>
         <div class="costs-field">
-          <label>Service Fee / Stripe (¥ CNY)</label>
+          <label>${t.costsServiceFee}</label>
           <input type="number" step="0.01" min="0" id="cost-fee-${o.id}" value="${costs.serviceFee||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
         </div>
         <div class="costs-field">
-          <label>Druckkosten Backprint (¥ CNY)</label>
+          <label>${t.costsPrinting}</label>
           <input type="number" step="0.01" min="0" id="cost-print-${o.id}" value="${costs.printing||""}" placeholder="0.00" oninput="updateCostsTotal(${o.id})" />
         </div>
       </div>
       <div class="costs-total-row">
-        <span>Total Kosten (vom Guthaben abgezogen):</span>
+        <span>${t.costsTotal}</span>
         <span id="costs-total-${o.id}">¥ ${total.toFixed(2)}</span>
       </div>
-      <button class="costs-save-btn" onclick="saveCosts(${o.id})">💾 Speichern</button>
+      <button class="costs-save-btn" onclick="saveCosts(${o.id})">${t.costsSave}</button>
     </div>
   </div>`;
 }
@@ -981,13 +990,14 @@ async function saveCosts(id) {
   const shipping   = parseFloat(document.getElementById("cost-shipping-" + id)?.value) || 0;
   const serviceFee = parseFloat(document.getElementById("cost-fee-"     + id)?.value) || 0;
   const printing   = parseFloat(document.getElementById("cost-print-"   + id)?.value) || 0;
+  const t = ADMIN_TRANSLATIONS[adminLang];
   try {
     await api("/api/order/update-costs", { id, costs: { jersey, shipping, serviceFee, printing } });
     const order = allOrders.find(o => o.id === id);
     if (order) order.costs = { jersey, shipping, serviceFee, printing };
     displayOrders();
-    toast("✅ Kosten gespeichert!");
-  } catch(e) { toast("❌ Fehler beim Speichern.", true); }
+    toast(t.toastCostsOk);
+  } catch(e) { toast(t.toastCostsErr, true); }
 }
 
 // ── BUCHHALTUNG ───────────────────────────────────────────────────────
@@ -1344,7 +1354,7 @@ async function saveManualOrder() {
   } catch(e) {
     toast("❌ Fehler beim Speichern — läuft der Server?", true);
   }
-  btn.disabled = false; btn.textContent = adminLang === "en" ? "Save order" : "Bestellung speichern";
+  btn.disabled = false; btn.textContent = ADMIN_TRANSLATIONS[adminLang].saveOrder;
 }
 
 // ── LANGUAGE TOGGLE ──────────────────────────────────────────────────────────
@@ -1352,76 +1362,138 @@ let adminLang = localStorage.getItem("adminLang") || "de";
 
 const ADMIN_TRANSLATIONS = {
   de: {
-    tabOrders:     "📦 Bestellungen",
-    tabAddOrder:   "➕ Bestellung eintragen",
-    tabPending:    "⏳ Pending",
-    tabApproved:   "✅ Bestätigt",
-    tabAddReview:  "✍️ Review hinzufügen",
-    titleOrders:   "Alle Bestellungen",
-    titleAddOrder: "Bestellung manuell eintragen",
-    titlePending:  "Pending Reviews — warte auf Bestätigung",
-    titleApproved: "Bestätigte Reviews — öffentlich sichtbar",
-    titleAddReview:"Neue Review manuell hinzufügen",
-    filterAll:     "Alle",
-    filterNew:     "🔵 Neu",
-    filterProc:    "🟡 In Bearbeitung",
-    filterShipped: "🟣 Versendet",
-    filterDeliv:   "🟢 Geliefert",
-    noticeOrders:  "<strong>Für bestehende Bestellungen:</strong> Trage hier Bestellungen ein, die du per Email erhalten hast.",
-    noticePending: "<strong>So funktioniert es:</strong> Wenn ein Kunde eine Rezension schreibt, erscheint sie hier. Prüfe ob die Bestellungs-E-Mail zu einer echten Bestellung gehört — dann klick <strong>Bestätigen ✓</strong>.",
-    custData:      "👤 Kundendaten",
-    orderItems:    "🛒 Bestellte Artikel",
-    misc:          "📝 Sonstiges",
-    lblName:       "Name *",
-    lblEmail:      "Email *",
-    lblPhone:      "Telefon",
-    lblCountry:    "Land",
-    lblAddress:    "Strasse & Hausnummer",
-    lblCity:       "PLZ & Stadt",
-    lblStatus:     "Status",
-    lblNotes:      "Notizen / Anmerkungen",
-    addItem:       "+ Artikel hinzufügen",
-    saveOrder:     "Bestellung speichern ✓",
-    statusNew:     "🔵 Neu",
-    statusProc:    "🟡 In Bearbeitung",
-    statusShipped: "🟣 Versendet",
-    statusDeliv:   "🟢 Geliefert",
+    tabOrders:          "📦 Bestellungen",
+    tabAddOrder:        "➕ Bestellung eintragen",
+    tabPending:         "⏳ Pending",
+    tabApproved:        "✅ Bestätigt",
+    tabAddReview:       "✍️ Review hinzufügen",
+    titleOrders:        "Alle Bestellungen",
+    titleAddOrder:      "Bestellung manuell eintragen",
+    titlePending:       "Pending Reviews — warte auf Bestätigung",
+    titleApproved:      "Bestätigte Reviews — öffentlich sichtbar",
+    titleAddReview:     "Neue Review manuell hinzufügen",
+    filterAll:          "Alle",
+    filterNew:          "🔵 Neu",
+    filterProc:         "🟡 In Bearbeitung",
+    filterShipped:      "🟣 Versendet",
+    filterDeliv:        "🟢 Geliefert",
+    noticeOrders:       "<strong>Für bestehende Bestellungen:</strong> Trage hier Bestellungen ein, die du per Email erhalten hast.",
+    noticePending:      "<strong>So funktioniert es:</strong> Wenn ein Kunde eine Rezension schreibt, erscheint sie hier. Prüfe ob die Bestellungs-E-Mail zu einer echten Bestellung gehört — dann klick <strong>Bestätigen ✓</strong>.",
+    custData:           "👤 Kundendaten",
+    orderItems:         "🛒 Bestellte Artikel",
+    misc:               "📝 Sonstiges",
+    lblName:            "Name *",
+    lblEmail:           "Email *",
+    lblPhone:           "Telefon",
+    lblCountry:         "Land",
+    lblAddress:         "Strasse & Hausnummer",
+    lblCity:            "PLZ & Stadt",
+    lblStatus:          "Status",
+    lblNotes:           "Notizen / Anmerkungen",
+    addItem:            "+ Artikel hinzufügen",
+    saveOrder:          "Bestellung speichern ✓",
+    statusNew:          "🔵 Neu",
+    statusProc:         "🟡 In Bearbeitung",
+    statusShipped:      "🟣 Versendet",
+    statusDeliv:        "🟢 Geliefert",
+    // order card dynamic strings
+    loading:            "⏳ Lädt...",
+    serverError:        "❌ Server nicht erreichbar — bitte stelle sicher dass <strong>START TUNNEL.bat</strong> läuft und lade die Seite neu.",
+    noOrders:           "📭 Keine Bestellungen.",
+    noOrdersCat:        "📭 Keine Bestellungen in dieser Kategorie.",
+    labelCustomer:      "Kunde",
+    labelOrderedItems:  "Bestellte Artikel",
+    noItems:            "Keine Artikel",
+    labelSave:          "Speichern",
+    labelDelete:        "✕ Löschen",
+    confirmDelete:      "Bestellung wirklich löschen?",
+    toastStatusOk:      "✅ Status aktualisiert!",
+    toastStatusErr:     "❌ Fehler beim Speichern.",
+    toastDeleteOk:      "🗑️ Bestellung gelöscht.",
+    toastDeleteErr:     "❌ Fehler beim Löschen.",
+    toastCostsOk:       "✅ Kosten gespeichert!",
+    toastCostsErr:      "❌ Fehler beim Speichern.",
+    // costs section
+    costsEnter:         "💴 Kosten eintragen (¥ CNY)",
+    costsJersey:        "Trikot Einkaufspreis (¥ CNY)",
+    costsShipping:      "Versandkosten (¥ CNY)",
+    costsServiceFee:    "Service Fee / Stripe (¥ CNY)",
+    costsPrinting:      "Druckkosten Backprint (¥ CNY)",
+    costsTotal:         "Total Kosten (vom Guthaben abgezogen):",
+    costsSave:          "💾 Speichern",
+    costsDisplayJersey: "Trikot",
+    costsDisplayShip:   "Versand",
+    costsDisplayFee:    "Service Fee",
+    costsDisplayPrint:  "Druck",
+    // supplier banner
+    cnyLabel:           "Verbleibendes CNY-Guthaben",
   },
   en: {
-    tabOrders:     "📦 Orders",
-    tabAddOrder:   "➕ Add Order",
-    tabPending:    "⏳ Pending",
-    tabApproved:   "✅ Approved",
-    tabAddReview:  "✍️ Add Review",
-    titleOrders:   "All Orders",
-    titleAddOrder: "Add Order Manually",
-    titlePending:  "Pending Reviews — awaiting confirmation",
-    titleApproved: "Approved Reviews — publicly visible",
-    titleAddReview:"Add New Review Manually",
-    filterAll:     "All",
-    filterNew:     "🔵 New",
-    filterProc:    "🟡 Processing",
-    filterShipped: "🟣 Shipped",
-    filterDeliv:   "🟢 Delivered",
-    noticeOrders:  "<strong>For existing orders:</strong> Enter orders you received by email here.",
-    noticePending: "<strong>How it works:</strong> When a customer writes a review, it appears here. Check if the order email belongs to a real order — then click <strong>Approve ✓</strong>.",
-    custData:      "👤 Customer Details",
-    orderItems:    "🛒 Ordered Items",
-    misc:          "📝 Other",
-    lblName:       "Name *",
-    lblEmail:      "Email *",
-    lblPhone:      "Phone",
-    lblCountry:    "Country",
-    lblAddress:    "Street & Number",
-    lblCity:       "ZIP & City",
-    lblStatus:     "Status",
-    lblNotes:      "Notes / Remarks",
-    addItem:       "+ Add Item",
-    saveOrder:     "Save Order ✓",
-    statusNew:     "🔵 New",
-    statusProc:    "🟡 Processing",
-    statusShipped: "🟣 Shipped",
-    statusDeliv:   "🟢 Delivered",
+    tabOrders:          "📦 Orders",
+    tabAddOrder:        "➕ Add Order",
+    tabPending:         "⏳ Pending",
+    tabApproved:        "✅ Approved",
+    tabAddReview:       "✍️ Add Review",
+    titleOrders:        "All Orders",
+    titleAddOrder:      "Add Order Manually",
+    titlePending:       "Pending Reviews — awaiting confirmation",
+    titleApproved:      "Approved Reviews — publicly visible",
+    titleAddReview:     "Add New Review Manually",
+    filterAll:          "All",
+    filterNew:          "🔵 New",
+    filterProc:         "🟡 Processing",
+    filterShipped:      "🟣 Shipped",
+    filterDeliv:        "🟢 Delivered",
+    noticeOrders:       "<strong>For existing orders:</strong> Enter orders you received by email here.",
+    noticePending:      "<strong>How it works:</strong> When a customer writes a review, it appears here. Check if the order email belongs to a real order — then click <strong>Approve ✓</strong>.",
+    custData:           "👤 Customer Details",
+    orderItems:         "🛒 Ordered Items",
+    misc:               "📝 Other",
+    lblName:            "Name *",
+    lblEmail:           "Email *",
+    lblPhone:           "Phone",
+    lblCountry:         "Country",
+    lblAddress:         "Street & Number",
+    lblCity:            "ZIP & City",
+    lblStatus:          "Status",
+    lblNotes:           "Notes / Remarks",
+    addItem:            "+ Add Item",
+    saveOrder:          "Save Order ✓",
+    statusNew:          "🔵 New",
+    statusProc:         "🟡 Processing",
+    statusShipped:      "🟣 Shipped",
+    statusDeliv:        "🟢 Delivered",
+    // order card dynamic strings
+    loading:            "⏳ Loading...",
+    serverError:        "❌ Server unreachable — make sure <strong>START TUNNEL.bat</strong> is running and reload the page.",
+    noOrders:           "📭 No orders.",
+    noOrdersCat:        "📭 No orders in this category.",
+    labelCustomer:      "Customer",
+    labelOrderedItems:  "Ordered Items",
+    noItems:            "No items",
+    labelSave:          "Save",
+    labelDelete:        "✕ Delete",
+    confirmDelete:      "Really delete this order?",
+    toastStatusOk:      "✅ Status updated!",
+    toastStatusErr:     "❌ Error saving.",
+    toastDeleteOk:      "🗑️ Order deleted.",
+    toastDeleteErr:     "❌ Error deleting.",
+    toastCostsOk:       "✅ Costs saved!",
+    toastCostsErr:      "❌ Error saving.",
+    // costs section
+    costsEnter:         "💴 Enter Costs (¥ CNY)",
+    costsJersey:        "Jersey Purchase Price (¥ CNY)",
+    costsShipping:      "Shipping Costs (¥ CNY)",
+    costsServiceFee:    "Service Fee / Stripe (¥ CNY)",
+    costsPrinting:      "Printing / Backprint (¥ CNY)",
+    costsTotal:         "Total Costs (deducted from balance):",
+    costsSave:          "💾 Save",
+    costsDisplayJersey: "Jersey",
+    costsDisplayShip:   "Shipping",
+    costsDisplayFee:    "Service Fee",
+    costsDisplayPrint:  "Printing",
+    // supplier banner
+    cnyLabel:           "Remaining CNY Balance",
   }
 };
 
@@ -1486,6 +1558,15 @@ function applyAdminLang() {
   // Toggle indicator
   document.getElementById("lang-de").classList.toggle("active", adminLang === "de");
   document.getElementById("lang-en").classList.toggle("active", adminLang === "en");
+
+  // Supplier CNY banner label
+  const cnyLabel = document.getElementById("supplier-cny-label");
+  if (cnyLabel) cnyLabel.textContent = t.cnyLabel;
+
+  // Re-render order cards so all dynamic strings update
+  if (currentUser && typeof displayOrders === "function") {
+    displayOrders();
+  }
 }
 
 function toggleAdminLang() {
