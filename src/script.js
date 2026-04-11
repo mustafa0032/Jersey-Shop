@@ -2237,7 +2237,7 @@ function renderRetros() {
         <h3>${baseName}</h3>
         <div class="product-price">
           <span class="price-original">CHF 89</span>
-          <span class="price-sale">CHF 37</span>
+          <span class="price-sale">CHF ${product.price}</span>
         </div>
       </div>
       <div class="product-addons">

@@ -22,17 +22,21 @@ const ROOT    = __dirname;
 const VERSION = Date.now(); // cache-busting version, changes on every server restart
 
 // ── Server-side price rules (single source of truth) ──────────────
-// Base jersey: 35 CHF | +Shorts: +13 | +Backprint: +4
+// Fan Edition:  35 CHF | +Shorts: +13 | +Backprint: +4
+// Retros:       37 CHF | +Backprint: +4
 const BASE_JERSEY_PRICE = 35;
+const BASE_RETRO_PRICE  = 37;
 const ADDON_SHORTS      = 13;
 const ADDON_BACKPRINT   = 4;
 const SHIPPING_PER_ITEM = 2.90; // CHF per item — always calculated server-side
-// All valid per-item prices: 35, 39, 48, 52
+// All valid per-item prices: 35, 39, 41, 48, 52
 const VALID_ITEM_PRICES = new Set([
-  BASE_JERSEY_PRICE,
-  BASE_JERSEY_PRICE + ADDON_BACKPRINT,
-  BASE_JERSEY_PRICE + ADDON_SHORTS,
-  BASE_JERSEY_PRICE + ADDON_SHORTS + ADDON_BACKPRINT,
+  BASE_JERSEY_PRICE,                                    // 35 — Fan Edition
+  BASE_JERSEY_PRICE + ADDON_BACKPRINT,                  // 39 — Fan Edition + Backprint
+  BASE_JERSEY_PRICE + ADDON_SHORTS,                     // 48 — Fan Edition + Shorts
+  BASE_JERSEY_PRICE + ADDON_SHORTS + ADDON_BACKPRINT,   // 52 — Fan Edition + Shorts + Backprint
+  BASE_RETRO_PRICE,                                     // 37 — Retro
+  BASE_RETRO_PRICE  + ADDON_BACKPRINT,                  // 41 — Retro + Backprint
 ]);
 
 // ── Discount codes (server-only, never sent to browser) ───────────
@@ -146,7 +150,7 @@ function parseBody(req) {
 function setCORS(res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 }
 
 function json(res, code, data) {
@@ -443,7 +447,7 @@ http.createServer(async (req, res) => {
           ``,
           order.notes ? `Anmerkungen: ${order.notes}` : "",
           `Newsletter: ${order.newsletter ? "✅ Ja" : "❌ Nein"}`,
-        ].filter(l => l !== undefined).join("\n"),
+        ].filter(l => l !== undefined && l !== "").join("\n"),
       }).catch(err => console.error("[Owner notify error]", err.message));
 
       return json(res, 200, { ok: true });

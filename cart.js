@@ -121,7 +121,7 @@ toast=document.createElement("div");
 toast.id="cart-toast";
 document.body.appendChild(toast);
 }
-toast.innerHTML=`<span class="cart-toast-icon">✅</span><span class="cart-toast-text"><strong>${name}</strong>wurde zum Warenkorb hinzugefügt!</span>`;
+toast.innerHTML=`<span class="cart-toast-icon">✅</span><span class="cart-toast-text"><strong>${name}</strong> wurde zum Warenkorb hinzugefügt!</span>`;
 toast.classList.remove("cart-toast--hide");
 toast.classList.add("cart-toast--show");
 clearTimeout(toast._hideTimer);
