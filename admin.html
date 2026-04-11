@@ -931,10 +931,12 @@ function buildCostsSection(o) {
   const hasCosts = costs.jersey || costs.shipping || costs.serviceFee || costs.printing;
   const total = +((costs.jersey||0) + (costs.shipping||0) + (costs.serviceFee||0) + (costs.printing||0)).toFixed(2);
   const btnClass = hasCosts ? "costs-toggle-btn costs-saved" : "costs-toggle-btn";
-  const btnLabel = hasCosts ? `✅ ${t.costsEnter.replace("💴 ","").split("(")[0].trim()} (¥ ${total.toFixed(2)} CNY)` : t.costsEnter;
+  const btnLabel = hasCosts
+    ? `✅ ${adminLang === "de" ? "Kosten eingetragen" : "Costs saved"} (¥ ${total.toFixed(2)} CNY)`
+    : t.costsEnter;
   return `
   <div class="order-costs">
-    <button class="${btnClass}" onclick="toggleCostsForm(${o.id})">${hasCosts ? `✅ ${adminLang==="de"?"Kosten eingetragen":"Costs saved"} (¥ ${total.toFixed(2)} CNY)` : t.costsEnter}</button>
+    <button class="${btnClass}" onclick="toggleCostsForm(${o.id})">${btnLabel}</button>
     ${hasCosts ? `
     <div class="costs-display">
       ${costs.jersey    ? `<span class="costs-display-item">${t.costsDisplayJersey}: <strong>¥${(+costs.jersey).toFixed(2)}</strong></span>` : ""}

@@ -29,7 +29,7 @@ activeDiscountPercent=0;
 
 function getDiscountPercent(){return activeDiscountPercent;}
 function getActiveDiscount(){return activeDiscountCode;}
-const SHIPPING_PER_ITEM = 2.90; // CHF per item — display only, server enforces the real value
+const SHIPPING_PER_ITEM = 3.90; // CHF per item — display only, server enforces the real value
 
 function getShippingDisplay(){
   const cart = getCart();

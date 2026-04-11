@@ -17,7 +17,7 @@ const mailer = nodemailer.createTransport({
   },
 });
 
-const PORT    = 8080;
+const PORT    = parseInt(process.env.PORT) || 8080;
 const ROOT    = __dirname;
 const VERSION = Date.now(); // cache-busting version, changes on every server restart
 
@@ -28,7 +28,7 @@ const BASE_JERSEY_PRICE = 35;
 const BASE_RETRO_PRICE  = 37;
 const ADDON_SHORTS      = 13;
 const ADDON_BACKPRINT   = 4;
-const SHIPPING_PER_ITEM = 2.90; // CHF per item — always calculated server-side
+const SHIPPING_PER_ITEM = 3.90; // CHF per item — always calculated server-side
 // All valid per-item prices: 35, 39, 41, 48, 52
 const VALID_ITEM_PRICES = new Set([
   BASE_JERSEY_PRICE,                                    // 35 — Fan Edition
@@ -359,7 +359,7 @@ http.createServer(async (req, res) => {
     const discountPercent = DISCOUNT_CODES[discountCode] || 0;
     const discountedCHF   = +(subtotalCHF * (1 - discountPercent / 100)).toFixed(2);
 
-    // Shipping = 2.90 CHF × total number of items — always calculated server-side
+    // Shipping = 3.90 CHF × total number of items — always calculated server-side
     const shippingCHF  = +(SHIPPING_PER_ITEM * totalQty).toFixed(2);
     const totalCHF     = +(discountedCHF + shippingCHF).toFixed(2);
     const amountRappen = Math.round(totalCHF * 100);
@@ -405,6 +405,7 @@ http.createServer(async (req, res) => {
         order_id:          body.order_id || "",
         date:              new Date().toLocaleString("de-CH"),
         status:            body.status || "new",
+        payment_status:    body.payment_status || "paid",
         customer:          body.customer,
         items:             body.items,
         total:             body.total || 0,

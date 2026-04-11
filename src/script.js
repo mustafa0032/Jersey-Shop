@@ -2037,7 +2037,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
         </div>
       </div>
       ${addonsHtml}
-      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="${pair.front.price}" data-image-front="${pair.front.image||""}" data-image-back="${pair.back?.image||""}">${t("product.addtocart")} ${pair.front.price}</button>
+      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="${pair.front.price}" data-image-front="${pair.front.image||""}" data-image-back="${pair.back?.image||""}">${t("product.addtocart")} CHF ${pair.front.price}</button>
     `;
     grid.appendChild(card);
   });
@@ -2074,7 +2074,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
           card.querySelectorAll(".addon-check:checked").forEach(c => {
             total += Number(c.dataset.price);
           });
-          btn.textContent = `${t("product.addtocart")} ${total}`;
+          btn.textContent = `${t("product.addtocart")} CHF ${total}`;
         });
       });
     });
@@ -2260,7 +2260,7 @@ function renderRetros() {
           <input type="text" class="backprint-number" placeholder="${t("product.number.ph")}" maxlength="3" />
         </div>
       </div>
-      <button class="add-to-cart-btn" data-id="${product.id}">${t("product.addtocart")} ${product.price}</button>
+      <button class="add-to-cart-btn" data-id="${product.id}">${t("product.addtocart")} CHF ${product.price}</button>
     `;
     grid.appendChild(card);
   });
@@ -2302,7 +2302,7 @@ function renderRetros() {
           card.querySelectorAll(".addon-check:checked").forEach(c => {
             total += Number(c.dataset.price);
           });
-          if (btn) btn.textContent = `${t("product.addtocart")} ${total}`;
+          if (btn) btn.textContent = `${t("product.addtocart")} CHF ${total}`;
         });
       });
     });
@@ -2877,7 +2877,7 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
           card.querySelectorAll(".addon-check:checked").forEach(c => {
             total += Number(c.dataset.price);
           });
-          if (btn) btn.textContent = `${t("product.addtocart")} ${total}`;
+          if (btn) btn.textContent = `${t("product.addtocart")} CHF ${total}`;
         });
       });
     });
@@ -3046,7 +3046,7 @@ if (checkoutForm) {
     const discountCode    = (typeof getActiveDiscount  === "function") ? getActiveDiscount()  : null;
     const discountSaving  = +(subtotal * discountPercent / 100).toFixed(2);
     const totalQty        = cart.reduce((sum, i) => sum + (i.quantity || 1), 0);
-    const SHIPPING        = +(2.90 * totalQty).toFixed(2); // 2.90 per item (display estimate, server recalculates)
+    const SHIPPING        = +(3.90 * totalQty).toFixed(2); // 3.90 per item (display estimate, server recalculates)
     const total           = +(subtotal - discountSaving + SHIPPING).toFixed(2);
 
     // ── Build readable cart list ────────────────────────────────────────
@@ -3132,7 +3132,8 @@ if (checkoutForm) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           order_id,
-          status:   "paid",
+          status:            "new",
+          payment_status:    "paid",
           customer: { name: fullName, email, phone, address, city, postalCode, country: countryCode },
           items:    orderItems,
           total:    +(verifiedTotal || total).toFixed(2),
@@ -3169,7 +3170,7 @@ if (checkoutForm) {
             "----------------------------",
             `Artikel: CHF ${(subtotal - discountSaving).toFixed(2)}`,
             discountPercent > 0 ? `Rabattcode ${discountCode}: −${discountPercent}%, gespart CHF ${discountSaving.toFixed(2)}` : "",
-            `Versand: CHF ${verifiedShipping.toFixed(2)} (${totalQty} × CHF 2.90)`,
+            `Versand: CHF ${verifiedShipping.toFixed(2)} (${totalQty} × CHF 3.90)`,
             `Total: CHF ${(verifiedTotal || total).toFixed(2)}`,
             "----------------------------",
             `Bezahlt mit Karte (Stripe).`,
