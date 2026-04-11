@@ -673,8 +673,8 @@ http.createServer(async (req, res) => {
   if (req.method === "POST" && url === "/api/finance/add-entry") {
     if (!requireAuth(res, req, "admin")) return;
     const body = await parseBody(req);
-    const { description, amount, type } = body;
-    if (!description || !amount || !["income","expense"].includes(type)) {
+    const { description, amount } = body;
+    if (!description || !amount || parseFloat(amount) <= 0) {
       return json(res, 400, { error: "Missing or invalid fields." });
     }
     const entries = readJSON(FINANCE);
@@ -683,7 +683,7 @@ http.createServer(async (req, res) => {
       date:        new Date().toLocaleDateString("de-CH", { day:"2-digit", month:"2-digit", year:"numeric" }),
       description: String(description).slice(0, 200),
       amount:      Math.abs(parseFloat(amount)),
-      type,
+      type:        "deposit",
     });
     writeJSON(FINANCE, entries);
     return json(res, 200, { ok: true });
