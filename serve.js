@@ -166,7 +166,14 @@ http.createServer(async (req, res) => {
   setCORS(res);
   if (req.method === "OPTIONS") { res.writeHead(204); res.end(); return; }
 
-  const url = decodeURIComponent(req.url.split("?")[0]);
+  let url;
+  try {
+    url = decodeURIComponent(req.url.split("?")[0]);
+  } catch (e) {
+    res.writeHead(400, { "Content-Type": "text/plain" });
+    res.end("Bad Request");
+    return;
+  }
 
   // ── WARTUNGSMODUS ─────────────────────────────────────────────────
   const MAINTENANCE = false; // auf true setzen um Wartungsseite zu aktivieren

@@ -229,10 +229,15 @@
     .add-order-form { background: #13131c; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.75rem; max-width: 760px; }
     .add-order-form h3 { font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin: 1.5rem 0 1rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.25rem; }
     .add-order-form h3:first-child { margin-top: 0; border-top: none; padding-top: 0; }
-    .item-row { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 0.6rem; align-items: end; margin-bottom: 0.6rem; }
-    .item-row input { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #fff; border-radius: 8px; padding: 0.55rem 0.75rem; font-size: 0.85rem; font-family: 'Poppins', sans-serif; outline: none; width: 100%; }
-    .item-row input:focus { border-color: #4ade80; }
-    .remove-item-btn { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.2); color: #f87171; border-radius: 8px; padding: 0.55rem 0.7rem; cursor: pointer; font-size: 0.9rem; }
+    .item-row { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 0.75rem; margin-bottom: 0.75rem; }
+    .item-row-main { display: grid; grid-template-columns: 2fr 0.7fr 0.6fr 0.8fr auto; gap: 0.5rem; align-items: center; }
+    .item-row-backprint { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem; }
+    .item-row input, .item-row select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #fff; border-radius: 8px; padding: 0.55rem 0.75rem; font-size: 0.85rem; font-family: 'Poppins', sans-serif; outline: none; width: 100%; }
+    .item-row select option { background: #1a1a2e; color: #fff; }
+    .item-row input:focus, .item-row select:focus { border-color: #4ade80; }
+    .item-row .ir-bp-name, .item-row .ir-bp-number { border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.04); font-size: 0.8rem; }
+    .item-row .ir-bp-name:focus, .item-row .ir-bp-number:focus { border-color: #fbbf24; }
+    .remove-item-btn { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.2); color: #f87171; border-radius: 8px; padding: 0.55rem 0.7rem; cursor: pointer; font-size: 0.9rem; white-space: nowrap; }
     .add-item-btn { background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.82rem; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s; margin-top: 0.25rem; width: 100%; }
     .add-item-btn:hover { border-color: rgba(74,222,128,0.4); color: #4ade80; }
     .order-total-display { display: flex; justify-content: flex-end; align-items: center; gap: 0.75rem; margin-top: 0.75rem; font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.8); }
@@ -412,10 +417,24 @@
         <h3>🛒 Bestellte Artikel</h3>
         <div id="ao-items-list">
           <div class="item-row">
-            <input type="text" placeholder="Trikot (z.B. Barcelona Home 25/26, Grösse L)" />
-            <input type="number" placeholder="Menge" min="1" value="1" />
-            <input type="number" placeholder="Preis CHF" min="0" step="0.01" />
-            <button class="remove-item-btn" onclick="removeOrderItem(this)" title="Entfernen">✕</button>
+            <div class="item-row-main">
+              <input type="text" class="ir-name" placeholder="Trikot (z.B. Barcelona Home 25/26)" oninput="recalcTotal()" />
+              <select class="ir-size">
+                <option value="">— Grösse —</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+              </select>
+              <input type="number" class="ir-qty" placeholder="Menge" min="1" value="1" oninput="recalcTotal()" />
+              <input type="number" class="ir-price" placeholder="Preis CHF" min="0" step="0.01" oninput="recalcTotal()" />
+              <button class="remove-item-btn" onclick="removeOrderItem(this)" title="Entfernen">✕</button>
+            </div>
+            <div class="item-row-backprint">
+              <input type="text" class="ir-bp-name" placeholder="✏️ Backprint Name (optional)" maxlength="20" />
+              <input type="text" class="ir-bp-number" placeholder="# Nummer (optional)" maxlength="3" />
+            </div>
           </div>
         </div>
         <button class="add-item-btn" onclick="addOrderItem()">+ Artikel hinzufügen</button>
@@ -1256,17 +1275,35 @@ async function addReviewManually() {
 }
 
 // ── MANUAL ORDER ENTRY ────────────────────────────────────────────────
+function makeItemRowHTML() {
+  return `
+    <div class="item-row-main">
+      <input type="text" class="ir-name" placeholder="Trikot (z.B. Real Madrid Away 25/26)" oninput="recalcTotal()" />
+      <select class="ir-size">
+        <option value="">— Grösse —</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+      <input type="number" class="ir-qty" placeholder="Menge" min="1" value="1" oninput="recalcTotal()" />
+      <input type="number" class="ir-price" placeholder="Preis CHF" min="0" step="0.01" oninput="recalcTotal()" />
+      <button class="remove-item-btn" onclick="removeOrderItem(this)" title="Entfernen">✕</button>
+    </div>
+    <div class="item-row-backprint">
+      <input type="text" class="ir-bp-name" placeholder="✏️ Backprint Name (optional)" maxlength="20" />
+      <input type="text" class="ir-bp-number" placeholder="# Nummer (optional)" maxlength="3" />
+    </div>`;
+}
+
 function addOrderItem() {
   const list = document.getElementById("ao-items-list");
   const row = document.createElement("div");
   row.className = "item-row";
-  row.innerHTML = `
-    <input type="text" placeholder="Trikot (z.B. Real Madrid Away 25/26, Grösse M)" oninput="recalcTotal()" />
-    <input type="number" placeholder="Menge" min="1" value="1" oninput="recalcTotal()" />
-    <input type="number" placeholder="Preis CHF" min="0" step="0.01" oninput="recalcTotal()" />
-    <button class="remove-item-btn" onclick="removeOrderItem(this)" title="Entfernen">✕</button>`;
+  row.innerHTML = makeItemRowHTML();
   list.appendChild(row);
-  row.querySelector("input").focus();
+  row.querySelector(".ir-name").focus();
 }
 
 function removeOrderItem(btn) {
@@ -1279,18 +1316,14 @@ function removeOrderItem(btn) {
 function recalcTotal() {
   let total = 0;
   document.querySelectorAll("#ao-items-list .item-row").forEach(row => {
-    const inputs = row.querySelectorAll("input");
-    const qty   = parseFloat(inputs[1]?.value) || 0;
-    const price = parseFloat(inputs[2]?.value) || 0;
+    const qty   = parseFloat(row.querySelector(".ir-qty")?.value)   || 0;
+    const price = parseFloat(row.querySelector(".ir-price")?.value) || 0;
     total += qty * price;
   });
   document.getElementById("ao-total-display").textContent = total.toFixed(2);
 }
 
-// Add oninput to first row on load
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("#ao-items-list .item-row input").forEach(i => i.setAttribute("oninput", "recalcTotal()"));
-});
+// oninput already set via class-based selectors in makeItemRowHTML()
 
 async function saveManualOrder() {
   const name    = document.getElementById("ao-name").value.trim();
@@ -1308,13 +1341,16 @@ async function saveManualOrder() {
   let total = 0;
   let valid = true;
   document.querySelectorAll("#ao-items-list .item-row").forEach(row => {
-    const inputs = row.querySelectorAll("input");
-    const itemName = inputs[0]?.value.trim();
-    const qty      = parseInt(inputs[1]?.value) || 1;
-    const price    = parseFloat(inputs[2]?.value) || 0;
+    const itemName = row.querySelector(".ir-name")?.value.trim();
+    const size     = row.querySelector(".ir-size")?.value || "";
+    const qty      = parseInt(row.querySelector(".ir-qty")?.value)   || 1;
+    const price    = parseFloat(row.querySelector(".ir-price")?.value) || 0;
+    const bpName   = row.querySelector(".ir-bp-name")?.value.trim()   || "";
+    const bpNumber = row.querySelector(".ir-bp-number")?.value.trim() || "";
+    const backprint = bpName || bpNumber ? [bpName, bpNumber].filter(Boolean).join(" #") : "";
     if (!itemName) { valid = false; return; }
     const subtotal = +(qty * price).toFixed(2);
-    items.push({ name: itemName, size: "", backprint: "", quantity: qty, price, subtotal });
+    items.push({ name: itemName, size, backprint, quantity: qty, price, subtotal });
     total += subtotal;
   });
 
@@ -1341,13 +1377,12 @@ async function saveManualOrder() {
     document.getElementById("ao-city").value    = "";
     document.getElementById("ao-notes").value   = "";
     document.getElementById("ao-status").value  = "new";
-    document.getElementById("ao-items-list").innerHTML = `
-      <div class="item-row">
-        <input type="text" placeholder="Trikot (z.B. Barcelona Home 25/26, Grösse L)" oninput="recalcTotal()" />
-        <input type="number" placeholder="Menge" min="1" value="1" oninput="recalcTotal()" />
-        <input type="number" placeholder="Preis CHF" min="0" step="0.01" oninput="recalcTotal()" />
-        <button class="remove-item-btn" onclick="removeOrderItem(this)" title="Entfernen">✕</button>
-      </div>`;
+    const freshRow = document.createElement("div");
+    freshRow.className = "item-row";
+    freshRow.innerHTML = makeItemRowHTML();
+    const itemsList = document.getElementById("ao-items-list");
+    itemsList.innerHTML = "";
+    itemsList.appendChild(freshRow);
     document.getElementById("ao-total-display").textContent = "0.00";
 
     toast("✅ Bestellung gespeichert!");
