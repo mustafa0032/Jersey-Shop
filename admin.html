@@ -213,6 +213,11 @@
       font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s;
     }
     .update-btn:hover { background: rgba(74,222,128,0.25); }
+    .wa-btn {
+      background: rgba(37,211,102,0.12); border: 1px solid rgba(37,211,102,0.3); color: #25d366;
+      border-radius: 8px; padding: 0.4rem 0.9rem; font-size: 0.8rem; font-family: 'Poppins',sans-serif; cursor: pointer; transition: all 0.2s; font-weight: 600;
+    }
+    .wa-btn:hover { background: rgba(37,211,102,0.25); border-color: #25d366; }
     .order-del-btn {
       margin-left: auto; background: transparent; border: 1px solid rgba(248,113,113,0.25); color: rgba(248,113,113,0.7);
       border-radius: 8px; padding: 0.4rem 0.8rem; font-size: 0.75rem; cursor: pointer;
@@ -877,6 +882,7 @@ function displayOrders() {
           <option value="delivered"  ${o.status==="delivered"  ?"selected":""}>${t.statusDeliv}</option>
         </select>
         <button class="update-btn" onclick="updateOrderStatus(${o.id})">${t.labelSave}</button>
+        <button class="wa-btn" onclick="sendWhatsApp(${o.id})" title="An Supplier via WhatsApp senden">📱 WhatsApp</button>
         ${isAdmin ? `<button class="order-del-btn" onclick="deleteOrder(${o.id})">${t.labelDelete}</button>` : ""}
       </div>` : `<div style="margin-top:0.75rem;font-size:0.78rem;color:rgba(255,255,255,0.25);">${t.lblStatus} <strong style="color:rgba(255,255,255,0.5)">${statusLabel}</strong></div>`;
     return `
@@ -941,6 +947,37 @@ async function deleteOrder(id) {
     displayOrders();
     toast(t.toastDeleteOk);
   } catch(e) { toast(t.toastDeleteErr, true); }
+}
+
+// ── WHATSAPP SUPPLIER ────────────────────────────────────────────────
+const SUPPLIER_WA = "8618122711993"; // +86 181 2271 1993
+
+function sendWhatsApp(orderId) {
+  const order = allOrders.find(o => o.id === orderId);
+  if (!order) return;
+
+  const BASE_URL = "https://jerseyphase.ch";
+  const lines = [];
+  lines.push(`🛒 *New Order — ${order.order_id}*`);
+  lines.push(`📅 Date: ${order.date}`);
+  lines.push(``);
+  lines.push(`*Items:*`);
+  (order.items || []).forEach((item, i) => {
+    let line = `${i + 1}. *${item.name}*`;
+    if (item.size)          line += `  |  Size: *${item.size}*`;
+    if (item.quantity > 1)  line += `  |  Qty: *${item.quantity}*`;
+    if (item.backprint)     line += `\n   ✏️ Backprint: *${item.backprint}*`;
+    lines.push(line);
+    // Add image links
+    if (item.image)     lines.push(`   🖼️ Front: ${BASE_URL}/${item.image}`);
+    if (item.imageBack) lines.push(`   🖼️ Back: ${BASE_URL}/${item.imageBack}`);
+    if (item.imageLogo) lines.push(`   🖼️ Logo: ${BASE_URL}/${item.imageLogo}`);
+    lines.push(``);
+  });
+  lines.push(`— JerseyPhase`);
+
+  const msg = encodeURIComponent(lines.join("\n"));
+  window.open(`https://wa.me/${SUPPLIER_WA}?text=${msg}`, "_blank");
 }
 
 // ── COSTS PER ORDER ───────────────────────────────────────────────────
