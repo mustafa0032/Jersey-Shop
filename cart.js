@@ -1,5 +1,10 @@
 const CART_KEY="jerseyhub_cart";
 
+// ── XSS-safe HTML escaping ─────────────────────────────────────────
+function escCart(str) {
+  return String(str ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+
 let activeDiscountCode=null;
 let activeDiscountPercent=0;
 
@@ -121,7 +126,7 @@ toast=document.createElement("div");
 toast.id="cart-toast";
 document.body.appendChild(toast);
 }
-toast.innerHTML=`<span class="cart-toast-icon">✅</span><span class="cart-toast-text"><strong>${name}</strong> wurde zum Warenkorb hinzugefügt!</span>`;
+toast.innerHTML=`<span class="cart-toast-icon">✅</span><span class="cart-toast-text"><strong>${escCart(name)}</strong> wurde zum Warenkorb hinzugefügt!</span>`;
 toast.classList.remove("cart-toast--hide");
 toast.classList.add("cart-toast--show");
 clearTimeout(toast._hideTimer);
@@ -204,26 +209,26 @@ const itemEl=document.createElement("div");
 itemEl.className="cart-item";
 
 const sizeHtml=item.size
-?`<span class="cart-size-badge">Size:${item.size}</span>`
+?`<span class="cart-size-badge">Size:${escCart(item.size)}</span>`
 :"";
 const backprintHtml=item.backprint
-?`<div class="cart-addons-info">✏️ Backprint:${item.backprint}</div>`
+?`<div class="cart-addons-info">✏️ Backprint:${escCart(item.backprint)}</div>`
 :"";
 
 itemEl.innerHTML=`
-<div class="cart-item-image"><img src="${item.image||'https://via.placeholder.com/60x60?text=Jersey'}" alt="${item.name}" width="60" height="60"/></div>
+<div class="cart-item-image"><img src="${escCart(item.image||'https://via.placeholder.com/60x60?text=Jersey')}" alt="${escCart(item.name)}" width="60" height="60"/></div>
 <div class="cart-item-details">
-<h3>${item.name}${sizeHtml}</h3>
+<h3>${escCart(item.name)}${sizeHtml}</h3>
 ${backprintHtml}
 <div class="cart-item-meta">
 <span class="cart-price">CHF ${item.price.toFixed(2)}</span>
 <span class="cart-subtotal">Subtotal CHF ${(item.price*item.quantity).toFixed(2)}</span>
 </div>
 <div class="cart-item-actions">
-<button class="qty-btn" data-action="decrease" data-uid="${item.uid}">-</button>
+<button class="qty-btn" data-action="decrease" data-uid="${escCart(item.uid)}">-</button>
 <span class="qty-value">${item.quantity}</span>
-<button class="qty-btn" data-action="increase" data-uid="${item.uid}">+</button>
-<button class="remove-btn" data-uid="${item.uid}">Remove</button>
+<button class="qty-btn" data-action="increase" data-uid="${escCart(item.uid)}">+</button>
+<button class="remove-btn" data-uid="${escCart(item.uid)}">Remove</button>
 </div>
 </div>
 `;

@@ -101,7 +101,7 @@ function requireAuth(res, req, requiredRole) {
   return session;
 }
 
-// ── Rate limiter ──────────────────────────────────────────────────
+// ── Rate limiter (with automatic memory cleanup) ──────────────────
 const rateMaps = {};
 function checkRateLimit(ip, key = "default", max = 5, windowMs = 60_000) {
   if (!rateMaps[key]) rateMaps[key] = new Map();
@@ -111,6 +111,10 @@ function checkRateLimit(ip, key = "default", max = 5, windowMs = 60_000) {
   if (now > entry.resetAt) { entry.count = 0; entry.resetAt = now + windowMs; }
   entry.count++;
   map.set(ip, entry);
+  // Cleanup stale entries every 500 requests to prevent memory leak
+  if (map.size > 500) {
+    for (const [k, v] of map.entries()) { if (now > v.resetAt) map.delete(k); }
+  }
   return entry.count <= max;
 }
 
@@ -138,20 +142,37 @@ function writeJSON(file, data) {
 }
 
 // ── Parse request body ─────────────────────────────────────────────
-function parseBody(req) {
+function parseBody(req, maxBytes = 1e5) { // default 100 KB; pass larger value where needed
   return new Promise((resolve, reject) => {
     let body = "";
-    req.on("data", chunk => { body += chunk; if (body.length > 5e6) reject(new Error("Too large")); });
+    req.on("data", chunk => { body += chunk; if (body.length > maxBytes) reject(new Error("Too large")); });
     req.on("end", () => { try { resolve(JSON.parse(body)); } catch(e) { resolve({}); } });
     req.on("error", reject);
   });
 }
 
-// ── CORS headers ───────────────────────────────────────────────────
+// ── Security + CORS headers ────────────────────────────────────────
 function setCORS(res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "https://jerseyphase.ch");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+}
+
+function setSecurityHeaders(res) {
+  res.setHeader("X-Content-Type-Options",   "nosniff");
+  res.setHeader("X-Frame-Options",          "SAMEORIGIN");
+  res.setHeader("Referrer-Policy",          "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy",       "camera=(), microphone=(), geolocation=()");
+  // Allow Stripe iframes (needed for card elements) + own origin
+  res.setHeader("Content-Security-Policy",
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' https://js.stripe.com; " +
+    "frame-src https://js.stripe.com; " +
+    "connect-src 'self' https://api.stripe.com; " +
+    "img-src 'self' data: https:; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "font-src 'self' https://fonts.gstatic.com;"
+  );
 }
 
 function json(res, code, data) {
@@ -164,6 +185,7 @@ function json(res, code, data) {
 http.createServer(async (req, res) => {
 
   setCORS(res);
+  setSecurityHeaders(res);
   if (req.method === "OPTIONS") { res.writeHead(204); res.end(); return; }
 
   let url;
@@ -221,7 +243,11 @@ http.createServer(async (req, res) => {
 
   // POST /api/review/submit  — customer submits a new review
   if (req.method === "POST" && url === "/api/review/submit") {
-    const body = await parseBody(req);
+    const ip = req.socket.remoteAddress || "unknown";
+    if (!checkRateLimit(ip, "review-submit", 3, 10 * 60_000)) {
+      return json(res, 429, { error: "Too many review submissions. Please wait." });
+    }
+    const body = await parseBody(req, 4 * 1024 * 1024); // 4 MB — allows photo uploads
     if (!body.name || !body.text || !body.rating) {
       return json(res, 400, { error: "Missing fields" });
     }
@@ -405,20 +431,44 @@ http.createServer(async (req, res) => {
     if (!body.customer || !body.items) {
       return json(res, 400, { error: "Missing fields" });
     }
+
+    // ── Rate limit order submissions ─────────────────────────────
+    const ip = req.socket.remoteAddress || "unknown";
+    if (!checkRateLimit(ip, "order-submit", 5, 60_000)) {
+      return json(res, 429, { error: "Too many requests." });
+    }
+
+    // ── Verify Stripe payment server-side (for web checkout orders)
+    // Manual admin orders will not have a stripe_payment_id
+    const stripeId = body.stripe_payment_id || "";
+    let verifiedTotal = null;
+    if (stripeId) {
+      try {
+        const pi = await stripe.paymentIntents.retrieve(stripeId);
+        if (pi.status !== "succeeded") {
+          return json(res, 400, { error: "Payment not completed. Order not saved." });
+        }
+        verifiedTotal = pi.amount / 100; // Stripe stores in Rappen
+      } catch (err) {
+        console.error("[Stripe verify error]", err.message);
+        return json(res, 400, { error: "Could not verify payment. Please contact support." });
+      }
+    }
+
     try {
       const orders = readJSON(ORDERS);
       const order = {
         id:                Date.now(),
         order_id:          body.order_id || "",
         date:              new Date().toLocaleString("de-CH"),
-        status:            body.status || "new",
-        payment_status:    body.payment_status || "paid",
+        status:            "new",            // ALWAYS "new" — never trust client
+        payment_status:    stripeId ? "paid" : (body.payment_status || "unpaid"),
         customer:          body.customer,
         items:             body.items,
-        total:             body.total || 0,
+        total:             verifiedTotal !== null ? verifiedTotal : (body.total || 0),
         notes:             body.notes || "",
         newsletter:        body.newsletter || false,
-        stripe_payment_id: body.stripe_payment_id || "",
+        stripe_payment_id: stripeId,
       };
       orders.unshift(order);
       writeJSON(ORDERS, orders);
@@ -629,10 +679,14 @@ http.createServer(async (req, res) => {
     return json(res, 200, orders);
   }
 
-  // POST /api/order/update-status  — admin updates order status
+  // POST /api/order/update-status  — admin/supplier updates order status
   if (req.method === "POST" && url === "/api/order/update-status") {
     if (!requireAuth(res, req, "any")) return;
     const body = await parseBody(req);
+    const VALID_STATUSES = ["new", "processing", "shipped", "delivered", "cancelled"];
+    if (!VALID_STATUSES.includes(body.status)) {
+      return json(res, 400, { error: "Invalid status value." });
+    }
     const orders = readJSON(ORDERS);
     const order = orders.find(o => o.id === body.id);
     if (!order) return json(res, 404, { error: "Not found" });
@@ -714,9 +768,17 @@ http.createServer(async (req, res) => {
     res.writeHead(403); res.end("Forbidden"); return;
   }
 
-  let filePath = path.join(ROOT, url === "/" ? "/index.html" : url);
+  let filePath = path.normalize(path.join(ROOT, url === "/" ? "/index.html" : url));
+
+  // ── Path traversal guard: ensure file is within ROOT ─────────────
+  if (!filePath.startsWith(ROOT + path.sep) && filePath !== ROOT) {
+    res.writeHead(403, { "Content-Type": "text/plain" });
+    res.end("Forbidden");
+    return;
+  }
+
   fs.readFile(filePath, (err, data) => {
-    if (err) { res.writeHead(404); res.end("Not found: " + url); return; }
+    if (err) { res.writeHead(404, { "Content-Type": "text/plain" }); res.end("Not found"); return; }
     const ext  = path.extname(filePath).toLowerCase();
     const mime = MIME[ext] || "application/octet-stream";
     const isJs = ext === ".js";
