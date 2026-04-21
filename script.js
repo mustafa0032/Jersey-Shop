@@ -1950,10 +1950,10 @@ const retrosProducts = [
   },
   {
     "id": 2037,
-    "name": "Türkiye Home 1996 Front",
+    "name": "Turkey Home 1996 Front",
     "category": "retro-nations",
     "price": 37,
-    "description": "Retro Home jersey 1996 for Türkiye",
+    "description": "Retro Home jersey 1996 for Turkey",
     "image": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Front.jpg",
     "imageBack": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Back.jpg",
     "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Logo.jpg"
