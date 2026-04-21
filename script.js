@@ -1542,6 +1542,38 @@ const nationalTeamsProducts = [
     "price": 35,
     "description": "National Team 2026 jersey for Wales",
     "image": "2026 national Teams/Fifa WC 2026 Jerseys/Wales b.webp"
+  },
+  {
+    "id": 1088,
+    "name": "Turkey Home Front",
+    "category": "national",
+    "price": 35,
+    "description": "National Team 2026 jersey for Turkey",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Turkey f.webp"
+  },
+  {
+    "id": 1089,
+    "name": "Turkey Home Back",
+    "category": "national",
+    "price": 35,
+    "description": "National Team 2026 jersey for Turkey",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Turkey b.webp"
+  },
+  {
+    "id": 1090,
+    "name": "Bosnia Home Front",
+    "category": "national",
+    "price": 35,
+    "description": "National Team 2026 jersey for Bosnia",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Bosnia f.webp"
+  },
+  {
+    "id": 1091,
+    "name": "Bosnia Home Back",
+    "category": "national",
+    "price": 35,
+    "description": "National Team 2026 jersey for Bosnia",
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Bosnia b.webp"
   }
 ];
 
