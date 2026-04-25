@@ -583,6 +583,41 @@ http.createServer(async (req, res) => {
     }
   }
 
+  // POST /api/order/send-shipping-email  — admin sends shipping notification to customer
+  if (req.method === "POST" && url === "/api/order/send-shipping-email") {
+    if (!requireAuth(res, req, "admin")) return;
+    const body = await parseBody(req);
+    const { order_id, to, subject, body: emailBody } = body;
+
+    if (!to || !subject || !emailBody) {
+      return json(res, 400, { error: "Missing fields." });
+    }
+    // Basic email format check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
+      return json(res, 400, { error: "Invalid recipient email address." });
+    }
+
+    // Rate limit: max 20 shipping emails per hour
+    const ip = req.socket.remoteAddress || "unknown";
+    if (!checkRateLimit(ip, "shipping-email", 20, 60 * 60_000)) {
+      return json(res, 429, { error: "Too many emails. Please wait." });
+    }
+
+    try {
+      await mailer.sendMail({
+        from:    `"JerseyPhase" <${process.env.GMAIL_USER}>`,
+        to,
+        subject,
+        text:    emailBody,
+      });
+      console.log(`[Shipping email] Sent to ${to} for order ${order_id}`);
+      return json(res, 200, { ok: true });
+    } catch (err) {
+      console.error("[Shipping email error]", err.message);
+      return json(res, 500, { error: "Email konnte nicht gesendet werden: " + err.message });
+    }
+  }
+
   // POST /api/contact  — contact form sends message to owner
   if (req.method === "POST" && url === "/api/contact") {
     const body = await parseBody(req);

@@ -295,6 +295,50 @@
       .costs-grid { grid-template-columns: 1fr; }
     }
 
+    /* ── SHIPPING EMAIL BUTTON ── */
+    .ship-email-btn {
+      background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.35); color: #60a5fa;
+      border-radius: 8px; padding: 0.4rem 0.9rem; font-size: 0.8rem; font-family: 'Poppins',sans-serif;
+      cursor: pointer; transition: all 0.2s; font-weight: 600; white-space: nowrap;
+    }
+    .ship-email-btn:hover { background: rgba(96,165,250,0.25); border-color: #60a5fa; }
+    .ship-email-btn:disabled { opacity: 0.45; cursor: default; }
+    .ship-email-btn.sent { background: rgba(74,222,128,0.12); border-color: rgba(74,222,128,0.3); color: #4ade80; }
+
+    /* ── SHIPPING EMAIL MODAL ── */
+    #ship-modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      z-index: 9998; align-items: center; justify-content: center; backdrop-filter: blur(4px);
+    }
+    #ship-modal-overlay.open { display: flex; }
+    #ship-modal {
+      background: #13131c; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px;
+      padding: 2rem; max-width: 560px; width: 95%; max-height: 90vh; overflow-y: auto;
+    }
+    #ship-modal h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; color: #60a5fa; }
+    #ship-modal label { display: block; font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.4); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    #ship-modal input, #ship-modal textarea {
+      width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; border-radius: 10px; padding: 0.7rem 0.9rem; font-size: 0.88rem;
+      font-family: 'Poppins', sans-serif; outline: none; margin-bottom: 1rem; box-sizing: border-box;
+    }
+    #ship-modal input:focus, #ship-modal textarea:focus { border-color: #60a5fa; }
+    #ship-modal textarea { resize: vertical; min-height: 150px; line-height: 1.6; }
+    .ship-modal-actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 0.5rem; }
+    .ship-send-btn {
+      background: #60a5fa; color: #0a0a0f; border: none; border-radius: 10px;
+      padding: 0.75rem 1.75rem; font-weight: 700; font-size: 0.92rem;
+      font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s;
+    }
+    .ship-send-btn:hover { background: #3b82f6; }
+    .ship-send-btn:disabled { background: rgba(96,165,250,0.3); color: rgba(0,0,0,0.5); cursor: default; }
+    .ship-cancel-btn {
+      background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5);
+      border-radius: 10px; padding: 0.75rem 1.25rem; font-size: 0.88rem;
+      font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s;
+    }
+    .ship-cancel-btn:hover { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.8); }
+
     /* ── TOAST ── */
     .toast { position: fixed; bottom: 2rem; right: 2rem; background: #0a0a0f; border: 1px solid #4ade80; color: #4ade80; padding: 0.75rem 1.25rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; z-index: 9999; opacity: 0; transform: translateY(10px); transition: all 0.25s; pointer-events: none; }
     .toast.show { opacity: 1; transform: translateY(0); }
@@ -883,6 +927,7 @@ function displayOrders() {
         </select>
         <button class="update-btn" onclick="updateOrderStatus(${o.id})">${t.labelSave}</button>
         <button class="wa-btn" onclick="sendWhatsApp(${o.id})" title="An Supplier via WhatsApp senden">📱 WhatsApp</button>
+        ${isAdmin ? `<button class="ship-email-btn" id="ship-btn-${o.id}" onclick="openShipModal(${o.id})" title="Versand-Email an Kunden senden">📦 Versand-Email</button>` : ""}
         ${isAdmin ? `<button class="order-del-btn" onclick="deleteOrder(${o.id})">${t.labelDelete}</button>` : ""}
       </div>` : `<div style="margin-top:0.75rem;font-size:0.78rem;color:rgba(255,255,255,0.25);">${t.lblStatus} <strong style="color:rgba(255,255,255,0.5)">${statusLabel}</strong></div>`;
     return `
@@ -1652,6 +1697,108 @@ function toggleAdminLang() {
 // Apply on load
 document.addEventListener("DOMContentLoaded", applyAdminLang);
 
+// ── SHIPPING EMAIL ────────────────────────────────────────────────
+let shipOrderId = null;
+
+function openShipModal(orderId) {
+  const order = allOrders.find(o => o.id === orderId);
+  if (!order) return;
+  shipOrderId = orderId;
+
+  const c = order.customer || {};
+  const customerName = c.name || "Kunde";
+  const customerEmail = c.email || "";
+  const itemList = (order.items || []).map((i, idx) =>
+    `  ${idx + 1}. ${i.name}${i.size ? ` (Grösse ${i.size})` : ""}${i.quantity > 1 ? ` × ${i.quantity}` : ""}${i.backprint ? ` — Backprint: ${i.backprint}` : ""}`
+  ).join("\n");
+
+  const subject = `📦 Dein Trikot ist unterwegs! — ${order.order_id}`;
+
+  const body = [
+    `Hallo ${customerName},`,
+    ``,
+    `Grossartige Neuigkeiten! 🎉`,
+    ``,
+    `Dein${(order.items||[]).length > 1 ? "e Trikots sind" : " Trikot ist"} fertig hergestellt worden und ${(order.items||[]).length > 1 ? "sind" : "ist"} nun auf dem Weg zu dir!`,
+    ``,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `📦 BESTELLDETAILS`,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `Bestellnummer: ${order.order_id}`,
+    ``,
+    `Artikel:`,
+    itemList,
+    ``,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `🚚 LIEFERZEIT`,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `Deine Bestellung wird voraussichtlich in`,
+    `7–12 Arbeitstagen bei dir eintreffen.`,
+    ``,
+    `Bei Fragen kannst du uns jederzeit unter`,
+    `jerseyphase@gmail.com erreichen.`,
+    ``,
+    `Vielen Dank für dein Vertrauen in JerseyPhase! ⚽🏆`,
+    `Wir hoffen, dass dir das Trikot gefällt!`,
+    ``,
+    `Dein JerseyPhase Team`,
+  ].join("\n");
+
+  document.getElementById("ship-to-email").value = customerEmail;
+  document.getElementById("ship-subject").value  = subject;
+  document.getElementById("ship-body").value     = body;
+
+  const sendBtn = document.getElementById("ship-send-btn");
+  sendBtn.disabled = false;
+  sendBtn.textContent = "📧 Email senden →";
+
+  document.getElementById("ship-modal-overlay").classList.add("open");
+}
+
+function closeShipModal() {
+  document.getElementById("ship-modal-overlay").classList.remove("open");
+  shipOrderId = null;
+}
+
+async function confirmSendShippingEmail() {
+  const toEmail  = document.getElementById("ship-to-email").value.trim();
+  const subject  = document.getElementById("ship-subject").value.trim();
+  const bodyText = document.getElementById("ship-body").value.trim();
+
+  if (!toEmail || !subject || !bodyText) {
+    toast("⚠️ E-Mail, Betreff und Nachricht dürfen nicht leer sein.", true); return;
+  }
+
+  const sendBtn = document.getElementById("ship-send-btn");
+  sendBtn.disabled = true;
+  sendBtn.textContent = "Senden…";
+
+  try {
+    const res = await fetch("/api/order/send-shipping-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + authToken },
+      body: JSON.stringify({ order_id: shipOrderId, to: toEmail, subject, body: bodyText }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) throw new Error(data.error || "Fehler");
+
+    // Mark button as sent
+    const shipBtn = document.getElementById(`ship-btn-${shipOrderId}`);
+    if (shipBtn) { shipBtn.textContent = "✅ Email gesendet"; shipBtn.classList.add("sent"); }
+
+    toast("✅ Versand-Email erfolgreich gesendet!");
+    closeShipModal();
+  } catch(e) {
+    sendBtn.disabled = false;
+    sendBtn.textContent = "📧 Email senden →";
+    toast("❌ Fehler beim Senden: " + e.message, true);
+  }
+}
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeShipModal();
+});
+
 // ── Image Lightbox ────────────────────────────────────────────────
 function openImgLightbox(src, label) {
   const lb  = document.getElementById("img-lightbox");
@@ -1673,6 +1820,27 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeImgLigh
   <span id="img-lightbox-close" onclick="closeImgLightbox()">✕</span>
   <img id="img-lightbox-img" src="" alt="Jersey preview" onclick="event.stopPropagation()" />
   <div id="img-lightbox-label"></div>
+</div>
+
+<!-- ── SHIPPING EMAIL MODAL ──────────────────────────────────────── -->
+<div id="ship-modal-overlay" onclick="if(event.target===this)closeShipModal()">
+  <div id="ship-modal">
+    <h3>📦 Versand-Benachrichtigung senden</h3>
+
+    <label>An (E-Mail des Kunden)</label>
+    <input type="email" id="ship-to-email" readonly style="opacity:0.6;cursor:default;" />
+
+    <label>Betreff</label>
+    <input type="text" id="ship-subject" />
+
+    <label>Nachricht</label>
+    <textarea id="ship-body"></textarea>
+
+    <div class="ship-modal-actions">
+      <button class="ship-cancel-btn" onclick="closeShipModal()">Abbrechen</button>
+      <button class="ship-send-btn" id="ship-send-btn" onclick="confirmSendShippingEmail()">📧 Email senden →</button>
+    </div>
+  </div>
 </div>
 
 </body>
