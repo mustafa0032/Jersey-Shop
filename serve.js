@@ -163,15 +163,16 @@ function setSecurityHeaders(res) {
   res.setHeader("X-Frame-Options",          "SAMEORIGIN");
   res.setHeader("Referrer-Policy",          "strict-origin-when-cross-origin");
   res.setHeader("Permissions-Policy",       "camera=(), microphone=(), geolocation=()");
-  // Allow Stripe iframes (needed for card elements) + own origin
+  // Allow Stripe iframes, Google Fonts, WhatsApp links — needed for shop functionality
   res.setHeader("Content-Security-Policy",
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' https://js.stripe.com; " +
+    "script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdnjs.cloudflare.com; " +
     "frame-src https://js.stripe.com; " +
-    "connect-src 'self' https://api.stripe.com; " +
-    "img-src 'self' data: https:; " +
+    "connect-src 'self' https://api.stripe.com https://q.stripe.com; " +
+    "img-src 'self' data: blob: https:; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-    "font-src 'self' https://fonts.gstatic.com;"
+    "font-src 'self' https://fonts.gstatic.com data:; " +
+    "media-src 'none';"
   );
 }
 
@@ -438,31 +439,47 @@ http.createServer(async (req, res) => {
       return json(res, 429, { error: "Too many requests." });
     }
 
-    // ── Verify Stripe payment server-side (for web checkout orders)
-    // Manual admin orders will not have a stripe_payment_id
+    // ── Determine if this is an authenticated admin request ──────────
+    // Web checkout = no auth header; Admin manual entry = Bearer token
+    const adminSession = getSession(req);
+    const isAdminOrder = !!(adminSession && adminSession.role === "admin");
+
+    // ── Verify Stripe payment server-side (web checkout orders only) ─
+    // Manual admin orders have no stripe_payment_id — skip verification
     const stripeId = body.stripe_payment_id || "";
     let verifiedTotal = null;
+
     if (stripeId) {
       try {
         const pi = await stripe.paymentIntents.retrieve(stripeId);
         if (pi.status !== "succeeded") {
           return json(res, 400, { error: "Payment not completed. Order not saved." });
         }
-        verifiedTotal = pi.amount / 100; // Stripe stores in Rappen
+        verifiedTotal = pi.amount / 100; // Stripe stores in Rappen (CHF cents)
       } catch (err) {
         console.error("[Stripe verify error]", err.message);
         return json(res, 400, { error: "Could not verify payment. Please contact support." });
       }
+    } else if (!isAdminOrder) {
+      // Non-admin order without Stripe ID — reject
+      return json(res, 400, { error: "Missing payment information." });
     }
+
+    // ── Validate status if provided by admin ─────────────────────────
+    const VALID_STATUSES = ["new", "processing", "shipped", "delivered", "cancelled"];
+    const requestedStatus = body.status || "new";
+    const orderStatus = isAdminOrder && VALID_STATUSES.includes(requestedStatus)
+      ? requestedStatus   // Admin can set any valid status
+      : "new";            // Web checkout always starts as "new"
 
     try {
       const orders = readJSON(ORDERS);
       const order = {
         id:                Date.now(),
-        order_id:          body.order_id || "",
+        order_id:          body.order_id || ("MAN-" + Date.now().toString(36).toUpperCase().slice(-5)),
         date:              new Date().toLocaleString("de-CH"),
-        status:            "new",            // ALWAYS "new" — never trust client
-        payment_status:    stripeId ? "paid" : (body.payment_status || "unpaid"),
+        status:            orderStatus,
+        payment_status:    stripeId ? "paid" : (isAdminOrder ? (body.payment_status || "manual") : "unpaid"),
         customer:          body.customer,
         items:             body.items,
         total:             verifiedTotal !== null ? verifiedTotal : (body.total || 0),
@@ -472,9 +489,11 @@ http.createServer(async (req, res) => {
       };
       orders.unshift(order);
       writeJSON(ORDERS, orders);
-      console.log(`[Order saved] ${order.order_id} — CHF ${order.total}`);
+      console.log(`[Order saved] ${order.order_id} — CHF ${order.total} (${isAdminOrder ? "manual" : "web"})`);
 
-      // Notify owner
+      // Notify owner only for real web checkout orders (not manually entered by admin)
+      if (isAdminOrder) return json(res, 200, { ok: true });
+
       const c = order.customer || {};
       const itemLines = (order.items || []).map(i =>
         `  • ${i.name}${i.size ? ` (${i.size})` : ""}${i.backprint ? ` [Backprint: ${i.backprint}]` : ""} × ${i.quantity} — CHF ${i.subtotal}`
@@ -508,27 +527,6 @@ http.createServer(async (req, res) => {
           `Newsletter: ${order.newsletter ? "✅ Ja" : "❌ Nein"}`,
         ].filter(l => l !== undefined && l !== "").join("\n"),
       }).catch(err => console.error("[Owner notify error]", err.message));
-
-      // Notify supplier (no customer data!)
-      mailer.sendMail({
-        from:    `"JerseyPhase Shop" <${process.env.GMAIL_USER}>`,
-        to:      "youngman8811@126.com",
-        subject: `🛒 New Order Received — ${order.order_id}`,
-        text: [
-          `Hi Liu,`,
-          ``,
-          `A new order has been placed on JerseyPhase!`,
-          ``,
-          `Order ID: ${order.order_id}`,
-          `Date:     ${order.date}`,
-          `Total:    CHF ${order.total}`,
-          ``,
-          `For full details (customer, items, address) please visit the Admin Panel:`,
-          `👉 https://jerseyphase.ch/admin.html`,
-          ``,
-          `— JerseyPhase`,
-        ].join("\n"),
-      }).catch(err => console.error("[Supplier notify error]", err.message));
 
       return json(res, 200, { ok: true });
     } catch (err) {
