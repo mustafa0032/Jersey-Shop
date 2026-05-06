@@ -518,12 +518,18 @@
         Prüfe ob die Bestellungs-E-Mail zu einer echten Bestellung gehört (schau in deinem Gmail nach) —
         dann klick <strong>Bestätigen ✓</strong>. Die Review erscheint sofort öffentlich auf der Website mit "Verified Purchase".
       </div>
+      <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+        <button onclick="renderPending()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:0.4rem 1rem;border-radius:6px;cursor:pointer;font-size:0.85rem;">🔄 Aktualisieren</button>
+      </div>
       <div id="pending-list"></div>
     </div>
 
     <!-- Tab: Approved -->
     <div class="tab-panel" id="tab-approved">
       <p class="section-title">Bestätigte Reviews — öffentlich sichtbar</p>
+      <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+        <button onclick="renderApproved()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:0.4rem 1rem;border-radius:6px;cursor:pointer;font-size:0.85rem;">🔄 Aktualisieren</button>
+      </div>
       <div id="approved-list"></div>
     </div>
 
@@ -1209,7 +1215,17 @@ async function renderPending() {
   const list = document.getElementById("pending-list");
   list.innerHTML = `<div class="pending-empty"><span>⏳</span>Lädt...</div>`;
   let pending = [];
-  try { pending = await api("/api/reviews/pending"); } catch(e) {}
+  try {
+    const result = await api("/api/reviews/pending");
+    if (Array.isArray(result)) {
+      pending = result;
+    } else {
+      throw new Error("Unerwartete Serverantwort: " + JSON.stringify(result));
+    }
+  } catch(e) {
+    list.innerHTML = `<div class="pending-empty" style="color:#ff6b6b;"><span>❌</span>Fehler beim Laden: ${escHtml(e.message || "Unbekannter Fehler")}.<br><small>Bitte Seite neu laden oder Aktualisieren drücken.</small></div>`;
+    return;
+  }
   document.getElementById("pending-count-badge").textContent = pending.length ? `(${pending.length})` : "";
   if (!pending.length) {
     list.innerHTML = `<div class="pending-empty"><span>📭</span>Keine ausstehenden Rezensionen.</div>`;
@@ -1241,7 +1257,17 @@ async function renderApproved() {
   const list = document.getElementById("approved-list");
   list.innerHTML = `<div class="pending-empty"><span>⏳</span>Lädt...</div>`;
   let approved = [];
-  try { approved = await api("/api/reviews/approved"); } catch(e) {}
+  try {
+    const result = await api("/api/reviews/approved");
+    if (Array.isArray(result)) {
+      approved = result;
+    } else {
+      throw new Error("Unerwartete Serverantwort: " + JSON.stringify(result));
+    }
+  } catch(e) {
+    list.innerHTML = `<div class="pending-empty" style="color:#ff6b6b;"><span>❌</span>Fehler beim Laden: ${escHtml(e.message || "Unbekannter Fehler")}.<br><small>Bitte Seite neu laden oder Aktualisieren drücken.</small></div>`;
+    return;
+  }
   document.getElementById("approved-count-badge").textContent = approved.length ? `(${approved.length})` : "";
   if (!approved.length) {
     list.innerHTML = `<div class="pending-empty"><span>⭐</span>Noch keine bestätigten Rezensionen.</div>`;
