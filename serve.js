@@ -75,9 +75,17 @@ function getSession(req) {
   return session;
 }
 
-// ── Photo URL validation — only allow https:// images ─────────────
+// ── Photo URL validation — allow https:// images and compressed data: images ──
 function sanitizePhotoUrl(url) {
   if (!url) return null;
+  // Accept compressed base64 images (JPEG/PNG/WebP) — client always compresses before sending
+  if (url.startsWith("data:image/jpeg;base64,") ||
+      url.startsWith("data:image/png;base64,")  ||
+      url.startsWith("data:image/webp;base64,")) {
+    // Sanity-check size: reject if > 800 KB (base64 ≈ 4/3 × raw bytes)
+    if (url.length > 1100000) return null; // ~800 KB base64
+    return url;
+  }
   try {
     const parsed = new URL(url);
     if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return null;
@@ -317,9 +325,20 @@ http.createServer(async (req, res) => {
   // POST /api/review/add  — admin manually adds a verified review
   if (req.method === "POST" && url === "/api/review/add") {
     if (!requireAuth(res, req, "admin")) return;
-    const body = await parseBody(req, 4 * 1024 * 1024); // 4 MB — photo URLs can be large
+    const body = await parseBody(req, 4 * 1024 * 1024); // 4 MB — allows compressed photo uploads
     if (!body.name || !body.text || !body.rating) {
       return json(res, 400, { error: "Missing fields" });
+    }
+    // Accept compressed data: images from admin (client compresses to ≤500px JPEG before upload)
+    // or sanitized https:// URLs. Reject all other formats.
+    const rawPhoto = body.photo || null;
+    let safePhoto = null;
+    if (rawPhoto) {
+      if (rawPhoto.startsWith("data:image/jpeg;base64,") || rawPhoto.startsWith("data:image/png;base64,") || rawPhoto.startsWith("data:image/webp;base64,")) {
+        safePhoto = rawPhoto; // admin-uploaded, already compressed client-side
+      } else {
+        safePhoto = sanitizePhotoUrl(rawPhoto); // https:// URL — sanitize normally
+      }
     }
     const approved = readJSON(APPROVED);
     approved.unshift({
@@ -328,7 +347,7 @@ http.createServer(async (req, res) => {
       jersey:   body.jersey  || "",
       rating:   Number(body.rating) || 5,
       text:     body.text,
-      photo:    sanitizePhotoUrl(body.photo), // only allow https:// URLs, strip data: blobs
+      photo:    safePhoto,
       date:     body.date    || new Date().toLocaleDateString("de-CH", { month: "long", year: "numeric" }),
       verified: true,
     });

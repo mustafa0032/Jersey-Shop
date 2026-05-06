@@ -2586,17 +2586,43 @@ function initReviewModal() {
   const removeBtn   = overlay.querySelector("#photo-remove-btn");
   let photoBase64   = null;
 
-  photoInput?.addEventListener("change", () => {
+  // Compress image to max 600px JPEG before storing — keeps payload small
+  function compressReviewPhoto(file, maxPx = 600, quality = 0.82) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error("Datei konnte nicht gelesen werden."));
+      reader.onload = e => {
+        const img = new Image();
+        img.onerror = () => reject(new Error("Bild konnte nicht geladen werden."));
+        img.onload = () => {
+          let w = img.naturalWidth, h = img.naturalHeight;
+          if (w > maxPx || h > maxPx) {
+            if (w >= h) { h = Math.round(h * maxPx / w); w = maxPx; }
+            else        { w = Math.round(w * maxPx / h); h = maxPx; }
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = w; canvas.height = h;
+          canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL("image/jpeg", quality));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  photoInput?.addEventListener("change", async () => {
     const file = photoInput.files[0];
     if (!file) return;
     photoName.textContent = file.name;
-    const reader = new FileReader();
-    reader.onload = e => {
-      photoBase64 = e.target.result;
+    try {
+      photoBase64 = await compressReviewPhoto(file);
       previewImg.src = photoBase64;
       previewWrap.style.display = "inline-block";
-    };
-    reader.readAsDataURL(file);
+    } catch(err) {
+      photoBase64 = null;
+      photoName.textContent = "Fehler beim Laden";
+    }
   });
   removeBtn?.addEventListener("click", () => {
     photoBase64 = null;

@@ -615,10 +615,19 @@
             <textarea id="add-text" placeholder="Text der Rezension..."></textarea>
           </div>
           <div class="form-field full">
-            <label>Foto (optional) — nur HTTPS-URL (z.B. Google Fotos, Imgur)</label>
-            <input type="url" id="add-photo-url" placeholder="https://i.imgur.com/... oder Google Fotos Link" />
-            <small style="color:rgba(255,255,255,0.4);font-size:0.75rem;">⚠️ Nur öffentliche https:// Links werden gespeichert. Lokale Dateien werden nicht unterstützt.</small>
-            <div id="add-photo-preview" style="margin-top:0.5rem;display:none;"><img id="add-preview-img" style="max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:1px solid rgba(255,255,255,0.1);" /></div>
+            <label>Foto (optional) — Datei hochladen oder URL eingeben</label>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.4rem;">
+              <label style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:#fff;padding:0.35rem 0.9rem;border-radius:6px;cursor:pointer;font-size:0.82rem;white-space:nowrap;">
+                📁 Datei wählen
+                <input type="file" id="add-photo-file" accept="image/*" style="display:none;" />
+              </label>
+              <input type="url" id="add-photo-url" placeholder="oder https://... Link einfügen" style="flex:1;min-width:180px;" />
+            </div>
+            <small style="color:rgba(255,255,255,0.4);font-size:0.75rem;">Bilder werden automatisch auf max. 500px verkleinert bevor sie gespeichert werden.</small>
+            <div id="add-photo-preview" style="margin-top:0.5rem;display:none;position:relative;display:inline-block;">
+              <img id="add-preview-img" style="max-width:140px;max-height:140px;border-radius:8px;object-fit:cover;border:1px solid rgba(255,255,255,0.15);display:block;" />
+              <button onclick="clearPhotoInput()" style="position:absolute;top:-6px;right:-6px;background:#e74c3c;border:none;color:#fff;width:20px;height:20px;border-radius:50%;cursor:pointer;font-size:12px;line-height:20px;padding:0;">✕</button>
+            </div>
           </div>
         </div>
         <button class="save-btn" onclick="addReviewManually()">Review hinzufügen ✓</button>
@@ -803,6 +812,8 @@ function escHtml(str) {
 // Only allow http/https photo URLs — blocks javascript: and data: attacks
 function safePhotoUrl(url) {
   if (!url) return null;
+  // Allow compressed data: URLs from admin file-upload (base64 JPEG)
+  if (url.startsWith("data:image/")) return url;
   try {
     const p = new URL(url);
     return (p.protocol === "https:" || p.protocol === "http:") ? escHtml(url) : null;
@@ -1333,17 +1344,74 @@ function initAddStars() {
   });
 }
 
-function initPhotoUpload() {
+// Compress an image file to a JPEG data-URL (max 500px on longest side, quality 0.82)
+function compressImage(file, maxPx = 500, quality = 0.82) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("Datei konnte nicht gelesen werden."));
+    reader.onload = e => {
+      const rawImg = new Image();
+      rawImg.onerror = () => reject(new Error("Bild konnte nicht geladen werden."));
+      rawImg.onload = () => {
+        let w = rawImg.naturalWidth;
+        let h = rawImg.naturalHeight;
+        if (w > maxPx || h > maxPx) {
+          if (w >= h) { h = Math.round(h * maxPx / w); w = maxPx; }
+          else        { w = Math.round(w * maxPx / h); h = maxPx; }
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width  = w;
+        canvas.height = h;
+        canvas.getContext("2d").drawImage(rawImg, 0, 0, w, h);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      rawImg.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function clearPhotoInput() {
   const preview  = document.getElementById("add-photo-preview");
   const img      = document.getElementById("add-preview-img");
   const urlInput = document.getElementById("add-photo-url");
+  const fileInput= document.getElementById("add-photo-file");
+  if (preview)  preview.style.display = "none";
+  if (img)      img.src = "";
+  if (urlInput) urlInput.value = "";
+  if (fileInput)fileInput.value = "";
+}
+
+function initPhotoUpload() {
+  const fileInput = document.getElementById("add-photo-file");
+  const preview   = document.getElementById("add-photo-preview");
+  const img       = document.getElementById("add-preview-img");
+  const urlInput  = document.getElementById("add-photo-url");
   if (!urlInput) return;
+
+  // File chosen → compress → show preview
+  fileInput && fileInput.addEventListener("change", async () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) { toast("⚠️ Nur Bilddateien erlaubt.", true); return; }
+    try {
+      const dataUrl = await compressImage(file);
+      img.src = dataUrl;
+      preview.style.display = "inline-block";
+      urlInput.value = ""; // clear URL field
+    } catch(err) {
+      toast("❌ Bild konnte nicht verarbeitet werden: " + err.message, true);
+    }
+  });
+
+  // URL typed → show preview (https only)
   urlInput.addEventListener("input", () => {
     const val = urlInput.value.trim();
-    if (val && val.startsWith("https://")) {
+    if (val.startsWith("https://")) {
       img.src = val;
-      preview.style.display = "block";
-    } else {
+      preview.style.display = "inline-block";
+      if (fileInput) fileInput.value = "";
+    } else if (!val) {
       preview.style.display = "none";
     }
   });
@@ -1354,9 +1422,11 @@ async function addReviewManually() {
   const jersey = document.getElementById("add-jersey").value.trim();
   const date   = document.getElementById("add-date").value.trim();
   const text   = document.getElementById("add-text").value.trim();
-  const photoUrl = document.getElementById("add-photo-url").value.trim();
-  // Only send https:// URLs — data: blobs are stripped server-side anyway
-  const photo = (photoUrl && photoUrl.startsWith("https://")) ? photoUrl : null;
+  // Photo: prefer compressed data-URL from file upload, fallback to https:// URL
+  const previewImg = document.getElementById("add-preview-img");
+  const photoUrl   = document.getElementById("add-photo-url").value.trim();
+  const previewSrc = (document.getElementById("add-photo-preview").style.display !== "none") ? previewImg.src : null;
+  const photo = previewSrc || (photoUrl.startsWith("https://") ? photoUrl : null);
   if (!name || !jersey || !text || !addRating) {
     toast("⚠️ Bitte alle Pflichtfelder ausfüllen und Sterne wählen.", true); return;
   }
@@ -1374,8 +1444,7 @@ async function addReviewManually() {
     document.getElementById("add-name").value = "";
     document.getElementById("add-jersey").value = "";
     document.getElementById("add-text").value = "";
-    document.getElementById("add-photo-url").value = "";
-    document.getElementById("add-photo-preview").style.display = "none";
+    clearPhotoInput();
     addRating = 0;
     document.querySelectorAll("#add-stars .sp-star").forEach(s => s.classList.remove("on"));
     toast("✅ Review manuell hinzugefügt!");
