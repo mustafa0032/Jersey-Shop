@@ -317,7 +317,7 @@ http.createServer(async (req, res) => {
   // POST /api/review/add  — admin manually adds a verified review
   if (req.method === "POST" && url === "/api/review/add") {
     if (!requireAuth(res, req, "admin")) return;
-    const body = await parseBody(req);
+    const body = await parseBody(req, 4 * 1024 * 1024); // 4 MB — photo URLs can be large
     if (!body.name || !body.text || !body.rating) {
       return json(res, 400, { error: "Missing fields" });
     }
@@ -328,7 +328,7 @@ http.createServer(async (req, res) => {
       jersey:   body.jersey  || "",
       rating:   Number(body.rating) || 5,
       text:     body.text,
-      photo:    body.photo   || null,
+      photo:    sanitizePhotoUrl(body.photo), // only allow https:// URLs, strip data: blobs
       date:     body.date    || new Date().toLocaleDateString("de-CH", { month: "long", year: "numeric" }),
       verified: true,
     });

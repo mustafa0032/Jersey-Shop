@@ -615,9 +615,9 @@
             <textarea id="add-text" placeholder="Text der Rezension..."></textarea>
           </div>
           <div class="form-field full">
-            <label>Foto (optional) — Bild-URL oder von Gerät hochladen</label>
-            <input type="url" id="add-photo-url" placeholder="https://... (oder Datei unten hochladen)" />
-            <input type="file" id="add-photo-file" accept="image/*" style="margin-top:0.5rem;background:transparent;border:none;color:rgba(255,255,255,0.5);font-size:0.82rem;" />
+            <label>Foto (optional) — nur HTTPS-URL (z.B. Google Fotos, Imgur)</label>
+            <input type="url" id="add-photo-url" placeholder="https://i.imgur.com/... oder Google Fotos Link" />
+            <small style="color:rgba(255,255,255,0.4);font-size:0.75rem;">⚠️ Nur öffentliche https:// Links werden gespeichert. Lokale Dateien werden nicht unterstützt.</small>
             <div id="add-photo-preview" style="margin-top:0.5rem;display:none;"><img id="add-preview-img" style="max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:1px solid rgba(255,255,255,0.1);" /></div>
           </div>
         </div>
@@ -1334,18 +1334,18 @@ function initAddStars() {
 }
 
 function initPhotoUpload() {
-  const fileInput = document.getElementById("add-photo-file");
-  const preview   = document.getElementById("add-photo-preview");
-  const img       = document.getElementById("add-preview-img");
-  const urlInput  = document.getElementById("add-photo-url");
-  fileInput.addEventListener("change", () => {
-    const file = fileInput.files[0]; if (!file) return;
-    const reader = new FileReader();
-    reader.onload = e => { img.src = e.target.result; preview.style.display = "block"; urlInput.value = ""; };
-    reader.readAsDataURL(file);
-  });
+  const preview  = document.getElementById("add-photo-preview");
+  const img      = document.getElementById("add-preview-img");
+  const urlInput = document.getElementById("add-photo-url");
+  if (!urlInput) return;
   urlInput.addEventListener("input", () => {
-    if (urlInput.value.trim()) { img.src = urlInput.value.trim(); preview.style.display = "block"; fileInput.value = ""; }
+    const val = urlInput.value.trim();
+    if (val && val.startsWith("https://")) {
+      img.src = val;
+      preview.style.display = "block";
+    } else {
+      preview.style.display = "none";
+    }
   });
 }
 
@@ -1354,31 +1354,36 @@ async function addReviewManually() {
   const jersey = document.getElementById("add-jersey").value.trim();
   const date   = document.getElementById("add-date").value.trim();
   const text   = document.getElementById("add-text").value.trim();
-  const imgEl  = document.getElementById("add-preview-img");
-  const photo  = document.getElementById("add-photo-preview").style.display !== "none" ? imgEl.src : null;
+  const photoUrl = document.getElementById("add-photo-url").value.trim();
+  // Only send https:// URLs — data: blobs are stripped server-side anyway
+  const photo = (photoUrl && photoUrl.startsWith("https://")) ? photoUrl : null;
   if (!name || !jersey || !text || !addRating) {
     toast("⚠️ Bitte alle Pflichtfelder ausfüllen und Sterne wählen.", true); return;
   }
   const saveBtn = document.querySelector(".save-btn");
   saveBtn.disabled = true; saveBtn.textContent = "Speichern…";
   try {
-    await api("/api/review/add", {
+    const result = await api("/api/review/add", {
       name, jersey, rating: addRating, text, photo,
       date: date || new Date().toLocaleDateString("de-CH", { month: "long", year: "numeric" }),
       verified: true
     });
+    if (!result || !result.ok) {
+      throw new Error(result?.error || "Server hat kein ok zurückgegeben");
+    }
     document.getElementById("add-name").value = "";
     document.getElementById("add-jersey").value = "";
     document.getElementById("add-text").value = "";
     document.getElementById("add-photo-url").value = "";
-    document.getElementById("add-photo-file").value = "";
     document.getElementById("add-photo-preview").style.display = "none";
     addRating = 0;
     document.querySelectorAll("#add-stars .sp-star").forEach(s => s.classList.remove("on"));
     toast("✅ Review manuell hinzugefügt!");
     switchTab("approved", document.querySelectorAll(".tab-btn")[2]);
     renderApproved();
-  } catch(e) { toast("❌ Fehler beim Speichern.", true); }
+  } catch(e) {
+    toast("❌ Fehler beim Speichern: " + (e.message || "Unbekannt"), true);
+  }
   saveBtn.disabled = false; saveBtn.textContent = "Review hinzufügen ✓";
 }
 
