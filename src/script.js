@@ -2069,7 +2069,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
         </div>
       </div>
       ${addonsHtml}
-      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="${pair.front.price}" data-image-front="${pair.front.image||""}" data-image-back="${pair.back?.image||""}">${t("product.addtocart")} CHF ${pair.front.price}</button>
+      <button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="${pair.front.price}" data-image-front="${pair.front.image||""}" data-image-back="${pair.back?.image||""}">${t("product.addtocart")} ${pair.front.price}</button>
     `;
     grid.appendChild(card);
   });
@@ -2106,7 +2106,7 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
           card.querySelectorAll(".addon-check:checked").forEach(c => {
             total += Number(c.dataset.price);
           });
-          btn.textContent = `${t("product.addtocart")} CHF ${total}`;
+          btn.textContent = `${t("product.addtocart")} ${total}`;
         });
       });
     });
@@ -2292,7 +2292,7 @@ function renderRetros() {
           <input type="text" class="backprint-number" placeholder="${t("product.number.ph")}" maxlength="3" />
         </div>
       </div>
-      <button class="add-to-cart-btn" data-id="${product.id}">${t("product.addtocart")} CHF ${product.price}</button>
+      <button class="add-to-cart-btn" data-id="${product.id}">${t("product.addtocart")} ${product.price}</button>
     `;
     grid.appendChild(card);
   });
@@ -2334,7 +2334,7 @@ function renderRetros() {
           card.querySelectorAll(".addon-check:checked").forEach(c => {
             total += Number(c.dataset.price);
           });
-          if (btn) btn.textContent = `${t("product.addtocart")} CHF ${total}`;
+          if (btn) btn.textContent = `${t("product.addtocart")} ${total}`;
         });
       });
     });
@@ -2935,7 +2935,7 @@ document.querySelectorAll(".flyout-l1 > li").forEach((item) => {
           card.querySelectorAll(".addon-check:checked").forEach(c => {
             total += Number(c.dataset.price);
           });
-          if (btn) btn.textContent = `${t("product.addtocart")} CHF ${total}`;
+          if (btn) btn.textContent = `${t("product.addtocart")} ${total}`;
         });
       });
     });

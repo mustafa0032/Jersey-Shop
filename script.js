@@ -2052,7 +2052,7 @@ ${pair.front.price<35?"":'<span class="price-original">CHF 79</span>'}
 </div>
 </div>
 ${addonsHtml}
-<button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="${pair.front.price}" data-image-front="${pair.front.image||""}" data-image-back="${pair.back?.image||""}">${t("product.addtocart")}CHF ${pair.front.price}</button>
+<button class="add-to-cart-btn" data-id="${pair.front.id}" data-base-price="${pair.front.price}" data-image-front="${pair.front.image||""}" data-image-back="${pair.back?.image||""}">${t("product.addtocart")}${pair.front.price}</button>
 `;
 grid.appendChild(card);
 });
@@ -2081,7 +2081,7 @@ let total=35;
 card.querySelectorAll("\u002e\u0061\u0064\u0064\u006f\u006e\u002d\u0063\u0068\u0065\u0063\u006b\u003a\u0063\u0068\u0065\u0063\u006b\u0065\u0064").forEach(c=>{
 total+=Number(c.dataset.price);
 });
-btn.textContent=`${t("product.addtocart")}CHF ${total}`;
+btn.textContent=`${t("product.addtocart")}${total}`;
 });
 });
 });
@@ -2244,7 +2244,7 @@ ${hasMultiple?`
 <input type="text" class="backprint-number" placeholder="${t("product.number.ph")}" maxlength="3"/>
 </div>
 </div>
-<button class="add-to-cart-btn" data-id="${product.id}">${t("product.addtocart")}CHF ${product.price}</button>
+<button class="add-to-cart-btn" data-id="${product.id}">${t("product.addtocart")}${product.price}</button>
 `;
 grid.appendChild(card);
 });
@@ -2278,7 +2278,7 @@ let total=basePrice;
 card.querySelectorAll("\u002e\u0061\u0064\u0064\u006f\u006e\u002d\u0063\u0068\u0065\u0063\u006b\u003a\u0063\u0068\u0065\u0063\u006b\u0065\u0064").forEach(c=>{
 total+=Number(c.dataset.price);
 });
-if(btn)btn.textContent=`${t("product.addtocart")}CHF ${total}`;
+if(btn)btn.textContent=`${t("product.addtocart")}${total}`;
 });
 });
 });
@@ -2787,7 +2787,7 @@ let total=basePrice;
 card.querySelectorAll("\u002e\u0061\u0064\u0064\u006f\u006e\u002d\u0063\u0068\u0065\u0063\u006b\u003a\u0063\u0068\u0065\u0063\u006b\u0065\u0064").forEach(c=>{
 total+=Number(c.dataset.price);
 });
-if(btn)btn.textContent=`${t("product.addtocart")}CHF ${total}`;
+if(btn)btn.textContent=`${t("product.addtocart")}${total}`;
 });
 });
 });
