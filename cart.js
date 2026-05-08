@@ -98,6 +98,7 @@ function isSameEntry(a,b){
 return a.id===b.id&&
 a.name===b.name&&
 a.price===b.price&&
+(a.size||"")===(b.size||"")&&
 (a.backprint||"")===(b.backprint||"");
 }
 function showCartToast(name){
