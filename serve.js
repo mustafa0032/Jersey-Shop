@@ -174,9 +174,9 @@ function setSecurityHeaders(res) {
   // Allow Stripe iframes, Google Fonts, WhatsApp links — needed for shop functionality
   res.setHeader("Content-Security-Policy",
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdnjs.cloudflare.com; " +
+    "script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdnjs.cloudflare.com https://umami.lucasreitmann.me; " +
     "frame-src https://js.stripe.com; " +
-    "connect-src 'self' https://api.stripe.com https://q.stripe.com; " +
+    "connect-src 'self' https://api.stripe.com https://q.stripe.com https://umami.lucasreitmann.me; " +
     "img-src 'self' data: blob: https:; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "font-src 'self' https://fonts.gstatic.com data:; " +
