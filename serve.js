@@ -40,7 +40,9 @@ const VALID_ITEM_PRICES = new Set([
 ]);
 
 // ── Discount codes (server-only, never sent to browser) ───────────
-const DISCOUNT_CODES = { "SECRET10": 10, "WM26": 10 };
+// Discount codes are now managed via admin panel → stored in discount-codes.json
+// This object is the in-memory fallback; always call loadDiscountCodes() for live data
+const DISCOUNT_CODES_DEFAULT = { "SECRET10": 10, "WM26": 10 };
 
 // ── Admin credentials — loaded from .env, never hardcoded ─────────
 function loadAdminUsers() {
@@ -128,10 +130,23 @@ function checkRateLimit(ip, key = "default", max = 5, windowMs = 60_000) {
 
 // Backwards compat alias used by discount endpoint below
 const discountRateMap = new Map();
-const PENDING  = path.join(ROOT, "reviews-pending.json");
-const APPROVED = path.join(ROOT, "reviews-approved.json");
-const ORDERS   = path.join(ROOT, "orders.json");
-const FINANCE  = path.join(ROOT, "finance-entries.json");
+const PENDING   = path.join(ROOT, "reviews-pending.json");
+const APPROVED  = path.join(ROOT, "reviews-approved.json");
+const ORDERS    = path.join(ROOT, "orders.json");
+const FINANCE   = path.join(ROOT, "finance-entries.json");
+const DISCOUNTS = path.join(ROOT, "discount-codes.json");
+
+// Load discount codes from file (falls back to hardcoded defaults)
+function loadDiscountCodes() {
+  try {
+    const data = readJSON(DISCOUNTS);
+    if (data && typeof data === "object" && !Array.isArray(data)) return data;
+  } catch(e) {}
+  return { "SECRET10": 10, "WM26": 10 };
+}
+function saveDiscountCodes(codes) {
+  writeJSON(DISCOUNTS, codes);
+}
 
 const MIME = {
   ".html": "text/html", ".css": "text/css", ".js": "application/javascript",
@@ -174,9 +189,9 @@ function setSecurityHeaders(res) {
   // Allow Stripe iframes, Google Fonts, WhatsApp links — needed for shop functionality
   res.setHeader("Content-Security-Policy",
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdnjs.cloudflare.com; " +
+    "script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdnjs.cloudflare.com https://umami.lucasreitmann.me; " +
     "frame-src https://js.stripe.com; " +
-    "connect-src 'self' https://api.stripe.com https://q.stripe.com; " +
+    "connect-src 'self' https://api.stripe.com https://q.stripe.com https://umami.lucasreitmann.me; " +
     "img-src 'self' data: blob: https:; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "font-src 'self' https://fonts.gstatic.com data:; " +
@@ -365,10 +380,47 @@ http.createServer(async (req, res) => {
     }
     const body = await parseBody(req);
     const code = (body.code || "").trim().toUpperCase();
-    if (DISCOUNT_CODES[code] !== undefined) {
-      return json(res, 200, { ok: true, percent: DISCOUNT_CODES[code] });
+    const codes = loadDiscountCodes();
+    if (codes[code] !== undefined) {
+      return json(res, 200, { ok: true, percent: codes[code] });
     }
     return json(res, 200, { ok: false });
+  }
+
+  // GET /api/discount-codes  — admin fetches all discount codes
+  if (req.method === "GET" && url === "/api/discount-codes") {
+    if (!requireAuth(res, req, "admin")) return;
+    return json(res, 200, loadDiscountCodes());
+  }
+
+  // POST /api/discount-codes/add  — admin adds or updates a discount code
+  if (req.method === "POST" && url === "/api/discount-codes/add") {
+    if (!requireAuth(res, req, "admin")) return;
+    const body = await parseBody(req);
+    const code    = (body.code || "").trim().toUpperCase();
+    const percent = parseInt(body.percent, 10);
+    if (!code || !/^[A-Z0-9_-]{2,20}$/.test(code)) {
+      return json(res, 400, { error: "Ungültiger Code (2–20 Zeichen, nur Buchstaben/Zahlen)." });
+    }
+    if (isNaN(percent) || percent < 1 || percent > 100) {
+      return json(res, 400, { error: "Rabatt muss zwischen 1 und 100% liegen." });
+    }
+    const codes = loadDiscountCodes();
+    codes[code] = percent;
+    saveDiscountCodes(codes);
+    return json(res, 200, { ok: true, codes });
+  }
+
+  // POST /api/discount-codes/delete  — admin removes a discount code
+  if (req.method === "POST" && url === "/api/discount-codes/delete") {
+    if (!requireAuth(res, req, "admin")) return;
+    const body = await parseBody(req);
+    const code = (body.code || "").trim().toUpperCase();
+    const codes = loadDiscountCodes();
+    if (!codes[code]) return json(res, 404, { error: "Code nicht gefunden." });
+    delete codes[code];
+    saveDiscountCodes(codes);
+    return json(res, 200, { ok: true, codes });
   }
 
   // ── STRIPE PAYMENT API ──────────────────────────────────────────
@@ -409,7 +461,7 @@ http.createServer(async (req, res) => {
 
     // Apply discount code server-side if provided
     const discountCode    = (body.discount_code || "").trim().toUpperCase();
-    const discountPercent = DISCOUNT_CODES[discountCode] || 0;
+    const discountPercent = (loadDiscountCodes()[discountCode]) || 0;
     const discountedCHF   = +(subtotalCHF * (1 - discountPercent / 100)).toFixed(2);
 
     // Shipping = 3.90 CHF × total number of items — always calculated server-side
@@ -814,7 +866,7 @@ http.createServer(async (req, res) => {
 
   // ── STATIC FILES ──────────────────────────────────────────────────
   // Block direct access to sensitive data files
-  const BLOCKED_FILES = ["orders.json","reviews-pending.json","reviews-approved.json","product-images.json","finance-entries.json",".env","serve.js"];
+  const BLOCKED_FILES = ["orders.json","reviews-pending.json","reviews-approved.json","product-images.json","finance-entries.json","discount-codes.json",".env","serve.js"];
   const requestedFile = url.split("/").pop().split("?")[0];
   if (BLOCKED_FILES.includes(requestedFile)) {
     res.writeHead(403); res.end("Forbidden"); return;
@@ -854,6 +906,5 @@ http.createServer(async (req, res) => {
   console.log("  🔐  Admin:  http://localhost:" + PORT + "/admin.html");
   console.log("");
   console.log("  Keep this window open while you use the shop.");
-  console.log("  Press Ctrl+C to stop the server.");
   console.log("");
-});
+});  

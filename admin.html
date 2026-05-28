@@ -351,6 +351,8 @@
       .order-body { grid-template-columns: 1fr; }
     }
   </style>
+  <script defer src="https://umami.lucasreitmann.me/script.js" data-website-id="9bd6ab99-b055-46fe-9f31-e5ee6c75255d"></script>
+  <script defer src="https://umami.lucasreitmann.me/script.js" data-website-id="d83317a4-2e37-45c7-945e-de7726ad49d4"></script>
 </head>
 <body>
 
@@ -400,6 +402,7 @@
       <button class="tab-btn" onclick="switchTab('approved', this)">✅ Bestätigt <span id="approved-count-badge"></span></button>
       <button class="tab-btn" id="tab-add-btn" onclick="switchTab('add', this)">✍️ Review hinzufügen</button>
       <button class="tab-btn" id="tab-finance-btn" onclick="switchTab('finance', this)">💰 Buchhaltung</button>
+      <button class="tab-btn" id="tab-discounts-btn" onclick="switchTab('discounts', this)">🏷️ Rabattcodes</button>
     </div>
 
     <!-- Tab: Orders -->
@@ -534,6 +537,40 @@
     </div>
 
     <!-- Tab: Buchhaltung (admin only) -->
+    <!-- Tab: Rabattcodes -->
+    <div class="tab-panel" id="tab-discounts">
+      <p class="section-title">🏷️ Rabattcodes verwalten</p>
+      <div class="notice" style="margin-bottom:1.5rem;">
+        Rabattcodes gelten für <strong>alle Trikots</strong>. Der Versand wird immer normal dazugerechnet. Codes sind <strong>nicht öffentlich</strong> — nur wer den Code kennt, kann ihn nutzen.
+      </div>
+
+      <!-- Neuen Code hinzufügen -->
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem;">
+        <p style="margin:0 0 1rem;font-weight:600;font-size:0.95rem;">➕ Neuen Code erstellen</p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:flex-end;">
+          <div>
+            <label style="font-size:0.8rem;color:rgba(255,255,255,0.5);display:block;margin-bottom:4px;">Code</label>
+            <input type="text" id="dc-new-code" placeholder="z.B. SOMMER25" maxlength="20"
+              style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;text-transform:uppercase;width:160px;"
+              oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9_-]/g,'')" />
+          </div>
+          <div>
+            <label style="font-size:0.8rem;color:rgba(255,255,255,0.5);display:block;margin-bottom:4px;">Rabatt %</label>
+            <input type="number" id="dc-new-percent" placeholder="10" min="1" max="100"
+              style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;width:90px;" />
+          </div>
+          <button onclick="addDiscountCode()"
+            style="background:#22c55e;border:none;color:#fff;padding:0.55rem 1.25rem;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.9rem;white-space:nowrap;">
+            ✅ Code hinzufügen
+          </button>
+        </div>
+      </div>
+
+      <!-- Bestehende Codes -->
+      <p style="font-weight:600;font-size:0.9rem;margin-bottom:0.75rem;">Aktive Codes</p>
+      <div id="discounts-list"></div>
+    </div>
+
     <div class="tab-panel" id="tab-finance">
       <p class="section-title">💰 Buchhaltung</p>
 
@@ -705,10 +742,12 @@ function startDashboard(username, role) {
     document.getElementById("tab-add-btn").style.display = "none";
     document.getElementById("tab-addorder-btn").style.display = "none";
     document.getElementById("tab-finance-btn").style.display = "none";
+    document.getElementById("tab-discounts-btn").style.display = "none";
   }
-  // Finance tab only visible to admin
+  // Finance + Discounts tabs only visible to admin
   if (role === "admin") {
     document.getElementById("tab-finance-btn").style.display = "";
+    document.getElementById("tab-discounts-btn").style.display = "";
   }
 
   loadDashboard();
@@ -755,6 +794,7 @@ function switchTab(name, btn) {
   btn.classList.add("active");
   document.getElementById("tab-" + name).classList.add("active");
   if (name === "finance") renderFinance();
+  if (name === "discounts") renderDiscounts();
 }
 
 // ── LOAD DASHBOARD ────────────────────────────────────────────────────
@@ -1118,6 +1158,73 @@ async function saveCosts(id) {
     displayOrders();
     toast(t.toastCostsOk);
   } catch(e) { toast(t.toastCostsErr, true); }
+}
+
+// ── RABATTCODES ───────────────────────────────────────────────────────
+async function renderDiscounts() {
+  const list = document.getElementById("discounts-list");
+  if (!list) return;
+  list.innerHTML = `<p style="color:rgba(255,255,255,0.4);font-size:0.85rem;">Lädt…</p>`;
+  let codes = {};
+  try {
+    const result = await api("/api/discount-codes");
+    if (result && typeof result === "object" && !Array.isArray(result)) codes = result;
+    else throw new Error("Ungültige Antwort");
+  } catch(e) {
+    list.innerHTML = `<p style="color:#f87171;">❌ Fehler: ${escHtml(e.message)}</p>`;
+    return;
+  }
+  const entries = Object.entries(codes);
+  if (!entries.length) {
+    list.innerHTML = `<p style="color:rgba(255,255,255,0.35);font-size:0.85rem;">Keine Codes vorhanden.</p>`;
+    return;
+  }
+  list.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+    <thead>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);text-align:left;">
+        <th style="padding:0.5rem 1rem 0.5rem 0;">Code</th>
+        <th style="padding:0.5rem 1rem;">Rabatt</th>
+        <th style="padding:0.5rem 0;">Aktion</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${entries.map(([code, pct]) => `
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+          <td style="padding:0.65rem 1rem 0.65rem 0;font-weight:700;letter-spacing:0.05em;">${escHtml(code)}</td>
+          <td style="padding:0.65rem 1rem;color:#4ade80;font-weight:600;">${pct}%</td>
+          <td style="padding:0.65rem 0;">
+            <button onclick="deleteDiscountCode('${escHtml(code)}')"
+              style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.35);color:#f87171;padding:0.3rem 0.75rem;border-radius:6px;cursor:pointer;font-size:0.8rem;">
+              🗑️ Löschen
+            </button>
+          </td>
+        </tr>`).join("")}
+    </tbody>
+  </table>`;
+}
+
+async function addDiscountCode() {
+  const code    = (document.getElementById("dc-new-code").value || "").trim().toUpperCase();
+  const percent = document.getElementById("dc-new-percent").value.trim();
+  if (!code || !percent) { toast("⚠️ Code und Prozent angeben.", true); return; }
+  try {
+    const result = await api("/api/discount-codes/add", { code, percent: parseInt(percent, 10) });
+    if (!result.ok) throw new Error(result.error || "Fehler");
+    document.getElementById("dc-new-code").value = "";
+    document.getElementById("dc-new-percent").value = "";
+    toast(`✅ Code "${code}" (${percent}%) gespeichert!`);
+    renderDiscounts();
+  } catch(e) { toast("❌ " + e.message, true); }
+}
+
+async function deleteDiscountCode(code) {
+  if (!confirm(`Code "${code}" wirklich löschen?`)) return;
+  try {
+    const result = await api("/api/discount-codes/delete", { code });
+    if (!result.ok) throw new Error(result.error || "Fehler");
+    toast(`🗑️ Code "${code}" gelöscht.`);
+    renderDiscounts();
+  } catch(e) { toast("❌ " + e.message, true); }
 }
 
 // ── BUCHHALTUNG ───────────────────────────────────────────────────────
@@ -1937,11 +2044,4 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeImgLigh
     <textarea id="ship-body"></textarea>
 
     <div class="ship-modal-actions">
-      <button class="ship-cancel-btn" onclick="closeShipModal()">Abbrechen</button>
-      <button class="ship-send-btn" id="ship-send-btn" onclick="confirmSendShippingEmail()">📧 Email senden →</button>
-    </div>
-  </div>
-</div>
-
-</body>
-</html>
+ 
