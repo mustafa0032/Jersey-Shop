@@ -40,7 +40,7 @@ const VALID_ITEM_PRICES = new Set([
 ]);
 
 // ── Discount codes (server-only, never sent to browser) ───────────
-const DISCOUNT_CODES = { "SECRET10": 10 };
+const DISCOUNT_CODES = { "SECRET10": 10, "WM26": 10 };
 
 // ── Admin credentials — loaded from .env, never hardcoded ─────────
 function loadAdminUsers() {
