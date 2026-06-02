@@ -2211,13 +2211,26 @@ function filterByTeam(team, gridId, sectionId) {
     ? grid.nextElementSibling : null;
 
   if (team) {
-    // Show all matching cards, hide everything else, hide the View More button
-    grid.querySelectorAll(".product-card").forEach(card => {
-      const show = card.dataset.team === team;
-      card.style.display = show ? "" : "none";
-      if (show) delete card.dataset.extraCard;
-    });
-    if (vmWrap) vmWrap.style.display = "none";
+    // Count matches first — if 0, fall back to full reset so the grid never goes blank
+    const allCards = Array.from(grid.querySelectorAll(".product-card"));
+    const matchCount = allCards.filter(c => c.dataset.team === team).length;
+
+    if (matchCount === 0) {
+      // No products for this team — silently reset to all cards
+      allCards.forEach((card, i) => {
+        if (i < 8) { card.style.display = ""; delete card.dataset.extraCard; }
+        else { card.style.display = "none"; card.dataset.extraCard = "true"; }
+      });
+      if (vmWrap) vmWrap.style.display = "";
+    } else {
+      // Show only matching cards, hide the rest and the View More button
+      allCards.forEach(card => {
+        const show = card.dataset.team === team;
+        card.style.display = show ? "" : "none";
+        if (show) delete card.dataset.extraCard;
+      });
+      if (vmWrap) vmWrap.style.display = "none";
+    }
   } else {
     // Reset: re-apply 8-card limit, show View More again
     grid.querySelectorAll(".product-card").forEach((card, i) => {

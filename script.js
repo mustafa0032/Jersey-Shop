@@ -2170,12 +2170,22 @@ if(!grid)return;
 const vmWrap=grid.nextElementSibling&&grid.nextElementSibling.classList.contains("\u0076\u0069\u0065\u0077\u002d\u006d\u006f\u0072\u0065\u002d\u0077\u0072\u0061\u0070\u0070\u0065\u0072")
 ?grid.nextElementSibling:null;
 if(team){
-grid.querySelectorAll("\u002e\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u002d\u0063\u0061\u0072\u0064").forEach(card=>{
+const allCards=Array.from(grid.querySelectorAll("\u002e\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u002d\u0063\u0061\u0072\u0064"));
+const matchCount=allCards.filter(c=>c.dataset.team===team).length;
+if(matchCount===0){
+allCards.forEach((card,i)=>{
+if(i<8){card.style.display="";delete card.dataset.extraCard;}
+else{card.style.display="\u006e\u006f\u006e\u0065";card.dataset.extraCard="\u0074\u0072\u0075\u0065";}
+});
+if(vmWrap)vmWrap.style.display="";
+}else{
+allCards.forEach(card=>{
 const show=card.dataset.team===team;
 card.style.display=show?"":"\u006e\u006f\u006e\u0065";
 if(show)delete card.dataset.extraCard;
 });
 if(vmWrap)vmWrap.style.display="\u006e\u006f\u006e\u0065";
+}
 }else{
 grid.querySelectorAll("\u002e\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u002d\u0063\u0061\u0072\u0064").forEach((card,i)=>{
 if(i<8){card.style.display="";delete card.dataset.extraCard;}
