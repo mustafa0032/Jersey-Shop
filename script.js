@@ -1958,7 +1958,7 @@ const retrosProducts=[
 }
 ];
 function renderProducts(){
-renderPairedSection(products,"\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u0073\u002d\u0067\u0072\u0069\u0064","\u0066\u0065",true);
+renderPairedSection(products,"\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u0073\u002d\u0067\u0072\u0069\u0064","\u0066\u0065",true,"\u0066\u0061\u006e\u002d\u0065\u0064\u0069\u0074\u0069\u006f\u006e");
 }
 function slideImage(sliderId,direction){
 const slider=document.getElementById(sliderId);
@@ -1981,9 +1981,11 @@ const NO_SHORTS_TEAMS=new Set([
 "\u004e\u006f\u0072\u0077\u0061\u0079","\u0050\u0065\u0072\u0075","\u0050\u006f\u006c\u0061\u006e\u0064","\u0053\u0063\u006f\u0074\u006c\u0061\u006e\u0064","\u0053\u006f\u0075\u0074\u0068\u0020\u004b\u006f\u0072\u0065\u0061",
 "\u0053\u0077\u0065\u0064\u0065\u006e","\u0055\u006b\u0072\u0061\u0069\u006e\u0065","\u0056\u0065\u006e\u0065\u007a\u0075\u0065\u006c\u0061","\u0057\u0061\u006c\u0065\u0073",
 ]);
-function renderPairedSection(productsArr,gridId,idPrefix,showAddons){
+function renderPairedSection(productsArr,gridId,idPrefix,showAddons,sectionId){
 const grid=document.getElementById(gridId);
 if(!grid)return;
+const prevEl=grid.previousElementSibling;
+if(prevEl&&prevEl.classList.contains("\u0074\u0066\u002d\u0077\u0072\u0061\u0070"))prevEl.remove();
 grid.innerHTML="";
 const pairs=[];
 const usedIds=new Set();
@@ -2151,9 +2153,55 @@ grid.querySelectorAll("\u005b\u0064\u0061\u0074\u0061\u002d\u0065\u0078\u0074\u0
 vmWrap.remove();
 });
 }
+if(sectionId){
+const uniqueTeams=[...new Set(
+Array.from(grid.querySelectorAll("\u002e\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u002d\u0063\u0061\u0072\u0064")).map(c=>c.dataset.team)
+)].sort((a,b)=>a.localeCompare(b));
+const tfWrap=document.createElement("\u0064\u0069\u0076");
+tfWrap.className="\u0074\u0066\u002d\u0077\u0072\u0061\u0070";
+const arrowLeft=document.createElement("\u0062\u0075\u0074\u0074\u006f\u006e");
+arrowLeft.className="\u0074\u0066\u002d\u0061\u0072\u0072\u006f\u0077\u0020\u0074\u0066\u002d\u0061\u0072\u0072\u006f\u0077\u002d\u006c\u0065\u0066\u0074";
+arrowLeft.setAttribute("\u0061\u0072\u0069\u0061\u002d\u006c\u0061\u0062\u0065\u006c","\u0073\u0063\u0072\u006f\u006c\u006c\u0020\u006c\u0065\u0066\u0074");
+arrowLeft.innerHTML="\u0026\u0023\u0038\u0032\u0034\u0039\u003b";
+arrowLeft.style.display="\u006e\u006f\u006e\u0065";
+const filterBar=document.createElement("\u0064\u0069\u0076");
+filterBar.className="\u0074\u0065\u0061\u006d\u002d\u0066\u0069\u006c\u0074\u0065\u0072\u002d\u0062\u0061\u0072";
+filterBar.dataset.gridId=gridId;
+const arrowRight=document.createElement("\u0062\u0075\u0074\u0074\u006f\u006e");
+arrowRight.className="\u0074\u0066\u002d\u0061\u0072\u0072\u006f\u0077\u0020\u0074\u0066\u002d\u0061\u0072\u0072\u006f\u0077\u002d\u0072\u0069\u0067\u0068\u0074";
+arrowRight.setAttribute("\u0061\u0072\u0069\u0061\u002d\u006c\u0061\u0062\u0065\u006c","\u0073\u0063\u0072\u006f\u006c\u006c\u0020\u0072\u0069\u0067\u0068\u0074");
+arrowRight.innerHTML="\u0026\u0023\u0038\u0032\u0035\u0030\u003b";
+const allBtn=document.createElement("\u0062\u0075\u0074\u0074\u006f\u006e");
+allBtn.className="\u0074\u0065\u0061\u006d\u002d\u0066\u0069\u006c\u0074\u0065\u0072\u002d\u0062\u0074\u006e\u0020\u0061\u0063\u0074\u0069\u0076\u0065";
+allBtn.dataset.team="";
+allBtn.textContent=t("\u0066\u0069\u006c\u0074\u0065\u0072\u002e\u0061\u006c\u006c");
+allBtn.addEventListener("\u0063\u006c\u0069\u0063\u006b",()=>filterByTeam(null,gridId,sectionId));
+filterBar.appendChild(allBtn);
+uniqueTeams.forEach(team=>{
+const btn=document.createElement("\u0062\u0075\u0074\u0074\u006f\u006e");
+btn.className="\u0074\u0065\u0061\u006d\u002d\u0066\u0069\u006c\u0074\u0065\u0072\u002d\u0062\u0074\u006e";
+btn.dataset.team=team;
+btn.textContent=team;
+btn.addEventListener("\u0063\u006c\u0069\u0063\u006b",()=>filterByTeam(team,gridId,sectionId));
+filterBar.appendChild(btn);
+});
+const SCROLL_STEP=200;
+function updateArrows(){
+arrowLeft.style.display=filterBar.scrollLeft>2?"":"\u006e\u006f\u006e\u0065";
+arrowRight.style.display=filterBar.scrollLeft<filterBar.scrollWidth-filterBar.clientWidth-2?"":"\u006e\u006f\u006e\u0065";
+}
+arrowLeft.addEventListener("\u0063\u006c\u0069\u0063\u006b",()=>{filterBar.scrollBy({left:-SCROLL_STEP,behavior:"\u0073\u006d\u006f\u006f\u0074\u0068"});});
+arrowRight.addEventListener("\u0063\u006c\u0069\u0063\u006b",()=>{filterBar.scrollBy({left:SCROLL_STEP,behavior:"\u0073\u006d\u006f\u006f\u0074\u0068"});});
+filterBar.addEventListener("\u0073\u0063\u0072\u006f\u006c\u006c",updateArrows,{passive:true});
+setTimeout(updateArrows,0);
+tfWrap.appendChild(arrowLeft);
+tfWrap.appendChild(filterBar);
+tfWrap.appendChild(arrowRight);
+grid.insertAdjacentElement("\u0062\u0065\u0066\u006f\u0072\u0065\u0062\u0065\u0067\u0069\u006e",tfWrap);
+}
 }
 function renderNationalTeams(){
-renderPairedSection(nationalTeamsProducts,"\u006e\u0061\u0074\u0069\u006f\u006e\u0061\u006c\u002d\u0074\u0065\u0061\u006d\u0073\u002d\u0067\u0072\u0069\u0064","\u006e\u0074",true);
+renderPairedSection(nationalTeamsProducts,"\u006e\u0061\u0074\u0069\u006f\u006e\u0061\u006c\u002d\u0074\u0065\u0061\u006d\u0073\u002d\u0067\u0072\u0069\u0064","\u006e\u0074",true,"\u006e\u0061\u0074\u0069\u006f\u006e\u0061\u006c\u002d\u0074\u0065\u0061\u006d\u0073");
 document.querySelectorAll("\u0023\u006e\u0061\u0074\u0069\u006f\u006e\u0061\u006c\u002d\u0074\u0065\u0061\u006d\u0073\u002d\u0067\u0072\u0069\u0064\u0020\u002e\u0070\u0072\u006f\u0064\u0075\u0063\u0074\u002d\u0063\u0061\u0072\u0064").forEach(card=>{
 if(NO_SHORTS_TEAMS.has(card.dataset.team)){
 card.querySelectorAll("\u002e\u0061\u0064\u0064\u006f\u006e\u002d\u006f\u0070\u0074\u0069\u006f\u006e").forEach(label=>{
@@ -2192,6 +2240,12 @@ if(i<8){card.style.display="";delete card.dataset.extraCard;}
 else{card.style.display="\u006e\u006f\u006e\u0065";card.dataset.extraCard="\u0074\u0072\u0075\u0065";}
 });
 if(vmWrap)vmWrap.style.display="";
+}
+const filterBar=document.querySelector(`.team-filter-bar[data-grid-id="${gridId}"]`);
+if(filterBar){
+filterBar.querySelectorAll("\u002e\u0074\u0065\u0061\u006d\u002d\u0066\u0069\u006c\u0074\u0065\u0072\u002d\u0062\u0074\u006e").forEach(btn=>{
+btn.classList.toggle("\u0061\u0063\u0074\u0069\u0076\u0065",btn.dataset.team===(team||""));
+});
 }
 const section=document.getElementById(sectionId);
 if(section)section.scrollIntoView({behavior:"\u0073\u006d\u006f\u006f\u0074\u0068",block:"\u0073\u0074\u0061\u0072\u0074"});

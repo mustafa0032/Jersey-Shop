@@ -1961,7 +1961,7 @@ const retrosProducts = [
 ];
 
 function renderProducts() {
-  renderPairedSection(products, "products-grid", "fe", true);
+  renderPairedSection(products, "products-grid", "fe", true, "fan-edition");
 }
 
 function slideImage(sliderId, direction) {
@@ -1993,9 +1993,12 @@ const NO_SHORTS_TEAMS = new Set([
   "Sweden", "Ukraine", "Venezuela", "Wales",
 ]);
 
-function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
+function renderPairedSection(productsArr, gridId, idPrefix, showAddons, sectionId) {
   const grid = document.getElementById(gridId);
   if (!grid) return;
+  // Remove any pre-existing filter bar wrapper
+  const prevEl = grid.previousElementSibling;
+  if (prevEl && prevEl.classList.contains("tf-wrap")) prevEl.remove();
   grid.innerHTML = "";
 
   const pairs = [];
@@ -2186,10 +2189,71 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
       vmWrap.remove();
     });
   }
+
+  // ── TEAM FILTER BAR WITH SCROLL ARROWS ────────────────────────────
+  if (sectionId) {
+    const uniqueTeams = [...new Set(
+      Array.from(grid.querySelectorAll(".product-card")).map(c => c.dataset.team)
+    )].sort((a, b) => a.localeCompare(b));
+
+    // Outer wrapper holds arrows + scrollable bar
+    const tfWrap = document.createElement("div");
+    tfWrap.className = "tf-wrap";
+
+    const arrowLeft = document.createElement("button");
+    arrowLeft.className = "tf-arrow tf-arrow-left";
+    arrowLeft.setAttribute("aria-label", "scroll left");
+    arrowLeft.innerHTML = "&#8249;"; // ‹
+    arrowLeft.style.display = "none"; // hidden at start (already at left)
+
+    const filterBar = document.createElement("div");
+    filterBar.className = "team-filter-bar";
+    filterBar.dataset.gridId = gridId;
+
+    const arrowRight = document.createElement("button");
+    arrowRight.className = "tf-arrow tf-arrow-right";
+    arrowRight.setAttribute("aria-label", "scroll right");
+    arrowRight.innerHTML = "&#8250;"; // ›
+
+    // "All" button
+    const allBtn = document.createElement("button");
+    allBtn.className = "team-filter-btn active";
+    allBtn.dataset.team = "";
+    allBtn.textContent = t("filter.all");
+    allBtn.addEventListener("click", () => filterByTeam(null, gridId, sectionId));
+    filterBar.appendChild(allBtn);
+
+    // One button per team
+    uniqueTeams.forEach(team => {
+      const btn = document.createElement("button");
+      btn.className = "team-filter-btn";
+      btn.dataset.team = team;
+      btn.textContent = team;
+      btn.addEventListener("click", () => filterByTeam(team, gridId, sectionId));
+      filterBar.appendChild(btn);
+    });
+
+    // Scroll arrows logic
+    const SCROLL_STEP = 200;
+    function updateArrows() {
+      arrowLeft.style.display  = filterBar.scrollLeft > 2 ? "" : "none";
+      arrowRight.style.display = filterBar.scrollLeft < filterBar.scrollWidth - filterBar.clientWidth - 2 ? "" : "none";
+    }
+    arrowLeft.addEventListener("click",  () => { filterBar.scrollBy({ left: -SCROLL_STEP, behavior: "smooth" }); });
+    arrowRight.addEventListener("click", () => { filterBar.scrollBy({ left:  SCROLL_STEP, behavior: "smooth" }); });
+    filterBar.addEventListener("scroll", updateArrows, { passive: true });
+    // Initial arrow state after layout
+    setTimeout(updateArrows, 0);
+
+    tfWrap.appendChild(arrowLeft);
+    tfWrap.appendChild(filterBar);
+    tfWrap.appendChild(arrowRight);
+    grid.insertAdjacentElement("beforebegin", tfWrap);
+  }
 }
 
 function renderNationalTeams() {
-  renderPairedSection(nationalTeamsProducts, "national-teams-grid", "nt", true);
+  renderPairedSection(nationalTeamsProducts, "national-teams-grid", "nt", true, "national-teams");
   // After render: physically remove the shorts option from out-of-stock countries.
   // This runs as a direct DOM cleanup so it works regardless of caching or template issues.
   document.querySelectorAll("#national-teams-grid .product-card").forEach(card => {
@@ -2239,6 +2303,14 @@ function filterByTeam(team, gridId, sectionId) {
     });
     if (vmWrap) vmWrap.style.display = "";
   }
+  // Sync active button in the in-section filter bar
+  const filterBar = document.querySelector(`.team-filter-bar[data-grid-id="${gridId}"]`);
+  if (filterBar) {
+    filterBar.querySelectorAll(".team-filter-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.team === (team || ""));
+    });
+  }
+
   const section = document.getElementById(sectionId);
   if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
 }
