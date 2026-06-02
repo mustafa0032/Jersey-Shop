@@ -86,7 +86,6 @@ en:{
 "product.number.ph":"Number (e.g. 9)",
 "product.viewmore":"View more",
 "product.morejerseys":"more jerseys",
-"filter.all":"All teams",
 "cart.title":"Your Cart",
 "cart.empty":"Your cart is empty.",
 "cart.browse":"Browse jerseys",
@@ -211,7 +210,6 @@ de:{
 "product.number.ph":"Nummer (z.B. 9)",
 "product.viewmore":"Mehr anzeigen",
 "product.morejerseys":"weitere Trikots",
-"filter.all":"Alle Teams",
 "cart.title":"Dein Warenkorb",
 "cart.empty":"Dein Warenkorb ist leer.",
 "cart.browse":"Trikots ansehen",
@@ -278,4 +276,11 @@ localStorage.setItem("jp_lang",lang);
 applyTranslations();
 }
 document.addEventListener("DOMContentLoaded",()=>{
-document.querySelectorAll(".lang-bt
+document.querySelectorAll(".lang-btn").forEach(btn=>{
+btn.addEventListener("click",()=>setLang(btn.dataset.lang));
+});
+document.querySelectorAll(".lang-btn").forEach(btn=>{
+btn.classList.toggle("active",btn.dataset.lang===JP_LANG);
+});
+applyTranslations();
+});

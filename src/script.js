@@ -6,7 +6,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for AC Milan",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Front.jpeg"
   },
   {
     "id": 2,
@@ -15,7 +15,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for AC Milan",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/AC Milan/AC Milan Home 25-26 Back.jpeg"
   },
   {
     "id": 3,
@@ -24,7 +24,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Ajax",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Ajax/Ajax 25-26 away front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Ajax/Ajax 25-26 away front.jpeg"
   },
   {
     "id": 4,
@@ -33,7 +33,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Ajax",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Ajax/Ajax 25-26 away back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Ajax/Ajax 25-26 away back.jpeg"
   },
   {
     "id": 5,
@@ -42,7 +42,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Arsenal",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Front.jpeg"
   },
   {
     "id": 6,
@@ -51,7 +51,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Arsenal",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal away 25-26 Back.jpeg"
   },
   {
     "id": 7,
@@ -60,7 +60,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Arsenal",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Front.jpeg"
   },
   {
     "id": 8,
@@ -69,7 +69,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Arsenal",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Arsenal/Arsenal home 25-26 Back.jpeg"
   },
   {
     "id": 9,
@@ -78,7 +78,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Barcelona",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 Front.jpeg"
   },
   {
     "id": 10,
@@ -87,7 +87,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Barcelona",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona away 25-26 back.jpeg"
   },
   {
     "id": 11,
@@ -96,7 +96,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Barcelona",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 Front.jpeg"
   },
   {
     "id": 12,
@@ -105,7 +105,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Barcelona",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Barcelona/Barcelona Home 25-26 back.jpeg"
   },
   {
     "id": 13,
@@ -114,7 +114,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Bayern München",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Front.jpeg"
   },
   {
     "id": 14,
@@ -123,7 +123,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Bayern München",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München away 25-26 Back.jpeg"
   },
   {
     "id": 15,
@@ -132,7 +132,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Bayern München",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Front.jpeg"
   },
   {
     "id": 16,
@@ -141,7 +141,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Bayern München",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bayern München/Bayern München Home 25-26 Back.jpeg"
   },
   {
     "id": 17,
@@ -150,7 +150,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Benfica",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Benfica/Benfica away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica away 25-26 Front.jpeg"
   },
   {
     "id": 18,
@@ -159,7 +159,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Benfica",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Benfica/Benfica away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica away 25-26 Back.jpeg"
   },
   {
     "id": 19,
@@ -168,7 +168,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Benfica",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Benfica/Benfica Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica Home 25-26 Front.jpeg"
   },
   {
     "id": 20,
@@ -177,7 +177,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Benfica",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Benfica/Benfica home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Benfica/Benfica home 25-26 Back.jpeg"
   },
   {
     "id": 21,
@@ -186,7 +186,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Betis",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Betis/Betis home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Betis/Betis home 25-26 Front.jpeg"
   },
   {
     "id": 22,
@@ -195,7 +195,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Betis",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Betis/Betis home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Betis/Betis home 25-26 back.jpeg"
   },
   {
     "id": 23,
@@ -204,7 +204,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Bilbao",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Front.jpeg"
   },
   {
     "id": 24,
@@ -213,7 +213,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Bilbao",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Bilbao/Bilbao home 25-26 Back.jpeg"
   },
   {
     "id": 25,
@@ -222,7 +222,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Celtic",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Celtic/Celtic home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Celtic/Celtic home 25-26 Front.jpeg"
   },
   {
     "id": 26,
@@ -231,7 +231,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Celtic",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Celtic/Celtic Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Celtic/Celtic Home 25-26 Back.jpeg"
   },
   {
     "id": 27,
@@ -240,7 +240,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Chelsea",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 front.jpeg"
   },
   {
     "id": 28,
@@ -249,7 +249,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Chelsea",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea away 25-26 back.jpeg"
   },
   {
     "id": 29,
@@ -258,7 +258,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Chelsea",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Chelsea/Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Home 25-26 Front.jpeg"
   },
   {
     "id": 30,
@@ -267,7 +267,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Chelsea",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Chelsea/Chealsea 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Chelsea/Chealsea 25-26 back.jpeg"
   },
   {
     "id": 31,
@@ -276,7 +276,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Flamengo",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Front.jpeg"
   },
   {
     "id": 32,
@@ -285,7 +285,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Flamengo",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Flamengo/Flamengo home 25-26 Back.jpeg"
   },
   {
     "id": 33,
@@ -294,7 +294,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Inter Miami",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Front.jpeg"
   },
   {
     "id": 34,
@@ -303,7 +303,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Inter Miami",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Away 25-26 Back.jpeg"
   },
   {
     "id": 35,
@@ -312,7 +312,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Inter Miami",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Front.jpeg"
   },
   {
     "id": 36,
@@ -321,7 +321,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Inter Miami",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Miami/Inter Miami Home 25-26 Back.jpeg"
   },
   {
     "id": 37,
@@ -330,7 +330,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Inter Milan",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Front.jpeg"
   },
   {
     "id": 38,
@@ -339,7 +339,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Inter Milan",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Inter Milan/Inter Milan home 25-26 Back.jpeg"
   },
   {
     "id": 39,
@@ -348,7 +348,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Juventus",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Juventus/Juventus away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus away 25-26 Front.jpeg"
   },
   {
     "id": 40,
@@ -357,7 +357,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Juventus",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Juventus/Juventus away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus away 25-26 Back.jpeg"
   },
   {
     "id": 41,
@@ -366,7 +366,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Juventus",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Juventus/Juventus 25-26 home Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus 25-26 home Front.jpeg"
   },
   {
     "id": 42,
@@ -375,7 +375,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Juventus",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Juventus/Juventus 25-26 home back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Juventus/Juventus 25-26 home back.jpeg"
   },
   {
     "id": 43,
@@ -384,7 +384,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Liverpool",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away front.jpeg"
   },
   {
     "id": 44,
@@ -393,7 +393,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Liverpool",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Away back.jpeg"
   },
   {
     "id": 45,
@@ -402,7 +402,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Liverpool",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Front.jpeg"
   },
   {
     "id": 46,
@@ -411,7 +411,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Liverpool",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Liverpool/Liverpool 25-26 Back.jpeg"
   },
   {
     "id": 47,
@@ -420,7 +420,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Manchester City",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Front.jpeg"
   },
   {
     "id": 48,
@@ -429,7 +429,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Manchester City",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city away 25-26 Back.jpeg"
   },
   {
     "id": 49,
@@ -438,7 +438,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Black Front jersey for Manchester City",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black.jpeg"
   },
   {
     "id": 50,
@@ -447,7 +447,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Black Back jersey for Manchester City",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city 25-26 Away black back.jpeg"
   },
   {
     "id": 51,
@@ -456,7 +456,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Manchester City",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Front.jpeg"
   },
   {
     "id": 52,
@@ -465,7 +465,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Manchester City",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester City/Manchester city Home 25-26 Back.jpeg"
   },
   {
     "id": 53,
@@ -474,7 +474,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Manchester United",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Front.jpeg"
   },
   {
     "id": 54,
@@ -483,7 +483,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Manchester United",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Away 25-26 Back.jpeg"
   },
   {
     "id": 55,
@@ -492,7 +492,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Manchester United",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Front.jpeg"
   },
   {
     "id": 56,
@@ -501,7 +501,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Manchester United",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Manchester United/Manchester United Home 25-26 Back.jpeg"
   },
   {
     "id": 57,
@@ -510,7 +510,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Marseille",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Marseille/Marseille away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille away 25-26 Front.jpeg"
   },
   {
     "id": 58,
@@ -519,7 +519,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Marseille",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Marseille/Marseille away 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille away 25-26 back.jpeg"
   },
   {
     "id": 59,
@@ -528,7 +528,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Marseille",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Marseille/Marseille home 25-26 front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille home 25-26 front.jpeg"
   },
   {
     "id": 60,
@@ -537,7 +537,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Marseille",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Marseille/Marseille home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Marseille/Marseille home 25-26 back.jpeg"
   },
   {
     "id": 61,
@@ -546,7 +546,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Mineiro",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Front.jpeg"
   },
   {
     "id": 62,
@@ -555,7 +555,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Mineiro",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Mineiro/Mineiro Home 25-26 Back.jpeg"
   },
   {
     "id": 63,
@@ -564,7 +564,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Minens",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Minens/Minens 25-26 front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Minens/Minens 25-26 front.jpeg"
   },
   {
     "id": 64,
@@ -573,7 +573,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Minens",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Minens/Minens 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Minens/Minens 25-26 back.jpeg"
   },
   {
     "id": 65,
@@ -582,7 +582,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Napoli",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Napoli/Napoli 25-26 away front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 away front.jpeg"
   },
   {
     "id": 66,
@@ -591,7 +591,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Napoli",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Napoli/Napoli 25-26 away back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 away back.jpeg"
   },
   {
     "id": 67,
@@ -600,7 +600,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Napoli",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Napoli/Napoli 25-26 home front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 home front.jpeg"
   },
   {
     "id": 68,
@@ -609,7 +609,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Napoli",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Napoli/Napoli 25-26 home back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Napoli/Napoli 25-26 home back.jpeg"
   },
   {
     "id": 69,
@@ -618,7 +618,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for New Castle",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/New Castle/New Castle home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/New Castle/New Castle home 25-26 Front.jpeg"
   },
   {
     "id": 70,
@@ -627,7 +627,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for New Castle",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/New Castle/New Castle home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/New Castle/New Castle home 25-26 back.jpeg"
   },
   {
     "id": 71,
@@ -636,7 +636,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Palmeiras",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Front.jpeg"
   },
   {
     "id": 72,
@@ -645,7 +645,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Palmeiras",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Away 25-26 Back.jpeg"
   },
   {
     "id": 73,
@@ -654,7 +654,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Palmeiras",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Front.jpeg"
   },
   {
     "id": 74,
@@ -663,7 +663,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Palmeiras",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Palmeiras/Palmeiras Home 25-26 Back.jpeg"
   },
   {
     "id": 75,
@@ -672,7 +672,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Paris",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Paris/Paris Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Paris/Paris Home 25-26 Front.jpeg"
   },
   {
     "id": 76,
@@ -681,7 +681,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Paris",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Paris/Paris Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Paris/Paris Home 25-26 Back.jpeg"
   },
   {
     "id": 77,
@@ -690,7 +690,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Porto",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Porto/Porto away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto away 25-26 Front.jpeg"
   },
   {
     "id": 78,
@@ -699,7 +699,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Porto",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Porto/Porto away 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto away 25-26 back.jpeg"
   },
   {
     "id": 79,
@@ -708,7 +708,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Porto",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Porto/Porto home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto home 25-26 Front.jpeg"
   },
   {
     "id": 80,
@@ -717,7 +717,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Porto",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Porto/Porto Home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Porto/Porto Home 25-26 back.jpeg"
   },
   {
     "id": 81,
@@ -726,7 +726,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Real Madrid",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Front.jpeg"
   },
   {
     "id": 82,
@@ -735,7 +735,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Real Madrid",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Away 25-26 Back.jpeg"
   },
   {
     "id": 83,
@@ -744,7 +744,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Real Madrid",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Front.jpeg"
   },
   {
     "id": 84,
@@ -753,7 +753,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Real Madrid",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Real Madrid/Real Madrid Home 25-26 Back.jpeg"
   },
   {
     "id": 85,
@@ -762,7 +762,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Rome",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Rome/Rome home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Rome/Rome home 25-26 Front.jpeg"
   },
   {
     "id": 86,
@@ -771,7 +771,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Rome",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Rome/Rome home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Rome/Rome home 25-26 Back.jpeg"
   },
   {
     "id": 87,
@@ -780,7 +780,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Santos",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Santos/Santos back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Santos/Santos back.jpeg"
   },
   {
     "id": 88,
@@ -789,7 +789,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Front jersey for Sao Paulo",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Front.jpeg"
   },
   {
     "id": 89,
@@ -798,7 +798,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Away Back jersey for Sao Paulo",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Sao Paulo/Sao Paulo away 25-26 Back.jpeg"
   },
   {
     "id": 90,
@@ -807,7 +807,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Sporting Lissabon",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Front.jpeg"
   },
   {
     "id": 91,
@@ -816,7 +816,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Sporting Lissabon",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Sporting Lissabon/Sporting Lissabon home 25-26 Back.jpeg"
   },
   {
     "id": 92,
@@ -825,7 +825,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Front jersey for Totenham",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Totenham/Totenham home 25-26 Front.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Totenham/Totenham home 25-26 Front.jpeg"
   },
   {
     "id": 93,
@@ -834,7 +834,7 @@ const products = [
     "price": 35,
     "description": "Fan Edition Home Back jersey for Totenham",
     "color": "team-colors",
-    "image": "Jerseys/Fan Edition/Totenham/Totenham home 25-26 back.jpeg"
+    "image": "Jerseys/Jerseys/Fan Edition/Totenham/Totenham home 25-26 back.jpeg"
   }
 ];
 
@@ -925,7 +925,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Canada",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Canada F.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Canada f.webp"
   },
   {
     "id": 1011,
@@ -1584,9 +1584,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2006-2007 for AC Milan",
-    "image": "Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan black version 2006-2007 Logo.jpg"
   },
   {
     "id": 2001,
@@ -1594,9 +1594,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2010-2011 for AC Milan",
-    "image": "Jerseys/Retros/Clubs/AC Milan/AC Milan Home 2010-2011 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/AC Milan/AC Milan Home 2010-2011 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/AC Milan/Ac Milan Home 2010-2011 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan Home 2010-2011 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/AC Milan/AC Milan Home 2010-2011 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/AC Milan/Ac Milan Home 2010-2011 Logo.jpg"
   },
   {
     "id": 2002,
@@ -1604,9 +1604,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2002-2004 for Arsenal",
-    "image": "Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2002-2004 Logo.jpg"
   },
   {
     "id": 2003,
@@ -1614,9 +1614,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2019-2020 for Arsenal",
-    "image": "Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Arsenal/Arsenal Home 2019-2020 Logo.jpg"
   },
   {
     "id": 2004,
@@ -1624,9 +1624,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2013-2014 for Barcelona",
-    "image": "Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2013-2014 Logo.jpg"
   },
   {
     "id": 2005,
@@ -1634,9 +1634,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2015-2016 for Barcelona",
-    "image": "Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2015-2016 Logo.jpg"
   },
   {
     "id": 2006,
@@ -1644,9 +1644,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2019-2020 for Barcelona",
-    "image": "Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Barcelona/Barcelona Home 2019-2020 Logo.jpg"
   },
   {
     "id": 2007,
@@ -1654,9 +1654,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2013-2014 for Bayern München",
-    "image": "Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Bayern München/Bayern München Home 2013-2014 Logo.jpg"
   },
   {
     "id": 2008,
@@ -1664,9 +1664,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2011-2012 for Chelsea",
-    "image": "Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Chelsea/Chelsea Home 2011-2012 Logo.jpg"
   },
   {
     "id": 2009,
@@ -1674,9 +1674,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2009-2010 for Inter Mailand",
-    "image": "Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Inter Mailand/Inter Mailand Home 2009-2010 Logo.jpg"
   },
   {
     "id": 2010,
@@ -1684,9 +1684,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 1995-1997 for Juventus",
-    "image": "Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Logojpg.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 1995-1997 Logojpg.jpg"
   },
   {
     "id": 2011,
@@ -1694,9 +1694,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2018-2019 for Juventus",
-    "image": "Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Juventus/Juventus Home 2018-2019 Logo.jpg"
   },
   {
     "id": 2012,
@@ -1704,9 +1704,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2018-2019 for Liverpool",
-    "image": "Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Liverpool/Liverpool Home 2018-2019 Logo.jpg"
   },
   {
     "id": 2013,
@@ -1714,9 +1714,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2011-2012 for Manchester City",
-    "image": "Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Manchester City/Manchester City Home 2011-2012 Logo.jpg"
   },
   {
     "id": 2014,
@@ -1724,9 +1724,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2007-2008 for Manchester United",
-    "image": "Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Manchester United/Manchester United Home 2007-2008 Logo.jpg"
   },
   {
     "id": 2015,
@@ -1734,9 +1734,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 1992-1993 for Marseille",
-    "image": "Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Marseille/Marseille Home 1992-1993 Logo.jpg"
   },
   {
     "id": 2016,
@@ -1744,9 +1744,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2017-2018 for PSG",
-    "image": "Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/PSG/Paris Home 2017-2018 Logo.jpg"
   },
   {
     "id": 2017,
@@ -1754,9 +1754,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Away jersey 2016-2017 for Real Madrid",
-    "image": "Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2016-2017 Logo.jpg"
   },
   {
     "id": 2018,
@@ -1764,9 +1764,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Away jersey 2017-2018 for Real Madrid",
-    "image": "Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid away 2017-2018 Logo.jpg"
   },
   {
     "id": 2019,
@@ -1774,9 +1774,9 @@ const retrosProducts = [
     "category": "retro-clubs",
     "price": 37,
     "description": "Retro Home jersey 2017-2018 for Real Madrid",
-    "image": "Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Front.jpg",
-    "imageBack": "Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Back.jpg",
-    "imageLogo": "Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/Clubs/Real Madrid/Real Madrid Home 2017-2018 Logo.jpg"
   },
   {
     "id": 2020,
@@ -1784,9 +1784,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2022 for Argentina",
-    "image": "Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Argentina/Argentina home 2022 Logo.jpg"
   },
   {
     "id": 2021,
@@ -1794,9 +1794,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2018 for Brazil",
-    "image": "Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Brazil/Brazil Home 2018 Logo.jpg"
   },
   {
     "id": 2022,
@@ -1804,9 +1804,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 1998 for Croatia",
-    "image": "Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Croatia/Croatia Home 1998 Logo.jpg"
   },
   {
     "id": 2023,
@@ -1814,9 +1814,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 1994-1995 for England",
-    "image": "Jerseys/Retros/National Teams/England/England home 1994-1995 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/England/England home 1994-1995 back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/England/England home 1994-1995 logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/England/England home 1994-1995 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/England/England home 1994-1995 back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/England/England home 1994-1995 logo.jpg"
   },
   {
     "id": 2024,
@@ -1824,9 +1824,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2003-2004 for England",
-    "image": "Jerseys/Retros/National Teams/England/England home 2003-2004 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/England/England home 2003-2004 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/England/England home 2003-2004 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/England/England home 2003-2004 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/England/England home 2003-2004 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/England/England home 2003-2004 Logo.jpg"
   },
   {
     "id": 2025,
@@ -1834,9 +1834,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2018 for France",
-    "image": "Jerseys/Retros/National Teams/France/France home 2018 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/France/France home 2018 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/France/France home 2018 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/France/France home 2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/France/France home 2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/France/France home 2018 Logo.jpg"
   },
   {
     "id": 2026,
@@ -1844,9 +1844,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2014 for Germany",
-    "image": "Jerseys/Retros/National Teams/Germany/Germany home 2014 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Germany/Germany home 2014 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Germany/Germany home 2014 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Germany/Germany home 2014 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Germany/Germany home 2014 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Germany/Germany home 2014 Logo.jpg"
   },
   {
     "id": 2027,
@@ -1854,9 +1854,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2006 for Italy",
-    "image": "Jerseys/Retros/National Teams/Italy/Italy Home 2006 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Italy/Italy Home 2006 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Italy/Italy Home 2006 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Italy/Italy Home 2006 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Italy/Italy Home 2006 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Italy/Italy Home 2006 Logo.jpg"
   },
   {
     "id": 2028,
@@ -1864,9 +1864,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2018 for Japan",
-    "image": "Jerseys/Retros/National Teams/Japan/Japan Home 2018 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Japan/Japan Home 2018 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Japan/Japan Home 2018 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Japan/Japan Home 2018 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Japan/Japan Home 2018 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Japan/Japan Home 2018 Logo.jpg"
   },
   {
     "id": 2029,
@@ -1874,9 +1874,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 1998 for Marocco",
-    "image": "Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Marocco/Marocco Home 1998 Logo.jpg"
   },
   {
     "id": 2030,
@@ -1884,9 +1884,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2014 for Mexico",
-    "image": "Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Mexico/Mexico Home 2014 Logo.jpg"
   },
   {
     "id": 2031,
@@ -1894,9 +1894,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2014-2015 for Netherlands",
-    "image": "Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Netherlands/Netherlands home 2014-2015 Logo.jpg"
   },
   {
     "id": 2032,
@@ -1904,9 +1904,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 1994-1995 for Nigeria",
-    "image": "Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Nigeria/Nigeria Home 1994-1995 Logo.jpg"
   },
   {
     "id": 2033,
@@ -1914,9 +1914,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2016 for Portugal",
-    "image": "Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Portugal/Portugal Home 2016 Logo.jpg"
   },
   {
     "id": 2034,
@@ -1924,9 +1924,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2002 for Senegal",
-    "image": "Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Senegal/Senegal Home 2002 Logo.jpg"
   },
   {
     "id": 2035,
@@ -1934,9 +1934,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2010 for Spain",
-    "image": "Jerseys/Retros/National Teams/Spain/Spain Home 2010 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Spain/Spain Home 2010 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Spain/Spain Home 2010 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2010 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2010 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2010 Logo.jpg"
   },
   {
     "id": 2036,
@@ -1944,9 +1944,9 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 2012 for Spain",
-    "image": "Jerseys/Retros/National Teams/Spain/Spain Home 2012 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Spain/Spain Home 2012 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Spain/Spain Home 2012 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2012 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2012 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Spain/Spain Home 2012 Logo.jpg"
   },
   {
     "id": 2037,
@@ -1954,14 +1954,14 @@ const retrosProducts = [
     "category": "retro-nations",
     "price": 37,
     "description": "Retro Home jersey 1996 for Turkey",
-    "image": "Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Front.jpg",
-    "imageBack": "Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Back.jpg",
-    "imageLogo": "Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Logo.jpg"
+    "image": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Front.jpg",
+    "imageBack": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Back.jpg",
+    "imageLogo": "Jerseys/Jerseys/Retros/National Teams/Türkiye/Turkey Home 1996 Logo.jpg"
   }
 ];
 
 function renderProducts() {
-  renderPairedSection(products, "products-grid", "fe", true, "fan-edition");
+  renderPairedSection(products, "products-grid", "fe", true);
 }
 
 function slideImage(sliderId, direction) {
@@ -1993,12 +1993,9 @@ const NO_SHORTS_TEAMS = new Set([
   "Sweden", "Ukraine", "Venezuela", "Wales",
 ]);
 
-function renderPairedSection(productsArr, gridId, idPrefix, showAddons, sectionId) {
+function renderPairedSection(productsArr, gridId, idPrefix, showAddons) {
   const grid = document.getElementById(gridId);
   if (!grid) return;
-  // Remove any pre-existing filter bar wrapper
-  const prevEl = grid.previousElementSibling;
-  if (prevEl && prevEl.classList.contains("tf-wrap")) prevEl.remove();
   grid.innerHTML = "";
 
   const pairs = [];
@@ -2189,71 +2186,10 @@ function renderPairedSection(productsArr, gridId, idPrefix, showAddons, sectionI
       vmWrap.remove();
     });
   }
-
-  // ── TEAM FILTER BAR WITH SCROLL ARROWS ────────────────────────────
-  if (sectionId) {
-    const uniqueTeams = [...new Set(
-      Array.from(grid.querySelectorAll(".product-card")).map(c => c.dataset.team)
-    )].sort((a, b) => a.localeCompare(b));
-
-    // Outer wrapper holds arrows + scrollable bar
-    const tfWrap = document.createElement("div");
-    tfWrap.className = "tf-wrap";
-
-    const arrowLeft = document.createElement("button");
-    arrowLeft.className = "tf-arrow tf-arrow-left";
-    arrowLeft.setAttribute("aria-label", "scroll left");
-    arrowLeft.innerHTML = "&#8249;"; // ‹
-    arrowLeft.style.display = "none"; // hidden at start (already at left)
-
-    const filterBar = document.createElement("div");
-    filterBar.className = "team-filter-bar";
-    filterBar.dataset.gridId = gridId;
-
-    const arrowRight = document.createElement("button");
-    arrowRight.className = "tf-arrow tf-arrow-right";
-    arrowRight.setAttribute("aria-label", "scroll right");
-    arrowRight.innerHTML = "&#8250;"; // ›
-
-    // "All" button
-    const allBtn = document.createElement("button");
-    allBtn.className = "team-filter-btn active";
-    allBtn.dataset.team = "";
-    allBtn.textContent = t("filter.all");
-    allBtn.addEventListener("click", () => filterByTeam(null, gridId, sectionId));
-    filterBar.appendChild(allBtn);
-
-    // One button per team
-    uniqueTeams.forEach(team => {
-      const btn = document.createElement("button");
-      btn.className = "team-filter-btn";
-      btn.dataset.team = team;
-      btn.textContent = team;
-      btn.addEventListener("click", () => filterByTeam(team, gridId, sectionId));
-      filterBar.appendChild(btn);
-    });
-
-    // Scroll arrows logic
-    const SCROLL_STEP = 200;
-    function updateArrows() {
-      arrowLeft.style.display  = filterBar.scrollLeft > 2 ? "" : "none";
-      arrowRight.style.display = filterBar.scrollLeft < filterBar.scrollWidth - filterBar.clientWidth - 2 ? "" : "none";
-    }
-    arrowLeft.addEventListener("click",  () => { filterBar.scrollBy({ left: -SCROLL_STEP, behavior: "smooth" }); });
-    arrowRight.addEventListener("click", () => { filterBar.scrollBy({ left:  SCROLL_STEP, behavior: "smooth" }); });
-    filterBar.addEventListener("scroll", updateArrows, { passive: true });
-    // Initial arrow state after layout
-    setTimeout(updateArrows, 0);
-
-    tfWrap.appendChild(arrowLeft);
-    tfWrap.appendChild(filterBar);
-    tfWrap.appendChild(arrowRight);
-    grid.insertAdjacentElement("beforebegin", tfWrap);
-  }
 }
 
 function renderNationalTeams() {
-  renderPairedSection(nationalTeamsProducts, "national-teams-grid", "nt", true, "national-teams");
+  renderPairedSection(nationalTeamsProducts, "national-teams-grid", "nt", true);
   // After render: physically remove the shorts option from out-of-stock countries.
   // This runs as a direct DOM cleanup so it works regardless of caching or template issues.
   document.querySelectorAll("#national-teams-grid .product-card").forEach(card => {
@@ -2275,26 +2211,13 @@ function filterByTeam(team, gridId, sectionId) {
     ? grid.nextElementSibling : null;
 
   if (team) {
-    // Count matches first — if 0, fall back to full reset so the grid never goes blank
-    const allCards = Array.from(grid.querySelectorAll(".product-card"));
-    const matchCount = allCards.filter(c => c.dataset.team === team).length;
-
-    if (matchCount === 0) {
-      // No products for this team — silently reset to all cards
-      allCards.forEach((card, i) => {
-        if (i < 8) { card.style.display = ""; delete card.dataset.extraCard; }
-        else { card.style.display = "none"; card.dataset.extraCard = "true"; }
-      });
-      if (vmWrap) vmWrap.style.display = "";
-    } else {
-      // Show only matching cards, hide the rest and the View More button
-      allCards.forEach(card => {
-        const show = card.dataset.team === team;
-        card.style.display = show ? "" : "none";
-        if (show) delete card.dataset.extraCard;
-      });
-      if (vmWrap) vmWrap.style.display = "none";
-    }
+    // Show all matching cards, hide everything else, hide the View More button
+    grid.querySelectorAll(".product-card").forEach(card => {
+      const show = card.dataset.team === team;
+      card.style.display = show ? "" : "none";
+      if (show) delete card.dataset.extraCard;
+    });
+    if (vmWrap) vmWrap.style.display = "none";
   } else {
     // Reset: re-apply 8-card limit, show View More again
     grid.querySelectorAll(".product-card").forEach((card, i) => {
@@ -2303,14 +2226,6 @@ function filterByTeam(team, gridId, sectionId) {
     });
     if (vmWrap) vmWrap.style.display = "";
   }
-  // Sync active button in the in-section filter bar
-  const filterBar = document.querySelector(`.team-filter-bar[data-grid-id="${gridId}"]`);
-  if (filterBar) {
-    filterBar.querySelectorAll(".team-filter-btn").forEach(btn => {
-      btn.classList.toggle("active", btn.dataset.team === (team || ""));
-    });
-  }
-
   const section = document.getElementById(sectionId);
   if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
 }
