@@ -438,6 +438,9 @@ http.createServer(async (req, res) => {
 
   // POST /api/create-payment-intent  — creates a Stripe PaymentIntent
   if (req.method === "POST" && url === "/api/create-payment-intent") {
+    if (!checkRateLimit(ip, "create-pi", 10, 60_000))
+      return json(res, 429, { error: "Too many requests. Please wait a moment." });
+
     const body  = await parseBody(req);
     const items = Array.isArray(body.items) ? body.items : [];
 
