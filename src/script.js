@@ -925,7 +925,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Canada",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Canada b.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Canada f.webp"
   },
   {
     "id": 1011,
@@ -933,7 +933,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Canada",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Canada f.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Canada b.webp"
   },
   {
     "id": 1012,
@@ -941,7 +941,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Chile",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Chile b.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Chile f.webp"
   },
   {
     "id": 1013,
@@ -949,7 +949,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Chile",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Chile f.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Chile b.webp"
   },
   {
     "id": 1014,
@@ -1213,7 +1213,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Morocco",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Morocco b.jpg"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Morocco f.jpg"
   },
   {
     "id": 1047,
@@ -1221,7 +1221,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Morocco",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Morocco f.jpg"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Morocco b.jpg"
   },
   {
     "id": 1048,
@@ -1229,7 +1229,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Netherlands",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Netherlanx b.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Netherland f.webp"
   },
   {
     "id": 1049,
@@ -1237,7 +1237,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Netherlands",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Netherland f.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Netherlanx b.webp"
   },
   {
     "id": 1050,
@@ -1309,7 +1309,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Peru",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Peru b.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Peru f.webp"
   },
   {
     "id": 1059,
@@ -1317,7 +1317,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Peru",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Peru f.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Peru b.webp"
   },
   {
     "id": 1060,
@@ -1357,7 +1357,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Saudi Arabia",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Saudia b.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Saudia f.webp"
   },
   {
     "id": 1065,
@@ -1365,7 +1365,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Saudi Arabia",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Saudia f.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Saudia b.webp"
   },
   {
     "id": 1066,
@@ -1485,7 +1485,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Ukraine",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ukraine b.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ukraine f.webp"
   },
   {
     "id": 1081,
@@ -1493,7 +1493,7 @@ const nationalTeamsProducts = [
     "category": "national",
     "price": 35,
     "description": "National Team 2026 jersey for Ukraine",
-    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ukraine f.webp"
+    "image": "2026 national Teams/Fifa WC 2026 Jerseys/Ukraine b.webp"
   },
   {
     "id": 1082,
